@@ -4,34 +4,34 @@
     "ad_soyad": "Mehmet Korkmaz",
     "tc_kimlik": "12345678901",
     "burs_miktari": 1000.0,
-    "tarih": "2026-09-02"
+    "tarih": "2026-09-08"
   },
   {
     "kisi_turu": "İhtiyaç Sahibi",
     "ad_soyad": "Zeynep Çelik",
     "tc_kimlik": "23456789012",
     "burs_miktari": 1000.0,
-    "tarih": "2026-09-02"
+    "tarih": "2026-09-08"
   },
   {
     "kisi_turu": "İhtiyaç Sahibi",
     "ad_soyad": "Ali Yıldız",
     "tc_kimlik": "34567890123",
     "burs_miktari": 1000.0,
-    "tarih": "2026-09-02"
+    "tarih": "2026-09-08"
   },
   {
     "kisi_turu": "Sosyal Medya Ortağı",
     "kanal_adi": "TRM Trend TV",
     "takipci_sayisi": 50000,
     "destek_miktari": 1500.0,
-    "tarih": "2026-09-02"
+    "tarih": "2026-09-08"
   },
   {
     "kisi_turu": "Sosyal Medya Ortağı",
     "kanal_adi": "Fahri Hoca Akademi",
     "takipci_sayisi": 35000,
     "destek_miktari": 1500.0,
-    "tarih": "2026-09-02"
+    "tarih": "2026-09-08"
   }
 ]

@@ -1,0 +1,12 @@
+{
+    "total_accounts": 100,
+    "platforms": [
+        "YouTube Shorts",
+        "TikTok",
+        "Instagram Reels",
+        "Telegram",
+        "WhatsApp"
+    ],
+    "proxy_rotation": "ACTIVE",
+    "status": "READY"
+}

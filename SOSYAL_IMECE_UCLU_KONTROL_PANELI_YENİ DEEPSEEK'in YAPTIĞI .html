@@ -1,0 +1,3193 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sosyal İmece — Kontrol Merkezi</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --void:#07090f; --panel-a:#0f1420; --panel-b:#1a2236;
+    --gold:#e8b64c; --gold-dim:#8a6a26; --gold-glow:rgba(232,182,76,.35);
+    --text:#eef2f8; --text-dim:#8492ab; --ok:#35d488; --warn:#f0b429; --err:#ff4d5e;
+  }
+  *{box-sizing:border-box;}
+  html,body{ height:100%; margin:0; }
+  body{
+    display:flex; flex-direction:column; color:var(--text); font-family:'Segoe UI',system-ui,sans-serif;
+    background:
+      radial-gradient(circle at 15% 0%, rgba(232,182,76,.08), transparent 40%),
+      linear-gradient(160deg, var(--void) 0%, #0b0e16 55%, var(--void) 100%);
+  }
+  .shell-header{
+    padding:22px 26px 18px; position:relative;
+    border-bottom:1px solid rgba(232,182,76,.25);
+    background:linear-gradient(180deg, rgba(26,34,54,.95), rgba(15,20,32,.5));
+    flex-shrink:0; text-align:center;
+  }
+  .shell-header h1{
+    margin:0; font-size:57px; color:var(--gold); font-family:Georgia,serif;
+    text-align:center; line-height:1.05; letter-spacing:.01em;
+  }
+  .shell-header h1 span{
+    color:var(--text-dim); font-size:24px; font-family:sans-serif;
+    display:block; margin-top:8px; font-weight:400; letter-spacing:.04em;
+  }
+  .shell-status{
+    position:absolute; top:20px; right:26px;
+    display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text-dim);
+    background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06);
+    padding:6px 12px; border-radius:20px;
+  }
+  @media (max-width:1100px){
+    .shell-header h1{ font-size:36px; }
+    .shell-header h1 span{ font-size:16px; }
+  }
+  @media (max-width:700px){
+    .shell-header h1{ font-size:24px; }
+    .shell-header h1 span{ font-size:12px; }
+    .shell-status{ position:static; margin-top:10px; display:inline-flex; }
+  }
+  .led{width:9px;height:9px;border-radius:50%;display:inline-block;box-shadow:0 0 8px currentColor;}
+  .led.ok{background:var(--ok); color:var(--ok);}
+  .tab-bar{
+    display:flex; gap:4px; padding:0 22px; background:rgba(10,13,20,.6);
+    border-bottom:1px solid rgba(232,182,76,.15); flex-shrink:0; overflow-x:auto;
+  }
+  .tab-btn{
+    display:flex; align-items:center; gap:8px; padding:14px 20px; cursor:pointer;
+    color:var(--text-dim); font-size:13.5px; font-weight:600; border-bottom:3px solid transparent;
+    white-space:nowrap; transition:color .15s, border-color .15s, background .15s;
+  }
+  .tab-btn:hover{ color:var(--text); background:rgba(255,255,255,.03); }
+  .tab-btn.active{ color:var(--gold); border-bottom-color:var(--gold); background:rgba(232,182,76,.06); }
+  .tab-btn .num{
+    width:20px; height:20px; border-radius:50%; background:rgba(255,255,255,.08); color:var(--text-dim);
+    display:flex; align-items:center; justify-content:center; font-size:11px; flex-shrink:0;
+  }
+  .tab-btn.active .num{ background:var(--gold); color:#241b04; }
+  .panel-stage{ flex:1; position:relative; overflow-y:auto; }
+  .tab-content{ display:none; padding:24px; }
+  .tab-content.active{ display:block; }
+  @media (max-width:700px){
+    .tab-btn{ padding:12px 14px; font-size:12.5px; }
+    .tab-btn span.label{ display:none; }
+    .tab-content{ padding:12px; }
+  }
+
+  :root{
+    --void:#07090f; --panel-a:#0f1420; --panel-b:#1a2236;
+    --gold:#e8b64c; --gold-dim:#8a6a26; --gold-glow:rgba(232,182,76,.35);
+    --text:#eef2f8; --text-dim:#8492ab;
+    --ok:#35d488; --warn:#f0b429; --err:#ff4d5e;
+    --ch1:#ff3b3b; --ch2:#35d488; --ch3:#3b8bff; --ch4:#f0d13b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; color:var(--text);
+    font-family:'Segoe UI',system-ui,sans-serif;
+    background:
+      radial-gradient(circle at 15% 0%, rgba(232,182,76,.08), transparent 40%),
+      linear-gradient(160deg, var(--void) 0%, #0b0e16 55%, var(--void) 100%);
+  }
+  h1,h2,h3,.disp{font-family:'Georgia',serif; letter-spacing:.02em;}
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 28px; border-bottom:1px solid rgba(232,182,76,.25);
+    background:linear-gradient(180deg, rgba(26,34,54,.9), rgba(15,20,32,.4));
+  }
+  .topbar h1{margin:0; font-size:22px; color:var(--gold);}
+  .topbar h1 span{color:var(--text-dim); font-size:13px; font-family:sans-serif; display:block; margin-top:2px;}
+  .led{width:11px;height:11px;border-radius:50%;display:inline-block;margin-right:8px;box-shadow:0 0 8px currentColor;}
+  .led.ok{background:var(--ok); color:var(--ok);}
+  .led.warn{background:var(--warn); color:var(--warn);}
+  .led.err{background:var(--err); color:var(--err);}
+  .status-pill{display:flex;align-items:center;font-size:13px;color:var(--text-dim);
+    background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); padding:7px 14px; border-radius:20px;}
+
+  .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px; padding:24px 28px;}
+  .card{
+    background:linear-gradient(155deg, var(--panel-b), var(--panel-a));
+    border:1px solid rgba(232,182,76,.18); border-radius:14px; padding:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  .card h3{margin:0 0 12px; font-size:14px; color:var(--gold); text-transform:uppercase; letter-spacing:.08em; font-family:sans-serif;}
+  .span-4{grid-column:span 4;} .span-5{grid-column:span 5;} .span-6{grid-column:span 6;}
+  .span-7{grid-column:span 7;} .span-8{grid-column:span 8;} .span-12{grid-column:span 12;}
+  @media (max-width:1000px){ .grid>div{grid-column:span 12 !important;} }
+
+  button{
+    font-family:inherit; cursor:pointer; border:none; border-radius:8px; padding:9px 16px;
+    font-size:13px; font-weight:600; transition:transform .12s, box-shadow .12s;
+  }
+  button:active{transform:scale(.97);}
+  .btn-primary{background:var(--gold); color:#241b04;}
+  .btn-primary:hover{box-shadow:0 0 14px var(--gold-glow);}
+  .btn-warning{background:var(--warn); color:#241b04;}
+  .btn-danger{background:var(--err); color:#fff;}
+  .btn-outline{background:transparent; border:1px solid rgba(232,182,76,.4); color:var(--gold);}
+  .btn-secondary{background:rgba(255,255,255,.08); color:var(--text);}
+  .btn-row{display:flex; gap:10px; flex-wrap:wrap;}
+
+  canvas.osc{width:100%; height:120px; display:block; border-radius:8px; background:#05070c; border:1px solid rgba(232,182,76,.12);}
+  .osc-legend{display:flex; gap:14px; margin-top:8px; font-size:11px; color:var(--text-dim); flex-wrap:wrap;}
+  .osc-legend span{display:flex;align-items:center; gap:5px;}
+  .osc-legend i{width:9px;height:9px;border-radius:2px;display:inline-block;}
+  .chan-btn-row{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
+  .chan-btn{ background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); color:var(--text-dim);
+    padding:6px 12px; border-radius:20px; font-size:11.5px; display:flex; align-items:center; gap:6px; cursor:pointer; }
+  .chan-btn i{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .chan-btn.active{ border-color:var(--gold); color:var(--text); background:rgba(232,182,76,.12); }
+  .chan-btn.all-btn{ border-style:dashed; }
+
+  .traffic-flags{display:flex; gap:10px; margin-bottom:10px;}
+  .flag-box{flex:1; text-align:center; background:rgba(255,255,255,.03); border-radius:8px; padding:8px 4px; border:1px solid rgba(255,255,255,.06);}
+  .flag-box .flag{font-size:20px;} .flag-box .pct{font-weight:700; font-size:15px; margin-top:2px;}
+  .totals{font-size:12px; color:var(--text-dim); margin-top:8px; text-align:center;}
+
+  select, input[type=text]{
+    background:#0b0f18; border:1px solid rgba(232,182,76,.3); color:var(--text);
+    padding:8px 10px; border-radius:7px; font-size:13px; width:100%;
+  }
+  .lang-checks{display:flex; gap:14px; margin:10px 0; font-size:13px;}
+  .lang-checks label{display:flex; align-items:center; gap:5px;}
+
+  progress{width:100%; height:10px; border-radius:6px; overflow:hidden; appearance:none;}
+  progress::-webkit-progress-bar{background:rgba(255,255,255,.08); border-radius:6px;}
+  progress::-webkit-progress-value{background:linear-gradient(90deg,var(--gold-dim),var(--gold)); border-radius:6px;}
+
+  .gauge-wrap{display:flex; align-items:center; justify-content:center;}
+  .counter-big{font-size:38px; font-weight:800; color:var(--gold); font-family:'Georgia',serif;}
+  .counter-label{font-size:12px; color:var(--text-dim); text-align:center;}
+
+  .timeline{list-style:none; margin:0; padding:0; font-size:13px;}
+  .timeline li{position:relative; padding:8px 0 8px 22px; border-left:2px solid rgba(232,182,76,.25); margin-left:6px;}
+  .timeline li::before{content:''; position:absolute; left:-6px; top:12px; width:10px;height:10px;border-radius:50%; background:var(--gold);}
+  .timeline .t{color:var(--text-dim); font-size:11px; display:block;}
+
+  .toast-wrap{position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; gap:10px; z-index:999;}
+  .toast{background:#151b29; border-left:4px solid var(--gold); padding:12px 16px; border-radius:8px;
+    box-shadow:0 8px 24px rgba(0,0,0,.5); font-size:13px; min-width:220px; animation:slidein .25s ease;}
+  .toast.err{border-left-color:var(--err);} .toast.ok{border-left-color:var(--ok);}
+  @keyframes slidein{from{transform:translateX(30px);opacity:0;} to{transform:translateX(0);opacity:1;}}
+
+  .modal-bg{position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index:1000;}
+  .modal-bg.show{display:flex;}
+  .modal-box{background:var(--panel-a); border:1px solid var(--gold-dim); border-radius:12px; padding:22px; width:420px; max-width:90vw;}
+  .modal-box h3{color:var(--gold); margin-top:0;}
+  pre#ana_modalBody{white-space:pre-wrap; font-size:12px; background:#05070c; padding:10px; border-radius:8px; max-height:240px; overflow:auto;}
+
+  :root{
+    --void:#07090f; --panel-a:#0f1420; --panel-b:#1a2236;
+    --gold:#e8b64c; --gold-dim:#8a6a26; --gold-glow:rgba(232,182,76,.35);
+    --text:#eef2f8; --text-dim:#8492ab;
+    --ok:#35d488; --warn:#f0b429; --err:#ff4d5e;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; min-height:100vh; color:var(--text); font-family:'Segoe UI',system-ui,sans-serif;
+    background:radial-gradient(circle at 85% 0%, rgba(232,182,76,.08), transparent 40%),
+      linear-gradient(160deg, var(--void) 0%, #0b0e16 55%, var(--void) 100%); }
+  .topbar{ display:flex; align-items:center; justify-content:space-between; padding:18px 28px;
+    border-bottom:1px solid rgba(232,182,76,.25); background:linear-gradient(180deg, rgba(26,34,54,.9), rgba(15,20,32,.4)); }
+  .topbar h1{margin:0; font-size:22px; color:var(--gold); font-family:Georgia,serif;}
+  .topbar h1 span{color:var(--text-dim); font-size:13px; font-family:sans-serif; display:block; margin-top:2px;}
+  select{ background:#0b0f18; border:1px solid rgba(232,182,76,.3); color:var(--text); padding:7px 10px; border-radius:7px; font-size:13px;}
+  .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px; padding:24px 28px;}
+  .card{ background:linear-gradient(155deg, var(--panel-b), var(--panel-a)); border:1px solid rgba(232,182,76,.18);
+    border-radius:14px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.35); }
+  .card h3{margin:0 0 12px; font-size:14px; color:var(--gold); text-transform:uppercase; letter-spacing:.08em;}
+  .span-4{grid-column:span 4;} .span-6{grid-column:span 6;} .span-8{grid-column:span 8;} .span-12{grid-column:span 12;}
+  @media (max-width:1000px){ .grid>div{grid-column:span 12 !important;} }
+  button{ font-family:inherit; cursor:pointer; border:none; border-radius:8px; padding:9px 16px; font-size:13px; font-weight:600; }
+  .btn-primary{background:var(--gold); color:#241b04;} .btn-dark{background:#1b2230; color:var(--text); border:1px solid rgba(232,182,76,.3);}
+  .btn-danger{background:var(--err); color:#fff;} .btn-secondary{background:rgba(255,255,255,.08); color:var(--text);}
+  .btn-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;}
+  canvas.osc{width:100%; height:130px; display:block; border-radius:8px; background:#05070c; border:1px solid rgba(232,182,76,.12);}
+  .osc-legend{display:flex; gap:12px; margin-top:8px; font-size:11px; color:var(--text-dim); flex-wrap:wrap;}
+  .osc-legend span{display:flex;align-items:center; gap:5px;} .osc-legend i{width:9px;height:9px;border-radius:2px;display:inline-block;}
+  .chan-btn-row{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
+  .chan-btn{ background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); color:var(--text-dim);
+    padding:6px 12px; border-radius:20px; font-size:11.5px; display:flex; align-items:center; gap:6px; cursor:pointer; }
+  .chan-btn i{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .chan-btn.active{ border-color:var(--gold); color:var(--text); background:rgba(232,182,76,.12); }
+  .chan-btn.all-btn{ border-style:dashed; }
+  .counter-input{ display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:13px;}
+  .counter-input input{width:60px; background:#0b0f18; border:1px solid rgba(232,182,76,.3); color:var(--text); padding:6px; border-radius:6px; text-align:center;}
+  .toggle-row{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+  .switch{position:relative; width:44px; height:24px;}
+  .switch input{opacity:0; width:0; height:0;}
+  .slider{position:absolute; cursor:pointer; inset:0; background:#333; border-radius:24px; transition:.2s;}
+  .slider:before{content:""; position:absolute; height:18px; width:18px; left:3px; bottom:3px; background:white; border-radius:50%; transition:.2s;}
+  input:checked + .slider{background:var(--gold);}
+  input:checked + .slider:before{transform:translateX(20px);}
+  .log-box{background:#05070c; border:1px solid rgba(232,182,76,.15); border-radius:8px; padding:10px; height:160px;
+    overflow-y:auto; font-family:'Consolas',monospace; font-size:11.5px; color:#9fe6b6;}
+  .log-box div{margin-bottom:3px;}
+  .lang-checks{display:flex; gap:14px; margin:10px 0; font-size:13px;}
+  .lang-checks label{display:flex; align-items:center; gap:5px;}
+  .toast-wrap{position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; gap:10px; z-index:999;}
+  .toast{background:#151b29; border-left:4px solid var(--gold); padding:12px 16px; border-radius:8px;
+    box-shadow:0 8px 24px rgba(0,0,0,.5); font-size:13px; min-width:220px;}
+  .toast.err{border-left-color:var(--err);} .toast.ok{border-left-color:var(--ok);}
+
+  :root{
+    --void:#07090f; --panel-a:#0f1420; --panel-b:#1a2236;
+    --gold:#e8b64c; --gold-dim:#8a6a26; --gold-glow:rgba(232,182,76,.35);
+    --text:#eef2f8; --text-dim:#8492ab; --ok:#35d488; --warn:#f0b429; --err:#ff4d5e;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; min-height:100vh; color:var(--text); font-family:'Segoe UI',system-ui,sans-serif;
+    background:radial-gradient(circle at 50% 0%, rgba(232,182,76,.10), transparent 45%),
+      linear-gradient(160deg, var(--void) 0%, #0b0e16 55%, var(--void) 100%); }
+  .alarm-bar{ display:none; background:repeating-linear-gradient(45deg,#ff4d5e,#ff4d5e 10px,#c81628 10px,#c81628 20px);
+    color:#fff; text-align:center; font-weight:800; padding:8px; letter-spacing:.1em; animation:blink 1s infinite; }
+  .alarm-bar.show{display:block;}
+  @keyframes blink{ 50%{opacity:.4;} }
+  .topbar{ display:flex; align-items:center; justify-content:space-between; padding:18px 28px;
+    border-bottom:1px solid rgba(232,182,76,.25); background:linear-gradient(180deg, rgba(26,34,54,.9), rgba(15,20,32,.4)); }
+  .topbar h1{margin:0; font-size:22px; color:var(--gold); font-family:Georgia,serif;}
+  .topbar h1 span{color:var(--text-dim); font-size:13px; font-family:sans-serif; display:block; margin-top:2px;}
+  .btn-emergency{ background:var(--err); color:#fff; border:none; padding:12px 22px; border-radius:10px; font-weight:800;
+    font-size:14px; cursor:pointer; animation:blink 1.2s infinite; }
+  .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px; padding:24px 28px;}
+  .card{ background:linear-gradient(155deg, var(--panel-b), var(--panel-a)); border:1px solid rgba(232,182,76,.18);
+    border-radius:14px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.35); }
+  .card h3{margin:0 0 12px; font-size:14px; color:var(--gold); text-transform:uppercase; letter-spacing:.08em;}
+  .span-3{grid-column:span 3;} .span-4{grid-column:span 4;} .span-5{grid-column:span 5;}
+  .span-6{grid-column:span 6;} .span-7{grid-column:span 7;} .span-8{grid-column:span 8;} .span-12{grid-column:span 12;}
+  @media (max-width:1000px){ .grid>div{grid-column:span 12 !important;} }
+  button{ font-family:inherit; cursor:pointer; border:none; border-radius:8px; padding:9px 16px; font-size:13px; font-weight:600; }
+  .btn-primary{background:var(--gold); color:#241b04;} .btn-dark{background:#1b2230; color:var(--text); border:1px solid rgba(232,182,76,.3);}
+  .btn-gradient{background:linear-gradient(90deg,#e8b64c,#ff8a3d); color:#241b04; font-size:15px; padding:12px 20px;}
+  .btn-secondary{background:rgba(255,255,255,.08); color:var(--text);}
+  .btn-ceo-approve{ background:linear-gradient(90deg,#1f9e5c,#35d488); color:#052e18; font-weight:700; padding:11px 16px; border-radius:9px; box-shadow:0 0 0 rgba(53,212,136,0); transition:box-shadow .2s; }
+  .btn-ceo-approve:hover{ box-shadow:0 0 14px rgba(53,212,136,.5); }
+  .btn-ceo-passive{ background:linear-gradient(90deg,#f0b429,#ffd23d); color:#3a2a00; font-weight:700; padding:11px 16px; border-radius:9px; box-shadow:0 0 0 rgba(240,180,41,0); transition:box-shadow .2s; }
+  .btn-ceo-passive:hover{ box-shadow:0 0 14px rgba(240,180,41,.55); }
+  .btn-ceo-logout{ background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906; font-weight:700; padding:11px 16px; border-radius:9px; box-shadow:0 0 0 rgba(255,77,94,0); transition:box-shadow .2s; }
+  .btn-ceo-logout:hover{ box-shadow:0 0 14px rgba(255,77,94,.5); }
+  #kom_ceoKeyInput, #kom_ceoUserIdInput{ background:#0b0f18; border:1px solid rgba(232,182,76,.3); color:var(--text); padding:9px 10px; border-radius:7px; font-size:13px; width:100%; }
+  .ceo-row{ display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.07); border-radius:8px; padding:8px 10px; margin-bottom:6px; }
+  .ceo-row .mini-btn{ padding:5px 10px; font-size:11px; border-radius:6px; }
+  .btn-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;}
+  canvas.osc{width:100%; height:180px; display:block; border-radius:8px; background:#05070c; border:1px solid rgba(232,182,76,.12);}
+  .osc-legend{display:flex; gap:10px; margin-top:8px; font-size:10.5px; color:var(--text-dim); flex-wrap:wrap;}
+  .osc-legend span{display:flex;align-items:center; gap:4px;} .osc-legend i{width:9px;height:9px;border-radius:2px;display:inline-block;}
+  .chan-btn-row{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
+  .chan-btn{ background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); color:var(--text-dim);
+    padding:6px 12px; border-radius:20px; font-size:11.5px; display:flex; align-items:center; gap:6px; cursor:pointer; }
+  .chan-btn i{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .chan-btn.active{ border-color:var(--gold); color:var(--text); background:rgba(232,182,76,.12); }
+  .chan-btn.all-btn{ border-style:dashed; }
+  .platform-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
+  .platform-toggle-box{ background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:8px;
+    padding:10px; text-align:center; font-size:12px; cursor:pointer; }
+  .platform-toggle-box.active{ border-color:var(--gold); background:rgba(232,182,76,.08); }
+  textarea{ width:100%; background:#0b0f18; border:1px solid rgba(232,182,76,.3); color:var(--text); border-radius:8px; padding:10px; font-family:inherit; resize:vertical; }
+  .media-preview{ margin-top:10px; font-size:12px; color:var(--text-dim); background:#05070c; border-radius:8px; padding:10px; min-height:40px; }
+  table{width:100%; border-collapse:collapse; font-size:12px;}
+  th,td{padding:7px 8px; border-bottom:1px solid rgba(255,255,255,.06); text-align:left;}
+  th{color:var(--gold); font-weight:600;}
+  .console{ background:#010203; border:1px solid rgba(232,182,76,.15); border-radius:8px; padding:10px; height:220px;
+    overflow-y:auto; font-family:'Consolas',monospace; font-size:11.5px; color:#7CFC90; }
+  .console div{margin-bottom:2px;}
+  .heat-cell{ width:100%; aspect-ratio:1.4; border-radius:5px; display:flex; align-items:center; justify-content:center; font-size:10px; color:#0b0f18; font-weight:700;}
+  .heatmap{display:grid; grid-template-columns:repeat(5,1fr); gap:5px; font-size:10px;}
+  .heatmap .lbl{font-size:9px; color:var(--text-dim); text-align:center; margin-bottom:2px;}
+  .modal-bg{position:fixed; inset:0; background:rgba(0,0,0,.65); display:none; align-items:center; justify-content:center; z-index:1000;}
+  .modal-bg.show{display:flex;}
+  .modal-box{background:var(--panel-a); border:1px solid var(--gold-dim); border-radius:12px; padding:22px; width:460px; max-width:92vw;}
+  .toast-wrap{position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; gap:10px; z-index:999;}
+  .toast{background:#151b29; border-left:4px solid var(--gold); padding:12px 16px; border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,.5); font-size:13px; min-width:220px;}
+  .toast.err{border-left-color:var(--err);} .toast.ok{border-left-color:var(--ok);}
+
+#content-ultimate{ --void:#050608; --panel-a:#0d1119; --panel-b:#161d2e; --gold-glow:rgba(232,182,76,.45); --neon:#39ffe0; --neon-glow:rgba(57,255,224,.55); }
+#content-ultimate{ min-height:100vh; }
+#content-ultimate .top-strip{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:14px 28px; border-bottom:1px solid rgba(57,255,224,.25);
+  background:linear-gradient(180deg, rgba(15,20,32,.95), rgba(8,10,16,.6));
+  flex-wrap:wrap;
+}
+#content-ultimate .volkan-id{ display:flex; align-items:center; gap:12px; }
+#content-ultimate .volkan-avatar{
+  width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:20px; background:radial-gradient(circle, var(--panel-b), var(--panel-a));
+  border:2px solid var(--neon); box-shadow:0 0 0 rgba(57,255,224,0); transition:box-shadow .2s;
+}
+#content-ultimate .top-strip.speaking .volkan-avatar{ box-shadow:0 0 18px var(--neon-glow); }
+#content-ultimate .volkan-meta .name{ font-size:15px; font-weight:800; color:var(--neon); letter-spacing:.04em; text-shadow:0 0 10px var(--neon-glow); }
+#content-ultimate .volkan-meta .engine{ font-size:11.5px; color:#1a1a1a; opacity:0.08; user-select:none; pointer-events:none; }
+#content-ultimate .engine-dot{ width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:5px; background:#151515; box-shadow:none; opacity:.1; }
+#content-ultimate .engine-dot.ready{ background:#151515; }
+#content-ultimate .btn-unlock{
+  background:linear-gradient(90deg, var(--neon), #1fb894); color:#022019; font-weight:800; border:none;
+  padding:11px 20px; border-radius:10px; cursor:pointer; font-size:13px; letter-spacing:.03em;
+  box-shadow:0 0 0 rgba(57,255,224,0); transition:box-shadow .2s, transform .12s;
+}
+#content-ultimate .btn-unlock:hover{ box-shadow:0 0 16px var(--neon-glow); }
+#content-ultimate .btn-unlock:active{ transform:scale(.97); }
+#content-ultimate .btn-unlock[disabled]{ opacity:.5; cursor:default; box-shadow:none; }
+#content-ultimate .sim-badge{ font-size:1px; padding:0; border:none; color:#0a0a0a; background:transparent; opacity:0.03; pointer-events:none; user-select:none; }
+#content-ultimate .welcome-wrap{ display:none; }
+#content-ultimate .section{ max-width:1400px; margin:0 auto; padding:18px 28px; }
+#content-ultimate .section h2{
+  font-size:14px; color:var(--gold); text-transform:uppercase; letter-spacing:.1em;
+  border-bottom:1px solid rgba(232,182,76,.2); padding-bottom:10px; margin-bottom:18px;
+}
+#content-ultimate .card{
+  background:linear-gradient(155deg, var(--panel-b), var(--panel-a));
+  border:1px solid rgba(232,182,76,.18); border-radius:14px; padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  position:relative;
+}
+#content-ultimate .radar-stats{ display:flex; gap:22px; margin-bottom:12px; flex-wrap:wrap; }
+#content-ultimate .radar-stat{ font-size:12px; color:var(--text-dim); }
+#content-ultimate .radar-stat b{ display:block; font-size:20px; color:var(--gold); font-family:Georgia,serif; }
+
+#content-ultimate .flow-container {
+  background: #00000055; border-radius: 18px; padding: 12px;
+  min-height: 60px; max-height: 150px; overflow-y: auto;
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  border: 1px solid #2a3344;
+}
+#content-ultimate .flow-ajan {
+  background: #1a1f2e; border-radius: 16px; padding: 6px 16px;
+  border: 1px solid #3a3a4a; font-size: 12px;
+  display: flex; align-items: center; gap: 6px;
+  animation: ultPopIn .3s ease;
+  transition: box-shadow .25s, border-color .25s, background .25s;
+}
+#content-ultimate .flow-ajan .isim { font-weight: 600; color: #ffdd99; }
+#content-ultimate .flow-ajan .gorev { color: #99bbff; font-size: 11px; }
+#content-ultimate .flow-ajan.tamam { border-color: #44ff88; background: #1a3a2a; }
+#content-ultimate .flow-ajan.durum-yesil {
+  border-color: #3ddc71;
+  box-shadow: 0 0 12px rgba(61,220,113,.7), 0 0 22px rgba(61,220,113,.35);
+  animation: flowNeonYesil 1s steps(1,end) infinite;
+}
+#content-ultimate .flow-ajan.durum-sari {
+  border-color: #ffd23d;
+  background: #3a3000;
+  box-shadow: 0 0 12px rgba(255,210,61,.8), 0 0 22px rgba(255,210,61,.35);
+}
+#content-ultimate .flow-ajan.durum-kirmizi {
+  border-color: #ff4d5e;
+  background: #3a0d12;
+  box-shadow: 0 0 12px rgba(255,77,94,.85), 0 0 22px rgba(255,77,94,.4);
+}
+@keyframes flowNeonYesil {
+  0%,49%{ box-shadow: 0 0 14px rgba(61,220,113,.9), 0 0 26px rgba(61,220,113,.45); border-color:#3ddc71; }
+  50%,100%{ box-shadow: 0 0 4px rgba(61,220,113,.4); border-color:rgba(61,220,113,.5); }
+}
+@keyframes ultPopIn { from { transform: scale(.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+#content-ultimate .agent-grid {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 3px;
+  padding: 5px;
+  margin-top: 6px;
+  background: #00000066;
+  border-radius: 10px;
+  border: 1px solid #2a3344;
+}
+#content-ultimate .agent-cell {
+  background: #1a1f2e;
+  border-radius: 4px;
+  height: 26px;
+  text-align: center;
+  border: 1px solid #2a3344;
+  font-size: 7.5px;
+  font-weight: 700;
+  color: #99a7bd;
+  cursor: pointer;
+  transition: .15s;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px;
+  position: relative;
+  white-space: nowrap;
+}
+#content-ultimate .agent-cell:hover {
+  transform: scale(1.3);
+  z-index: 5;
+  color: #fff;
+  border-color: #ffaa55;
+  box-shadow: 0 0 10px rgba(255,170,85,.6);
+}
+#content-ultimate .agent-cell.durum-yesil {
+  background: rgba(61,220,113,.16);
+  border-color: #3ddc71;
+  color: #b5ffd0;
+  box-shadow: 0 0 8px rgba(61,220,113,.7);
+  animation: ultCellYesil .9s steps(1,end) infinite;
+}
+#content-ultimate .agent-cell.durum-sari {
+  background: rgba(255,210,61,.22);
+  border-color: #ffd23d;
+  color: #fff3b0;
+  box-shadow: 0 0 10px rgba(255,210,61,.9);
+}
+#content-ultimate .agent-cell.durum-kirmizi {
+  background: rgba(255,77,94,.25);
+  border-color: #ff4d5e;
+  color: #ffc4ca;
+  box-shadow: 0 0 10px rgba(255,77,94,.9);
+}
+@keyframes ultCellYesil {
+  0%,49%{ box-shadow: 0 0 10px rgba(61,220,113,.95), 0 0 18px rgba(61,220,113,.5); }
+  50%,100%{ box-shadow: 0 0 3px rgba(61,220,113,.4); }
+}
+
+#content-ultimate .agent-hover-preview {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 320px;
+  max-width: 92%;
+  background: linear-gradient(155deg, #1a2236, #0d1420);
+  border: 1px solid #ffaa55;
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.7), 0 0 22px rgba(255,170,85,.25);
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity .18s ease, transform .18s ease;
+  pointer-events: none;
+  z-index: 50;
+}
+#content-ultimate .agent-hover-preview.goster {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+#content-ultimate .agent-hover-preview .ahp-baslik {
+  font-family: Georgia, serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffaa44;
+  margin-bottom: 4px;
+  text-shadow: 0 0 10px rgba(255,170,85,.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#content-ultimate .agent-hover-preview .ahp-rol {
+  color: #ffe9a8;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+#content-ultimate .agent-hover-preview .ahp-gorev {
+  color: #ccd;
+  font-size: 11.5px;
+  border-top: 1px dashed rgba(255,170,85,.35);
+  padding-top: 6px;
+}
+#content-ultimate .agent-hover-preview .ahp-durum {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+#content-ultimate .agent-hover-preview .ahp-durum.yesil{ background:rgba(61,220,113,.2); color:#3ddc71; border:1px solid #3ddc71; }
+#content-ultimate .agent-hover-preview .ahp-durum.sari{ background:rgba(255,210,61,.2); color:#ffd23d; border:1px solid #ffd23d; }
+#content-ultimate .agent-hover-preview .ahp-durum.kirmizi{ background:rgba(255,77,94,.2); color:#ff4d5e; border:1px solid #ff4d5e; }
+#content-ultimate .agent-hover-preview .ahp-durum.bosta{ background:rgba(153,167,189,.15); color:#99a7bd; border:1px solid #99a7bd; }
+#content-ultimate .agent-hover-preview .ahp-actions{
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,170,85,.3);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#content-ultimate .agent-hover-preview .ahp-btn{
+  flex: 1;
+  min-width: 120px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform .12s, box-shadow .12s;
+  font-family: inherit;
+}
+#content-ultimate .agent-hover-preview .ahp-btn:hover{ transform: scale(1.03); }
+#content-ultimate .agent-hover-preview .ahp-btn-danger{
+  background: linear-gradient(90deg,#c81e2e,#ff4d5e);
+  color: #fff;
+  box-shadow: 0 0 0 rgba(255,77,94,0);
+}
+#content-ultimate .agent-hover-preview .ahp-btn-danger:hover{ box-shadow: 0 0 12px rgba(255,77,94,.6); }
+#content-ultimate .agent-hover-preview .ahp-btn-warn{
+  background: linear-gradient(90deg,#e8a500,#ffd23d);
+  color: #3a2a00;
+  box-shadow: 0 0 0 rgba(240,180,41,0);
+}
+#content-ultimate .agent-hover-preview .ahp-btn-warn:hover{ box-shadow: 0 0 12px rgba(240,180,41,.6); }
+
+#content-ultimate .btn-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+#content-ultimate .btn-group button {
+  background: #1e2a3a; border: 1px solid #ffaa55; color: #fff;
+  padding: 8px 16px; border-radius: 40px; font-weight: 600; font-size: 12px; cursor: pointer;
+  font-family: inherit; transition: 0.2s;
+}
+#content-ultimate .btn-group button:hover { background: #ffaa33; color: #000; }
+#content-ultimate .input-group { display: flex; gap: 8px; margin: 8px 0; }
+#content-ultimate .input-group input {
+  flex: 1; padding: 9px 14px; border-radius: 40px;
+  border: 1px solid #ffaa55; background: #0b0f18; color: var(--text); font-size: 13px;
+  font-family: inherit;
+}
+#content-ultimate .ult-log-box {
+  background: #010101aa; border-radius: 16px; padding: 10px;
+  font-family: monospace; font-size: 11px; color: #9eff9e;
+  max-height: 120px; overflow-y: auto; margin-top: 10px; border: 1px solid #2a3344;
+}
+#content-ultimate .agent-legend{ display:flex; gap:16px; margin-top:14px; font-size:11px; color:var(--text-dim); flex-wrap:wrap; }
+#content-ultimate .agent-legend span{ display:flex; align-items:center; gap:6px; }
+#content-ultimate .agent-legend i{ width:10px; height:10px; border-radius:3px; display:inline-block; }
+#content-ultimate .voice-actions{ display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:14px; }
+#content-ultimate .voice-btn{
+  display:flex; flex-direction:column; align-items:flex-start; gap:6px; text-align:left;
+  background:rgba(255,255,255,.04); border:1px solid rgba(232,182,76,.2); border-radius:12px;
+  padding:14px 16px; cursor:pointer; color:var(--text); transition:border-color .15s, background .15s;
+}
+#content-ultimate .voice-btn:hover{ border-color:var(--gold); background:rgba(232,182,76,.06); }
+#content-ultimate .voice-btn .vb-title{ font-size:13.5px; font-weight:700; color:var(--gold); }
+#content-ultimate .voice-btn .vb-desc{ font-size:11.5px; color:var(--text-dim); }
+#content-ultimate .voice-btn[disabled]{ opacity:.45; cursor:not-allowed; }
+#content-ultimate .voice-log{
+  margin-top:18px; background:#05070c; border:1px solid rgba(57,255,224,.15); border-radius:8px;
+  padding:10px; height:130px; overflow-y:auto; font-family:'Consolas',monospace; font-size:11.5px; color:#8ff5e1;
+}
+#content-ultimate .voice-log div{ margin-bottom:3px; }
+#content-ultimate .toast-wrap{position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; gap:10px; z-index:999;}
+#content-ultimate .toast{background:#151b29; border-left:4px solid var(--neon); padding:12px 16px; border-radius:8px;
+  box-shadow:0 8px 24px rgba(0,0,0,.5); font-size:13px; min-width:220px; animation:slidein .25s ease;}
+#content-ultimate .toast.err{border-left-color:var(--err);}
+@keyframes slidein{from{transform:translateX(30px);opacity:0;} to{transform:translateX(0);opacity:1;}}
+@media (max-width:900px){
+  #content-ultimate .agent-grid{ grid-template-columns:repeat(15, 1fr); }
+  #content-ultimate .agent-cell{ font-size:7px; height:24px; }
+  #content-ultimate .agent-hover-preview{ width:250px; top:8px; right:8px; }
+}
+
+.sys-neon-dot{
+  width:12px; height:12px; border-radius:50%; display:inline-block; margin-left:8px;
+  background:#555; box-shadow:0 0 5px #555; transition: background .3s, box-shadow .3s;
+  vertical-align:middle;
+}
+.sys-neon-dot.green{ background:#3ddc71; box-shadow:0 0 10px #3ddc71, 0 0 18px #3ddc71; }
+.sys-neon-dot.yellow{ background:#ffd23d; box-shadow:0 0 10px #ffd23d, 0 0 18px #ffd23d; animation:neonPulse 1s infinite alternate; }
+.sys-neon-dot.red{ background:#ff4d5e; box-shadow:0 0 10px #ff4d5e, 0 0 18px #ff4d5e; }
+@keyframes neonPulse{ from{opacity:1;} to{opacity:.4;} }
+
+button.vt-locked, .chan-btn.vt-locked{ opacity:.4; filter:grayscale(.5); cursor:not-allowed; pointer-events:none; }
+
+.panel-voice-mini{
+  display:flex; align-items:center; gap:8px; margin-bottom:12px;
+  padding:8px 12px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);
+  border-radius:10px; width:fit-content;
+}
+.panel-voice-mini button{ padding:6px 12px; font-size:12px; }
+.panel-legend{
+  margin-top:24px; padding:16px 18px; background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08); border-radius:12px; font-size:12.5px; line-height:1.55;
+}
+.panel-legend h4{ margin:0 0 10px 0; font-size:13.5px; }
+.panel-legend dl{ margin:0; }
+.panel-legend dt{ font-weight:600; margin-top:8px; }
+.panel-legend dd{ margin:2px 0 0 0; opacity:.85; }
+
+h2[data-announce], h3[data-announce]{
+  cursor: pointer;
+  transition: color .15s, text-shadow .15s;
+  position: relative;
+}
+h2[data-announce]:hover, h3[data-announce]:hover{
+  color: #ffd98a;
+  text-shadow: 0 0 12px rgba(232,182,76,.6);
+}
+
+.osc-wrap{
+  position: relative;
+  padding: 22px 44px 22px 44px;
+  background: #05070c;
+  border-radius: 10px;
+  border: 1px solid rgba(232,182,76,.12);
+}
+.osc-wrap canvas.osc{
+  border: none;
+  margin: 0;
+}
+.osc-scale-top, .osc-scale-bottom{
+  position: absolute;
+  left: 44px; right: 44px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Consolas', monospace;
+  font-size: 9.5px;
+  color: rgba(232,182,76,.55);
+  pointer-events: none;
+  letter-spacing: .05em;
+}
+.osc-scale-top{ top: 4px; }
+.osc-scale-bottom{ bottom: 4px; }
+.osc-scale-left, .osc-scale-right{
+  position: absolute;
+  top: 22px; bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: 'Consolas', monospace;
+  font-size: 9.5px;
+  color: rgba(232,182,76,.55);
+  pointer-events: none;
+  letter-spacing: .05em;
+}
+.osc-scale-left{ left: 6px; text-align: right; width: 34px; }
+.osc-scale-right{ right: 6px; text-align: left; width: 34px; }
+.osc-scale-left span, .osc-scale-right span,
+.osc-scale-top span, .osc-scale-bottom span{
+  line-height: 1;
+}
+
+.osc-live-value{
+  position: absolute;
+  top: 6px; right: 54px;
+  background: rgba(57,255,224,.12);
+  color: #39ffe0;
+  font-family: 'Consolas', monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(57,255,224,.4);
+  box-shadow: 0 0 10px rgba(57,255,224,.35);
+  pointer-events: none;
+  letter-spacing: .04em;
+}
+</style>
+</head>
+<body>
+
+<div class="shell-header">
+  <h1>🌐 Sosyal İmece — Kontrol Merkezi<span>Küresel İmece Dünyası · Otonom Panel</span></h1>
+  <div class="shell-status"><span class="led ok"></span><span id="shellClock"></span></div>
+</div>
+
+<div class="tab-bar" id="tabBar">
+  <div class="tab-btn active" data-panel="ultimate" onclick="switchPanel('ultimate')">
+    <span class="num">1</span><span class="label">🚀 Ultimate Komuta Merkezi</span>
+  </div>
+  <div class="tab-btn" data-panel="ana" onclick="switchPanel('ana')">
+    <span class="num">2</span><span class="label">📊 Ana Gösterge Paneli</span>
+  </div>
+  <div class="tab-btn" data-panel="gelismis" onclick="switchPanel('gelismis')">
+    <span class="num">3</span><span class="label">🧠 Gelişmiş AI + SMDA Paneli</span>
+  </div>
+  <div class="tab-btn" data-panel="komuta" onclick="switchPanel('komuta')">
+    <span class="num">4</span><span class="label">🎛️ Komuta Merkezi / Drive Sosyal Paneli</span>
+  </div>
+</div>
+
+<div class="panel-stage">
+  <div class="tab-content" id="content-ana">
+
+
+<div class="panel-voice-mini">
+  <button class="btn-unlock sys-voice-on-btn" style="padding:6px 12px; font-size:12px;">🔊 Ses Açma</button>
+  <span class="sys-neon-dot" title="Sistem durumu: yeşil=aktif, sarı=acil durum, kırmızı=durduruldu"></span>
+  <button class="btn-unlock sys-voice-off-btn" style="padding:6px 12px; font-size:12px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
+</div>
+<div class="topbar">
+  <h1>🌐 SOSYAL İMECE — Ana Gösterge Paneli<span>Küresel İmece Dünyası · Otonom Panel</span></h1>
+  <div class="status-pill"><span class="led ok" id="ana_connLed"></span><span id="ana_connText">Bağlantı kontrol ediliyor…</span></div>
+</div>
+
+<div class="grid">
+
+  <div class="card span-4">
+    <h3 data-announce="Çok Dilli Trafik başlığındasınız. Burada son yirmi dört saatte hangi dilde kaç istek geldiğini göreceksiniz.">🌐 Çok Dilli Trafik (Son 24s)</h3>
+    <canvas id="ana_multilangChart" height="140"></canvas>
+    <div class="traffic-flags">
+      <div class="flag-box"><div class="flag">🇹🇷</div><div class="pct" id="ana_pctTr">–</div></div>
+      <div class="flag-box"><div class="flag">🇬🇧</div><div class="pct" id="ana_pctEn">–</div></div>
+      <div class="flag-box"><div class="flag">🇩🇪</div><div class="pct" id="ana_pctDe">–</div></div>
+    </div>
+    <div class="totals" id="ana_trafficTotals">Toplam: — istek</div>
+  </div>
+
+  <div class="card span-8">
+    <h3 data-announce="Canlı Telemetri Osiloskopu başlığındasınız. Kanal butonlarına tıklayarak Volkan'dan görev bilgisi alabilirsiniz.">📈 Canlı Telemetri Osiloskopu</h3>
+    <div class="osc-wrap">
+      <div class="osc-scale-top"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="osc-scale-left"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <canvas id="ana_osiloskopCanvas" class="osc" width="900" height="120"></canvas>
+      <div class="osc-scale-right"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="osc-scale-bottom"><span>0s</span><span>1s</span><span>2s</span><span>3s</span><span>4s</span></div>
+      <div class="osc-live-value" id="ana_oscLiveValue">— canlı</div>
+    </div>
+    <div class="chan-btn-row" id="ana_oscChanButtons"></div>
+  </div>
+
+  <div class="card span-4">
+    <h3 data-announce="SMDA Hızlı Kontrol başlığındasınız.">⚙️ SMDA Hızlı Kontrol</h3>
+    <div style="margin-bottom:10px;"><span class="led" id="ana_smdaLed"></span><span id="ana_smdaLedText">bekliyor</span></div>
+    <div class="btn-row" style="margin-bottom:10px;">
+      <button class="btn-warning" data-vtask-start="SMDA Test, Dry Run. Deneme modunda başlatılıyor." data-vtask-done="SMDA deneme modu tamamlandı." onclick="ana_runSocialAgent(true)">SMDA Test (Dry Run)</button>
+      <button class="btn-danger" data-vtask-start="Canlı dağıtım onay penceresi açılıyor." data-vtask-done="Onay penceresi kapatıldı." onclick="ana_confirmLiveRun()">Canlı Dağıtım ⚠️</button>
+    </div>
+    <div id="ana_smdaResult" style="font-size:12px; color:var(--text-dim); margin-bottom:6px;">Son batch: —</div>
+    <progress id="ana_smdaProgress" max="100" value="0"></progress>
+  </div>
+
+  <div class="card span-4">
+    <h3 data-announce="Hızlı Eylemler başlığındasınız.">🛠️ Hızlı Eylemler</h3>
+    <div class="btn-row">
+      <button class="btn-primary" data-vtask-start="WhatsApp köprü bağlantısı test ediliyor." data-vtask-done="WhatsApp köprü testi tamamlandı." onclick="ana_testWhatsAppBridge()">WhatsApp Köprüsü Test</button>
+      <button class="btn-outline" data-vtask-start="Tüm canlı metrikler yeniden yükleniyor." data-vtask-done="Metrikler yenilendi." onclick="ana_refreshAllMetrics()">🔄 Yenile</button>
+      <button class="btn-secondary" data-vtask-start="Son konuşma logları isteniyor." data-vtask-done="Loglar görüntülendi." onclick="ana_showLogs()">📋 Logları Görüntüle</button>
+    </div>
+    <div id="ana_quickActionResult" style="font-size:12px; color:var(--text-dim); margin-top:10px;"></div>
+  </div>
+
+  <div class="card span-4">
+    <h3 data-announce="Bütünleşik Sağlık Endeksi. Derin Sistem Teşhisi butonu ile manuel kalibrasyon başlatılabilir.">💠 Bütünleşik Sağlık Endeksi</h3>
+    <div class="gauge-wrap"><svg id="ana_healthGauge" width="180" height="110" viewBox="0 0 180 110"></svg></div>
+    <div style="text-align:center; margin-top:12px;">
+      <button class="btn-primary" data-vtask-start="Derin sistem teşhisi başlatılıyor." data-vtask-done="Derin sistem teşhisi tamamlandı." onclick="ana_derinTeshis()">🔬 Derin Sistem Teşhisi</button>
+    </div>
+    <div id="ana_teshisSonuc" style="font-size:11.5px; color:var(--text-dim); margin-top:10px; text-align:center;"></div>
+  </div>
+
+  <div class="card span-12">
+    <h3 data-announce="Canlı Mesaj Trafiği ve Son Aktiviteler.">📡 Canlı Mesaj Trafiği &amp; Son Aktiviteler</h3>
+    <div style="display:flex; gap:24px; align-items:center;">
+      <div style="text-align:center;">
+        <div class="counter-big" id="ana_liveMsgCounter">0</div>
+        <div class="counter-label">bu oturumda mesaj</div>
+      </div>
+      <ul class="timeline" id="ana_activityTimeline" style="flex:1;"></ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast-wrap" id="ana_toastWrap"></div>
+
+<div class="modal-bg" id="ana_confirmModal">
+  <div class="modal-box">
+    <h3>⚠️ Canlı Dağıtım Onayı</h3>
+    <p>5 ürün canlı olarak tüm platformlara dağıtılacak. Emin misiniz?</p>
+    <div class="btn-row">
+      <button class="btn-danger" data-vtask-start="Canlı dağıtım onaylandı." data-vtask-done="Canlı dağıtım tamamlandı." onclick="ana_runSocialAgent(false); closeModal('ana_confirmModal')">Evet, Yayınla</button>
+      <button class="btn-secondary" data-vtask-start="Canlı dağıtım iptal edildi." data-vtask-done="Onay penceresi kapatıldı." onclick="ana_closeModal('ana_confirmModal')">Vazgeç</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="ana_genericModal">
+  <div class="modal-box">
+    <h3 id="ana_modalTitle">Sonuç</h3>
+    <pre id="ana_modalBody"></pre>
+    <div class="btn-row" style="margin-top:12px;"><button class="btn-secondary" data-vtask-start="Bilgi penceresi kapatılıyor." data-vtask-done="Bilgi penceresi kapatıldı." onclick="ana_closeModal('ana_genericModal')">Kapat</button></div>
+  </div>
+</div>
+
+<div class="panel-legend">
+  <h4>📋 Bu panelde ne var, hangi buton ne işe yarar?</h4>
+  <dl>
+    <dt>📈 Canlı Telemetri Osiloskopu</dt>
+    <dd>Sistemin dört temel canlı metriğini gösterir.</dd>
+    <dt>SMDA Test (Dry Run)</dt>
+    <dd>Sosyal Medya Dağıtım Ajanını gerçek paylaşım yapmadan test eder.</dd>
+    <dt>Canlı Dağıtım ⚠️</dt>
+    <dd>Onay penceresi açar; onaylarsanız ürünler GERÇEKTEN paylaşılır.</dd>
+    <dt>🔬 Derin Sistem Teşhisi</dt>
+    <dd>Sağlık endeksini kalibre eder ve tüm alt sistemleri test eder.</dd>
+  </dl>
+</div>
+
+
+
+  </div>
+  <div class="tab-content" id="content-gelismis">
+
+
+<div class="panel-voice-mini">
+  <button class="btn-unlock sys-voice-on-btn" style="padding:6px 12px; font-size:12px;">🔊 Ses Açma</button>
+  <span class="sys-neon-dot" title="Sistem durumu: yeşil=aktif, sarı=acil durum, kırmızı=durduruldu"></span>
+  <button class="btn-unlock sys-voice-off-btn" style="padding:6px 12px; font-size:12px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
+</div>
+<div class="topbar">
+  <h1 id="gel_pageTitle">🧠 Gelişmiş AI + SMDA Kontrol Paneli<span id="gel_pageSub">Küresel İmece Dünyası · Otonom Panel</span></h1>
+  <select id="gel_langSelect" onchange="gel_changePanelLanguage(this.value)">
+    <option value="tr">🇹🇷 Türkçe</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="de">🇩🇪 Deutsch</option>
+  </select>
+</div>
+
+<div class="grid">
+
+  <div class="card span-4">
+    <h3 id="gel_aiCardTitle" data-announce="Yapay Zeka Modülü başlığındasınız.">🧠 AI Modülü</h3>
+    <button class="btn-dark" data-vtask-start="Yapay zeka modülü test ediliyor." data-vtask-done="AI modülü testi tamamlandı." onclick="gel_testAIIntegration()">🧠 AI Test</button>
+    <div id="gel_aiTestResult" style="font-size:12px; color:var(--text-dim); margin:10px 0;"></div>
+    <canvas id="gel_intentChart" height="180"></canvas>
+  </div>
+
+  <div class="card span-4">
+    <h3 data-announce="Dil Başına AI Doğruluk başlığındasınız.">🎯 Dil Başına AI Doğruluk</h3>
+    <canvas id="gel_langAccuracyChart" height="180"></canvas>
+  </div>
+
+  <div class="card span-4">
+    <h3 data-announce="Konuşma Süresi Dağılımı başlığındasınız.">⏱️ Konuşma Süresi Dağılımı (dk)</h3>
+    <canvas id="gel_durationHistogram" height="180"></canvas>
+  </div>
+
+  <div class="card span-8">
+    <h3 data-announce="Yapay Zeka ve Sosyal Osiloskop başlığındasınız.">📈 AI + Sosyal Osiloskop (5 Kanal)</h3>
+    <div class="osc-wrap">
+      <div class="osc-scale-top"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="osc-scale-left"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <canvas id="gel_osiloskopCanvas" class="osc" width="900" height="130"></canvas>
+      <div class="osc-scale-right"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="osc-scale-bottom"><span>0s</span><span>1s</span><span>2s</span><span>3s</span><span>4s</span></div>
+    </div>
+    <div class="chan-btn-row" id="gel_oscChanButtons"></div>
+  </div>
+
+  <div class="card span-4">
+    <h3 data-announce="SMDA Tam Kontrol Paneli başlığındasınız. Özel dakika girişi ile esnek döngü süresi belirleyebilirsiniz.">⚙️ SMDA Tam Kontrol Paneli</h3>
+    <div class="toggle-row">
+      <label class="switch"><input type="checkbox" id="gel_smdaLoopToggle" onchange="gel_toggleSmdaLoop(this.checked)"><span class="slider"></span></label>
+      <span>Döngü Aktif</span>
+      <select id="gel_loopInterval" style="margin-left:auto; width:110px;" onchange="gel_customInputTemizle()">
+        <option value="30">30 dk</option><option value="60" selected>60 dk</option>
+        <option value="180">180 dk</option><option value="360">360 dk</option>
+      </select>
+    </div>
+    <div class="counter-input" style="margin-bottom:12px;">
+      <label style="flex:0 0 auto;">Özel dk</label>
+      <input type="number" id="gel_customInterval" placeholder="dk" min="1" max="1440" style="width:80px;" oninput="gel_customInputKullan()">
+      <span style="font-size:11px; color:var(--text-dim);">(1-1440)</span>
+    </div>
+    <div class="counter-input"><label>Max Ürün</label><input type="number" id="gel_maxProducts" value="5" min="0" max="10"></div>
+    <div class="counter-input"><label>Max İMECE</label><input type="number" id="gel_maxImece" value="1" min="0" max="10"></div>
+    <div class="btn-row">
+      <button class="btn-primary" data-vtask-start="SMDA canlı modda çalıştırılıyor." data-vtask-done="SMDA tamamlandı." onclick="gel_smdaStart()">Başlat</button>
+      <button class="btn-danger" data-vtask-start="SMDA döngüsü durduruluyor." data-vtask-done="SMDA döngüsü durduruldu." onclick="gel_smdaStop()">Durdur</button>
+      <button class="btn-dark" data-vtask-start="SMDA deneme modunda çalıştırılıyor." data-vtask-done="SMDA deneme tamamlandı." onclick="gel_smdaDryRun()">Dry-Run Test</button>
+    </div>
+  </div>
+
+  <div class="card span-8">
+    <h3 data-announce="SMDA Canlı Log başlığındasınız.">🖥️ SMDA Canlı Log</h3>
+    <div class="log-box" id="gel_smdaLiveLog"></div>
+  </div>
+
+  <div class="card span-12">
+    <h3 data-announce="SMDA Döngü Takvimi başlığındasınız.">📅 SMDA Döngü Takvimi (Son 30 Gün)</h3>
+    <canvas id="gel_loopCalendarChart" height="90"></canvas>
+  </div>
+
+</div>
+
+<div class="toast-wrap" id="gel_toastWrap"></div>
+
+<div class="panel-legend">
+  <h4>📋 Bu panelde ne var, hangi buton ne işe yarar?</h4>
+  <dl>
+    <dt>🧠 AI Test</dt>
+    <dd>Yapay zeka modülünü test eder.</dd>
+    <dt>⚙️ SMDA Tam Kontrol Paneli — Başlat</dt>
+    <dd>SMDA'yı canlı modda çalıştırır.</dd>
+    <dt>Durdur</dt>
+    <dd>SMDA döngüsünü durdurur.</dd>
+    <dt>Dry-Run Test</dt>
+    <dd>Deneme modunda çalıştırır.</dd>
+    <dt>Özel dk</dt>
+    <dd>Serbest dakika girişi (1-1440).</dd>
+  </dl>
+</div>
+
+
+
+  </div>
+  <div class="tab-content" id="content-komuta">
+
+
+<div class="panel-voice-mini">
+  <button class="btn-unlock sys-voice-on-btn" style="padding:6px 12px; font-size:12px;">🔊 Ses Açma</button>
+  <span class="sys-neon-dot" title="Sistem durumu: yeşil=aktif, sarı=acil durum, kırmızı=durduruldu"></span>
+  <button class="btn-unlock sys-voice-off-btn" style="padding:6px 12px; font-size:12px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
+</div>
+<div class="alarm-bar" id="kom_alarmBar">🚨 ACİL DURUM AKTİF — TÜM OTONOM SÜREÇLER DURDURULDU 🚨</div>
+
+<div class="topbar">
+  <h1>🎛️ Komuta Merkezi / Drive Sosyal Paneli<span>Küresel İmece Dünyası · Otonom Panel</span></h1>
+  <div style="display:flex; gap:10px;">
+    <button class="btn-dark" data-vtask-start="Canlı medya penceresi açılıyor." data-vtask-done="Medya penceresi kapatıldı." onclick="kom_openLiveMediaModal()">📺 Canlı Medya</button>
+    <button class="btn-emergency" data-vtask-start="Acil durum protokolü etkinleştiriliyor." data-vtask-done="Acil durum kaldırılıyor." onclick="kom_emergencyStop()">🚨 ACİL DURUM</button>
+  </div>
+</div>
+
+<div class="grid">
+
+  <div class="card span-12">
+    <h3 data-announce="Üst Düzey Telemetri Osiloskopu başlığındasınız. Sekiz kanal mevcut.">📡 Üst Düzey Telemetri Osiloskopu (8 Kanal)</h3>
+    <div class="osc-wrap">
+      <div class="osc-scale-top"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="osc-scale-left"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <canvas id="kom_telemetryCanvas" class="osc" width="1000" height="200"></canvas>
+      <div class="osc-scale-right"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="osc-scale-bottom"><span>0s</span><span>1s</span><span>2s</span><span>3s</span><span>4s</span></div>
+    </div>
+    <div class="chan-btn-row" id="kom_oscChanButtons"></div>
+  </div>
+
+  <div class="card span-5">
+    <h3 data-announce="Merkezi Çok Dilli Trafik başlığındasınız.">🌐 Çok Dilli Trafik (Merkezi Görünüm)</h3>
+    <canvas id="kom_bigMultilangChart" height="260"></canvas>
+  </div>
+
+  <div class="card span-7">
+    <h3 data-announce="Coğrafi Yoğunluk başlığındasınız.">🗺️ Coğrafi Yoğunluk (TR / ABD / Almanya)</h3>
+    <svg id="kom_worldMap" viewBox="0 0 500 220" style="width:100%; height:auto;"></svg>
+  </div>
+
+  <div class="card span-4">
+    <h3 data-announce="Platform Kontrolü başlığındasınız.">📢 Platform Kontrolü</h3>
+    <div class="platform-grid" id="kom_platformGrid"></div>
+    <button class="btn-gradient" style="width:100%; margin-top:12px;" data-vtask-start="Seçili platformlara eş zamanlı yayın başlatılıyor." data-vtask-done="Yayın tamamlandı." onclick="kom_shareToAllPlatforms()">📢 Hepsine Yayınla</button>
+  </div>
+
+  <div class="card span-4">
+    <h3 data-announce="Medya Üret başlığındasınız.">🎬 Medya Üret (Ses + Görsel + Video)</h3>
+    <textarea id="kom_mediaText" rows="3" placeholder="Paylaşılacak metni buraya yazın…"></textarea>
+    <div class="btn-row">
+      <button class="btn-dark" data-vtask-start="Medya üretimi başlatılıyor." data-vtask-done="Medya üretimi tamamlandı." onclick="kom_generateMedia()">🎬 Medya Üret</button>
+    </div>
+    <div class="media-preview" id="kom_mediaPreview">Henüz medya üretilmedi.</div>
+  </div>
+
+  <div class="card span-4">
+    <h3 data-announce="Platform Başarı Oranı başlığındasınız. Barlara tıklayarak Volkan'dan değerlendirme alabilirsiniz.">📊 Platform Başarı Oranı</h3>
+    <canvas id="kom_platformSuccessChart" height="220"></canvas>
+    <div style="font-size:11px; color:var(--text-dim); margin-top:8px; text-align:center;">💡 Barlara tıklayın — Volkan değerlendirsin.</div>
+  </div>
+
+  <div class="card span-12">
+    <h3 data-announce="Son 20 Dağıtım Batch'i başlığındasınız.">🗂️ Son 20 Dağıtım Batch'i</h3>
+    <div style="max-height:240px; overflow-y:auto;">
+      <table>
+        <thead><tr><th>Tarih</th><th>Başarı</th><th>Medya</th><th>Hata</th></tr></thead>
+        <tbody id="kom_batchTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card span-12">
+    <h3 data-announce="CEO Yönetim Paneli başlığındasınız. Onaylama, pasif alma, çıkışa zorlama ve toplu işlemler burada yapılır.">👑 CEO Yönetim Paneli — Erişim Onayı</h3>
+    <div style="display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap; margin-bottom:16px;">
+      <div style="flex:1; min-width:180px;">
+        <label style="font-size:11px; color:var(--text-dim); display:block; margin-bottom:4px;">CEO Anahtarı</label>
+        <input type="password" id="kom_ceoKeyInput" placeholder="CEO_ACCESS_KEY girin…">
+      </div>
+      <div style="flex:2; min-width:220px;">
+        <label style="font-size:11px; color:var(--text-dim); display:block; margin-bottom:4px;">Kullanıcı ID / İsim</label>
+        <input type="text" id="kom_ceoUserIdInput" placeholder="ör. ahmet_yilmaz veya +905xxxxxxxxx">
+      </div>
+      <button class="btn-ceo-approve" data-vtask-start="CEO onay işlemi başlıyor." data-vtask-done="CEO onayı tamamlandı." onclick="kom_ceoApproveLogin()">✅ CEO: Sisteme Girecek Kişiyi Onayla</button>
+      <button class="btn-ceo-passive" data-vtask-start="CEO pasif işlemi başlıyor." data-vtask-done="CEO pasif işlemi tamamlandı." onclick="kom_ceoPassiveUser()">⏸ CEO: Sistemde Pasif Kalması İçin Kişiyi Onayla</button>
+      <button class="btn-ceo-logout" data-vtask-start="CEO çıkış işlemi başlıyor." data-vtask-done="CEO çıkış işlemi tamamlandı." onclick="kom_ceoForceLogout()">⛔ CEO: Sistemden Çıkması İçin Kişiyi Onayla</button>
+    </div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; padding:12px; background:rgba(255,255,255,.02); border:1px dashed rgba(232,182,76,.25); border-radius:10px;">
+      <strong style="font-size:12px; color:var(--gold); align-self:center; margin-right:8px;">⚡ Toplu Yönetim:</strong>
+      <button class="btn-ceo-approve" data-vtask-start="Tüm bekleyenler onaylanıyor." data-vtask-done="Tüm bekleyenler onaylandı." onclick="kom_ceoApproveAll()">✅ Tüm Bekleyenleri Onayla</button>
+      <button class="btn-ceo-logout" data-vtask-start="Tüm aktif oturumlar kapatılıyor." data-vtask-done="Tüm aktif oturumlar kapatıldı." onclick="kom_ceoCloseAllSessions()">⛔ Tüm Aktif Oturumları Kapat</button>
+    </div>
+    <div id="kom_ceoActionResult" style="font-size:12.5px; color:var(--text-dim); margin-bottom:14px;"></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <strong style="font-size:12.5px; color:var(--gold);">⏳ Bekleyen Erişim Talepleri</strong>
+          <button class="btn-secondary" style="padding:4px 10px; font-size:11px;" data-vtask-start="CEO listeleri yenileniyor." data-vtask-done="CEO listeleri güncellendi." onclick="kom_loadCeoLists()">🔄</button>
+        </div>
+        <div id="kom_ceoPendingList" style="font-size:12px; color:var(--text-dim);">Yükleniyor…</div>
+      </div>
+      <div>
+        <strong style="font-size:12.5px; color:var(--gold); display:block; margin-bottom:8px;">🟢 Aktif Oturumlar</strong>
+        <div id="kom_ceoActiveList" style="font-size:12px; color:var(--text-dim);">Yükleniyor…</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card span-12">
+    <h3 data-announce="Canlı Konsol başlığındasınız.">🖥️ Canlı Konsol</h3>
+    <div class="console" id="kom_liveConsole"></div>
+  </div>
+
+</div>
+
+<div class="toast-wrap" id="kom_toastWrap"></div>
+
+<div class="modal-bg" id="kom_mediaModal">
+  <div class="modal-box">
+    <h3 style="color:var(--gold); margin-top:0;">📺 Canlı Medya Önizleme</h3>
+    <div id="kom_liveMediaContent" style="background:#05070c; border-radius:8px; padding:16px; text-align:center; font-size:13px; color:var(--text-dim); min-height:120px; display:flex; align-items:center; justify-content:center;">
+      media_out/ içinde henüz üretim yok (demo).
+    </div>
+    <div class="btn-row"><button class="btn-secondary" data-vtask-start="Medya penceresi kapatılıyor." data-vtask-done="Medya penceresi kapatıldı." onclick="kom_closeModal('kom_mediaModal')">Kapat</button></div>
+  </div>
+</div>
+
+<div class="panel-legend">
+  <h4>📋 Bu panelde ne var, hangi buton ne işe yarar?</h4>
+  <dl>
+    <dt>🚨 ACİL DURUM</dt>
+    <dd>Global Lock devreye girer; 200 ajan ve SMDA döngüleri duraklatılır.</dd>
+    <dt>📊 Platform Başarı Oranı</dt>
+    <dd>Barlara tıklayınca Volkan platformun durumunu değerlendirir.</dd>
+    <dt>👑 CEO Yönetim Paneli</dt>
+    <dd>Onaylama, pasif alma, çıkışa zorlama ve toplu işlemler Flask backend ile entegre.</dd>
+  </dl>
+</div>
+
+
+
+  </div>
+
+  <div class="tab-content active" id="content-ultimate">
+<div class="top-strip" id="ult_topStrip">
+  <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+    <button class="btn-unlock sys-voice-on-btn" style="padding:10px 18px; font-size:13px;">🔊 Ses Açma</button>
+    <button class="btn-unlock sys-voice-off-btn" style="padding:10px 18px; font-size:13px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
+  </div>
+  <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-left:auto;">
+    <span class="sim-badge" id="ult_agentSimBadge">·</span>
+    <button class="btn-unlock sys-voice-on-btn" id="ult_btnUnlockVoice" data-vmode="greet">🔓 Volkan 001 AI Ajanı BAŞLAT</button>
+    <span class="sys-neon-dot" id="sysNeonDot" title="Sistem durumu: yeşil=aktif, sarı=acil durum, kırmızı=durduruldu"></span>
+    <button class="btn-unlock sys-voice-off-btn" id="ult_btnKapat" data-vmode="farewell" style="background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">⏻ KAPAT</button>
+  </div>
+</div>
+
+<div class="section">
+  <h2 data-announce="Ajanların Akış Alanı. Burada o an görevde olan ajanlar canlı olarak görünür.">🐉 AKIŞ ALANI (Çalışan Ajanlar)</h2>
+  <div class="card">
+    <div class="flow-container" id="ult_flowContainer"></div>
+    <div class="btn-group">
+      <button id="ult_btnAksSifirla" onclick="ult_akisSifirla()">🔄 Ajanların Akışlarını Sıfırla</button>
+      <button id="ult_btnRastgele" onclick="ult_rastgeleGorevVer()">🎲 Ajanlara Rasgele Görev Ver</button>
+      <button id="ult_btnListeYenile" onclick="ult_guncelleAjanListesi()">🔄 Ajanların Listelerini Yenile</button>
+    </div>
+    <div class="input-group">
+      <input type="text" id="ult_komutInput" placeholder="Örn: Agent-042 5 dakikalık analiz">
+      <button onclick="ult_gonderKomut()">📨 Gönder</button>
+    </div>
+    <div class="ult-log-box" id="ult_logBox">✅ Sistem hazır · BAŞLAT'a basınca 200 ajan göreve başlar.</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 data-announce="Ajan Listesi. 200 ajanı tek ekranda göreceksiniz.">🤖 AJAN LİSTESİ</h2>
+  <div class="card">
+    <div class="radar-stats">
+      <div class="radar-stat"><b id="ult_statTotal">200</b>Toplam Ajan</div>
+      <div class="radar-stat"><b id="ult_statActive">0</b>Şu An Görevde</div>
+      <div class="radar-stat"><b id="ult_statIdle">200</b>Boşta</div>
+    </div>
+    <div class="agent-grid" id="ult_agentGrid"></div>
+    <div class="agent-legend">
+      <span><i style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15);"></i>Boşta</span>
+      <span><i style="background:rgba(61,220,113,.5); border:1px solid #3ddc71;"></i>Görevde</span>
+      <span><i style="background:rgba(255,210,61,.5); border:1px solid #ffd23d;"></i>Tehlikeli</span>
+      <span><i style="background:rgba(255,77,94,.5); border:1px solid #ff4d5e;"></i>Hata</span>
+    </div>
+
+    <div class="agent-hover-preview" id="ult_agentPreview">
+      <div class="ahp-baslik">
+        <span id="ult_prevKod">—</span>
+        <span class="ahp-durum bosta" id="ult_prevDurum">boşta</span>
+      </div>
+      <div class="ahp-rol" id="ult_prevRol">Rol: —</div>
+      <div class="ahp-gorev" id="ult_prevGorev">Görev: —</div>
+      <div class="ahp-actions">
+        <button class="ahp-btn ahp-btn-danger" onclick="ult_tekilAjanSonlandir()">⛔ Tekil Ajanı Sonlandır</button>
+        <button class="ahp-btn ahp-btn-warn" onclick="ult_ajanZorlaYenidenBaslat()">🔄 Ajanı Zorla Yeniden Başlat</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 data-announce="Sesli CEO Bildirimli Eylemler başlığındasınız.">🎙️ Sesli CEO Bildirimli Eylemler</h2>
+  <div class="card">
+    <div class="voice-actions" id="ult_voiceActions"></div>
+    <div class="voice-log" id="ult_voiceLog"></div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="ult_toastWrap"></div>
+  </div>
+
+</div>
+
+<script>
+const PANEL_ANNOUNCE_NAMES = {
+  ultimate: "Ultimate Komuta Merkezi",
+  ana: "Ana Gösterge",
+  gelismis: "Gelişmiş Eeeayy Ajanı + SMDA",
+  komuta: "Komuta Merkezi / Drive Sosyal"
+};
+function switchPanel(key){
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.panel === key));
+  document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+  document.getElementById("content-" + key).classList.add("active");
+  requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
+  if(typeof VolkanVoice !== "undefined" && VolkanVoice.isUnlocked()){
+    const name = PANEL_ANNOUNCE_NAMES[key] || key;
+    VolkanVoice.announce(`şu an ${name} panelindesiniz.`);
+  }
+}
+function tickClock(){
+  document.getElementById("shellClock").textContent = new Date().toLocaleString('tr-TR');
+}
+tickClock(); setInterval(tickClock, 1000);
+document.addEventListener("keydown", (e) => {
+  if(e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+  if(e.key === "1") switchPanel("ultimate");
+  if(e.key === "2") switchPanel("ana");
+  if(e.key === "3") switchPanel("gelismis");
+  if(e.key === "4") switchPanel("komuta");
+});
+
+window.PANEL_ACTIVE_TASKS = 0;
+window.PANEL_LOCKED = true;
+function setSysNeon(state){
+  document.querySelectorAll(".sys-neon-dot").forEach(d=>{
+    d.className = "sys-neon-dot" + (state && state !== "off" ? " " + state : "");
+  });
+}
+window.setSysNeon = setSysNeon;
+function vt_lockPanel(locked){
+  window.PANEL_LOCKED = locked;
+  document.querySelectorAll("button, .chan-btn").forEach(el=>{
+    if(el.classList.contains("sys-voice-on-btn") || el.classList.contains("sys-voice-off-btn")) return;
+    if(el.tagName === "BUTTON") el.disabled = locked;
+    el.classList.toggle("vt-locked", locked);
+  });
+}
+window.vt_lockPanel = vt_lockPanel;
+vt_lockPanel(true);
+
+function panelToast(msg, type="ok"){
+  const wrap = document.querySelector(".tab-content.active .toast-wrap") || document.getElementById("ult_toastWrap");
+  if(!wrap) return;
+  const el = document.createElement("div");
+  el.className = "toast " + type;
+  el.textContent = msg;
+  wrap.appendChild(el);
+  setTimeout(()=>el.remove(), 4000);
+}
+window.panelToast = panelToast;
+
+function ult_voiceLog(msg){
+  const box = document.getElementById("ult_voiceLog");
+  if(!box) return;
+  const div = document.createElement("div");
+  div.textContent = `[${new Date().toLocaleTimeString('tr-TR')}] ${msg}`;
+  box.appendChild(div); box.scrollTop = box.scrollHeight;
+  while(box.children.length > 200) box.removeChild(box.firstChild);
+}
+window.ult_voiceLog = ult_voiceLog;
+
+const VolkanVoice = (function(){
+  let unlocked = false;
+  const supported = 'speechSynthesis' in window;
+
+  function setEngineState(state){
+    const ult_topStrip = document.getElementById("ult_topStrip");
+    const ult_engineDot = document.getElementById("ult_engineDot");
+    const engineText = document.getElementById("ult_engineStatusText");
+    if(!ult_topStrip || !ult_engineDot || !engineText) return;
+    if(state === "konusuyor"){
+      ult_engineDot.className = "engine-dot ready";
+      engineText.textContent = "Ses Motoru: Aktif";
+      ult_topStrip.classList.add("speaking");
+    } else if(state === "hazir"){
+      ult_engineDot.className = "engine-dot ready";
+      engineText.textContent = "Ses Motoru: Hazır";
+      ult_topStrip.classList.remove("speaking");
+    } else {
+      ult_engineDot.className = "engine-dot";
+      engineText.textContent = "·";
+    }
+  }
+  setEngineState("hazirlaniyor");
+
+  function unlock(){
+    return new Promise((resolve)=>{
+      if(!supported){ resolve(false); return; }
+      try{
+        const warm = new SpeechSynthesisUtterance(" ");
+        warm.volume = 0; warm.lang = "tr-TR";
+        warm.onend = () => { unlocked = true; setEngineState("hazir"); resolve(true); };
+        warm.onerror = () => { unlocked = true; setEngineState("hazir"); resolve(true); };
+        window.speechSynthesis.speak(warm);
+      }catch(e){ resolve(false); }
+    });
+  }
+
+  function speakRaw(text){
+    return new Promise((resolve)=>{
+      if(!supported){ resolve(false); return; }
+      try{
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = "tr-TR";
+        utter.rate = 0.93;
+        utter.pitch = 1.02;
+        utter.volume = 1;
+        const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+        const trVoice = voices.find(v => /tr[-_]TR/i.test(v.lang) && /google|natural|online|premium|tolga|emel/i.test(v.name))
+                     || voices.find(v => /tr[-_]TR/i.test(v.lang));
+        if(trVoice) utter.voice = trVoice;
+        setEngineState("konusuyor");
+        utter.onend = () => { setEngineState("hazir"); resolve(true); };
+        utter.onerror = () => { setEngineState("hazir"); resolve(false); };
+        window.speechSynthesis.speak(utter);
+      }catch(e){ setEngineState("hazir"); resolve(false); }
+    });
+  }
+
+  async function announce(actionDescription){
+    if(!unlocked){
+      panelToast("Önce 'Volkan 001 AI Ajanı BAŞLAT' butonuna basmalısınız", "err");
+      ult_voiceLog("⚠️ Ses motoru kilitli.");
+      return false;
+    }
+    const fullText = `Sayın CEO, ${actionDescription}`;
+    ult_voiceLog("🗣️ " + fullText);
+    return await speakRaw(fullText);
+  }
+
+  async function speakExact(fullText){
+    if(!unlocked){
+      panelToast("Önce 'Volkan 001 AI Ajanı BAŞLAT' butonuna basmalısınız", "err");
+      return false;
+    }
+    ult_voiceLog("🗣️ " + fullText);
+    return await speakRaw(fullText);
+  }
+
+  return { unlock, announce, speakExact, isUnlocked: () => unlocked, isSupported: () => supported };
+})();
+window.VolkanVoice = VolkanVoice;
+
+async function panelVoiceOn(btn){
+  const mode = (btn && btn.dataset.vmode) || "toggle";
+  if(btn){ btn.disabled = true; btn.dataset.origText = btn.dataset.origText || btn.textContent; btn.textContent = "⏳ Başlatılıyor…"; }
+  const ok = await VolkanVoice.unlock();
+  if(ok){
+    setSysNeon("green");
+    vt_lockPanel(false);
+    panelToast("Sesli asistan aktif edildi", "ok");
+    ult_voiceLog("✅ Ses motoru kilidi açıldı.");
+    if(mode === "greet"){
+      btn.textContent = "✅ Sistem Aktif";
+      btn.disabled = true;
+      if(typeof ult_tumAjanlariCalistir === "function") ult_tumAjanlariCalistir();
+      await VolkanVoice.speakExact("Sayın CEO Fahri Bey hoş geldiniz, ben Volkan 001 Ee Aay Ajanı, 200 yapay zeka ajanımız ile komutlarınızı bekliyoruz.");
+    } else {
+      if(btn){ btn.disabled = false; btn.textContent = btn.dataset.origText; }
+      await VolkanVoice.speakExact("Şu an ses açıldı.");
+    }
+  } else {
+    if(btn){ btn.disabled = false; btn.textContent = btn.dataset.origText; }
+    panelToast("Bu tarayıcı sesli okumayı desteklemiyor olabilir", "err");
+  }
+}
+
+async function panelVoiceOff(btn){
+  const mode = (btn && btn.dataset.vmode) || "toggle";
+  if(!VolkanVoice.isUnlocked()){
+    panelToast("Önce sesi/BAŞLAT'ı açmalısınız", "err");
+    return;
+  }
+  if(mode === "farewell"){
+    await VolkanVoice.speakExact("Sayın CEO Fahri bey, bir sonraki komutlarınızı yerine getirmek üzere şimdilik hoşça kalın.");
+    ult_voiceLog("⏻ KAPAT: kapanış anonsu okundu.");
+  } else {
+    await VolkanVoice.speakExact("Şu an ses kapandı.");
+    ult_voiceLog("⏻ Ses kapatıldı.");
+  }
+  setSysNeon("red");
+  vt_lockPanel(true);
+  const startBtn = document.getElementById("ult_btnUnlockVoice");
+  if(startBtn){ startBtn.disabled = false; startBtn.textContent = startBtn.dataset.origText || "🔓 Volkan 001 AI Ajanı BAŞLAT"; }
+  if(mode === "farewell" && typeof ult_tumAjanlariDurdur === "function") ult_tumAjanlariDurdur();
+  panelToast("Ses kapatıldı", "ok");
+}
+
+document.querySelectorAll(".sys-voice-on-btn").forEach(b => b.addEventListener("click", () => panelVoiceOn(b)));
+document.querySelectorAll(".sys-voice-off-btn").forEach(b => b.addEventListener("click", () => panelVoiceOff(b)));
+
+function vt_taskName(el){
+  if(el.dataset.vtask) return el.dataset.vtask;
+  let t = el.textContent || "";
+  t = t.replace(/[\u{1F000}-\u{1FFFF}\u{2190}-\u{2BFF}\u{2600}-\u{27BF}\uFE0F]/gu, "");
+  t = t.replace(/\s+/g, " ").trim();
+  return t || "İşlem";
+}
+document.addEventListener("click", (e) => {
+  const el = e.target.closest("button, .chan-btn");
+  if(!el) return;
+  if(el.classList.contains("sys-voice-on-btn") || el.classList.contains("sys-voice-off-btn")) return;
+  if(el.classList.contains("voice-btn")) return;
+  if(el.classList.contains("agent-cell")) return;
+  if(el.classList.contains("ahp-btn")) return;
+  if(el.id === "ult_btnAksSifirla" || el.id === "ult_btnRastgele" || el.id === "ult_btnListeYenile") return;
+  if(el.classList.contains("chan-btn")){
+    // === YENİ: Osiloskop kanal butonları için toggle + Volkan anons ===
+    const isAll = el.classList.contains("all-btn") || el.dataset.ch === "all";
+    const chanLabel = isAll ? "Hepsini Karışık Takip Et" : vt_taskName(el);
+    const starting = el.dataset.chanState !== "on";
+    el.dataset.chanState = starting ? "on" : "off";
+    if(typeof VolkanVoice !== "undefined" && VolkanVoice.isUnlocked()){
+      if(starting){
+        const speech = el.dataset.vchanSpeech || ("Şimdi bu ekranda " + chanLabel + " göreceksiniz. Bu kanalın görevi başlamıştır ve canlı olarak takip edilecektir.");
+        VolkanVoice.speakExact("Sayın CEO, " + chanLabel + " butonuna bastınız. " + speech);
+      } else {
+        VolkanVoice.speakExact("Sayın CEO, " + chanLabel + " butonunun görevi sona ermiştir.");
+      }
+    }
+    return;
+  }
+
+  const starting = el.dataset.vstate !== "on";
+  el.dataset.vstate = starting ? "on" : "off";
+  window.PANEL_ACTIVE_TASKS = Math.max(0, window.PANEL_ACTIVE_TASKS + (starting ? 1 : -1));
+
+  const detailed = starting ? el.dataset.vtaskStart : el.dataset.vtaskDone;
+  if(detailed){
+    VolkanVoice.announce(detailed);
+  } else {
+    const task = vt_taskName(el);
+    VolkanVoice.announce(`${task} ${starting ? "başlamıştır" : "tamamlandı"}.`);
+  }
+});
+
+document.addEventListener("click", (e) => {
+  const h = e.target.closest("h2[data-announce], h3[data-announce]");
+  if(!h) return;
+  const metin = h.dataset.announce;
+  if(metin){
+    if(typeof VolkanVoice !== "undefined" && VolkanVoice.isUnlocked()){
+      VolkanVoice.speakExact("Sayın CEO, " + metin);
+    }
+  }
+});
+
+window.globalEmergencyLock = function(active){
+  if(active){
+    if(typeof ult_tumAjanlariDurdur === "function"){
+      try{ ult_tumAjanlariDurdur(); }catch(e){}
+    }
+    try{
+      const gelToggle = document.getElementById("gel_smdaLoopToggle");
+      if(gelToggle && gelToggle.checked){ gelToggle.checked = false; }
+      if(typeof gel_smdaStop === "function"){ try{ gel_smdaStop(); }catch(e){} }
+    }catch(e){}
+    setSysNeon("yellow");
+    window.PANEL_ACTIVE_TASKS = 0;
+  } else {
+    setSysNeon(typeof VolkanVoice !== "undefined" && VolkanVoice.isUnlocked() ? "green" : "red");
+  }
+};
+</script>
+
+<script>
+(function(){
+const API_BASE = "http://localhost:5000";
+function toast(msg, type="ok"){
+  const wrap = document.getElementById("ana_toastWrap");
+  const el = document.createElement("div");
+  el.className = "toast " + type;
+  el.textContent = msg;
+  wrap.appendChild(el);
+  setTimeout(()=>el.remove(), 4500);
+}
+function openModal(id){ document.getElementById(id).classList.add("show"); }
+function closeModal(id){ document.getElementById(id).classList.remove("show"); }
+function showResultModal(title, obj){
+  document.getElementById("ana_modalTitle").textContent = title;
+  document.getElementById("ana_modalBody").textContent = typeof obj === "string" ? obj : JSON.stringify(obj, null, 2);
+  openModal("ana_genericModal");
+}
+async function safeFetch(path, options={}, timeoutMs=2500){
+  const controller = new AbortController();
+  const t = setTimeout(()=>controller.abort(), timeoutMs);
+  try{
+    const res = await fetch(API_BASE + path, {...options, signal: controller.signal});
+    clearTimeout(t);
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    return {ok:true, data: await res.json()};
+  }catch(e){ clearTimeout(t); return {ok:false, error: e.message}; }
+}
+function rand(min,max){ return Math.random()*(max-min)+min; }
+
+async function checkConnection(){
+  const r = await safeFetch("/health");
+  const led = document.getElementById("ana_connLed");
+  const txt = document.getElementById("ana_connText");
+  if(r.ok){ led.className = "led ok"; txt.textContent = "Canlı bağlantı aktif"; txt.style.opacity = "1"; }
+  else {
+    led.className = "led warn";
+    txt.textContent = "·";
+    txt.style.opacity = "0.08";
+    txt.style.pointerEvents = "none";
+  }
+}
+
+async function ana_derinTeshis(){
+  const sonucBox = document.getElementById("ana_teshisSonuc");
+  sonucBox.textContent = "🔬 Teşhis başlatıldı…";
+  sonucBox.style.color = "var(--gold)";
+
+  const sonuclar = [];
+  const health = await safeFetch("/health");
+  sonuclar.push({ ad: "Backend Sağlık", ok: health.ok, detay: health.ok ? "Bağlantı aktif" : "Demo modu" });
+
+  const metrics = await safeFetch("/metrics/realtime");
+  sonuclar.push({ ad: "Metrik Akışı", ok: metrics.ok, detay: metrics.ok ? "Canlı veri akıyor" : "Demo veri" });
+
+  const lang = await safeFetch("/metrics/multilang");
+  sonuclar.push({ ad: "Dil Trafiği", ok: lang.ok, detay: lang.ok ? "3 dil aktif" : "Demo modu" });
+
+  const logs = await safeFetch("/logs/conversation");
+  sonuclar.push({ ad: "Log Servisi", ok: logs.ok, detay: logs.ok ? "Log okunabilir" : "Demo modu" });
+
+  const aktifAjan = (typeof ult_activeAgents !== "undefined" && ult_activeAgents) ? ult_activeAgents.size : 0;
+  sonuclar.push({ ad: "Aktif Ajan", ok: aktifAjan > 0, detay: aktifAjan + " / 200 görevde" });
+
+  const smdaToggle = document.getElementById("gel_smdaLoopToggle");
+  sonuclar.push({ ad: "SMDA Döngü", ok: true, detay: (smdaToggle && smdaToggle.checked) ? "Aktif" : "Beklemede" });
+
+  const okSayi = sonuclar.filter(s => s.ok).length;
+  const oran = Math.round((okSayi / sonuclar.length) * 100);
+  drawGauge(oran);
+
+  let html = `<strong style="color:${oran>=75?'var(--ok)':oran>=45?'var(--warn)':'var(--err)'}">Sağlık Endeksi: ${oran}% (${okSayi}/${sonuclar.length})</strong><br>`;
+  sonuclar.forEach(s => {
+    html += `<span style="color:${s.ok?'var(--ok)':'var(--err)'}">${s.ok?'🟢':'🔴'} ${s.ad}:</span> ${s.detay}<br>`;
+  });
+  sonucBox.innerHTML = html;
+  sonucBox.style.color = "var(--text)";
+
+  toast(`Derin teşhis tamamlandı: %${oran} sağlıklı`, oran >= 75 ? "ok" : "err");
+  if(typeof VolkanVoice !== "undefined" && VolkanVoice.isUnlocked()){
+    VolkanVoice.speakExact(`Sayın CEO, derin sistem teşhisi tamamlandı. Sağlık endeksi yüzde ${oran}.`);
+  }
+
+  addActivity(`🔬 Derin teşhis tamamlandı: %${oran}`);
+}
+window.ana_derinTeshis = ana_derinTeshis;
+
+class Oscilloscope{
+  constructor(canvasId, channelCount, colors, labels, points=200, explanations=[], allExplanation=""){
+    this.canvas = document.getElementById(canvasId);
+    this.ctx = this.canvas.getContext("2d");
+    this.channelCount = channelCount;
+    this.colors = colors;
+    this.labels = labels;
+    this.explanations = explanations;
+    this.allExplanation = allExplanation;
+    this.points = points;
+    this.selectedChannel = null;
+    this.buffers = Array.from({length:channelCount}, ()=>new Array(points).fill(0));
+    this._resize();
+    window.addEventListener("resize", ()=>this._resize());
+    if(window.ResizeObserver){
+      new ResizeObserver(()=>this._resize()).observe(this.canvas);
+    }
+  }
+  _resize(){
+    const rect = this.canvas.getBoundingClientRect();
+    const w = rect.width || this.canvas.parentElement?.clientWidth || 600;
+    this.canvas.width = w * (window.devicePixelRatio||1);
+    this.canvas.height = 120 * (window.devicePixelRatio||1);
+  }
+  pushValue(ch, value){ const buf = this.buffers[ch]; buf.shift(); buf.push(value); }
+  setChannel(idx){ this.selectedChannel = idx; }
+  showAll(){ this.selectedChannel = null; }
+  renderButtons(containerId){
+    const wrap = document.getElementById(containerId);
+    const buttons = this.labels.map((l,i)=>
+      `<div class="chan-btn" data-ch="${i}"><i style="background:${this.colors[i%this.colors.length]}"></i>${l}</div>`
+    ).join("");
+    wrap.innerHTML = buttons + `<div class="chan-btn all-btn" data-ch="all">🔀 Hepsini Karışık Takip Et</div>`;
+    wrap.querySelectorAll(".chan-btn").forEach(btn=>{
+      const ch = btn.dataset.ch;
+      const speech = ch === "all" ? this.allExplanation : this.explanations[parseInt(ch)];
+      if(speech) btn.dataset.vchanSpeech = speech;
+      btn.addEventListener("click", ()=>{
+        if(ch === "all"){ this.showAll(); } else { this.setChannel(parseInt(ch)); }
+        wrap.querySelectorAll(".chan-btn").forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+    wrap.querySelector('[data-ch="all"]').classList.add("active");
+  }
+  draw(){
+    const {ctx, canvas} = this;
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.strokeStyle = "rgba(232,182,76,.08)"; ctx.lineWidth = 1;
+    for(let x=0;x<w;x+=w/20){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+    for(let y=0;y<h;y+=h/6){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+    this.buffers.forEach((buf, i)=>{
+      if(this.selectedChannel !== null && this.selectedChannel !== i) return;
+      ctx.beginPath();
+      ctx.strokeStyle = this.colors[i % this.colors.length];
+      ctx.shadowColor = this.colors[i % this.colors.length];
+      ctx.shadowBlur = 6;
+      ctx.lineWidth = this.selectedChannel === i ? 3 : 2;
+      buf.forEach((v, idx)=>{
+        const x = (idx/(this.points-1)) * w;
+        const y = h - (Math.max(0,Math.min(100,v))/100) * h;
+        idx===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      });
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    });
+  }
+  start(fps=30){ this._timer = setInterval(()=>this.draw(), 1000/fps); }
+}
+
+const OSC_LABELS = ["WhatsApp mesaj/dk","CPU %","RAM %","AI başarım %"];
+const OSC_EXPLANATIONS = [
+  "WhatsApp mesaj sayısı. Dakikada kaç mesaj gönderildiğini gösterir.",
+  "CPU kullanımı. Sunucunuzun işlemci kullanım yüzdesini gösterir.",
+  "RAM kullanımı. Sunucunuzun bellek kullanım yüzdesini gösterir.",
+  "Eeeayy ajanı başarımı. Yapay zeka modülünün başarı yüzdesini gösterir."
+];
+const OSC_ALL_EXPLANATION = "Hepsini Karışık Takip Et modunda WhatsApp, CPU, RAM ve AI başarım kanallarının tümü aynı ekranda üst üste gösterilir.";
+const osc = new Oscilloscope("ana_osiloskopCanvas", 4, ["#ff3b3b","#35d488","#3b8bff","#f0d13b"], OSC_LABELS, 200, OSC_EXPLANATIONS, OSC_ALL_EXPLANATION);
+osc.renderButtons("ana_oscChanButtons");
+osc.start();
+
+async function pullRealtimeMetrics(){
+  if(!window.PANEL_ACTIVE_TASKS){
+    [0,1,2,3].forEach(ch => osc.pushValue(ch, 6));
+    return;
+  }
+  const r = await safeFetch("/metrics/realtime");
+  let m;
+  if(r.ok){ m = r.data; }
+  else { m = { cpu: rand(20,70), ram: rand(30,80), whatsapp_rate: rand(0,40), ai_score: rand(70,98) }; }
+  osc.pushValue(0, m.whatsapp_rate);
+  osc.pushValue(1, m.cpu);
+  osc.pushValue(2, m.ram);
+  osc.pushValue(3, m.ai_score);
+  document.getElementById("ana_liveMsgCounter").textContent =
+    (parseInt(document.getElementById("ana_liveMsgCounter").textContent)||0) + (r.ok?1:Math.round(rand(0,2)));
+  const liveEl = document.getElementById("ana_oscLiveValue");
+  if(liveEl){
+    if(osc.selectedChannel !== null){
+      const buf = osc.buffers[osc.selectedChannel];
+      const son = buf.slice(-20);
+      const ort = Math.round(son.reduce((a,b)=>a+b,0) / son.length);
+      liveEl.textContent = ort + " canlı";
+    } else {
+      liveEl.textContent = "— canlı";
+    }
+  }
+}
+setInterval(pullRealtimeMetrics, 1000);
+
+let ana_multilangChart;
+async function loadMultilang(){
+  const r = await safeFetch("/metrics/multilang");
+  let tr=72, en=18, de=10, total=1284;
+  if(r.ok && r.data.counts){
+    const c = r.data.counts;
+    total = (c.tr_count||0)+(c.en_count||0)+(c.de_count||0) || 1;
+    tr = Math.round((c.tr_count||0)/total*100);
+    en = Math.round((c.en_count||0)/total*100);
+    de = 100 - tr - en;
+  }
+  document.getElementById("ana_pctTr").textContent = "%"+tr;
+  document.getElementById("ana_pctEn").textContent = "%"+en;
+  document.getElementById("ana_pctDe").textContent = "%"+de;
+  document.getElementById("ana_trafficTotals").textContent = `Toplam: ${total.toLocaleString('tr-TR')} istek`;
+
+  const data = {
+    labels: ['🇹🇷 Türkçe','🇬🇧 English','🇩🇪 Deutsch'],
+    datasets: [{ data:[tr,en,de], backgroundColor:['#E30A17','#1D70B8','#FFCC00'], borderWidth:0 }]
+  };
+  if(ana_multilangChart){ ana_multilangChart.data = data; ana_multilangChart.update(); }
+  else {
+    ana_multilangChart = new Chart(document.getElementById('ana_multilangChart'), {
+      type:'doughnut', data,
+      options:{ plugins:{ legend:{ labels:{ color:'#eef2f8' } } } }
+    });
+  }
+}
+loadMultilang();
+setInterval(loadMultilang, 15000);
+
+async function testWhatsAppBridge(){
+  document.getElementById("ana_quickActionResult").textContent = "Test ediliyor…";
+  const start = performance.now();
+  const r = await safeFetch("/webhook/test", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({language:"tr"})});
+  const ms = Math.round(performance.now()-start);
+  if(r.ok){
+    document.getElementById("ana_quickActionResult").textContent = `✅ Bağlantı OK (${ms}ms)`;
+    toast("WhatsApp köprüsü yanıt verdi (" + ms + "ms)", "ok");
+    speakVolkan("WhatsApp köprüsü testi başarılı.");
+  } else {
+    document.getElementById("ana_quickActionResult").textContent = `⚠️ Yanıt yok — demo modu`;
+    toast("WhatsApp köprüsüne ulaşılamadı", "err");
+  }
+}
+
+async function runSocialAgent(dryRun){
+  const led = document.getElementById("ana_smdaLed"), ledText = document.getElementById("ana_smdaLedText");
+  led.className = "led warn"; ledText.textContent = "çalışıyor";
+  document.getElementById("ana_smdaProgress").value = 10;
+  const payload = { dry_run: dryRun, loop:false, max_products: dryRun?3:5 };
+  const r = await safeFetch("/panel/social/run", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload)});
+  document.getElementById("ana_smdaProgress").value = 100;
+  if(r.ok){
+    led.className = "led ok"; ledText.textContent = "tamamlandı";
+    document.getElementById("ana_smdaResult").textContent =
+      `Son batch: ${r.data.success_posts}/${r.data.total_posts} başarılı`;
+    toast((dryRun?"Dry-run":"Canlı dağıtım") + " tamamlandı", "ok");
+    speakVolkan(`Sosyal medya dağıtımı tamamlandı. ${r.data.success_posts} gönderiden ${r.data.total_posts} tanesi başarılı.`);
+    showResultModal("SMDA Sonucu", r.data);
+  } else {
+    led.className = "led err"; ledText.textContent = "backend yok (demo)";
+    const demo = { batch_id:"demo-"+Date.now(), status:"completed (demo)", success_posts: dryRun?3:5, total_posts: dryRun?3:5, errors:[] };
+    document.getElementById("ana_smdaResult").textContent = `Son batch (demo): ${demo.success_posts}/${demo.total_posts} başarılı`;
+    toast("Backend'e ulaşılamadı, demo sonuç gösteriliyor", "err");
+    showResultModal("SMDA Sonucu (DEMO)", demo);
+  }
+}
+function confirmLiveRun(){ openModal("ana_confirmModal"); }
+
+async function refreshAllMetrics(){
+  await Promise.all([pullRealtimeMetrics(), loadMultilang()]);
+  document.getElementById("ana_quickActionResult").textContent = "🔄 Metrikler yenilendi";
+  toast("Tüm metrikler yenilendi", "ok");
+}
+
+async function showLogs(){
+  const r = await safeFetch("/logs/conversation");
+  if(r.ok){ showResultModal("Son Konuşma Logları", r.data); }
+  else { showResultModal("Loglar (DEMO)", ["Backend bağlı değil."]); }
+}
+
+async function speakVolkan(text){
+  const r = await safeFetch("/panel/volkan/speak", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({text})});
+  if(r.ok && r.data.status === "success" && r.data.audio_url){
+    const audio = new Audio(API_BASE + r.data.audio_url);
+    audio.play().catch(()=>{});
+  }
+}
+
+function drawGauge(value){
+  const svg = document.getElementById("ana_healthGauge");
+  const cx=90, cy=100, r=75;
+  const angle = Math.PI * (1 - value/100);
+  const x = cx + r*Math.cos(angle), y = cy - r*Math.sin(angle);
+  const color = value>75 ? "#35d488" : value>45 ? "#f0b429" : "#ff4d5e";
+  svg.innerHTML = `
+    <path d="M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="14"/>
+    <path d="M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${x} ${y}" fill="none" stroke="${color}" stroke-width="14" stroke-linecap="round"/>
+    <circle cx="${cx}" cy="${cy}" r="4" fill="${color}"/>
+    <line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${color}" stroke-width="3"/>
+    <text x="${cx}" y="${cy-15}" text-anchor="middle" fill="#eef2f8" font-size="22" font-weight="700">${Math.round(value)}</text>
+  `;
+}
+function tickGauge(){ drawGauge(rand(55,95)); }
+tickGauge(); setInterval(tickGauge, 4000);
+
+function addActivity(text){
+  const ul = document.getElementById("ana_activityTimeline");
+  const li = document.createElement("li");
+  const now = new Date().toLocaleTimeString('tr-TR');
+  li.innerHTML = `<span class="t">${now}</span>${text}`;
+  ul.prepend(li);
+  while(ul.children.length > 5) ul.removeChild(ul.lastChild);
+}
+["Sistem başlatıldı","AI analizi tamamlandı (örnek)","SMDA döngü kontrolü yapıldı"].forEach(addActivity);
+
+checkConnection();
+setInterval(checkConnection, 10000);
+
+window.ana_closeModal = closeModal;
+window.ana_confirmLiveRun = confirmLiveRun;
+window.ana_refreshAllMetrics = refreshAllMetrics;
+window.ana_runSocialAgent = runSocialAgent;
+window.ana_showLogs = showLogs;
+window.ana_testWhatsAppBridge = testWhatsAppBridge;
+window.drawGauge = drawGauge;
+window.addActivity = addActivity;
+})();
+</script>
+
+<script>
+(function(){
+const API_BASE = "";
+function toast(msg, type="ok"){
+  const wrap = document.getElementById("gel_toastWrap");
+  const el = document.createElement("div"); el.className = "toast " + type; el.textContent = msg;
+  wrap.appendChild(el); setTimeout(()=>el.remove(), 4500);
+}
+async function safeFetch(path, options={}, timeoutMs=2500){
+  const controller = new AbortController(); const t = setTimeout(()=>controller.abort(), timeoutMs);
+  try{
+    const res = await fetch(API_BASE + path, {...options, signal: controller.signal});
+    clearTimeout(t); if(!res.ok) throw new Error("HTTP " + res.status);
+    return {ok:true, data: await res.json()};
+  }catch(e){ clearTimeout(t); return {ok:false, error: e.message}; }
+}
+function rand(min,max){ return Math.random()*(max-min)+min; }
+function logLine(msg){
+  const box = document.getElementById("gel_smdaLiveLog");
+  const div = document.createElement("div");
+  div.textContent = `[${new Date().toLocaleTimeString('tr-TR')}] ${msg}`;
+  box.appendChild(div); box.scrollTop = box.scrollHeight;
+  while(box.children.length > 100) box.removeChild(box.firstChild);
+}
+
+function gel_customInputKullan(){
+  const custom = document.getElementById("gel_customInterval");
+  if(!custom) return;
+  const val = parseInt(custom.value);
+  if(val && val >= 1 && val <= 1440){
+    const sel = document.getElementById("gel_loopInterval");
+    if(sel) sel.value = "";
+  }
+}
+function gel_customInputTemizle(){
+  const custom = document.getElementById("gel_customInterval");
+  if(custom) custom.value = "";
+}
+window.gel_customInputKullan = gel_customInputKullan;
+window.gel_customInputTemizle = gel_customInputTemizle;
+
+function gel_aktifIntervalDegeri(){
+  const custom = document.getElementById("gel_customInterval");
+  if(custom){
+    const val = parseInt(custom.value);
+    if(val && val >= 1 && val <= 1440) return val;
+  }
+  const sel = document.getElementById("gel_loopInterval");
+  return parseInt(sel.value) || 60;
+}
+window.gel_aktifIntervalDegeri = gel_aktifIntervalDegeri;
+
+class Oscilloscope{
+  constructor(canvasId, channelCount, colors, labels, points=200, explanations=[], allExplanation=""){
+    this.canvas = document.getElementById(canvasId); this.ctx = this.canvas.getContext("2d");
+    this.channelCount = channelCount; this.colors = colors; this.labels = labels; this.points = points;
+    this.explanations = explanations; this.allExplanation = allExplanation;
+    this.selectedChannel = null;
+    this.buffers = Array.from({length:channelCount}, ()=>new Array(points).fill(0));
+    this._resize(); window.addEventListener("resize", ()=>this._resize());
+    if(window.ResizeObserver){ new ResizeObserver(()=>this._resize()).observe(this.canvas); }
+  }
+  _resize(){ const rect=this.canvas.getBoundingClientRect(); const w=rect.width||this.canvas.parentElement?.clientWidth||600; this.canvas.width=w*(window.devicePixelRatio||1); this.canvas.height=130*(window.devicePixelRatio||1); }
+  pushValue(ch, value){ const buf=this.buffers[ch]; buf.shift(); buf.push(value); }
+  setChannel(idx){ this.selectedChannel = idx; }
+  showAll(){ this.selectedChannel = null; }
+  renderButtons(containerId){
+    const wrap = document.getElementById(containerId);
+    const buttons = this.labels.map((l,i)=>
+      `<div class="chan-btn" data-ch="${i}"><i style="background:${this.colors[i%this.colors.length]}"></i>${l}</div>`
+    ).join("");
+    wrap.innerHTML = buttons + `<div class="chan-btn all-btn" data-ch="all">🔀 Hepsini Karışık Takip Et</div>`;
+    wrap.querySelectorAll(".chan-btn").forEach(btn=>{
+      const ch = btn.dataset.ch;
+      const speech = ch === "all" ? this.allExplanation : this.explanations[parseInt(ch)];
+      if(speech) btn.dataset.vchanSpeech = speech;
+      btn.addEventListener("click", ()=>{
+        if(ch === "all"){ this.showAll(); } else { this.setChannel(parseInt(ch)); }
+        wrap.querySelectorAll(".chan-btn").forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+    wrap.querySelector('[data-ch="all"]').classList.add("active");
+  }
+  draw(){
+    const {ctx, canvas} = this; const w=canvas.width, h=canvas.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.strokeStyle="rgba(232,182,76,.08)"; ctx.lineWidth=1;
+    for(let x=0;x<w;x+=w/20){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+    for(let y=0;y<h;y+=h/6){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+    this.buffers.forEach((buf,i)=>{
+      if(this.selectedChannel !== null && this.selectedChannel !== i) return;
+      ctx.beginPath(); ctx.strokeStyle=this.colors[i%this.colors.length];
+      ctx.shadowColor=this.colors[i%this.colors.length]; ctx.shadowBlur=6;
+      ctx.lineWidth = this.selectedChannel === i ? 3 : 2;
+      buf.forEach((v,idx)=>{ const x=(idx/(this.points-1))*w; const y=h-(Math.max(0,Math.min(100,v))/100)*h; idx===0?ctx.moveTo(x,y):ctx.lineTo(x,y); });
+      ctx.stroke(); ctx.shadowBlur=0;
+    });
+  }
+  start(fps=30){ this._timer=setInterval(()=>this.draw(), 1000/fps); }
+}
+const OSC5_LABELS = ["AI niyet doğruluğu","Tarama hızı (ürün/sn)","Paylaşım başarı %","Cross-platform gecikmesi (sn)","Hata sayısı"];
+const OSC5_EXPLANATIONS = [
+  "Eeeayy ajanı niyet doğruluğu. Yapay zekanın müşteri niyetini yüzde kaç doğru anladığını gösterir.",
+  "Tarama hızı. Sistemin saniyede kaç ürünü taradığını gösterir.",
+  "Paylaşım başarı oranı. Sosyal medya paylaşımlarının başarı yüzdesini gösterir.",
+  "Cross-platform gecikmesi. İçeriğin platformlar arasında yayılma gecikmesini gösterir.",
+  "Hata sayısı. Son işlemlerde oluşan hataları gösterir."
+];
+const OSC5_ALL_EXPLANATION = "Hepsini Karışık Takip Et modunda AI niyet doğruluğu, tarama hızı, paylaşım başarı, cross-platform gecikmesi ve hata sayısı kanallarının tümü aynı ekranda gösterilir.";
+const osc = new Oscilloscope("gel_osiloskopCanvas", 5, ["#ff5fa8","#2d3f8f","#35d488","#f0842a","#9aa4b2"], OSC5_LABELS, 200, OSC5_EXPLANATIONS, OSC5_ALL_EXPLANATION);
+osc.renderButtons("gel_oscChanButtons");
+osc.start();
+async function pullRealtime(){
+  if(!window.PANEL_ACTIVE_TASKS){
+    [0,1,2,3,4].forEach(ch => osc.pushValue(ch, 6));
+    return;
+  }
+  const r = await safeFetch("/metrics/realtime");
+  const m = r.ok ? r.data : { ai_intent_acc: rand(70,97), scan_speed: rand(1,9), smda_success: rand(60,98), cross_delay: rand(0,8), errors: rand(0,5) };
+  osc.pushValue(0, m.ai_intent_acc ?? rand(70,97));
+  osc.pushValue(1, (m.scan_speed ?? rand(1,9))*10);
+  osc.pushValue(2, m.smda_success ?? rand(60,98));
+  osc.pushValue(3, (m.cross_delay ?? rand(0,8))*10);
+  osc.pushValue(4, (m.errors ?? rand(0,5))*15);
+}
+setInterval(pullRealtime, 1000);
+
+new Chart(document.getElementById('gel_intentChart'), {
+  type:'pie',
+  data:{ labels:['Selam','Yardım','Ürün','Komisyon','Şikayet','Sipariş','Kampanya','İptal','Bilgi','Öneri','Teşekkür','Diğer'],
+    datasets:[{ data:[14,11,22,9,4,13,8,3,7,5,2,2],
+      backgroundColor:['#e8b64c','#ff5fa8','#35d488','#3b8bff','#ff4d5e','#f0d13b','#9b59b6','#1abc9c','#e67e22','#95a5a6','#2ecc71','#7f8c8d'] }]},
+  options:{ plugins:{ legend:{ position:'right', labels:{ color:'#eef2f8', boxWidth:10, font:{size:10} } } } }
+});
+new Chart(document.getElementById('gel_langAccuracyChart'), {
+  type:'bar',
+  data:{ labels:['TR','EN','DE'], datasets:[{ label:'Doğruluk %', data:[94,89,86], backgroundColor:['#E30A17','#1D70B8','#FFCC00'] }]},
+  options:{ scales:{ y:{ beginAtZero:true, max:100, ticks:{color:'#8492ab'} }, x:{ticks:{color:'#eef2f8'}} }, plugins:{legend:{display:false}} }
+});
+new Chart(document.getElementById('gel_durationHistogram'), {
+  type:'bar',
+  data:{ labels:['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9','9-10'],
+    datasets:[{ label:'Konuşma sayısı', data:[22,35,28,19,14,9,6,4,2,1], backgroundColor:'#e8b64c' }]},
+  options:{ scales:{ y:{ ticks:{color:'#8492ab'} }, x:{ticks:{color:'#8492ab'}} }, plugins:{legend:{display:false}} }
+});
+new Chart(document.getElementById('gel_loopCalendarChart'), {
+  type:'line',
+  data:{ labels: Array.from({length:30},(_,i)=>`G${i+1}`),
+    datasets:[{ label:'Başarım %', data: Array.from({length:30},()=>Math.round(rand(60,99))),
+      borderColor:'#e8b64c', backgroundColor:'rgba(232,182,76,.15)', fill:true, tension:.3, pointRadius:2 }]},
+  options:{ scales:{ y:{ min:0,max:100, ticks:{color:'#8492ab'} }, x:{ ticks:{color:'#8492ab', maxTicksLimit:10} } }, plugins:{legend:{labels:{color:'#eef2f8'}}} }
+});
+
+async function testAIIntegration(){
+  document.getElementById("gel_aiTestResult").textContent = "Test ediliyor…";
+  const r = await safeFetch("/ai/test", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({prompt:"bugün trend nedir?"})});
+  if(r.ok){ document.getElementById("gel_aiTestResult").textContent = "✅ " + (r.data.response || "Yanıt alındı"); toast("AI modülü yanıt verdi", "ok"); speakVolkan("AI modülü testi başarılı."); }
+  else{ document.getElementById("gel_aiTestResult").textContent = "⚠️ Backend yok — demo yanıt"; toast("AI backend'e ulaşılamadı", "err"); }
+}
+
+let loopTimer = null;
+function toggleSmdaLoop(active){
+  if(active){
+    const intervalDk = gel_aktifIntervalDegeri();
+    const interval = intervalDk * 60 * 1000;
+    logLine(`Döngü başlatıldı (her ${intervalDk} dk)`);
+    loopTimer = setInterval(()=>smdaRun(false), Math.min(interval, 15000));
+    toast(`SMDA döngüsü aktif edildi (${intervalDk} dk)`, "ok");
+  } else {
+    clearInterval(loopTimer); logLine("Döngü durduruldu");
+    safeFetch("/social/stop-loop", {method:"POST"});
+    toast("SMDA döngüsü durduruldu", "ok");
+  }
+}
+function readSmdaParams(dryRun){
+  return {
+    dry_run: dryRun,
+    loop: document.getElementById("gel_smdaLoopToggle").checked,
+    interval_sec: gel_aktifIntervalDegeri() * 60,
+    max_products: parseInt(document.getElementById("gel_maxProducts").value)||0,
+    max_imece: parseInt(document.getElementById("gel_maxImece").value)||0
+  };
+}
+async function smdaRun(dryRun){
+  const params = readSmdaParams(dryRun);
+  logLine(`${dryRun?"Dry-run":"Canlı"} çalıştırılıyor…`);
+  const r = await safeFetch("/panel/social/run", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(params)});
+  if(r.ok && r.data.status !== "error"){
+    const d = r.data.details || r.data;
+    logLine(`✅ ${d.success_posts}/${d.total_posts} başarılı`);
+    speakVolkan(`Sosyal medya ajanı tamamlandı. ${d.success_posts} gönderiden ${d.total_posts} tanesi başarılı.`);
+  } else {
+    const errMsg = r.ok ? r.data.message : r.error;
+    logLine(`⚠️ Hata: ${errMsg}`);
+    speakVolkan("Sosyal medya ajanı çalıştırılırken bir hata oluştu.");
+  }
+}
+function smdaStart(){ smdaRun(false); }
+function smdaStop(){
+  document.getElementById("gel_smdaLoopToggle").checked=false;
+  toggleSmdaLoop(false);
+}
+function smdaDryRun(){ smdaRun(true); }
+
+async function speakVolkan(text){
+  const r = await safeFetch("/volkan/speak", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({text})});
+  if(r.ok && r.data.status === "success" && r.data.audio_url){
+    const audio = new Audio(API_BASE + r.data.audio_url);
+    audio.play().catch(()=>{});
+  }
+}
+
+function changePanelLanguage(lang){
+  const titles = { tr:["🧠 Gelişmiş AI + SMDA Kontrol Paneli","Küresel İmece Dünyası · Otonom Panel"],
+    en:["🧠 Advanced AI + SMDA Control Panel","Global Cooperative World · Autonomous Panel"],
+    de:["🧠 Erweitertes KI + SMDA Kontrollpanel","Globale Genossenschaftswelt · Autonomes Panel"] };
+  document.getElementById("gel_pageTitle").firstChild.textContent = titles[lang][0];
+  document.getElementById("gel_pageSub").textContent = titles[lang][1];
+  logLine("Panel dili değiştirildi: " + lang);
+}
+
+logLine("Panel yüklendi, canlı veri bekleniyor…");
+
+window.gel_changePanelLanguage = changePanelLanguage;
+window.gel_toggleSmdaLoop = toggleSmdaLoop;
+window.gel_smdaDryRun = smdaDryRun;
+window.gel_smdaStart = smdaStart;
+window.gel_smdaStop = smdaStop;
+window.gel_testAIIntegration = testAIIntegration;
+})();
+</script>
+
+<script>
+(function(){
+const API_BASE = "";
+function toast(msg, type="ok"){
+  const wrap = document.getElementById("kom_toastWrap");
+  const el = document.createElement("div"); el.className = "toast " + type; el.textContent = msg;
+  wrap.appendChild(el); setTimeout(()=>el.remove(), 4500);
+}
+function openModal(id){ document.getElementById(id).classList.add("show"); }
+function closeModal(id){ document.getElementById(id).classList.remove("show"); }
+async function safeFetch(path, options={}, timeoutMs=2500){
+  const controller = new AbortController(); const t = setTimeout(()=>controller.abort(), timeoutMs);
+  try{
+    const res = await fetch(API_BASE + path, {...options, signal: controller.signal});
+    clearTimeout(t); if(!res.ok) throw new Error("HTTP " + res.status);
+    return {ok:true, data: await res.json()};
+  }catch(e){ clearTimeout(t); return {ok:false, error:e.message}; }
+}
+function rand(min,max){ return Math.random()*(max-min)+min; }
+function consoleLine(msg, cls=""){
+  const box = document.getElementById("kom_liveConsole");
+  const div = document.createElement("div");
+  if(cls) div.style.color = cls;
+  div.textContent = `[${new Date().toLocaleTimeString('tr-TR')}] ${msg}`;
+  box.appendChild(div); box.scrollTop = box.scrollHeight;
+  while(box.children.length > 1000) box.removeChild(box.firstChild);
+}
+class Oscilloscope{
+  constructor(canvasId, channelCount, colors, labels, points=200, explanations=[], allExplanation=""){
+    this.canvas=document.getElementById(canvasId); this.ctx=this.canvas.getContext("2d");
+    this.channelCount=channelCount; this.colors=colors; this.labels=labels; this.points=points;
+    this.explanations=explanations; this.allExplanation=allExplanation;
+    this.selectedChannel = null;
+    this.buffers=Array.from({length:channelCount}, ()=>new Array(points).fill(0));
+    this._resize(); window.addEventListener("resize", ()=>this._resize());
+    if(window.ResizeObserver){ new ResizeObserver(()=>this._resize()).observe(this.canvas); }
+  }
+  _resize(){ const rect=this.canvas.getBoundingClientRect(); const w=rect.width||this.canvas.parentElement?.clientWidth||600; this.canvas.width=w*(window.devicePixelRatio||1); this.canvas.height=200*(window.devicePixelRatio||1); }
+  pushValue(ch,value){ const buf=this.buffers[ch]; buf.shift(); buf.push(value); }
+  setChannel(idx){ this.selectedChannel = idx; }
+  showAll(){ this.selectedChannel = null; }
+  renderButtons(containerId){
+    const wrap = document.getElementById(containerId);
+    const buttons = this.labels.map((l,i)=>
+      `<div class="chan-btn" data-ch="${i}"><i style="background:${this.colors[i%this.colors.length]}"></i>${l}</div>`
+    ).join("");
+    wrap.innerHTML = buttons + `<div class="chan-btn all-btn" data-ch="all">🔀 Hepsini Karışık Takip Et</div>`;
+    wrap.querySelectorAll(".chan-btn").forEach(btn=>{
+      const ch = btn.dataset.ch;
+      const speech = ch === "all" ? this.allExplanation : this.explanations[parseInt(ch)];
+      if(speech) btn.dataset.vchanSpeech = speech;
+      btn.addEventListener("click", ()=>{
+        if(ch === "all"){ this.showAll(); } else { this.setChannel(parseInt(ch)); }
+        wrap.querySelectorAll(".chan-btn").forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+    wrap.querySelector('[data-ch="all"]').classList.add("active");
+  }
+  draw(){
+    const {ctx,canvas}=this; const w=canvas.width,h=canvas.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.strokeStyle="rgba(232,182,76,.08)"; ctx.lineWidth=1;
+    for(let x=0;x<w;x+=w/24){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+    for(let y=0;y<h;y+=h/8){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+    this.buffers.forEach((buf,i)=>{
+      if(this.selectedChannel !== null && this.selectedChannel !== i) return;
+      ctx.beginPath(); ctx.strokeStyle=this.colors[i%this.colors.length];
+      ctx.shadowColor=this.colors[i%this.colors.length]; ctx.shadowBlur=5;
+      ctx.lineWidth = this.selectedChannel === i ? 2.6 : 1.8;
+      buf.forEach((v,idx)=>{ const x=(idx/(this.points-1))*w; const y=h-(Math.max(0,Math.min(100,v))/100)*h; idx===0?ctx.moveTo(x,y):ctx.lineTo(x,y); });
+      ctx.stroke(); ctx.shadowBlur=0;
+    });
+  }
+  start(fps=30){ this._timer=setInterval(()=>this.draw(),1000/fps); }
+}
+const CH8_LABELS = ["WhatsApp mesaj","CPU %","RAM %","AI başarım","SMDA başarı","Cross gecikme","Hata sayısı","TRM senkron"];
+const CH8_EXPLANATIONS = [
+  "WhatsApp mesaj trafiği. Dakikada gönderilen mesaj sayısını gösterir.",
+  "CPU kullanım yüzdesi.",
+  "RAM kullanım yüzdesi.",
+  "Eeeayy ajanı başarım yüzdesi.",
+  "SMDA paylaşım başarı oranı.",
+  "Cross-platform gecikmesi.",
+  "Hata sayısı.",
+  "TRM senkronizasyon durumu."
+];
+const CH8_ALL_EXPLANATION = "Hepsini Karışık Takip Et modunda sekiz kanal aynı ekranda üst üste gösterilir.";
+const CH8_COLORS = ["#ff3b3b","#35d488","#3b8bff","#f0d13b","#ff5fa8","#f0842a","#9aa4b2","#9b59b6"];
+const osc8 = new Oscilloscope("kom_telemetryCanvas", 8, CH8_COLORS, CH8_LABELS, 200, CH8_EXPLANATIONS, CH8_ALL_EXPLANATION);
+osc8.renderButtons("kom_oscChanButtons");
+osc8.start();
+async function pullTelemetry(){
+  if(!window.PANEL_ACTIVE_TASKS){
+    for(let i=0;i<8;i++) osc8.pushValue(i, 6);
+    return;
+  }
+  const r = await safeFetch("/metrics/realtime");
+  const m = r.ok ? r.data : {};
+  const vals = [
+    m.whatsapp_rate ?? rand(0,40), m.cpu ?? rand(20,70), m.ram ?? rand(30,80), m.ai_score ?? rand(70,98),
+    m.smda_success ?? rand(60,98), (m.cross_delay ?? rand(0,8))*10, (m.errors ?? rand(0,5))*15, m.trm_sync ?? rand(50,100)
+  ];
+  vals.forEach((v,i)=>osc8.pushValue(i,v));
+}
+setInterval(pullTelemetry, 1000);
+
+let bigChart;
+async function loadBigMultilang(){
+  const r = await safeFetch("/metrics/multilang");
+  let tr=72,en=18,de=10;
+  if(r.ok && r.data.counts){ const c=r.data.counts; const t=(c.tr_count||0)+(c.en_count||0)+(c.de_count||0)||1;
+    tr=Math.round(c.tr_count/t*100); en=Math.round(c.en_count/t*100); de=100-tr-en; }
+  const data = { labels:['🇹🇷 Türkçe','🇬🇧 English','🇩🇪 Deutsch'], datasets:[{data:[tr,en,de], backgroundColor:['#E30A17','#1D70B8','#FFCC00']}] };
+  if(bigChart){ bigChart.data=data; bigChart.update(); }
+  else{ bigChart = new Chart(document.getElementById('kom_bigMultilangChart'), { type:'doughnut', data,
+    options:{ plugins:{ legend:{ position:'bottom', labels:{color:'#eef2f8'} } } } }); }
+}
+loadBigMultilang(); setInterval(loadBigMultilang, 15000);
+
+function drawWorldMap(){
+  const svg = document.getElementById("kom_worldMap");
+  const points = [
+    {x:330, y:70, label:"Almanya", v: rand(30,90)},
+    {x:355, y:75, label:"Türkiye", v: rand(50,99)},
+    {x:120, y:80, label:"ABD", v: rand(20,80)},
+  ];
+  svg.innerHTML = `
+    <rect x="0" y="0" width="500" height="220" fill="#05070c" rx="10"/>
+    <text x="10" y="18" fill="#8492ab" font-size="10">basitleştirilmiş coğrafi yoğunluk gösterimi</text>
+    ${points.map(p=>`
+      <circle cx="${p.x}" cy="${p.y}" r="${10+p.v/5}" fill="rgba(232,182,76,${0.15+p.v/200})" stroke="var(--gold)" stroke-width="1"/>
+      <circle cx="${p.x}" cy="${p.y}" r="3" fill="#e8b64c"/>
+      <text x="${p.x}" y="${p.y+30}" fill="#eef2f8" font-size="11" text-anchor="middle">${p.label}</text>
+      <text x="${p.x}" y="${p.y+43}" fill="#8492ab" font-size="10" text-anchor="middle">%${Math.round(p.v)}</text>
+    `).join("")}
+  `;
+}
+drawWorldMap(); setInterval(drawWorldMap, 6000);
+
+const PLATFORMS = ["Telegram","WhatsApp","Facebook","Instagram","TikTok","YouTube","Bloglar"];
+const platformState = {};
+PLATFORMS.forEach(p=>platformState[p]=true);
+function renderPlatformGrid(){
+  document.getElementById("kom_platformGrid").innerHTML = PLATFORMS.map(p=>`
+    <div class="platform-toggle-box ${platformState[p]?'active':''}" onclick="kom_togglePlatform('${p}')">${p}</div>
+  `).join("");
+}
+function togglePlatform(p){ platformState[p] = !platformState[p]; renderPlatformGrid();
+  consoleLine(`${p} ${platformState[p]?"etkinleştirildi":"devre dışı bırakıldı"}`); }
+renderPlatformGrid();
+
+async function shareToAllPlatforms(){
+  const active = PLATFORMS.filter(p=>platformState[p]);
+  if(active.length===0){ toast("En az bir platform seçmelisiniz", "err"); return; }
+  consoleLine(`Yayın başlatıldı → ${active.join(", ")}`);
+  const r = await safeFetch("/panel/social/run", {method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({max_products:1, platforms: active})});
+  if(r.ok && r.data.status !== "error"){
+    toast("Tüm seçili platformlara yayınlandı", "ok"); consoleLine("✅ Yayın tamamlandı");
+    speakVolkan(`Yayın tamamlandı. Seçili ${active.length} platforma dağıtım yapıldı.`);
+  } else {
+    const errMsg = r.ok ? r.data.message : r.error;
+    toast("Yayın sırasında hata oluştu", "err"); consoleLine("⚠️ Hata: " + errMsg);
+    speakVolkan("Yayın sırasında bir hata oluştu.");
+  }
+}
+
+async function generateMedia(){
+  const text = document.getElementById("kom_mediaText").value.trim();
+  if(!text){ toast("Önce bir metin girin", "err"); return; }
+  document.getElementById("kom_mediaPreview").textContent = "Üretiliyor…";
+  consoleLine("Medya üretim isteği gönderildi (gTTS)");
+  const r = await safeFetch("/social/media/generate", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({text})});
+  if(r.ok && r.data.status === "success"){
+    document.getElementById("kom_mediaPreview").textContent = "✅ Üretildi: " + r.data.audio_file;
+    toast("Medya üretildi", "ok");
+    speakVolkan("Medya üretimi tamamlandı.");
+  } else {
+    const errMsg = r.ok ? r.data.message : r.error;
+    document.getElementById("kom_mediaPreview").textContent = "⚠️ Üretilemedi: " + errMsg;
+    toast("Medya üretilemedi — " + errMsg, "err");
+  }
+}
+function openLiveMediaModal(){
+  document.getElementById("kom_liveMediaContent").textContent = "media_out/ klasöründeki son medya için backend bağlantısı gerekiyor (demo modda gösterim yok).";
+  openModal("kom_mediaModal");
+}
+
+/* === YENİ: Platform Başarı Oranı — % etiketli, tıklanabilir bar grafiği === */
+const komPlatformSuccessChart = new Chart(document.getElementById('kom_platformSuccessChart'), {
+  type:'bar',
+  data:{ labels:['Telegram','WhatsApp','Facebook','Instagram','TikTok','YouTube','Bloglar'],
+    datasets:[{ label:'Başarı %', data:[92,87,83,79,65,74,81],
+      backgroundColor:['#26A5E4','#25D366','#1877F2','#E1306C','#111111','#FF0000','#8B5CF6'],
+      borderColor:'rgba(0,0,0,0)',
+      borderWidth:0 }]},
+  options:{
+    indexAxis:'y',
+    layout: { padding: { right: 42 } },
+    scales:{
+      x:{ max:100, ticks:{ color:'#8492ab' } },
+      y:{ ticks:{ color:'#eef2f8', font:{ size: 12, weight: '600' } } }
+    },
+    plugins:{ legend:{ display:false } },
+    hoverBorderWidth: 4,
+    hoverBorderColor: '#ffaa55',
+
+    onHover: (event, elements) => {
+      const chart = komPlatformSuccessChart;
+      chart.data.datasets[0].borderWidth = elements.length > 0 ? 4 : 0;
+      chart.data.datasets[0].borderColor = '#ffaa55';
+      chart.update('none');
+      if(event && event.native && event.native.target){
+        event.native.target.style.cursor = elements.length > 0 ? 'pointer' : 'default';
+      }
+    },
+
+    onClick: (event, elements) => {
+      if(elements.length === 0) return;
+      const idx = elements[0].index;
+      const label = komPlatformSuccessChart.data.labels[idx];
+      const value = komPlatformSuccessChart.data.datasets[0].data[idx];
+
+      if(!window._komBarActive) window._komBarActive = {};
+      const wasActive = window._komBarActive[idx] === true;
+      window._komBarActive[idx] = !wasActive;
+
+      if(!wasActive){
+        let degerlendirme;
+        if(value >= 90) degerlendirme = "mükemmel";
+        else if(value >= 80) degerlendirme = "çok iyi";
+        else if(value >= 70) degerlendirme = "iyi";
+        else if(value >= 60) degerlendirme = "orta";
+        else degerlendirme = "geliştirilmesi gereken";
+
+        const metin = `Sayın CEO, ${label} butonuna bastınız. ${label} platformunun başarı oranı yüzde ${value}. Bu ${degerlendirme} seviyede bir sonuç. Bu platformun görevi başlamıştır ve başarı durumu canlı olarak takip edilecektir.`;
+        if(window.VolkanVoice && VolkanVoice.isUnlocked()) VolkanVoice.speakExact(metin);
+        if(typeof consoleLine === "function") consoleLine(`📊 Bar tıklandı: ${label} %${value}`);
+
+        komPlatformSuccessChart.data.datasets[0].borderWidth = 4;
+        komPlatformSuccessChart.data.datasets[0].borderColor = '#e8b64c';
+        komPlatformSuccessChart.update('none');
+      } else {
+        const metin = `Sayın CEO, ${label} platformunun görevi sona ermiştir.`;
+        if(window.VolkanVoice && VolkanVoice.isUnlocked()) VolkanVoice.speakExact(metin);
+        if(typeof consoleLine === "function") consoleLine(`📊 Bar tamamlandı: ${label}`);
+
+        komPlatformSuccessChart.data.datasets[0].borderWidth = 0;
+        komPlatformSuccessChart.data.datasets[0].borderColor = 'rgba(0,0,0,0)';
+        komPlatformSuccessChart.update('none');
+      }
+    }
+  },
+  plugins: [{
+    id: 'platformPercentLabels',
+    afterDatasetsDraw(chart) {
+      const { ctx } = chart;
+      const meta = chart.getDatasetMeta(0);
+      meta.data.forEach((bar, index) => {
+        const value = chart.data.datasets[0].data[index];
+        ctx.save();
+        ctx.fillStyle = '#ffe9a8';
+        ctx.font = 'bold 12.5px "Segoe UI", sans-serif';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = 'rgba(0,0,0,.85)';
+        ctx.shadowBlur = 4;
+        ctx.fillText(value + '%', bar.x + 8, bar.y);
+        ctx.restore();
+      });
+    }
+  }]
+});
+
+function renderBatchTable(){
+  const tbody = document.getElementById("kom_batchTableBody");
+  const rows = Array.from({length:20}, (_,i)=>{
+    const d = new Date(Date.now() - i*3600*1000);
+    const success = Math.round(rand(2,6)), total = success + Math.round(rand(0,1));
+    return `<tr><td>${d.toLocaleString('tr-TR')}</td><td>${success}/${total}</td><td>${Math.round(rand(1,4))}</td><td>${total-success}</td></tr>`;
+  }).join("");
+  tbody.innerHTML = rows;
+}
+renderBatchTable();
+
+async function speakVolkan(text){
+  const r = await safeFetch("/volkan/speak", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({text})});
+  if(r.ok && r.data.status === "success" && r.data.audio_url){
+    const audio = new Audio(API_BASE + r.data.audio_url);
+    audio.play().catch(()=>{});
+  }
+}
+
+let emergencyActive = false;
+function emergencyStop(){
+  emergencyActive = !emergencyActive;
+  document.getElementById("kom_alarmBar").classList.toggle("show", emergencyActive);
+  if(emergencyActive){
+    consoleLine("🚨 ACİL DURUM TETİKLENDİ", "#ff4d5e");
+    safeFetch("/social/stop-loop", {method:"POST"});
+    if(typeof window.globalEmergencyLock === "function") window.globalEmergencyLock(true);
+    toast("Acil durum aktif", "err");
+    speakVolkan("Acil durum aktif edildi. Tüm otonom süreçler duraklatıldı.");
+  } else {
+    consoleLine("Acil durum kaldırıldı", "#35d488");
+    toast("Acil durum kaldırıldı", "ok");
+    if(typeof window.globalEmergencyLock === "function") window.globalEmergencyLock(false);
+    speakVolkan("Acil durum kaldırıldı. Sistem normale dönüyor.");
+  }
+}
+
+consoleLine("Komuta Merkezi başlatıldı");
+
+window.kom_closeModal = closeModal;
+window.kom_emergencyStop = emergencyStop;
+window.kom_generateMedia = generateMedia;
+window.kom_openLiveMediaModal = openLiveMediaModal;
+window.kom_shareToAllPlatforms = shareToAllPlatforms;
+window.kom_togglePlatform = togglePlatform;
+})();
+</script>
+
+<script>
+(function(){
+
+const TOTAL_AGENTS = 200;
+
+const ULT_AGENTS = [
+{id:1,code:"Agent-001",role:"Başkomutan / Ana Koordinatör",task:"Sistem geneli stratejik kararlar, önceliklendirme ve orchestrator.py yönlendirmesi."},
+{id:2,code:"Agent-002",role:"Operasyonel Denetçi",task:"Alt ajanların anlık görev durumlarını ve hata loglarını izleme."},
+{id:3,code:"Agent-003",role:"Bütçe ve Kaynak Yöneticisi",task:"OpenRouter API maliyetleri, cüzdan takibi ve kaynak optimizasyonu."},
+{id:4,code:"Agent-004",role:"Yürütme Konseyi Üyesi",task:"Departmanlar arası veri akışını ve senkronizasyonu sağlama."},
+{id:5,code:"Agent-005",role:"Karar Destek Uzmanı",task:"Çatışan senaryolarda alternatifli rota belirleme."},
+{id:6,code:"Agent-006",role:"Sistem Entegratörü",task:"Modüler yapıların ana ekosistemle uyumunu denetleme."},
+{id:7,code:"Agent-007",role:"Performans Ölçüm Sorumlusu",task:"Ajan yanıt süreleri ve verimlilik metriklerini raporlama."},
+{id:8,code:"Agent-008",role:"Görev Dağılım Uzmanı",task:"İş yükünü boşta kalan ajanlara dinamik olarak paylaştırma."},
+{id:9,code:"Agent-009",role:"Acil Durum Koordinatörü",task:"Kritik API hata döngülerinde (402/404) devreye girme."},
+{id:10,code:"Agent-010",role:"Komuta Sekreteryası",task:"Günlük operasyon özetlerini konsolide etme."},
+{id:11,code:"Agent-011",role:"Niş Analisti (Genel)",task:"trendurunlermarket.com için genel pazar eğilimlerini tarama."},
+{id:12,code:"Agent-012",role:"Ürün Trend Uzmanı",task:"Yükselen e-ticaret trendlerini ve talep artışlarını tespit etme."},
+{id:13,code:"Agent-013",role:"Pazar Segmentasyon Uzmanı",task:"Hedef kitleyi demografik ve coğrafi olarak bölümlere ayırma."},
+{id:14,code:"Agent-014",role:"Rakip Analiz Uzmanı",task:"Benzer affiliate sitelerinin stratejilerini inceleme."},
+{id:15,code:"Agent-015",role:"Fiyat Rekabetçilik Uzmanı",task:"Kar marjı ve optimum satış fiyatı simülasyonları yapma."},
+{id:16,code:"Agent-016",role:"Talep Tahmincisi",task:"Mevsimsel ürün taleplerini önceden modelleme."},
+{id:17,code:"Agent-017",role:"Kategori Optimizasyon Uzmanı",task:"Ürün kategorilerinin performansını değerlendirme."},
+{id:18,code:"Agent-018",role:"Stok ve Tedarik Takipçisi",task:"Ürün stok durumlarını ve tedarikçi güncellemelerini izleme."},
+{id:19,code:"Agent-019",role:"Karlılık Hesaplama Uzmanı",task:"Kampanya bazlı net kazanç projeksiyonları çıkarma."},
+{id:20,code:"Agent-020",role:"Küresel Pazar Araştırıcısı",task:"Uluslararası affiliate fırsatlarını tarama."},
+{id:21,code:"Agent-021",role:"Hedef Kitle Stratejisti",task:"Demografik veri tabanlarını kampanya hedefleriyle eşleştirme."},
+{id:22,code:"Agent-022",role:"Davranışsal Analist",task:"Kullanıcı tıklama ve satın alma alışkanlıklarını inceleme."},
+{id:23,code:"Agent-023",role:"Personas Oluşturucu",task:"Hedef kitle için ideal alıcı profilleri (persona) yaratma."},
+{id:24,code:"Agent-024",role:"İlgi Alanı Eşleştirici",task:"Sosyal medya ilgi alanlarıyla ürünleri bağlama."},
+{id:25,code:"Agent-025",role:"Yaş Grubu Hedefleme Uzmanı",task:"Farklı yaş gruplarına özel kampanya dili belirleme."},
+{id:26,code:"Agent-026",role:"Bölgesel Pazar Uzmanı",task:"Yerel tüketim alışkanlıklarını analiz etme."},
+{id:27,code:"Agent-027",role:"Sadakat Programı Stratejisti",task:"Tekrar eden müşteriler için kampanya kurgulama."},
+{id:28,code:"Agent-028",role:"Dönüşüm Hunisi Mimarı",task:"Ziyaretçinin alıcıya dönüşüm aşamalarını tasarlama."},
+{id:29,code:"Agent-029",role:"Trafik Kaynağı Analisti",task:"Hangi platformdan daha nitelikli trafik geldiğini raporlama."},
+{id:30,code:"Agent-030",role:"Strateji Geri Bildirim Uzmanı",task:"Kampanya sonuçlarına göre stratejiyi güncelleme."},
+{id:31,code:"Agent-031",role:"Blog Yazarı (Ana Akım)",task:"trendurunlermarket.com için uzun form SEO makaleleri üretme."},
+{id:32,code:"Agent-032",role:"Blog Yazarı (Ürün İnceleme)",task:"Detaylı ürün inceleme yazıları kaleme alma."},
+{id:33,code:"Agent-033",role:"Bülten İçerik Uzmanı",task:"E-posta bültenleri için cazip metinler hazırlama."},
+{id:34,code:"Agent-034",role:"Reklam Metni Yazarı (Copywriter)",task:"Dijital reklamlar için yüksek dönüşümlü kopyalar yazma."},
+{id:35,code:"Agent-035",role:"Başlık Optimizasyon Uzmanı",task:"Tıklama oranı (CTR) yüksek başlıklar tasarlama."},
+{id:36,code:"Agent-036",role:"Açılış Sayfası Metinçisi",task:"Landing page metinlerini kullanıcı psikolojisine göre düzenleme."},
+{id:37,code:"Agent-037",role:"Kampanya Hikaye Anlatıcısı",task:"Ürünler etrafında ilgi çekici hikayeler kurgulama."},
+{id:38,code:"Agent-038",role:"Sık Sorulan Sorular Uzmanı",task:"Ürün sayfaları için kapsamlı SSS metinleri oluşturma."},
+{id:39,code:"Agent-039",role:"Çağrı Metni Tasarımcısı",task:"Satışa yönlendiren CTA (Call to Action) cümleleri yazma."},
+{id:40,code:"Agent-040",role:"Sosyal Medya Metin Yazarı (Genel)",task:"Günlük sosyal medya gönderi metinleri üretme."},
+{id:41,code:"Agent-041",role:"Mikro Metin Yazarı",task:"Kısa form platformlar için vurucu sloganlar bulma."},
+{id:42,code:"Agent-042",role:"Hashtag Uzmanı",task:"İçerikler için en uygun ve popüler etiketleri belirleme."},
+{id:43,code:"Agent-043",role:"E-Ticaret Açıklama Uzmanı",task:"Ürün teknik özelliklerini pazarlama diline çevirme."},
+{id:44,code:"Agent-044",role:"Basın Bülteni Yazarı",task:"Organizasyon ve kampanya duyuruları için bülten hazırlama."},
+{id:45,code:"Agent-045",role:"Duygu Tonu Ayarlayıcısı",task:"Metinlerin hedef kitleye göre duygusal tonunu ayarlama."},
+{id:46,code:"Agent-046",role:"Çeviri ve Lokalizasyon Uzmanı",task:"Küresel metinleri yerel dile uyarlama."},
+{id:47,code:"Agent-047",role:"İçerik Kalite Kontrolcüsü",task:"Üretilen metinlerin dilbilgisi ve akışını denetleme."},
+{id:48,code:"Agent-048",role:"Özgünlük Denetçisi",task:"İçeriklerin intihal barındırmadığını kontrol etme."},
+{id:49,code:"Agent-049",role:"SEO Metin Entegratörü",task:"Anahtar kelimeleri metinlere doğal bir şekilde yerleştirme."},
+{id:50,code:"Agent-050",role:"Arşiv İçerik Düzenleyicisi",task:"Eski içerikleri güncel trendlere göre revize etme."},
+{id:51,code:"Agent-051",role:"Kısa Form Metin Uzmanı",task:"Hızlı okunan akış metinleri tasarlama."},
+{id:52,code:"Agent-052",role:"Etkileşim Odaklı Yazar",task:"Yorum ve beğeni artırıcı soru cümleleri kurgulama."},
+{id:53,code:"Agent-053",role:"Kampanya Slogancısı",task:"Marka kimliğini destekleyen sloganlar üretme."},
+{id:54,code:"Agent-054",role:"Ürün Lansman Metinçisi",task:"Yeni ürün duyuruları için özel metinler yazma."},
+{id:55,code:"Agent-055",role:"İndirim ve Fırsat Metinçisi",task:"Kampanya dönemlerine özel aciliyet hissi yaratan metinler yazma."},
+{id:56,code:"Agent-056",role:"Kurumsal İletişim Yazarı",task:"Dernek ve ortaklık duyuruları için resmi metinler hazırlama."},
+{id:57,code:"Agent-057",role:"Kullanıcı Yorumu Yanıtlayıcısı",task:"Otomatik müşteri etkileşim metinleri oluşturma."},
+{id:58,code:"Agent-058",role:"Hikaye (Story) Metin Yazarı",task:"Anlık paylaşımlar için kısa metinler üretme."},
+{id:59,code:"Agent-059",role:"Bilgilendirici Post Yazarı",task:"Tüketicileri eğiten eğitici içerik metinleri hazırlama."},
+{id:60,code:"Agent-060",role:"Trend Takipçi Yazar",task:"Güncel gündem maddelerini ürün pazarlamasıyla bağlama."},
+{id:61,code:"Agent-061",role:"Vizyon Metinleri Yazarı",task:"Sosyal İmece felsefesini anlatan içerikler üretme."},
+{id:62,code:"Agent-062",role:"E-Ticaret Rehber Yazarı",task:"Kullanıcılar için alışveriş kılavuzları hazırlama."},
+{id:63,code:"Agent-063",role:"Karşılaştırma Yazarı",task:"Alternatif ürünleri kıyaslayan makaleler yazma."},
+{id:64,code:"Agent-064",role:"Sektörel İçerik Üreticisi",task:"E-ticaret ve dijital pazarlama üzerine yazılar yazma."},
+{id:65,code:"Agent-065",role:"Seslendirme Metinçisi",task:"Video ve ses dosyaları için diyalog metinleri hazırlama."},
+{id:66,code:"Agent-066",role:"Görsel Altyazı Yazarı",task:"Videolar için dikkat çekici altyazı kopyaları yazma."},
+{id:67,code:"Agent-067",role:"Meta Açıklama Uzmanı",task:"Arama motorları için özel snippet açıklamaları yazma."},
+{id:68,code:"Agent-068",role:"Alternatif Metin (Alt Text) Yazarı",task:"Görseller için arama motoru uyumlu açıklamalar yazma."},
+{id:69,code:"Agent-069",role:"İçerik Takvimi Planlayıcısı",task:"Metinlerin yayın sırasını ve zamanlamasını organize etme."},
+{id:70,code:"Agent-070",role:"Copywriting Baş Denetçisi",task:"Tüm metin departmanının çıktılarını son kez onaylama."},
+{id:71,code:"Agent-071",role:"Görsel Tasarım Asistanı (Banner)",task:"Web sitesi banner ve afiş kompozisyonlarını yönlendirme."},
+{id:72,code:"Agent-072",role:"Ürün Görsel Optimizasyoncusu",task:"Ürün fotoğraflarının sunum kalitesini planlama."},
+{id:73,code:"Agent-073",role:"Renk Paleti Uzmanı",task:"Marka kimliğine uygun görsel renk uyumlarını belirleme."},
+{id:74,code:"Agent-074",role:"Sosyal Medya Görsel Planlayıcısı",task:"Instagram ve Facebook postları için görsel konsept çıkarma."},
+{id:75,code:"Agent-075",role:"Reklam Görsel Tasarımcısı",task:"Dijital reklam görsellerinin kompozisyonunu kurgulama."},
+{id:76,code:"Agent-076",role:"Kapak Fotoğrafı Uzmanı",task:"Video ve makaleler için tıklama çeken kapaklar tasarlama."},
+{id:77,code:"Agent-077",role:"İnfografik Tasarım Asistanı",task:"Verileri görselleştirmek için şema planları hazırlama."},
+{id:78,code:"Agent-078",role:"Kampanya Afiş Uzmanı",task:"Özel indirim günleri için görsel konseptler üretme."},
+{id:79,code:"Agent-079",role:"Logo ve İkon Düzenleyicisi",task:"Marka simgelerinin dijital mecralara uyumunu denetleme."},
+{id:80,code:"Agent-080",role:"Tipografi ve Font Uzmanı",task:"Görsellerde kullanılacak yazı tiplerini standartlaştırma."},
+{id:81,code:"Agent-081",role:"E-Ticaret Vitrin Tasarımcısı",task:"Mağaza ön yüz görsel yerleşimini planlama."},
+{id:82,code:"Agent-082",role:"Görsel Kalite Denetçisi",task:"Üretilen görsellerin çözünürlük ve estetik standartlarını kontrol etme."},
+{id:83,code:"Agent-083",role:"Şablon Standartlaştırıcısı",task:"Paylaşım şablonlarının kurumsal kimliğe uygunluğunu sağlama."},
+{id:84,code:"Agent-084",role:"Hareketli Görsel (GIF) Planlayıcısı",task:"İlgi çekici animasyonlu görseller kurgulama."},
+{id:85,code:"Agent-085",role:"Görsel Arşiv Sorumlusu",task:"Medya varlıklarını kategorize edip saklama."},
+{id:86,code:"Agent-086",role:"Video Kurgu ve Shorts Yönetmeni",task:"YouTube Shorts için dikey video akışı planlama."},
+{id:87,code:"Agent-087",role:"TikTok Video Akış Uzmanı",task:"TikTok trendlerine uygun video kurgu senaryoları yazma."},
+{id:88,code:"Agent-088",role:"Instagram Reels Kurgucusu",task:"Reels içerikleri için dinamik sahne geçişleri tasarlama."},
+{id:89,code:"Agent-089",role:"Video Giriş (Hook) Uzmanı",task:"Videonun ilk 3 saniyesinde izleyiciyi tutacak sahneler kurgulama."},
+{id:90,code:"Agent-090",role:"Ses ve Müzik Seçim Uzmanı",task:"Videolara uygun telifsiz arka plan müzikleri belirleme."},
+{id:91,code:"Agent-091",role:"Video Efekt ve Geçiş Planlayıcısı",task:"Görsel dinamizmi artıracak efektler önerme."},
+{id:92,code:"Agent-092",role:"Ürün Tanıtım Videosu Kurgucusu",task:"Ürünlerin özelliklerini gösteren video akışları tasarlama."},
+{id:93,code:"Agent-093",role:"Kapanış ve CTA Video Uzmanı",task:"Videoların sonuna dönüşüm odaklı yönlendirmeler ekleme."},
+{id:94,code:"Agent-094",role:"Video Süre Optimizasyoncusu",task:"Platform algoritmalarına göre video sürelerini ayarlama."},
+{id:95,code:"Agent-095",role:"Çoklu Platform Video Uyarlayıcısı",task:"Bir videoyu farklı platform ölçülerine uyarlama."},
+{id:96,code:"Agent-096",role:"Canlı Yayın Akış Planlayıcısı",task:"Olası canlı yayınlar için senaryo hazırlama."},
+{id:97,code:"Agent-097",role:"Video Kalite ve Performans Analisti",task:"Yayınlanan videoların izlenme oranlarını yorumlama."},
+{id:98,code:"Agent-098",role:"Animasyon Senaristi",task:"Tanıtım animasyonları için storyboard hazırlama."},
+{id:99,code:"Agent-099",role:"Görsel Efekt Danışmanı",task:"Videolara eklenecek dijital öğeleri planlama."},
+{id:100,code:"Agent-100",role:"Medya Prodüksiyon Baş Denetçisi",task:"Görsel ve video ekiplerinin tüm çıktımlarını onaylama."},
+{id:101,code:"Agent-101",role:"Anahtar Kelime Uzmanı (SEO)",task:"Arama hacmi yüksek kelimeleri tespit etme."},
+{id:102,code:"Agent-102",role:"Uzun Kuyruklu (Long-tail) SEO Uzmanı",task:"Niş arama sorgularını yakalama."},
+{id:103,code:"Agent-103",role:"Meta Etiket Düzenleyicisi",task:"Title ve description etiketlerini optimize etme."},
+{id:104,code:"Agent-104",role:"Rakip SEO Analisti",task:"Rakiplerin arama motoru stratejilerini çözme."},
+{id:105,code:"Agent-105",role:"Site İçi Bağlantı (Internal Link) Uzmanı",task:"Sayfalar arası yönlendirme ağını kurma."},
+{id:106,code:"Agent-106",role:"URL Yapısı Optimizasyoncusu",task:"SEO dostu URL standartlarını denetleme."},
+{id:107,code:"Agent-107",role:"Görsel SEO Uzmanı",task:"Resimlerin arama motorlarında indekslenmesini sağlama."},
+{id:108,code:"Agent-108",role:"Mobil SEO Uyumluluk Denetçisi",task:"Mobil arama performansını artırma önlemleri alma."},
+{id:109,code:"Agent-109",role:"Sayfa Yüklenme Hızı Analisti",task:"Hız optimizasyonu için teknik öneriler sunma."},
+{id:110,code:"Agent-110",role:"Yerel SEO Uzmanı",task:"Bölgesel aramalar için optimizasyon yapma."},
+{id:111,code:"Agent-111",role:"Organik Trafik Analisti",task:"Arama motoru kaynaklı ziyaretçi akışını izleme."},
+{id:112,code:"Agent-112",role:"Sıralama Takipçisi",task:"Hedef kelimelerdeki Google sıra değişimlerini raporlama."},
+{id:113,code:"Agent-113",role:"Tıklama Oranı (CTR) İyileştiricisi",task:"Arama sonuçlarındaki performansını artırma çalışmaları yapma."},
+{id:114,code:"Agent-114",role:"Hata (404/500) Takip Uzmanı",task:"Kırık bağlantıları tespit edip raporlama."},
+{id:115,code:"Agent-115",role:"Site Haritası (Sitemap) Yöneticisi",task:"XML site haritalarının güncelliğini denetleme."},
+{id:116,code:"Agent-116",role:"Yapılandırılmış Veri (Schema) Uzmanı",task:"Arama motoru botları için veri işaretlemeleri yapma."},
+{id:117,code:"Agent-117",role:"Backlink Stratejisti",task:"Dış bağlantı kaynaklarını planlama."},
+{id:118,code:"Agent-118",role:"İçerik Boşluğu (Content Gap) Analisti",task:"Rakiplerin var olup bizim olmadığımız alanları bulma."},
+{id:119,code:"Agent-119",role:"SEO Performans Raporcusu",task:"Haftalık organik büyüme raporları hazırlama."},
+{id:120,code:"Agent-120",role:"SEO Baş Denetçisi",task:"Arama motoru optimizasyon süreçlerinin tamamını koordine etme."},
+{id:121,code:"Agent-121",role:"Sosyal Medya Dağıtım Operatörü (Hesap 1-10)",task:"İlk 10 bireysel hesapta otomatik paylaşım yönetimi."},
+{id:122,code:"Agent-122",role:"Sosyal Medya Dağıtım Operatörü (Hesap 11-20)",task:"11-20 arası hesapların içerik akışını yönetme."},
+{id:123,code:"Agent-123",role:"Sosyal Medya Dağıtım Operatörü (Hesap 21-30)",task:"21-30 arası hesaplarda zamanlama yapma."},
+{id:124,code:"Agent-124",role:"Sosyal Medya Dağıtım Operatörü (Hesap 31-40)",task:"31-40 arası hesapların paylaşım otomasyonu."},
+{id:125,code:"Agent-125",role:"Sosyal Medya Dağıtım Operatörü (Hesap 41-50)",task:"41-50 arası hesaplarda etkileşim takibi."},
+{id:126,code:"Agent-126",role:"Sosyal Medya Dağıtım Operatörü (Hesap 51-60)",task:"51-60 arası hesapların içerik dağıtımı."},
+{id:127,code:"Agent-127",role:"Sosyal Medya Dağıtım Operatörü (Hesap 61-70)",task:"61-70 arası hesaplarda kampanya senkronizasyonu."},
+{id:128,code:"Agent-128",role:"Sosyal Medya Dağıtım Operatörü (Hesap 71-80)",task:"71-80 arası hesapların hedef kitle etkileşimi."},
+{id:129,code:"Agent-129",role:"Sosyal Medya Dağıtım Operatörü (Hesap 81-90)",task:"81-90 arası hesaplarda trafik yönlendirmesi."},
+{id:130,code:"Agent-130",role:"Sosyal Medya Dağıtım Operatörü (Hesap 91-100)",task:"Son 10 bireysel hesabın otomasyon yönetimi."},
+{id:131,code:"Agent-131",role:"Çoklu Hesap Zamanlama Uzmanı",task:"100 hesabın çakışmayan paylaşım takvimini oluşturma."},
+{id:132,code:"Agent-132",role:"Platform Dağılım Uzmanı",task:"İçeriklerin YouTube, TikTok, Instagram, Facebook arası dağılımı."},
+{id:133,code:"Agent-133",role:"Etkileşim Yönetim Asistanı",task:"Gelen yorumlara otomatik veya yarı otomatik yanıt verme."},
+{id:134,code:"Agent-134",role:"Algoritma Uyum Uzmanı",task:"Platform algoritmalarındaki güncellemelere göre paylaşım biçimini ayarlama."},
+{id:135,code:"Agent-135",role:"Hesap Güvenlik Denetçisi",task:"100 bireysel hesabın ban riskine karşı güvenlik sınırlarını gözetme."},
+{id:136,code:"Agent-136",role:"Çapraz Tanıtım Uzmanı",task:"Hesaplar arası organik etkileşim zincirleri kurma."},
+{id:137,code:"Agent-137",role:"Takipçi Kazanım Stratejisti",task:"Organik büyüme taktiklerini hesaplara uygulama."},
+{id:138,code:"Agent-138",role:"Paylaşım Frekans Ayarlayıcısı",task:"Hesapların spam algılanmaması için gönderi aralıklarını tanzim etme."},
+{id:139,code:"Agent-139",role:"Mesajlaşma Otomasyoncusu",task:"DM (Direct Message) üzerinden gelen affiliate link yönlendirmelerini yönetme."},
+{id:140,code:"Agent-140",role:"Grup ve Topluluk Paylaşımcısı",task:"İlgili Telegram ve WhatsApp gruplarına içerik akışı sağlama."},
+{id:141,code:"Agent-141",role:"Viral İçerik Yayımcısı",task:"Yüksek potansiyelli içerikleri eş zamanlı olarak 100 hesaba yayma."},
+{id:142,code:"Agent-142",role:"Kampanya Senkronizasyon Operatörü",task:"İndirim duyurularını tüm hesaplarda aynı anda başlatma."},
+{id:143,code:"Agent-143",role:"Hesap Performans Karşılaştırıcısı",task:"Hangi bireysel hesabın daha çok trafik getirdiğini ölçme."},
+{id:144,code:"Agent-144",role:"İçerik Çeşitlilik Denetçisi",task:"Aynı hesabın arka arkaya benzer içerik paylaşmasını engelleme."},
+{id:145,code:"Agent-145",role:"Erişim (Reach) Optimizasyoncusu",task:"Gönderilerin maksimum kişiye ulaşması için saat optimizasyonu yapma."},
+{id:146,code:"Agent-146",role:"Etkileşim Oranı Takipçisi",task:"Beğeni, kaydetme ve paylaşım oranlarını analiz etme."},
+{id:147,code:"Agent-147",role:"Profil Optimizasyon Uzmanı",task:"100 hesabın biyografi ve yönlendirme linklerini güncel tutma."},
+{id:148,code:"Agent-148",role:"Hata Kurtarma Operatörü",task:"Paylaşım yapmayan veya hata veren hesap otomasyonlarını onarma."},
+{id:149,code:"Agent-149",role:"Raporlama Asistanı (Sosyal Medya)",task:"100 hesabın günlük erişim özetlerini raporlama."},
+{id:150,code:"Agent-150",role:"Dağıtım Ağı Baş Denetçisi",task:"Sosyal medya otomasyon ekibinin tüm operasyonunu denetleme."},
+{id:151,code:"Agent-151",role:"Dynamic Niche Profiler (DNP) Baş Uzmanı",task:"Mekansal veri ve niş profil eşleştirme motorunu yönetme."},
+{id:152,code:"Agent-152",role:"Endeksa Entegrasyon Uzmanı",task:"Emlak ve bölge bazlı ekonomik değer verilerini sisteme çekme."},
+{id:153,code:"Agent-153",role:"Hoodmaps Veri Analisti",task:"Mahalle kültürleri ve eğilim haritalarını pazarlama verisiyle birleştirme."},
+{id:154,code:"Agent-154",role:"GeoSpy.ai Görsel Konum Uzmanı",task:"Görsellerin coğrafi ve mekansal analizini yapma."},
+{id:155,code:"Agent-155",role:"Mekansal Demografi Uzmanı",task:"Coğrafi bölgelerin gelir ve tüketim profillerini çıkarma."},
+{id:156,code:"Agent-156",role:"Bölgesel Niş Eşleştirici",task:"Hangi bölgeye hangi ürün grubunun pazarlanacağını belirleme."},
+{id:157,code:"Agent-157",role:"Konum Bazlı Hedefleme Uzmanı",task:"Yerel kampanyaları coğrafi koordinatlara göre optimize etme."},
+{id:158,code:"Agent-158",role:"Veri Sentezleyicisi (Spatial)",task:"Farklı coğrafi kaynaklardan gelen verileri tek havuzda toplama."},
+{id:159,code:"Agent-159",role:"Tüketici Eğilim Modelleme Uzmanı",task:"Mekansal veriler üzerinden satın alma davranışı öngörme."},
+{id:160,code:"Agent-160",role:"Niş Karlılık Analisti",task:"Belirlenen niş alanların finansal getiri potansiyelini hesaplama."},
+{id:161,code:"Agent-161",role:"Özel DNP Sentez Ajanı",task:"Çok katmanlı mekansal ve demografik profilleme işlemlerini yürütme."},
+{id:162,code:"Agent-162",role:"Harita Tabanlı Pazarlama Planlayıcısı",task:"Coğrafi verileri kampanya haritalarına dökme."},
+{id:163,code:"Agent-163",role:"Yerel Trend Takipçisi",task:"Şehir bazlı ani tüketim trendlerini yakalama."},
+{id:164,code:"Agent-164",role:"Veri Kalite Denetçisi (DNP)",task:"Mekansal verilerin doğruluğunu ve güncelliğini kontrol etme."},
+{id:165,code:"Agent-165",role:"API Veri Akış Uzmanı (Harici Araçlar)",task:"Endeksa ve benzeri servislerden veri çekme süreçlerini yönetme."},
+{id:166,code:"Agent-166",role:"Affiliate Veri Madencisi",task:"Satış ortaklığı ağlarından gelen dönüşüm verilerini işleme."},
+{id:167,code:"Agent-167",role:"Tıklama Dönüşüm Oranı (CR) Analisti",task:"Ziyaretçilerin yüzde kaçının satışa döndüğünü inceleme."},
+{id:168,code:"Agent-168",role:"Komisyon Gelir Takipçisi",task:"Affiliate ortaklıklarından elde edilen kazançları hesaplama."},
+{id:169,code:"Agent-169",role:"Çerez ve İzleme Uzmanı",task:"Ziyaretçi takip kodlarının (UTM vb.) çalışmasını denetleme."},
+{id:170,code:"Agent-170",role:"Trafik Kaynağı Dönüşüm Uzmanı",task:"En çok kazandıran trafik kanallarını tespit etme."},
+{id:171,code:"Agent-171",role:"Ürün Performans Madencisi",task:"Hangi ürünlerin en yüksek komisyonu getirdiğini raporlama."},
+{id:172,code:"Agent-172",role:"Sepet Terk Etme Analisti",task:"Kullanıcıların sepeti neden yarıda bıraktığını araştırma."},
+{id:173,code:"Agent-173",role:"Geri Dönüş (Retargeting) Veri Uzmanı",task:"Sepeti terk edenlere yönelik veri havuzu oluşturma."},
+{id:174,code:"Agent-174",role:"Satış Funnel Optimizasyoncusu",task:"Satış aşamalarındaki kayıpları en aza indirme."},
+{id:175,code:"Agent-175",role:"Maliyet / Getiri (ROI) Analisti",task:"Kampanya harcamaları ile elde edilen geliri kıyaslama."},
+{id:176,code:"Agent-176",role:"Veri Gizliliği Uyumluluk Uzmanı",task:"Toplanan verilerin yasal mevzuata uygunluğunu gözetme."},
+{id:177,code:"Agent-177",role:"Tahminsel Analitik Uzmanı",task:"Geçmiş verilere dayanarak gelecek satışları öngörme."},
+{id:178,code:"Agent-178",role:"Rapor Konsolide Edici",task:"Tüm analitik verileri yönetimin önüne sunulacak hale getirme."},
+{id:179,code:"Agent-179",role:"Veri Tabanı Temizlikçisi",task:"Eski ve gereksiz log/veri kalabalığını temizleme."},
+{id:180,code:"Agent-180",role:"Analitik Ekip Baş Denetçisi",task:"Veri analitiği ve madencilik operasyonlarını onaylama."},
+{id:181,code:"Agent-181",role:"Hata Denetim Uzmanı (Retry Handler)",task:"retry_handler.py süreçlerini ve yeniden deneme döngülerini yönetme."},
+{id:182,code:"Agent-182",role:"API Bağlantı İzleyicisi",task:"OpenRouter ve harici servislerin erişilebilirliğini denetleme."},
+{id:183,code:"Agent-183",role:"HTTP Hata Kodları Analisti",task:"402, 404, 500 gibi hataları anında tespit edip raporlama."},
+{id:184,code:"Agent-184",role:"Zaman Aşımı (Timeout) Yöneticisi",task:"Ağ gecikmelerinde sistemin kilitlenmesini önleme."},
+{id:185,code:"Agent-185",role:"Güvenlik Duvarı Asistanı",task:"Sistem dışından gelen yetkisiz istekleri izleme."},
+{id:186,code:"Agent-186",role:"Çevre Değişkeni (.env) Denetçisi",task:"Hassas anahtarların ve yapılandırmaların güvenliğini kontrol etme."},
+{id:187,code:"Agent-187",role:"Log Kayıt Yöneticisi",task:"Sistem hata ve işlem loglarını düzenli olarak arşivleme."},
+{id:188,code:"Agent-188",role:"İstisna (Exception) Yakalayıcı",task:"Kod bloklarında oluşan beklenmeyen çökmeleri engelleme."},
+{id:189,code:"Agent-189",role:"Otomatik Kurtarma Sorumlusu",task:"Hata alan süreçlerin güvenli şekilde yeniden başlamasını tetikleme."},
+{id:190,code:"Agent-190",role:"Sistem Sağlık Kontrolcüsü",task:"Tüm scriptlerin (orchestrator, launcher vb.) ayakta olup olmadığını test etme."},
+{id:191,code:"Agent-191",role:"UTEYKDER Veri Arşiv Ajanı",task:"uteykder_veri_arsiv_ajani.py ile dernek verilerinin güvenli arşivlenmesini sağlama."},
+{id:192,code:"Agent-192",role:"Sosyal İmece Veri Koruma Uzmanı",task:"sosyalimece.org veri tabanı güvenliğini denetleme."},
+{id:193,code:"Agent-193",role:"Yedekleme Operatörü",task:"Tüm sistem dosyalarının ve veritabanlarının periyodik yedeğini alma."},
+{id:194,code:"Agent-194",role:"Dernek Proje Veri Sorumlusu",task:"Sosyal sorumluluk projelerine ait belgeleri düzenleme."},
+{id:195,code:"Agent-195",role:"Üye Kayıt ve Bilgi Güvenliği Uzmanı",task:"Dernek üye veri tabanının gizliliğini koruma."},
+{id:196,code:"Agent-196",role:"Web Sitesi İçerik Güvenlikçisi",task:"uteykder.org.tr ve diğer web arayüzlerinin bütünlüğünü koruma."},
+{id:197,code:"Agent-197",role:"Dokümantasyon Asistanı",task:"Sistem mimarisine ait teknik belgelerin güncelliğini sağlama."},
+{id:198,code:"Agent-198",role:"Sürüm Kontrol Destekçisi",task:"Kod değişikliklerinin ve güncellemelerinin takibini yapma."},
+{id:199,code:"Agent-199",role:"Sistem Destek Uzmanı",task:"Genel operasyon boyunca kullanıcıya ve diğer ajanlara destek sağlama."},
+{id:200,code:"Agent-200",role:"Baş Arşiv ve Kapanış Ajanı",task:"Tüm günlük operasyonların dökümünü alarak sistemi güvenli kapatma moduna alma."}
+];
+window.ULT_AGENTS = ULT_AGENTS;
+
+const ULT_BY_ID = {};
+ULT_AGENTS.forEach(a => ULT_BY_ID[a.id] = a);
+
+let ult_activeAgents = new Map();
+let ult_flowContainer, ult_agentGrid, ult_logBox;
+let ult_simInterval = null;
+let ult_sistemAktif = false;
+let ult_renkZamanlayici = null;
+
+window._ult_aktifHoverAjanId = null;
+
+function ult_log(msg){
+  if(!ult_logBox) ult_logBox = document.getElementById("ult_logBox");
+  if(!ult_logBox) return;
+  ult_logBox.innerHTML += `<div>⏱️ ${new Date().toLocaleTimeString('tr-TR')} · ${msg}</div>`;
+  ult_logBox.scrollTop = ult_logBox.scrollHeight;
+  while(ult_logBox.children.length > 100) ult_logBox.removeChild(ult_logBox.firstChild);
+}
+window.ult_log = ult_log;
+
+function ult_durumUygula(id, durum){
+  const cell = document.getElementById("ult-agent-" + id);
+  if(cell){
+    cell.classList.remove("durum-yesil","durum-sari","durum-kirmizi");
+    if(durum && durum !== "bosta") cell.classList.add("durum-" + durum);
+  }
+  const flowItems = ult_flowContainer ? ult_flowContainer.querySelectorAll(".flow-ajan") : [];
+  for(const el of flowItems){
+    if(el.dataset.agentId == id){
+      el.classList.remove("durum-yesil","durum-sari","durum-kirmizi");
+      if(durum && durum !== "bosta") el.classList.add("durum-" + durum);
+      break;
+    }
+  }
+}
+
+function ult_buildAgentList(){
+  ult_agentGrid = document.getElementById("ult_agentGrid");
+  if(!ult_agentGrid) return;
+  ult_agentGrid.innerHTML = "";
+  ULT_AGENTS.forEach(a => {
+    const cell = document.createElement("div");
+    cell.className = "agent-cell";
+    cell.id = "ult-agent-" + a.id;
+    cell.dataset.agentId = a.id;
+    cell.title = `${a.code} — ${a.role}`;
+    cell.textContent = "Ajan " + String(a.id).padStart(3, "0");
+    cell.addEventListener("click", () => ult_agentTiklandi(a));
+    ult_agentGrid.appendChild(cell);
+  });
+  ult_updateStats();
+}
+
+function ult_updateStats(){
+  const active = ult_activeAgents.size;
+  const statTotal  = document.getElementById("ult_statTotal");
+  const statActive = document.getElementById("ult_statActive");
+  const statIdle   = document.getElementById("ult_statIdle");
+  if(statTotal)  statTotal.textContent  = ULT_AGENTS.length;
+  if(statActive) statActive.textContent = active;
+  if(statIdle)   statIdle.textContent   = ULT_AGENTS.length - active;
+}
+
+function ult_agentTiklandi(agent){
+  const prev = document.getElementById("ult_agentPreview");
+  const pKod = document.getElementById("ult_prevKod");
+  const pRol = document.getElementById("ult_prevRol");
+  const pGorev = document.getElementById("ult_prevGorev");
+  const pDurum = document.getElementById("ult_prevDurum");
+
+  if(prev && pKod){
+    pKod.textContent = agent.code;
+    pRol.textContent  = "Rol: " + agent.role;
+    pGorev.textContent = "Görev: " + agent.task;
+    const entry = ult_activeAgents.get(agent.id);
+    let durum = "bosta", durumTxt = "boşta";
+    if(entry){ durum = entry.durum; durumTxt = (durum === "yesil" ? "görevde" : durum === "sari" ? "tehlikeli" : "hata"); }
+    if(pDurum){
+      pDurum.className = "ahp-durum " + durum;
+      pDurum.textContent = durumTxt;
+    }
+    window._ult_aktifHoverAjanId = agent.id;
+    prev.classList.add("goster");
+    clearTimeout(ult_agentTiklandi._timeout);
+    ult_agentTiklandi._timeout = setTimeout(() => {
+      prev.classList.remove("goster");
+      window._ult_aktifHoverAjanId = null;
+    }, 8000);
+  }
+  if(VolkanVoice.isUnlocked()){
+    const metin = `${agent.code}. Rolü: ${agent.role}. Görevi: ${agent.task}`;
+    ult_voiceLog(`🗣️ ${metin}`);
+    VolkanVoice.speakExact(metin);
+  } else {
+    ult_voiceLog(`ℹ️ ${agent.code} — ${agent.role}`);
+  }
+}
+
+function ult_tekilAjanSonlandir(){
+  const id = window._ult_aktifHoverAjanId;
+  if(!id){ ult_log("⚠️ Hiçbir ajan seçili değil."); return; }
+  const agent = ULT_AGENTS.find(a => a.id === id);
+  if(!agent) return;
+  if(!ult_activeAgents.has(id)){
+    ult_log(`ℹ️ ${agent.code} zaten boşta.`);
+    if(VolkanVoice.isUnlocked()){
+      VolkanVoice.speakExact(`Sayın CEO, ${agent.code} ajanı zaten boşta.`);
+    }
+    return;
+  }
+  ult_ajanDeaktif(id);
+  ult_log(`⛔ ${agent.code} sonlandırıldı.`);
+  if(VolkanVoice.isUnlocked()){
+    VolkanVoice.speakExact(`Sayın CEO, ${agent.code} ajanı sonlandırıldı.`);
+  }
+}
+window.ult_tekilAjanSonlandir = ult_tekilAjanSonlandir;
+
+function ult_ajanZorlaYenidenBaslat(){
+  const id = window._ult_aktifHoverAjanId;
+  if(!id){ ult_log("⚠️ Hiçbir ajan seçili değil."); return; }
+  const agent = ULT_AGENTS.find(a => a.id === id);
+  if(!agent) return;
+  if(ult_activeAgents.has(id)){ ult_ajanDeaktif(id); }
+  setTimeout(() => {
+    if(!ult_sistemAktif){ ult_sistemAktif = true; }
+    ult_ajanaGorevVer(id, agent.task, "yesil");
+    ult_log(`🔄 ${agent.code} zorla yeniden başlatıldı.`);
+    if(VolkanVoice.isUnlocked()){
+      VolkanVoice.speakExact(`Sayın CEO, ${agent.code} ajanı zorla yeniden başlatıldı.`);
+    }
+  }, 400);
+}
+window.ult_ajanZorlaYenidenBaslat = ult_ajanZorlaYenidenBaslat;
+
+function ult_akisaEkle(agent, taskName, durum){
+  if(!ult_flowContainer) ult_flowContainer = document.getElementById("ult_flowContainer");
+  if(!ult_flowContainer) return null;
+  const el = document.createElement("div");
+  el.className = "flow-ajan durum-" + (durum || "yesil");
+  el.dataset.agentId = agent.id;
+  el.innerHTML = `<span class="isim">${agent.code}</span><span class="gorev">${taskName.substring(0, 34)}</span>`;
+  ult_flowContainer.appendChild(el);
+  ult_flowContainer.scrollTop = ult_flowContainer.scrollHeight;
+  return el;
+}
+function ult_akistanKaldir(agentId){
+  if(!ult_flowContainer) ult_flowContainer = document.getElementById("ult_flowContainer");
+  if(!ult_flowContainer) return;
+  const items = ult_flowContainer.querySelectorAll('.flow-ajan');
+  for(const el of items){
+    if(el.dataset.agentId == agentId){
+      el.classList.add('tamam');
+      setTimeout(() => el.remove(), 500);
+      break;
+    }
+  }
+}
+
+function ult_ajanaGorevVer(agentId, gorevMetni, durum){
+  const agent = ULT_AGENTS.find(a => a.id === agentId);
+  if(!agent) return false;
+  if(ult_activeAgents.has(agentId)) return false;
+
+  durum = durum || "yesil";
+  const flowEl = ult_akisaEkle(agent, gorevMetni || agent.task, durum);
+  ult_durumUygula(agentId, durum);
+
+  const sure = 6000 + Math.floor(Math.random() * 6000);
+  const timer = setTimeout(() => {
+    if(ult_sistemAktif){
+      ult_ajanDeaktif(agentId);
+      setTimeout(() => {
+        if(ult_sistemAktif && !ult_activeAgents.has(agentId)) {
+          const d = ult_rastgeleDurumUret();
+          ult_ajanaGorevVer(agentId, agent.task, d);
+        }
+      }, 300 + Math.random()*800);
+    } else {
+      ult_ajanDeaktif(agentId);
+    }
+  }, sure);
+
+  ult_activeAgents.set(agentId, { task: gorevMetni || agent.task, durum, timer, flowEl });
+  ult_updateStats();
+  return true;
+}
+function ult_ajanDeaktif(agentId){
+  const entry = ult_activeAgents.get(agentId);
+  if(!entry) return;
+  clearTimeout(entry.timer);
+  ult_activeAgents.delete(agentId);
+  ult_durumUygula(agentId, null);
+  ult_akistanKaldir(agentId);
+  ult_updateStats();
+}
+
+function ult_rastgeleDurumUret(){
+  const r = Math.random();
+  if(r < 0.80) return "yesil";
+  if(r < 0.92) return "sari";
+  return "kirmizi";
+}
+
+function ult_tumAjanlariCalistir(){
+  if(ult_sistemAktif) return;
+  ult_sistemAktif = true;
+  ult_log("🚀 Tüm 200 ajan göreve başladı.");
+  ULT_AGENTS.forEach((a, idx) => {
+    const durum = ult_rastgeleDurumUret();
+    setTimeout(() => {
+      if(!ult_sistemAktif) return;
+      ult_ajanaGorevVer(a.id, a.task, durum);
+    }, idx * 30 + Math.random()*200);
+  });
+  if(ult_simInterval) clearInterval(ult_simInterval);
+  ult_simInterval = setInterval(() => {
+    if(!ult_sistemAktif) return;
+    const idle = ULT_AGENTS.filter(a => !ult_activeAgents.has(a.id));
+    const sayi = Math.min(idle.length, 15 + Math.floor(Math.random() * 11));
+    for(let k = 0; k < sayi; k++){
+      const idx = Math.floor(Math.random() * idle.length);
+      const agent = idle.splice(idx, 1)[0];
+      if(agent) ult_ajanaGorevVer(agent.id, agent.task, ult_rastgeleDurumUret());
+    }
+  }, 3000);
+  if(ult_renkZamanlayici) clearInterval(ult_renkZamanlayici);
+  ult_renkZamanlayici = setInterval(() => {
+    if(!ult_sistemAktif) return;
+    const aktifler = Array.from(ult_activeAgents.keys());
+    if(aktifler.length === 0) return;
+    const sayi = Math.min(aktifler.length, 5 + Math.floor(Math.random() * 6));
+    for(let i = 0; i < sayi; i++){
+      const id = aktifler[Math.floor(Math.random() * aktifler.length)];
+      const entry = ult_activeAgents.get(id);
+      if(!entry) continue;
+      const yeniDurum = ult_rastgeleDurumUret();
+      entry.durum = yeniDurum;
+      ult_durumUygula(id, yeniDurum);
+    }
+  }, 2500);
+}
+window.ult_tumAjanlariCalistir = ult_tumAjanlariCalistir;
+
+function ult_tumAjanlariDurdur(){
+  ult_sistemAktif = false;
+  if(ult_simInterval){ clearInterval(ult_simInterval); ult_simInterval = null; }
+  if(ult_renkZamanlayici){ clearInterval(ult_renkZamanlayici); ult_renkZamanlayici = null; }
+  Array.from(ult_activeAgents.keys()).forEach(id => ult_ajanDeaktif(id));
+  ult_log("⏹ Tüm ajanlar durduruldu.");
+}
+window.ult_tumAjanlariDurdur = ult_tumAjanlariDurdur;
+
+function ult_akisSifirla(){
+  if(VolkanVoice.isUnlocked()){
+    VolkanVoice.speakExact("Sayın CEO, Ajanların Akışlarını Sıfırla butonuna bastınız. Tüm aktif ajanların görevleri iptal edildi.");
+  }
+  if(ult_simInterval){ clearInterval(ult_simInterval); ult_simInterval = null; }
+  if(ult_renkZamanlayici){ clearInterval(ult_renkZamanlayici); ult_renkZamanlayici = null; }
+  Array.from(ult_activeAgents.keys()).forEach(id => ult_ajanDeaktif(id));
+  ult_activeAgents.clear();
+  if(!ult_flowContainer) ult_flowContainer = document.getElementById("ult_flowContainer");
+  if(ult_flowContainer){ ult_flowContainer.innerHTML = ""; }
+  ult_updateStats();
+  ult_log("🔄 Akış alanı sıfırlandı.");
+}
+
+function ult_rastgeleGorevVer(){
+  const idle = ULT_AGENTS.filter(a => !ult_activeAgents.has(a.id));
+  if(idle.length === 0){
+    ult_log("⚠️ Tüm ajanlar meşgul!");
+    if(VolkanVoice.isUnlocked()) VolkanVoice.speakExact("Sayın CEO, tüm ajanlar meşgul.");
+    return;
+  }
+  const random = idle[Math.floor(Math.random() * idle.length)];
+  const durum = ult_rastgeleDurumUret();
+  ult_ajanaGorevVer(random.id, random.task, durum);
+  if(VolkanVoice.isUnlocked()){
+    VolkanVoice.speakExact(`Sayın CEO, ${random.code} ajanına rasgele görev verildi.`);
+  }
+}
+
+function ult_guncelleAjanListesi(){
+  ult_buildAgentList();
+  ult_log("🔄 Ajan listesi yenilendi.");
+  if(VolkanVoice.isUnlocked()) VolkanVoice.speakExact("Sayın CEO, ajan listesi yenilendi.");
+}
+
+function ult_gonderKomut(){
+  const input = document.getElementById("ult_komutInput");
+  if(!input) return;
+  const metin = input.value.trim();
+  if(!metin) return;
+  input.value = "";
+  ult_log(`📨 Komut: ${metin}`);
+
+  const match = metin.match(/Agent-(\d{1,3})/i);
+  if(match){
+    const id = parseInt(match[1]);
+    const agent = ULT_AGENTS.find(a => a.id === id);
+    if(!agent){ ult_log(`❌ Agent-${match[1]} bulunamadı.`); return; }
+    let gorev = metin.replace(/Agent-\d{1,3}/i, "").trim() || agent.task;
+    if(ult_ajanaGorevVer(agent.id, gorev, "yesil")){
+      if(VolkanVoice.isUnlocked()){
+        VolkanVoice.announce(`${agent.code} ajanına ${gorev} görevi verildi.`);
+      }
+    } else {
+      ult_log(`⚠️ ${agent.code} zaten çalışıyor.`);
+    }
+  } else {
+    ult_log(`❓ Komut anlaşılmadı: "${metin}"`);
+    if(VolkanVoice.isUnlocked()) VolkanVoice.announce("komut anlaşılmadı.");
+  }
+}
+
+const ULT_VOICE_ACTIONS = [
+  { title:"📊 Sistem Durum Raporu", desc:"tüm ajanların anlık durum raporunu okuyorum.",
+    action: () => VolkanVoice.announce("tüm ajanların anlık durum raporu hazırlandı.") },
+  { title:"🛡️ Güvenlik Taraması Başlat", desc:"güvenlik taramasını başlattığımı bildiriyorum.",
+    action: async () => { await VolkanVoice.announce("güvenlik taraması başlatılıyor."); ult_rastgeleGorevVer(); } },
+  { title:"📢 SMDA Dry-Run Bildirimi", desc:"SMDA deneme modunda çalıştırıldığını bildiriyorum.",
+    action: async () => { await VolkanVoice.announce("Sosyal medya dağıtım ajanı deneme modunda çalıştırılıyor."); ult_rastgeleGorevVer(); } },
+  { title:"🚨 Acil Durum Tatbikatı", desc:"acil durum tatbikatının başladığını bildiriyorum.",
+    action: () => VolkanVoice.announce("acil durum tatbikatı başlatıldı.") },
+  { title:"👥 Ajan Kapasite Özeti", desc:"kaç ajanın görevde olduğunu özetliyorum.",
+    action: () => VolkanVoice.announce(`şu anda ${ult_activeAgents.size} ajan görevde, ${ULT_AGENTS.length - ult_activeAgents.size} ajan boşta.`) },
+  { title:"🌙 Vardiya Kapanış Bildirimi", desc:"günlük operasyon özetini okuyorum.",
+    action: () => VolkanVoice.announce("günlük operasyon tamamlandı. İyi çalışmalar, Fahri Bey.") },
+];
+
+function ult_renderVoiceActions(){
+  const wrap = document.getElementById("ult_voiceActions");
+  if(!wrap) return;
+  wrap.innerHTML = "";
+  ULT_VOICE_ACTIONS.forEach(a => {
+    const btn = document.createElement("button");
+    btn.className = "voice-btn";
+    btn.innerHTML = `<span class="vb-title">${a.title}</span><span class="vb-desc">${a.desc}</span>`;
+    btn.addEventListener("click", () => a.action());
+    wrap.appendChild(btn);
+  });
+}
+
+window.ult_akisSifirla          = ult_akisSifirla;
+window.ult_rastgeleGorevVer     = ult_rastgeleGorevVer;
+window.ult_guncelleAjanListesi  = ult_guncelleAjanListesi;
+window.ult_gonderKomut          = ult_gonderKomut;
+
+function ult_baslat(){
+  ult_flowContainer = document.getElementById("ult_flowContainer");
+  ult_logBox        = document.getElementById("ult_logBox");
+  if(!ult_agentGrid) ult_buildAgentList();
+  ult_renderVoiceActions();
+  if(ult_flowContainer) ult_flowContainer.innerHTML = "";
+  ult_log("🚀 Volkan 001 AI Ajanı hazır. BAŞLAT'a basınca 200 ajan göreve başlar.");
+  if(window.vt_lockPanel) window.vt_lockPanel(window.PANEL_LOCKED);
+}
+if(document.readyState === "loading"){
+  document.addEventListener("DOMContentLoaded", ult_baslat);
+} else {
+  ult_baslat();
+}
+
+})();
+</script>
+
+<!-- ============================================================
+     CEO YÖNETİM PANELİ — FLASK BACKEND ENTEGRASYON MODÜLÜ
+     ============================================================ -->
+<script>
+(function(){
+  "use strict";
+
+  const API_BASE = "http://localhost:5000";
+
+  function getCeoKey(){
+    const el = document.getElementById("kom_ceoKeyInput");
+    return el ? el.value.trim() : "";
+  }
+  function getCeoUserId(){
+    const el = document.getElementById("kom_ceoUserIdInput");
+    return el ? el.value.trim() : "";
+  }
+
+  function ceoToast(msg, type){
+    if(typeof panelToast === "function"){ panelToast(msg, type || "ok"); }
+    else { console.log("[CEO]", msg); }
+  }
+  function ceoLog(msg, color){
+    const box = document.getElementById("kom_liveConsole");
+    if(!box) return;
+    const div = document.createElement("div");
+    if(color) div.style.color = color;
+    div.textContent = `[${new Date().toLocaleTimeString('tr-TR')}] ${msg}`;
+    box.appendChild(div); box.scrollTop = box.scrollHeight;
+    while(box.children.length > 1000) box.removeChild(box.firstChild);
+  }
+  function ceoVolkan(text){
+    if(typeof VolkanVoice !== "undefined" && VolkanVoice.isUnlocked()){
+      try{ VolkanVoice.speakExact(text); }catch(e){ console.warn(e); }
+    }
+  }
+  function ceoResultBox(){
+    return document.getElementById("kom_ceoActionResult");
+  }
+
+  async function executeCeoAction(path, payload, options){
+    payload = payload || {};
+    options = options || {};
+
+    const ceoKey = getCeoKey();
+    if(!ceoKey){
+      ceoToast("⚠️ Önce CEO anahtarını girin!", "err");
+      const rb = ceoResultBox();
+      if(rb){ rb.textContent = "⚠️ CEO anahtarı gerekli."; rb.style.color = "var(--err)"; }
+      ceoVolkan("Sayın CEO, lütfen önce CEO anahtarını girin.");
+      return { ok: false, status: 0, error: "no_ceo_key" };
+    }
+
+    const url = API_BASE + path;
+    const headers = {
+      "Content-Type": "application/json",
+      "X-CEO-Key": ceoKey
+    };
+    const body = Object.assign({}, payload, { ceo_key: ceoKey });
+
+    try{
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), options.timeoutMs || 8000);
+
+      const res = await fetch(url, {
+        method: options.method || "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      let data = null;
+      try { data = await res.json(); }
+      catch(e){ data = { status: "error", message: "Geçersiz JSON yanıtı" }; }
+
+      return { ok: res.ok, status: res.status, data: data };
+
+    }catch(err){
+      return { ok: false, status: 0, error: err.name === "AbortError" ? "timeout" : err.message };
+    }
+  }
+  window.executeCeoAction = executeCeoAction;
+
+  function ceoHandleResult(result, successMsg, logMsg){
+    const rb = ceoResultBox();
+    if(result.ok && result.data && (result.data.status === "success" || result.data.status === "ok")){
+      const msg = result.data.message || successMsg || "İşlem başarılı";
+      if(rb){ rb.textContent = "✅ " + msg; rb.style.color = "var(--ok)"; }
+      ceoToast(msg, "ok");
+      if(logMsg) ceoLog("✅ " + logMsg, "#7CFC90");
+      return { success: true, message: msg, data: result.data };
+    }
+    let errMsg = "Bilinmeyen hata";
+    if(result.status === 0){ errMsg = "Backend'e ulaşılamadı (bağlantı hatası)"; }
+    else if(result.status === 401 || result.status === 403){ errMsg = "CEO anahtarı geçersiz veya yetkisiz"; }
+    else if(result.data && result.data.message){ errMsg = result.data.message; }
+    else if(result.error){ errMsg = result.error; }
+    if(rb){ rb.textContent = "⚠️ " + errMsg; rb.style.color = "var(--err)"; }
+    ceoToast(errMsg, "err");
+    if(logMsg) ceoLog("⚠️ " + errMsg, "#ff8a8a");
+    return { success: false, message: errMsg, data: result.data };
+  }
+
+  async function ceoApproveLogin(){
+    const userId = getCeoUserId();
+    if(!userId){ ceoToast("Kullanıcı ID / isim girin", "err"); return; }
+    ceoLog(`📡 CEO onay isteği gönderiliyor: ${userId}`);
+    const result = await executeCeoAction("/ceo/approve-login", { user_id: userId });
+    const h = ceoHandleResult(result,
+      `${userId} sisteme giriş onaylandı`,
+      `CEO onayı: ${userId} sisteme giriş yaptı`);
+    if(h.success){
+      ceoVolkan(`${userId} kullanıcısının sisteme girişi CEO tarafından onaylandı.`);
+      if(typeof loadCeoLists === "function") loadCeoLists();
+    }
+  }
+
+  async function ceoPassiveUser(){
+    const userId = getCeoUserId();
+    if(!userId){ ceoToast("Kullanıcı ID / isim girin", "err"); return; }
+    ceoLog(`📡 CEO pasif isteği: ${userId}`);
+    const result = await executeCeoAction("/ceo/passive-user", { user_id: userId });
+    const h = ceoHandleResult(result,
+      `${userId} pasif duruma alındı`,
+      `CEO pasif: ${userId}`);
+    if(h.success){
+      ceoVolkan(`${userId} kullanıcısı CEO tarafından pasif duruma alındı.`);
+      if(typeof loadCeoLists === "function") loadCeoLists();
+    }
+  }
+
+  async function ceoForceLogout(){
+    const userId = getCeoUserId();
+    if(!userId){ ceoToast("Kullanıcı ID / isim girin", "err"); return; }
+    ceoLog(`📡 CEO çıkış isteği: ${userId}`);
+    const result = await executeCeoAction("/ceo/force-logout", { user_id: userId });
+    const h = ceoHandleResult(result,
+      `${userId} oturumu sonlandırıldı`,
+      `CEO çıkış: ${userId}`);
+    if(h.success){
+      ceoVolkan(`${userId} kullanıcısının oturumu CEO tarafından sonlandırıldı.`);
+      if(typeof loadCeoLists === "function") loadCeoLists();
+    }
+  }
+
+  async function ceoRejectLogin(){
+    const userId = getCeoUserId();
+    if(!userId){ ceoToast("Kullanıcı ID / isim girin", "err"); return; }
+    ceoLog(`📡 CEO red isteği: ${userId}`);
+    const result = await executeCeoAction("/ceo/reject-login", { user_id: userId });
+    const h = ceoHandleResult(result,
+      `${userId} erişim talebi reddedildi`,
+      `CEO red: ${userId}`);
+    if(h.success){
+      ceoVolkan(`${userId} kullanıcısının erişim talebi CEO tarafından reddedildi.`);
+      if(typeof loadCeoLists === "function") loadCeoLists();
+    }
+  }
+
+  async function ceoApproveAll(){
+    const ceoKey = getCeoKey();
+    if(!ceoKey){ ceoToast("Önce CEO anahtarını girin", "err"); return; }
+    const rb = ceoResultBox();
+    if(rb){ rb.textContent = "⏳ Tüm bekleyenler onaylanıyor…"; rb.style.color = "var(--gold)"; }
+    ceoLog("📡 Toplu onay isteği gönderiliyor…");
+
+    const result = await executeCeoAction("/ceo/approve-all-pending", {});
+    const n = (result.data && result.data.count) || 0;
+
+    if(result.ok && result.data && result.data.status === "success"){
+      const msg = `Tüm bekleyenler onaylandı (${n} kullanıcı)`;
+      if(rb){ rb.textContent = "✅ " + msg; rb.style.color = "var(--ok)"; }
+      ceoToast(msg, "ok");
+      ceoLog(`✅ CEO toplu onayı: ${n} kullanıcı onaylandı`, "#7CFC90");
+      ceoVolkan(`Sayın CEO, tüm bekleyen erişim talepleri toplu olarak onaylandı. Toplam ${n} kullanıcı.`);
+      if(typeof loadCeoLists === "function") loadCeoLists();
+    } else {
+      const errMsg = (result.data && result.data.message) || result.error || "Toplu onay başarısız";
+      if(rb){ rb.textContent = "⚠️ " + errMsg; rb.style.color = "var(--err)"; }
+      ceoToast(errMsg, "err");
+      ceoLog("⚠️ " + errMsg, "#ff8a8a");
+    }
+  }
+
+  async function ceoCloseAllSessions(){
+    const ceoKey = getCeoKey();
+    if(!ceoKey){ ceoToast("Önce CEO anahtarını girin", "err"); return; }
+    const rb = ceoResultBox();
+    if(rb){ rb.textContent = "⏳ Tüm aktif oturumlar kapatılıyor…"; rb.style.color = "var(--gold)"; }
+    ceoLog("📡 Toplu oturum kapatma isteği gönderiliyor…");
+
+    const result = await executeCeoAction("/ceo/close-all-sessions", {});
+    const n = (result.data && result.data.count) || 0;
+
+    if(result.ok && result.data && result.data.status === "success"){
+      const msg = `Tüm aktif oturumlar kapatıldı (${n} kullanıcı)`;
+      if(rb){ rb.textContent = "⛔ " + msg; rb.style.color = "var(--ok)"; }
+      ceoToast(msg, "ok");
+      ceoLog(`✅ CEO toplu kapatma: ${n} aktif oturum sonlandırıldı`, "#7CFC90");
+      ceoVolkan(`Sayın CEO, tüm aktif oturumlar toplu olarak kapatıldı. Toplam ${n} kullanıcı çıkışa zorlandı.`);
+      if(typeof loadCeoLists === "function") loadCeoLists();
+    } else {
+      const errMsg = (result.data && result.data.message) || result.error || "Toplu kapatma başarısız";
+      if(rb){ rb.textContent = "⚠️ " + errMsg; rb.style.color = "var(--err)"; }
+      ceoToast(errMsg, "err");
+      ceoLog("⚠️ " + errMsg, "#ff8a8a");
+    }
+  }
+
+  async function approveFromList(userId){
+    const input = document.getElementById("kom_ceoUserIdInput");
+    if(input) input.value = userId;
+    await ceoApproveLogin();
+  }
+
+  async function logoutFromList(userId){
+    const input = document.getElementById("kom_ceoUserIdInput");
+    if(input) input.value = userId;
+    await ceoForceLogout();
+  }
+
+  async function loadCeoLists(){
+    const pendingBox = document.getElementById("kom_ceoPendingList");
+    const activeBox  = document.getElementById("kom_ceoActiveList");
+    if(!pendingBox && !activeBox) return;
+
+    const ceoKey = getCeoKey();
+    if(!ceoKey){
+      if(pendingBox) pendingBox.innerHTML = `<div style="opacity:.6;">CEO anahtarı girin…</div>`;
+      if(activeBox)  activeBox.innerHTML  = `<div style="opacity:.6;">CEO anahtarı girin…</div>`;
+      return;
+    }
+
+    const rPending = await executeCeoAction("/ceo/pending-requests", {}, { timeoutMs: 5000 });
+    if(pendingBox){
+      if(rPending.ok && rPending.data && Array.isArray(rPending.data) && rPending.data.length){
+        pendingBox.innerHTML = rPending.data.map(u => `
+          <div class="ceo-row">
+            <span>${u.name || u.user_id} <span style="color:var(--text-dim); font-size:10.5px;">(${u.user_id})</span></span>
+            <button class="btn-ceo-approve mini-btn" data-ceo-action="approve" data-user-id="${u.user_id}">Onayla</button>
+          </div>`).join("");
+      } else if(rPending.ok){
+        pendingBox.innerHTML = `<div style="opacity:.6;">Bekleyen talep yok.</div>`;
+      } else {
+        pendingBox.innerHTML = `<div style="opacity:.6;">Backend'e ulaşılamadı (${rPending.error || rPending.status})</div>`;
+      }
+    }
+
+    const rActive = await executeCeoAction("/ceo/active-sessions", {}, { timeoutMs: 5000 });
+    if(activeBox){
+      if(rActive.ok && rActive.data && Array.isArray(rActive.data) && rActive.data.length){
+        activeBox.innerHTML = rActive.data.map(u => `
+          <div class="ceo-row">
+            <span>${u.name || u.user_id} <span style="color:var(--text-dim); font-size:10.5px;">(${u.user_id})</span></span>
+            <button class="btn-ceo-logout mini-btn" data-ceo-action="logout" data-user-id="${u.user_id}">Çıkışa Zorla</button>
+          </div>`).join("");
+      } else if(rActive.ok){
+        activeBox.innerHTML = `<div style="opacity:.6;">Aktif oturum yok.</div>`;
+      } else {
+        activeBox.innerHTML = `<div style="opacity:.6;">Backend'e ulaşılamadı (${rActive.error || rActive.status})</div>`;
+      }
+    }
+
+    if(window.vt_lockPanel) window.vt_lockPanel(window.PANEL_LOCKED);
+  }
+
+  document.addEventListener("click", function(e){
+    const btn = e.target.closest("[data-ceo-action]");
+    if(!btn) return;
+    const action = btn.dataset.ceoAction;
+    const userId = btn.dataset.userId;
+    if(action === "approve" && userId){ approveFromList(userId); }
+    else if(action === "logout" && userId){ logoutFromList(userId); }
+    else if(action === "reject" && userId){
+      const input = document.getElementById("kom_ceoUserIdInput");
+      if(input) input.value = userId;
+      ceoRejectLogin();
+    }
+  });
+
+  window.kom_ceoApproveLogin     = ceoApproveLogin;
+  window.kom_ceoPassiveUser      = ceoPassiveUser;
+  window.kom_ceoForceLogout      = ceoForceLogout;
+  window.kom_ceoApproveAll       = ceoApproveAll;
+  window.kom_ceoCloseAllSessions = ceoCloseAllSessions;
+  window.kom_ceoRejectLogin      = ceoRejectLogin;
+  window.kom_approveFromList     = approveFromList;
+  window.kom_logoutFromList      = logoutFromList;
+  window.kom_loadCeoLists        = loadCeoLists;
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", function(){
+      setTimeout(loadCeoLists, 800);
+    });
+  } else {
+    setTimeout(loadCeoLists, 800);
+  }
+
+  setInterval(loadCeoLists, 20000);
+
+  console.log("[CEO-ENTEGRASYON] Modül yüklendi. API_BASE =", API_BASE);
+
+})();
+</script>
+
+</body>
+</html>

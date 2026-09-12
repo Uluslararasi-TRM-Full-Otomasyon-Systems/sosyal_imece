@@ -1,11 +1,11 @@
 {
     "agent_id": 120,
     "agent_name": "TRM_Core_Agent_120",
-    "category": "Dijital Pazarlama",
+    "category": "Veri Doğrulama",
     "status": "success",
     "metrics": {
-        "erisim_sayisi": 15420,
-        "donusum_orani": "%3.4"
+        "dogrulanan_kayit": 1250,
+        "hata_orani": "0"
     },
-    "timestamp": "2026-09-02 15:40:59"
+    "timestamp": "2026-09-08 02:12:23"
 }

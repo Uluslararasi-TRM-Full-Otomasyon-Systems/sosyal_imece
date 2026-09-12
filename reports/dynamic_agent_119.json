@@ -1,11 +1,11 @@
 {
     "agent_id": 119,
     "agent_name": "TRM_Core_Agent_119",
-    "category": "Bölgesel Kalkınma",
+    "category": "Dijital Pazarlama",
     "status": "success",
     "metrics": {
-        "analiz_bolgesi": "Ege/İç Anadolu",
-        "veri_noktasi": 142
+        "erisim_sayisi": 15420,
+        "donusum_orani": "%3.4"
     },
-    "timestamp": "2026-09-02 15:40:59"
+    "timestamp": "2026-09-08 02:12:23"
 }

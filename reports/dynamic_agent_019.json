@@ -1,0 +1,11 @@
+{
+    "agent_id": 19,
+    "agent_name": "TRM_Core_Agent_019",
+    "category": "Dijital Pazarlama",
+    "status": "success",
+    "metrics": {
+        "erisim_sayisi": 15420,
+        "donusum_orani": "%3.4"
+    },
+    "timestamp": "2026-09-08 02:12:22"
+}

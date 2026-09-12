@@ -1,8 +1,8 @@
 [server]
 port = 8501
 headless = true
-enableCORS = false
-enableXsrfProtection = true
+enableCORS = true
+enableXsrfProtection = false
 enableWebsocketCompression = false
 maxUploadSize = 200
 

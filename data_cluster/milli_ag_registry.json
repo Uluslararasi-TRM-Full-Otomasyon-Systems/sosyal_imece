@@ -1,0 +1,7 @@
+{
+    "system": "Milli Da\u011f\u0131t\u0131k A\u011f (Sosyal \u0130mece)",
+    "max_capacity": 60000000,
+    "active_nodes_count": 2,
+    "optimization_mode": "ZERO_BLOAT_LAZY_LOAD",
+    "updated_at": "2026-09-05 19:38:53"
+}

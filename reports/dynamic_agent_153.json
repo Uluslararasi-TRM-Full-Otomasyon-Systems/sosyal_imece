@@ -1,11 +1,11 @@
 {
     "agent_id": 153,
     "agent_name": "TRM_Core_Agent_153",
-    "category": "Lojistik",
+    "category": "Bölgesel Kalkınma",
     "status": "success",
     "metrics": {
-        "rota_optimizasyonu": "Aktif",
-        "gecikme_orani": "%0.2"
+        "analiz_bolgesi": "Ege/İç Anadolu",
+        "veri_noktasi": 142
     },
-    "timestamp": "2026-09-02 15:40:59"
+    "timestamp": "2026-09-08 02:12:23"
 }

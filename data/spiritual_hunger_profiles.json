@@ -147,7 +147,7 @@
         }
     },
     "unknown": {
-        "analysis_timestamp": "2026-09-02T15:40:58.479427",
+        "analysis_timestamp": "2026-09-08T02:12:22.675172",
         "psychological_segment": "maddi_ihtiyac",
         "persona_map": {
             "user_id": "unknown",
@@ -165,37 +165,38 @@
             "preferred_content_format": "friend_recommendation",
             "impulse_buying_threshold": 50,
             "trust_factors": {
-                "micro_influencer_trust": 65,
-                "friend_recommendation_trust": 83,
-                "brand_trust": 46,
-                "social_proof_trust": 62
+                "micro_influencer_trust": 76,
+                "friend_recommendation_trust": 84,
+                "brand_trust": 37,
+                "social_proof_trust": 64
             }
         },
         "spiritual_hunger_score": 50,
         "timing_analysis": {
             "is_optimal": false,
             "optimal_reason": "",
-            "current_time": "15:40:58",
-            "current_hour": 15,
+            "current_time": "02:12:22",
+            "current_hour": 2,
             "is_weekend": false,
             "readiness_score": 40,
-            "recommended_delay": 45
+            "recommended_delay": 79
         },
         "content_recommendation": {
             "content_format": "friend_recommendation",
             "copywriting_style": "casual_friend",
             "product_recommendation": {
-                "category": "utility",
+                "category": "practical",
                 "price_range": "$20-$100",
                 "urgency": "medium",
                 "social_proof_enabled": true,
                 "micro_influencer_endorsed": true
             },
-            "cta_message": "Daha sonra bak",
+            "cta_message": "İlginizi çekebilir",
             "trust_signals": [
                 "10,000+ mutlu müşteri",
                 "4.9/5 yıldız değerlendirme",
-                "30 gün iade garantisi"
+                "30 gün iade garantisi",
+                "Favori influencerların tercihi"
             ],
             "tone": "practical_reassuring",
             "length": "30-60 seconds",
@@ -203,7 +204,7 @@
             "tiktok_style": true
         },
         "impulse_buying_probability": 55,
-        "trust_score": 64,
+        "trust_score": 65,
         "budget_analysis": {
             "needs_alternative": true,
             "original_price": 100,
@@ -245,7 +246,7 @@
             "scarcity_elements": [
                 {
                     "type": "geo_scarcity",
-                    "message": "Sadece Türkiye bölgesinde son 7 adet kaldı!",
+                    "message": "Sadece Türkiye bölgesinde son 4 adet kaldı!",
                     "urgency_boost": 25
                 },
                 {
@@ -255,7 +256,7 @@
                 },
                 {
                     "type": "social_proof",
-                    "message": "Şu anda 17 kişi bu ürünü inceliyor",
+                    "message": "Şu anda 49 kişi bu ürünü inceliyor",
                     "urgency_boost": 20
                 }
             ],

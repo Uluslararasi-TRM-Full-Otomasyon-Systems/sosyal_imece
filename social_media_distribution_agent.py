@@ -32,6 +32,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 import requests  # type: ignore
+import config
 
 # =====================================================================
 # 0. GENEL AYARLAR & KONUM
@@ -78,25 +79,58 @@ def _env(name: str, default: str = "") -> str:
     return default
 
 
-TELEGRAM_BOT_TOKEN = _env("TELEGRAM_BOT_TOKEN", "")
+# Config'den sosyal medya hesap bilgilerini al
+social_config = config._cfg.get("social_media", {})
+social_accounts = social_config.get("accounts", {})
+
+# Telegram
+TELEGRAM_BOT_TOKEN = social_accounts.get("telegram", {}).get("bot_token", _env("TELEGRAM_BOT_TOKEN", ""))
+TELEGRAM_BOT_USERNAME = social_accounts.get("telegram", {}).get("bot_username", "@TrendUrunlerMarket_Bot")
 TELEGRAM_REPORT_CHAT_ID = _env("TELEGRAM_REPORT_CHAT_ID", "")
 TELEGRAM_TARGET_CHANNEL_USERNAME = _env("TELEGRAM_TARGET_CHANNEL", "lanalisovets")
 
-TRM_API_URL = _env("TRM_API_URL", "https://api.trendurunlermarket.com/v1")
-TRM_API_KEY = _env("TRM_API_KEY", "TRM_SECURE_TOKEN_2026")
-
-FACEBOOK_ACCESS_TOKEN = _env("FACEBOOK_ACCESS_TOKEN", "")
-FACEBOOK_PAGE_ID = _env("FACEBOOK_PAGE_ID", "")
-INSTAGRAM_ACCESS_TOKEN = _env("INSTAGRAM_ACCESS_TOKEN", FACEBOOK_ACCESS_TOKEN)
-INSTAGRAM_BUSINESS_ACCOUNT_ID = _env("INSTAGRAM_BUSINESS_ACCOUNT_ID", "")
-TIKTOK_ACCESS_TOKEN = _env("TIKTOK_ACCESS_TOKEN", "")
-
+# WhatsApp
+WHATSAPP_PHONE = social_accounts.get("whatsapp", {}).get("phone", "+905426235116")
 WHATSAPP_API_TOKEN = _env("WHATSAPP_API_TOKEN", "")
 WHATSAPP_BROADCAST_NUMBERS = [
     n.strip() for n in _env("WHATSAPP_BROADCAST_NUMBERS", "").split(",") if n.strip()
 ]
 
+# Instagram
+INSTAGRAM_USERNAME = social_accounts.get("instagram", {}).get("username", "trendurunlermarket@gmail.com")
+INSTAGRAM_PASSWORD = social_accounts.get("instagram", {}).get("password", "")
+INSTAGRAM_ACCESS_TOKEN = _env("INSTAGRAM_ACCESS_TOKEN", "")
+INSTAGRAM_BUSINESS_ACCOUNT_ID = _env("INSTAGRAM_BUSINESS_ACCOUNT_ID", "")
+
+# TikTok
+TIKTOK_USERNAME = social_accounts.get("tiktok", {}).get("username", "trendurunlermarket@gmail.com")
+TIKTOK_PASSWORD = social_accounts.get("tiktok", {}).get("password", "")
+TIKTOK_ACCESS_TOKEN = _env("TIKTOK_ACCESS_TOKEN", "")
+
+# YouTube Shorts
+YOUTUBE_CHANNEL_NAME = social_accounts.get("youtube_shorts", {}).get("channel_name", "Trend Ürünler Market")
+YOUTUBE_EMAIL = social_accounts.get("youtube_shorts", {}).get("email", "trendurunlermarket@gmail.com")
+YOUTUBE_PASSWORD = social_accounts.get("youtube_shorts", {}).get("password", "")
+
+# Facebook
+FACEBOOK_EMAIL = social_accounts.get("facebook", {}).get("email", "trendurunlermarket@gmail.com")
+FACEBOOK_PASSWORD = social_accounts.get("facebook", {}).get("password", "")
+FACEBOOK_ACCESS_TOKEN = _env("FACEBOOK_ACCESS_TOKEN", "")
+FACEBOOK_PAGE_ID = _env("FACEBOOK_PAGE_ID", "")
+
+# TRM API
+TRM_API_URL = _env("TRM_API_URL", "https://api.trendurunlermarket.com/v1")
+TRM_API_KEY = _env("TRM_API_KEY", "TRM_SECURE_TOKEN_2026")
+
 DEFAULT_POST_INTERVAL_SEC = 60 * 30  # 30 dk.
+
+log.info(f"[CONFIG] Sosyal medya hesapları yüklendi:")
+log.info(f"  Telegram: {TELEGRAM_BOT_USERNAME}")
+log.info(f"  WhatsApp: {WHATSAPP_PHONE}")
+log.info(f"  Instagram: {INSTAGRAM_USERNAME}")
+log.info(f"  TikTok: {TIKTOK_USERNAME}")
+log.info(f"  YouTube: {YOUTUBE_CHANNEL_NAME}")
+log.info(f"  Facebook: {FACEBOOK_EMAIL}")
 
 
 # =====================================================================

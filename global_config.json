@@ -8,11 +8,50 @@
         "platforms": [
             "YouTube_Shorts",
             "TikTok",
-            "Instagram_Reels"
+            "Instagram_Reels",
+            "Facebook",
+            "Telegram",
+            "WhatsApp"
         ],
         "upload_interval": 300,
         "max_retries": 3,
-        "auto_upload": true
+        "auto_upload": true,
+        "accounts": {
+            "instagram": {
+                "username": "trendurunlermarket@gmail.com",
+                "password": "tr1357924680et"
+            },
+            "tiktok": {
+                "username": "trendurunlermarket@gmail.com",
+                "password": "tr1357924680et"
+            },
+            "youtube_shorts": {
+                "channel_name": "Trend Ürünler Market",
+                "email": "trendurunlermarket@gmail.com",
+                "password": "tr1357924680et"
+            },
+            "facebook": {
+                "email": "trendurunlermarket@gmail.com",
+                "password": "tr1357924680et"
+            },
+            "telegram": {
+                "bot_username": "@TrendUrunlerMarket_Bot",
+                "bot_token": "8686224874:AAFXXQs4okfam4EybDL9RZUvOEdJSRJeHLU"
+            },
+            "whatsapp": {
+                "phone": "+905426235116",
+                "contact_info": "Bilgi / İletişim Hattı"
+            }
+        }
+    },
+    "contact": {
+        "primary_phone": "+905426235116"
+    },
+    "financial": {
+        "account_holder": "Mehmet Fahri Güzel",
+        "bank_name": "Kuveyt Türk Katılım Bankası AŞ.",
+        "iban": "TR24 0020 5000 0954 0781 5000 01",
+        "tc_kimlik_no": "30304100922"
     },
     "api_keys": {
         "youtube_api_key": "",
@@ -25,5 +64,10 @@
     "logging": {
         "level": "INFO",
         "file": "logs/system.log"
+    },
+    "sistem": {
+        "max_ajan_sayisi": 165,
+        "log_klasoru": "./logs",
+        "rapor_klasoru": "./reports"
     }
 }

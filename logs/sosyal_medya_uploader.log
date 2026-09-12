@@ -1431,3 +1431,172 @@
 [2026-09-02 15:40:54,572] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
 [2026-09-02 15:40:54,573] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
 [2026-09-02 15:40:54,573] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.
+[2026-09-06 00:08:31,268] [Sosyal_Medya_Uploader] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 00:08:31,269] [Sosyal_Medya_Uploader] INFO: 🚀 Sosyal_Medya_Uploader başlatılıyor...
+[2026-09-06 00:08:31,269] [Sosyal_Medya_Uploader] INFO: 📁 Agent ID: None
+[2026-09-06 00:08:31,271] [Sosyal_Medya_Uploader] WARNING: ⚠️ youtube_api_key için API anahtarı eksik
+[2026-09-06 00:08:31,271] [Sosyal_Medya_Uploader] WARNING: ⚠️ tiktok_api_key için API anahtarı eksik
+[2026-09-06 00:08:31,271] [Sosyal_Medya_Uploader] WARNING: ⚠️ instagram_access_token için API anahtarı eksik
+[2026-09-06 00:08:31,271] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_key için API anahtarı eksik
+[2026-09-06 00:08:31,271] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_secret için API anahtarı eksik
+[2026-09-06 00:08:31,272] [Sosyal_Medya_Uploader] INFO: 📊 Platform durumu: {'youtube_api_key': False, 'tiktok_api_key': False, 'instagram_access_token': False, 'twitter_api_key': False, 'twitter_api_secret': False}
+[2026-09-06 00:08:31,272] [Sosyal_Medya_Uploader] INFO: 📁 Varsayılan video: content/videos/default_video.mp4
+[2026-09-06 00:08:31,272] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
+[2026-09-06 00:08:31,274] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
+[2026-09-06 00:08:31,274] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.
+[2026-09-06 00:46:43,345] [Sosyal_Medya_Uploader] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 00:46:43,345] [Sosyal_Medya_Uploader] INFO: 🚀 Sosyal_Medya_Uploader başlatılıyor...
+[2026-09-06 00:46:43,345] [Sosyal_Medya_Uploader] INFO: 📁 Agent ID: None
+[2026-09-06 00:46:43,345] [Sosyal_Medya_Uploader] WARNING: ⚠️ youtube_api_key için API anahtarı eksik
+[2026-09-06 00:46:43,345] [Sosyal_Medya_Uploader] WARNING: ⚠️ tiktok_api_key için API anahtarı eksik
+[2026-09-06 00:46:43,347] [Sosyal_Medya_Uploader] WARNING: ⚠️ instagram_access_token için API anahtarı eksik
+[2026-09-06 00:46:43,347] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_key için API anahtarı eksik
+[2026-09-06 00:46:43,347] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_secret için API anahtarı eksik
+[2026-09-06 00:46:43,347] [Sosyal_Medya_Uploader] INFO: 📊 Platform durumu: {'youtube_api_key': False, 'tiktok_api_key': False, 'instagram_access_token': False, 'twitter_api_key': False, 'twitter_api_secret': False}
+[2026-09-06 00:46:43,347] [Sosyal_Medya_Uploader] INFO: 📁 Varsayılan video: content/videos/default_video.mp4
+[2026-09-06 00:46:43,347] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
+[2026-09-06 00:46:43,349] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
+[2026-09-06 00:46:43,377] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.
+[2026-09-06 00:48:13,047] [Sosyal_Medya_Uploader] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 00:48:13,050] [Sosyal_Medya_Uploader] INFO: 🚀 Sosyal_Medya_Uploader başlatılıyor...
+[2026-09-06 00:48:13,050] [Sosyal_Medya_Uploader] INFO: 📁 Agent ID: None
+[2026-09-06 00:48:13,050] [Sosyal_Medya_Uploader] WARNING: ⚠️ youtube_api_key için API anahtarı eksik
+[2026-09-06 00:48:13,050] [Sosyal_Medya_Uploader] WARNING: ⚠️ tiktok_api_key için API anahtarı eksik
+[2026-09-06 00:48:13,050] [Sosyal_Medya_Uploader] WARNING: ⚠️ instagram_access_token için API anahtarı eksik
+[2026-09-06 00:48:13,050] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_key için API anahtarı eksik
+[2026-09-06 00:48:13,050] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_secret için API anahtarı eksik
+[2026-09-06 00:48:13,051] [Sosyal_Medya_Uploader] INFO: 📊 Platform durumu: {'youtube_api_key': False, 'tiktok_api_key': False, 'instagram_access_token': False, 'twitter_api_key': False, 'twitter_api_secret': False}
+[2026-09-06 00:48:13,051] [Sosyal_Medya_Uploader] INFO: 📁 Varsayılan video: content/videos/default_video.mp4
+[2026-09-06 00:48:13,051] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
+[2026-09-06 00:48:13,051] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
+[2026-09-06 00:48:13,051] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.
+[2026-09-06 00:54:16,945] [Sosyal_Medya_Uploader] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 00:54:16,947] [Sosyal_Medya_Uploader] INFO: 🚀 Sosyal_Medya_Uploader başlatılıyor...
+[2026-09-06 00:54:16,947] [Sosyal_Medya_Uploader] INFO: 📁 Agent ID: None
+[2026-09-06 00:54:16,947] [Sosyal_Medya_Uploader] WARNING: ⚠️ youtube_api_key için API anahtarı eksik
+[2026-09-06 00:54:16,947] [Sosyal_Medya_Uploader] WARNING: ⚠️ tiktok_api_key için API anahtarı eksik
+[2026-09-06 00:54:16,947] [Sosyal_Medya_Uploader] WARNING: ⚠️ instagram_access_token için API anahtarı eksik
+[2026-09-06 00:54:16,947] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_key için API anahtarı eksik
+[2026-09-06 00:54:16,947] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_secret için API anahtarı eksik
+[2026-09-06 00:54:16,947] [Sosyal_Medya_Uploader] INFO: 📊 Platform durumu: {'youtube_api_key': False, 'tiktok_api_key': False, 'instagram_access_token': False, 'twitter_api_key': False, 'twitter_api_secret': False}
+[2026-09-06 00:54:16,947] [Sosyal_Medya_Uploader] INFO: 📁 Varsayılan video: content/videos/default_video.mp4
+[2026-09-06 00:54:16,947] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
+[2026-09-06 00:54:17,014] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
+[2026-09-06 00:54:17,014] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.
+[2026-09-06 01:17:53,469] [Sosyal_Medya_Uploader] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 01:17:53,471] [Sosyal_Medya_Uploader] INFO: 🚀 Sosyal_Medya_Uploader başlatılıyor...
+[2026-09-06 01:17:53,471] [Sosyal_Medya_Uploader] INFO: 📁 Agent ID: None
+[2026-09-06 01:17:53,471] [Sosyal_Medya_Uploader] WARNING: ⚠️ youtube_api_key için API anahtarı eksik
+[2026-09-06 01:17:53,471] [Sosyal_Medya_Uploader] WARNING: ⚠️ tiktok_api_key için API anahtarı eksik
+[2026-09-06 01:17:53,471] [Sosyal_Medya_Uploader] WARNING: ⚠️ instagram_access_token için API anahtarı eksik
+[2026-09-06 01:17:53,471] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_key için API anahtarı eksik
+[2026-09-06 01:17:53,472] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_secret için API anahtarı eksik
+[2026-09-06 01:17:53,472] [Sosyal_Medya_Uploader] INFO: 📊 Platform durumu: {'youtube_api_key': False, 'tiktok_api_key': False, 'instagram_access_token': False, 'twitter_api_key': False, 'twitter_api_secret': False}
+[2026-09-06 01:17:53,472] [Sosyal_Medya_Uploader] INFO: 📁 Varsayılan video: content/videos/default_video.mp4
+[2026-09-06 01:17:53,472] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
+[2026-09-06 01:17:53,473] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
+[2026-09-06 01:17:53,473] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.
+[2026-09-06 01:18:50,674] [Sosyal_Medya_Uploader] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 01:18:50,674] [Sosyal_Medya_Uploader] INFO: 🚀 Sosyal_Medya_Uploader başlatılıyor...
+[2026-09-06 01:18:50,675] [Sosyal_Medya_Uploader] INFO: 📁 Agent ID: None
+[2026-09-06 01:18:50,675] [Sosyal_Medya_Uploader] WARNING: ⚠️ youtube_api_key için API anahtarı eksik
+[2026-09-06 01:18:50,675] [Sosyal_Medya_Uploader] WARNING: ⚠️ tiktok_api_key için API anahtarı eksik
+[2026-09-06 01:18:50,675] [Sosyal_Medya_Uploader] WARNING: ⚠️ instagram_access_token için API anahtarı eksik
+[2026-09-06 01:18:50,675] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_key için API anahtarı eksik
+[2026-09-06 01:18:50,676] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_secret için API anahtarı eksik
+[2026-09-06 01:18:50,676] [Sosyal_Medya_Uploader] INFO: 📊 Platform durumu: {'youtube_api_key': False, 'tiktok_api_key': False, 'instagram_access_token': False, 'twitter_api_key': False, 'twitter_api_secret': False}
+[2026-09-06 01:18:50,676] [Sosyal_Medya_Uploader] INFO: 📁 Varsayılan video: content/videos/default_video.mp4
+[2026-09-06 01:18:50,676] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
+[2026-09-06 01:18:50,676] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
+[2026-09-06 01:18:50,676] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.
+[2026-09-06 02:29:19,896] [Sosyal_Medya_Uploader] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 02:29:19,896] [Sosyal_Medya_Uploader] INFO: 🚀 Sosyal_Medya_Uploader başlatılıyor...
+[2026-09-06 02:29:19,897] [Sosyal_Medya_Uploader] INFO: 📁 Agent ID: None
+[2026-09-06 02:29:19,897] [Sosyal_Medya_Uploader] WARNING: ⚠️ youtube_api_key için API anahtarı eksik
+[2026-09-06 02:29:19,897] [Sosyal_Medya_Uploader] WARNING: ⚠️ tiktok_api_key için API anahtarı eksik
+[2026-09-06 02:29:19,897] [Sosyal_Medya_Uploader] WARNING: ⚠️ instagram_access_token için API anahtarı eksik
+[2026-09-06 02:29:19,897] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_key için API anahtarı eksik
+[2026-09-06 02:29:19,897] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_secret için API anahtarı eksik
+[2026-09-06 02:29:19,897] [Sosyal_Medya_Uploader] INFO: 📊 Platform durumu: {'youtube_api_key': False, 'tiktok_api_key': False, 'instagram_access_token': False, 'twitter_api_key': False, 'twitter_api_secret': False}
+[2026-09-06 02:29:19,898] [Sosyal_Medya_Uploader] INFO: 📁 Varsayılan video: content/videos/default_video.mp4
+[2026-09-06 02:29:19,898] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
+[2026-09-06 02:29:19,899] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
+[2026-09-06 02:29:19,899] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.
+[2026-09-06 02:30:49,537] [Sosyal_Medya_Uploader] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 02:30:49,537] [Sosyal_Medya_Uploader] INFO: 🚀 Sosyal_Medya_Uploader başlatılıyor...
+[2026-09-06 02:30:49,538] [Sosyal_Medya_Uploader] INFO: 📁 Agent ID: None
+[2026-09-06 02:30:49,538] [Sosyal_Medya_Uploader] WARNING: ⚠️ youtube_api_key için API anahtarı eksik
+[2026-09-06 02:30:49,538] [Sosyal_Medya_Uploader] WARNING: ⚠️ tiktok_api_key için API anahtarı eksik
+[2026-09-06 02:30:49,538] [Sosyal_Medya_Uploader] WARNING: ⚠️ instagram_access_token için API anahtarı eksik
+[2026-09-06 02:30:49,538] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_key için API anahtarı eksik
+[2026-09-06 02:30:49,538] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_secret için API anahtarı eksik
+[2026-09-06 02:30:49,538] [Sosyal_Medya_Uploader] INFO: 📊 Platform durumu: {'youtube_api_key': False, 'tiktok_api_key': False, 'instagram_access_token': False, 'twitter_api_key': False, 'twitter_api_secret': False}
+[2026-09-06 02:30:49,538] [Sosyal_Medya_Uploader] INFO: 📁 Varsayılan video: content/videos/default_video.mp4
+[2026-09-06 02:30:49,538] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
+[2026-09-06 02:30:49,540] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
+[2026-09-06 02:30:49,540] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.
+[2026-09-06 02:33:22,996] [Sosyal_Medya_Uploader] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 02:33:22,996] [Sosyal_Medya_Uploader] INFO: 🚀 Sosyal_Medya_Uploader başlatılıyor...
+[2026-09-06 02:33:22,996] [Sosyal_Medya_Uploader] INFO: 📁 Agent ID: None
+[2026-09-06 02:33:22,997] [Sosyal_Medya_Uploader] WARNING: ⚠️ youtube_api_key için API anahtarı eksik
+[2026-09-06 02:33:22,997] [Sosyal_Medya_Uploader] WARNING: ⚠️ tiktok_api_key için API anahtarı eksik
+[2026-09-06 02:33:22,997] [Sosyal_Medya_Uploader] WARNING: ⚠️ instagram_access_token için API anahtarı eksik
+[2026-09-06 02:33:22,997] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_key için API anahtarı eksik
+[2026-09-06 02:33:22,997] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_secret için API anahtarı eksik
+[2026-09-06 02:33:22,997] [Sosyal_Medya_Uploader] INFO: 📊 Platform durumu: {'youtube_api_key': False, 'tiktok_api_key': False, 'instagram_access_token': False, 'twitter_api_key': False, 'twitter_api_secret': False}
+[2026-09-06 02:33:22,998] [Sosyal_Medya_Uploader] INFO: 📁 Varsayılan video: content/videos/default_video.mp4
+[2026-09-06 02:33:22,998] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
+[2026-09-06 02:33:22,998] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
+[2026-09-06 02:33:22,999] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.
+[2026-09-07 13:28:13,116] [Sosyal_Medya_Uploader] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-07 13:28:13,121] [Sosyal_Medya_Uploader] INFO: 🚀 Sosyal_Medya_Uploader başlatılıyor...
+[2026-09-07 13:28:13,151] [Sosyal_Medya_Uploader] INFO: 📁 Agent ID: None
+[2026-09-07 13:28:13,164] [Sosyal_Medya_Uploader] WARNING: ⚠️ youtube_api_key için API anahtarı eksik
+[2026-09-07 13:28:13,164] [Sosyal_Medya_Uploader] WARNING: ⚠️ tiktok_api_key için API anahtarı eksik
+[2026-09-07 13:28:13,164] [Sosyal_Medya_Uploader] WARNING: ⚠️ instagram_access_token için API anahtarı eksik
+[2026-09-07 13:28:13,164] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_key için API anahtarı eksik
+[2026-09-07 13:28:13,168] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_secret için API anahtarı eksik
+[2026-09-07 13:28:13,184] [Sosyal_Medya_Uploader] INFO: 📊 Platform durumu: {'youtube_api_key': False, 'tiktok_api_key': False, 'instagram_access_token': False, 'twitter_api_key': False, 'twitter_api_secret': False}
+[2026-09-07 13:28:13,239] [Sosyal_Medya_Uploader] INFO: 📁 Varsayılan video: content/videos/default_video.mp4
+[2026-09-07 13:28:13,240] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
+[2026-09-07 13:28:13,241] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
+[2026-09-07 13:28:13,286] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.
+[2026-09-07 18:22:25,480] [Sosyal_Medya_Uploader] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-07 18:22:25,490] [Sosyal_Medya_Uploader] INFO: 🚀 Sosyal_Medya_Uploader başlatılıyor...
+[2026-09-07 18:22:25,490] [Sosyal_Medya_Uploader] INFO: 📁 Agent ID: None
+[2026-09-07 18:22:25,491] [Sosyal_Medya_Uploader] WARNING: ⚠️ youtube_api_key için API anahtarı eksik
+[2026-09-07 18:22:25,491] [Sosyal_Medya_Uploader] WARNING: ⚠️ tiktok_api_key için API anahtarı eksik
+[2026-09-07 18:22:25,491] [Sosyal_Medya_Uploader] WARNING: ⚠️ instagram_access_token için API anahtarı eksik
+[2026-09-07 18:22:25,491] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_key için API anahtarı eksik
+[2026-09-07 18:22:25,491] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_secret için API anahtarı eksik
+[2026-09-07 18:22:25,491] [Sosyal_Medya_Uploader] INFO: 📊 Platform durumu: {'youtube_api_key': False, 'tiktok_api_key': False, 'instagram_access_token': False, 'twitter_api_key': False, 'twitter_api_secret': False}
+[2026-09-07 18:22:25,491] [Sosyal_Medya_Uploader] INFO: 📁 Varsayılan video: content/videos/default_video.mp4
+[2026-09-07 18:22:25,491] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
+[2026-09-07 18:22:25,491] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
+[2026-09-07 18:22:25,491] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.
+[2026-09-07 20:40:51,100] [Sosyal_Medya_Uploader] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-07 20:40:51,102] [Sosyal_Medya_Uploader] INFO: 🚀 Sosyal_Medya_Uploader başlatılıyor...
+[2026-09-07 20:40:51,102] [Sosyal_Medya_Uploader] INFO: 📁 Agent ID: None
+[2026-09-07 20:40:51,102] [Sosyal_Medya_Uploader] WARNING: ⚠️ youtube_api_key için API anahtarı eksik
+[2026-09-07 20:40:51,102] [Sosyal_Medya_Uploader] WARNING: ⚠️ tiktok_api_key için API anahtarı eksik
+[2026-09-07 20:40:51,102] [Sosyal_Medya_Uploader] WARNING: ⚠️ instagram_access_token için API anahtarı eksik
+[2026-09-07 20:40:51,102] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_key için API anahtarı eksik
+[2026-09-07 20:40:51,102] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_secret için API anahtarı eksik
+[2026-09-07 20:40:51,103] [Sosyal_Medya_Uploader] INFO: 📊 Platform durumu: {'youtube_api_key': False, 'tiktok_api_key': False, 'instagram_access_token': False, 'twitter_api_key': False, 'twitter_api_secret': False}
+[2026-09-07 20:40:51,103] [Sosyal_Medya_Uploader] INFO: 📁 Varsayılan video: content/videos/default_video.mp4
+[2026-09-07 20:40:51,104] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
+[2026-09-07 20:40:51,104] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
+[2026-09-07 20:40:51,104] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.
+[2026-09-08 02:12:22,413] [Sosyal_Medya_Uploader] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-08 02:12:22,413] [Sosyal_Medya_Uploader] INFO: 🚀 Sosyal_Medya_Uploader başlatılıyor...
+[2026-09-08 02:12:22,413] [Sosyal_Medya_Uploader] INFO: 📁 Agent ID: None
+[2026-09-08 02:12:22,413] [Sosyal_Medya_Uploader] WARNING: ⚠️ youtube_api_key için API anahtarı eksik
+[2026-09-08 02:12:22,413] [Sosyal_Medya_Uploader] WARNING: ⚠️ tiktok_api_key için API anahtarı eksik
+[2026-09-08 02:12:22,413] [Sosyal_Medya_Uploader] WARNING: ⚠️ instagram_access_token için API anahtarı eksik
+[2026-09-08 02:12:22,413] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_key için API anahtarı eksik
+[2026-09-08 02:12:22,413] [Sosyal_Medya_Uploader] WARNING: ⚠️ twitter_api_secret için API anahtarı eksik
+[2026-09-08 02:12:22,413] [Sosyal_Medya_Uploader] INFO: 📊 Platform durumu: {'youtube_api_key': False, 'tiktok_api_key': False, 'instagram_access_token': False, 'twitter_api_key': False, 'twitter_api_secret': False}
+[2026-09-08 02:12:22,413] [Sosyal_Medya_Uploader] INFO: 📁 Varsayılan video: content/videos/default_video.mp4
+[2026-09-08 02:12:22,413] [Sosyal_Medya_Uploader] INFO: 🌐 Varsayılan dil: tr
+[2026-09-08 02:12:22,413] [Sosyal_Medya_Uploader] INFO: 💓 Heartbeat thread başlatıldı
+[2026-09-08 02:12:22,413] [MASTER_CONTROLLER] INFO: ✅ 'SocialUploaderAgent' (trm_agents.social_uploader_agent) initialize edildi.

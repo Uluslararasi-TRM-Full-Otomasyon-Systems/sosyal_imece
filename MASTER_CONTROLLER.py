@@ -884,10 +884,19 @@ class TRMMasterController:
                 wrapper = DynamicAgentWrapper(dyn_agent)
                 self.agent_instances.append((dyn_agent.agent_name, wrapper))
         
-        signal.signal(signal.SIGINT, self._signal_handler)
-        signal.signal(signal.SIGTERM, self._signal_handler)
-        if sys.platform == "win32":
-            signal.signal(signal.SIGBREAK, self._signal_handler)
+        # Signal handler'ları sadece ana thread'de kur (Streamlit thread güvenliği için)
+        try:
+            if threading.current_thread() is threading.main_thread():
+                signal.signal(signal.SIGINT, self._signal_handler)
+                signal.signal(signal.SIGTERM, self._signal_handler)
+                if sys.platform == "win32":
+                    signal.signal(signal.SIGBREAK, self._signal_handler)
+                logger.info("✅ Signal handler'lar ana thread'de başarıyla kuruldu")
+            else:
+                logger.warning("⚠️ Signal handler'lar ana thread'de değil, atlanıyor (Streamlit thread güvenliği)")
+        except ValueError as e:
+            logger.warning(f"⚠️ Signal handler kurulum hatası (thread güvenliği): {e}")
+            logger.info("🔄 Sistem signal olmadan çalışmaya devam edecek")
     
     def _signal_handler(self, signum, frame):
         logger.info(f"Signal {signum} alındı. Graceful shutdown başlatılıyor...")
@@ -954,31 +963,61 @@ class TRMMasterController:
         return restarted > 0
 
     def start_all_services(self):
-        logger.info("Otonom servisler sırayla devreye alınıyor...")
+        logger.info("Otonom servisler eşzamanlı (concurrent) olarak devreye alınıyor...")
 
         started = 0
-        for cls_name, instance in self.agent_instances:
+        failed = 0
+        results = []
+
+        # Thread pool ile eşzamanlı çalıştırma
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+        
+        def run_single_agent(cls_name, instance):
             current_log = {
                 "agent_name": cls_name,
                 "status": "pending",
             }
             try:
                 instance.run()
-                started += 1
                 current_log["status"] = "success"
                 logger.info(f"✅ '{cls_name}' başarıyla tetiklendi.")
+                return (cls_name, True, None)
             except Exception as e:
                 current_log["status"] = "error"
                 current_log["error"] = str(e)
                 logger.error(f"⚠️ '{cls_name}' çalıştırılırken hata: {e}")
+                return (cls_name, False, str(e))
+        
+        # Maksimum 50 thread ile eşzamanlı çalıştırma
+        max_workers = min(50, len(self.agent_instances))
+        
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_agent = {
+                executor.submit(run_single_agent, cls_name, instance): (cls_name, instance)
+                for cls_name, instance in self.agent_instances
+            }
             
-            try:
-                self.governance.run_governance_cycle(current_log)
-            except Exception as gov_err:
-                logger.error(f"⚠️ Governance döngüsü hatası ({cls_name}): {gov_err}")
+            for future in as_completed(future_to_agent):
+                cls_name, success, error = future.result()
+                results.append((cls_name, success, error))
+                
+                if success:
+                    started += 1
+                else:
+                    failed += 1
+                
+                # Governance döngüsü
+                try:
+                    self.governance.run_governance_cycle({
+                        "agent_name": cls_name,
+                        "status": "success" if success else "error",
+                        "error": error
+                    })
+                except Exception as gov_err:
+                    logger.error(f"⚠️ Governance döngüsü hatası ({cls_name}): {gov_err}")
 
         logger.info(
-            f"Karargah aktif! {started}/{self.max_ajan_sayisi} ajan fiilen ve dinamik olarak çalıştırıldı."
+            f"Karargah aktif! {started}/{self.max_ajan_sayisi} ajan başarıyla çalıştırıldı, {failed} başarısız."
         )
         return started
     

@@ -3,12 +3,18 @@ import os
 import json
 import logging
 from datetime import datetime
+import config
 
 logger = logging.getLogger("GeoFusionCore")
 
 class GeoEcommerceFusionEngine:
     def __init__(self):
         logger.info("🌍 Geo-Intelligence & E-Commerce Fusion Engine başlatılıyor...")
+        # Config'den sistem ayarlarını al
+        self.system_name = config._cfg.get("system_name", "SOSYAL İMECE")
+        self.version = config._cfg.get("version", "3.0.0")
+        self.max_agents = config._cfg.get("max_agents", 165)
+        logger.info(f"✅ Config yüklendi: {self.system_name} v{self.version}, Max Agents: {self.max_agents}")
 
     def run_fusion_analysis(self):
         """Hoodmaps, Endeksa ve GeoSpy verilerini e-ticaret operasyonlarıyla harmanlar."""
@@ -17,6 +23,11 @@ class GeoEcommerceFusionEngine:
         fusion_data = {
             "fusion_status": "active",
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "system_config": {
+                "system_name": self.system_name,
+                "version": self.version,
+                "max_agents": self.max_agents
+            },
             "modules": {
                 "hoodmaps_integration": {"status": "synced", "target_zones": ["Ege", "Marmara", "İç Anadolu"], "vibe_check": "Optimized"},
                 "endeksa_integration": {"status": "synced", "regional_price_index": "Stable", "market_trend": "Growth"},

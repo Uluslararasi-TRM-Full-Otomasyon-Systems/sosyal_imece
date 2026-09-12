@@ -1,11 +1,11 @@
 {
     "agent_id": 46,
     "agent_name": "TRM_Core_Agent_046",
-    "category": "Veri Doğrulama",
+    "category": "Denetim Destek",
     "status": "success",
     "metrics": {
-        "dogrulanan_kayit": 1250,
-        "hata_orani": "0"
+        "kontrol_durumu": "Tamamlandı",
+        "risk_skoru": "Düşük"
     },
-    "timestamp": "2026-09-02 15:40:58"
+    "timestamp": "2026-09-08 02:12:22"
 }

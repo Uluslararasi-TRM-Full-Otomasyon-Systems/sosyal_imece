@@ -1,0 +1,87 @@
+{
+    "agents": [
+        {
+            "id": "elif",
+            "name": "Elif",
+            "module": "elif_agent.py",
+            "command": "python elif_agent.py",
+            "description": "Content Strategy & Planning Agent",
+            "color": "#FF6B6B"
+        },
+        {
+            "id": "amara",
+            "name": "Amara",
+            "module": "amara_agent.py",
+            "command": "python amara_agent.py",
+            "description": "Social Media Distribution Agent",
+            "color": "#4ECDC4"
+        },
+        {
+            "id": "lucia",
+            "name": "Lucia",
+            "module": "lucia_agent.py",
+            "command": "python lucia_agent.py",
+            "description": "Analytics & Monitoring Agent",
+            "color": "#45B7D1"
+        },
+        {
+            "id": "sophie",
+            "name": "Sophie",
+            "module": "sophie_agent.py",
+            "command": "python sophie_agent.py",
+            "description": "Customer Engagement Agent",
+            "color": "#96CEB4"
+        },
+        {
+            "id": "emma",
+            "name": "Emma",
+            "module": "emma_agent.py",
+            "command": "python emma_agent.py",
+            "description": "Financial & Accounting Agent",
+            "color": "#FFEAA7"
+        },
+        {
+            "id": "yuki",
+            "name": "Yuki",
+            "module": "yuki_agent.py",
+            "command": "python yuki_agent.py",
+            "description": "AI & Automation Agent",
+            "color": "#DDA0DD"
+        },
+        {
+            "id": "alina",
+            "name": "Alina",
+            "module": "alina_agent.py",
+            "command": "python alina_agent.py",
+            "description": "Quality Assurance & Testing Agent",
+            "color": "#F39C12"
+        },
+        {
+            "id": "camille",
+            "name": "Camille",
+            "module": "camille_agent.py",
+            "command": "python camille_agent.py",
+            "description": "Security & Compliance Agent",
+            "color": "#E74C3C"
+        }
+    ],
+    "grid_layout": {
+        "rows": 2,
+        "columns": 4,
+        "zones": [
+            {"id": 1, "row": 0, "col": 0, "agent": "elif"},
+            {"id": 2, "row": 0, "col": 1, "agent": "amara"},
+            {"id": 3, "row": 0, "col": 2, "agent": "lucia"},
+            {"id": 4, "row": 0, "col": 3, "agent": "sophie"},
+            {"id": 5, "row": 1, "col": 0, "agent": "emma"},
+            {"id": 6, "row": 1, "col": 1, "agent": "yuki"},
+            {"id": 7, "row": 1, "col": 2, "agent": "alina"},
+            {"id": 8, "row": 1, "col": 3, "agent": "camille"}
+        ]
+    },
+    "inter_agent_bus": {
+        "log_file": "logs/inter_agent_bus.jsonl",
+        "enabled": true,
+        "max_size_mb": 100
+    }
+}

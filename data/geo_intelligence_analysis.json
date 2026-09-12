@@ -1,5 +1,5 @@
 {
-    "analysis_timestamp": "2026-09-02T15:40:58.325799",
+    "analysis_timestamp": "2026-09-08T02:12:22.697249",
     "target_location": "Istanbul",
     "product_category": "general",
     "analysis_type": "comprehensive",
@@ -23,7 +23,7 @@
             "36-45": 0.25,
             "46+": 0.15
         },
-        "timestamp": "2026-09-02T15:40:58.325275"
+        "timestamp": "2026-09-08T02:12:22.681580"
     },
     "geospy_analysis": {
         "location": "Istanbul",
@@ -46,7 +46,7 @@
             ]
         },
         "security_level": "medium",
-        "timestamp": "2026-09-02T15:40:58.325799"
+        "timestamp": "2026-09-08T02:12:22.691237"
     },
     "endeksa_analysis": [
         {
@@ -113,7 +113,7 @@
                     "36-45": 0.25,
                     "46+": 0.15
                 },
-                "timestamp": "2026-09-02T15:40:58.325275"
+                "timestamp": "2026-09-08T02:12:22.681580"
             },
             "geospy": {
                 "location": "Istanbul",
@@ -136,7 +136,7 @@
                     ]
                 },
                 "security_level": "medium",
-                "timestamp": "2026-09-02T15:40:58.325799"
+                "timestamp": "2026-09-08T02:12:22.691237"
             },
             "endeksa": [
                 {
@@ -182,7 +182,7 @@
             ],
             "web_data": {}
         },
-        "processing_timestamp": "2026-09-02T15:40:58.325799",
+        "processing_timestamp": "2026-09-08T02:12:22.691237",
         "model_version": "v2.1",
         "confidence_score": 0.87,
         "predictions": {
@@ -208,7 +208,7 @@
             "behavioral_data_available": false,
             "market_data_available": false
         },
-        "processing_timestamp": "2026-09-02T15:40:58.325799",
+        "processing_timestamp": "2026-09-08T02:12:22.697249",
         "model_version": "v2.1",
         "strategic_recommendations": {
             "primary_strategy": "geo_targeted_campaign",

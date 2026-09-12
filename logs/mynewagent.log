@@ -406,3 +406,133 @@
 [2026-09-02 15:40:54,570] [SocialImecePortalAgent-208] INFO: 🔒 KVKK uyumluluğu AKTİF
 [2026-09-02 15:40:54,570] [SocialImecePortalAgent-208] INFO: 👥 Üye veritabanı yüklendi: 2 üye
 [2026-09-02 15:40:54,570] [MASTER_CONTROLLER] INFO: ✅ 'SocialImecePortalAgent' (trm_agents.social_imece_portal_agent) initialize edildi.
+[2026-09-06 00:08:31,256] [MyNewAgent] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 00:08:31,258] [MyNewAgent] INFO: 🚀 MyNewAgent başlatılıyor...
+[2026-09-06 00:08:31,258] [MyNewAgent] INFO: 📁 Agent ID: None
+[2026-09-06 00:08:31,258] [MyNewAgent] INFO: 🚀 MyNewAgent başlatıldı
+[2026-09-06 00:08:31,258] [MASTER_CONTROLLER] INFO: ✅ 'MyNewAgent' (trm_agents.my_new_agent) initialize edildi.
+[2026-09-06 00:08:31,259] [MASTER_CONTROLLER] ERROR: ⚠️ 'PublicBenefitAnalystAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:08:31,259] [MASTER_CONTROLLER] ERROR: ⚠️ 'SentinelGuardAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:08:31,260] [MASTER_CONTROLLER] ERROR: ⚠️ 'SeoAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:08:31,263] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialAccountAutomationAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:08:31,264] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialImecePortalAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:46:43,341] [MyNewAgent] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 00:46:43,342] [MyNewAgent] INFO: 🚀 MyNewAgent başlatılıyor...
+[2026-09-06 00:46:43,342] [MyNewAgent] INFO: 📁 Agent ID: None
+[2026-09-06 00:46:43,342] [MyNewAgent] INFO: 🚀 MyNewAgent başlatıldı
+[2026-09-06 00:46:43,342] [MASTER_CONTROLLER] INFO: ✅ 'MyNewAgent' (trm_agents.my_new_agent) initialize edildi.
+[2026-09-06 00:46:43,342] [MASTER_CONTROLLER] ERROR: ⚠️ 'PublicBenefitAnalystAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:46:43,343] [MASTER_CONTROLLER] ERROR: ⚠️ 'SentinelGuardAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:46:43,343] [MASTER_CONTROLLER] ERROR: ⚠️ 'SeoAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:46:43,343] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialAccountAutomationAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:46:43,344] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialImecePortalAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:48:13,044] [MyNewAgent] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 00:48:13,044] [MyNewAgent] INFO: 🚀 MyNewAgent başlatılıyor...
+[2026-09-06 00:48:13,044] [MyNewAgent] INFO: 📁 Agent ID: None
+[2026-09-06 00:48:13,044] [MyNewAgent] INFO: 🚀 MyNewAgent başlatıldı
+[2026-09-06 00:48:13,044] [MASTER_CONTROLLER] INFO: ✅ 'MyNewAgent' (trm_agents.my_new_agent) initialize edildi.
+[2026-09-06 00:48:13,045] [MASTER_CONTROLLER] ERROR: ⚠️ 'PublicBenefitAnalystAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:48:13,045] [MASTER_CONTROLLER] ERROR: ⚠️ 'SentinelGuardAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:48:13,045] [MASTER_CONTROLLER] ERROR: ⚠️ 'SeoAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:48:13,047] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialAccountAutomationAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:48:13,047] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialImecePortalAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:54:16,942] [MyNewAgent] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 00:54:16,943] [MyNewAgent] INFO: 🚀 MyNewAgent başlatılıyor...
+[2026-09-06 00:54:16,943] [MyNewAgent] INFO: 📁 Agent ID: None
+[2026-09-06 00:54:16,943] [MyNewAgent] INFO: 🚀 MyNewAgent başlatıldı
+[2026-09-06 00:54:16,943] [MASTER_CONTROLLER] INFO: ✅ 'MyNewAgent' (trm_agents.my_new_agent) initialize edildi.
+[2026-09-06 00:54:16,943] [MASTER_CONTROLLER] ERROR: ⚠️ 'PublicBenefitAnalystAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:54:16,944] [MASTER_CONTROLLER] ERROR: ⚠️ 'SentinelGuardAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:54:16,944] [MASTER_CONTROLLER] ERROR: ⚠️ 'SeoAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:54:16,944] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialAccountAutomationAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:54:16,945] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialImecePortalAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:17:53,460] [MyNewAgent] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 01:17:53,460] [MyNewAgent] INFO: 🚀 MyNewAgent başlatılıyor...
+[2026-09-06 01:17:53,462] [MyNewAgent] INFO: 📁 Agent ID: None
+[2026-09-06 01:17:53,462] [MyNewAgent] INFO: 🚀 MyNewAgent başlatıldı
+[2026-09-06 01:17:53,462] [MASTER_CONTROLLER] INFO: ✅ 'MyNewAgent' (trm_agents.my_new_agent) initialize edildi.
+[2026-09-06 01:17:53,463] [MASTER_CONTROLLER] ERROR: ⚠️ 'PublicBenefitAnalystAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:17:53,464] [MASTER_CONTROLLER] ERROR: ⚠️ 'SentinelGuardAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:17:53,465] [MASTER_CONTROLLER] ERROR: ⚠️ 'SeoAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:17:53,466] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialAccountAutomationAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:17:53,466] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialImecePortalAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:18:50,669] [MyNewAgent] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 01:18:50,669] [MyNewAgent] INFO: 🚀 MyNewAgent başlatılıyor...
+[2026-09-06 01:18:50,669] [MyNewAgent] INFO: 📁 Agent ID: None
+[2026-09-06 01:18:50,669] [MyNewAgent] INFO: 🚀 MyNewAgent başlatıldı
+[2026-09-06 01:18:50,669] [MASTER_CONTROLLER] INFO: ✅ 'MyNewAgent' (trm_agents.my_new_agent) initialize edildi.
+[2026-09-06 01:18:50,669] [MASTER_CONTROLLER] ERROR: ⚠️ 'PublicBenefitAnalystAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:18:50,671] [MASTER_CONTROLLER] ERROR: ⚠️ 'SentinelGuardAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:18:50,671] [MASTER_CONTROLLER] ERROR: ⚠️ 'SeoAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:18:50,672] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialAccountAutomationAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:18:50,672] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialImecePortalAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:29:19,889] [MyNewAgent] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 02:29:19,891] [MyNewAgent] INFO: 🚀 MyNewAgent başlatılıyor...
+[2026-09-06 02:29:19,891] [MyNewAgent] INFO: 📁 Agent ID: None
+[2026-09-06 02:29:19,891] [MyNewAgent] INFO: 🚀 MyNewAgent başlatıldı
+[2026-09-06 02:29:19,891] [MASTER_CONTROLLER] INFO: ✅ 'MyNewAgent' (trm_agents.my_new_agent) initialize edildi.
+[2026-09-06 02:29:19,892] [MASTER_CONTROLLER] ERROR: ⚠️ 'PublicBenefitAnalystAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:29:19,892] [MASTER_CONTROLLER] ERROR: ⚠️ 'SentinelGuardAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:29:19,893] [MASTER_CONTROLLER] ERROR: ⚠️ 'SeoAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:29:19,893] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialAccountAutomationAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:29:19,894] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialImecePortalAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:30:49,532] [MyNewAgent] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 02:30:49,533] [MyNewAgent] INFO: 🚀 MyNewAgent başlatılıyor...
+[2026-09-06 02:30:49,533] [MyNewAgent] INFO: 📁 Agent ID: None
+[2026-09-06 02:30:49,533] [MyNewAgent] INFO: 🚀 MyNewAgent başlatıldı
+[2026-09-06 02:30:49,533] [MASTER_CONTROLLER] INFO: ✅ 'MyNewAgent' (trm_agents.my_new_agent) initialize edildi.
+[2026-09-06 02:30:49,533] [MASTER_CONTROLLER] ERROR: ⚠️ 'PublicBenefitAnalystAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:30:49,534] [MASTER_CONTROLLER] ERROR: ⚠️ 'SentinelGuardAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:30:49,534] [MASTER_CONTROLLER] ERROR: ⚠️ 'SeoAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:30:49,535] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialAccountAutomationAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:30:49,535] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialImecePortalAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:33:22,991] [MyNewAgent] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 02:33:22,992] [MyNewAgent] INFO: 🚀 MyNewAgent başlatılıyor...
+[2026-09-06 02:33:22,992] [MyNewAgent] INFO: 📁 Agent ID: None
+[2026-09-06 02:33:22,992] [MyNewAgent] INFO: 🚀 MyNewAgent başlatıldı
+[2026-09-06 02:33:22,992] [MASTER_CONTROLLER] INFO: ✅ 'MyNewAgent' (trm_agents.my_new_agent) initialize edildi.
+[2026-09-06 02:33:22,993] [MASTER_CONTROLLER] ERROR: ⚠️ 'PublicBenefitAnalystAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:33:22,993] [MASTER_CONTROLLER] ERROR: ⚠️ 'SentinelGuardAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:33:22,994] [MASTER_CONTROLLER] ERROR: ⚠️ 'SeoAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:33:22,994] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialAccountAutomationAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:33:22,994] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialImecePortalAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 13:28:13,078] [MyNewAgent] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-07 13:28:13,081] [MyNewAgent] INFO: 🚀 MyNewAgent başlatılıyor...
+[2026-09-07 13:28:13,081] [MyNewAgent] INFO: 📁 Agent ID: None
+[2026-09-07 13:28:13,081] [MyNewAgent] INFO: 🚀 MyNewAgent başlatıldı
+[2026-09-07 13:28:13,082] [MASTER_CONTROLLER] INFO: ✅ 'MyNewAgent' (trm_agents.my_new_agent) initialize edildi.
+[2026-09-07 13:28:13,083] [MASTER_CONTROLLER] ERROR: ⚠️ 'PublicBenefitAnalystAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 13:28:13,085] [MASTER_CONTROLLER] ERROR: ⚠️ 'SentinelGuardAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 13:28:13,086] [MASTER_CONTROLLER] ERROR: ⚠️ 'SeoAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 13:28:13,088] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialAccountAutomationAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 13:28:13,100] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialImecePortalAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 18:22:25,475] [MyNewAgent] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-07 18:22:25,475] [MyNewAgent] INFO: 🚀 MyNewAgent başlatılıyor...
+[2026-09-07 18:22:25,475] [MyNewAgent] INFO: 📁 Agent ID: None
+[2026-09-07 18:22:25,475] [MyNewAgent] INFO: 🚀 MyNewAgent başlatıldı
+[2026-09-07 18:22:25,475] [MASTER_CONTROLLER] INFO: ✅ 'MyNewAgent' (trm_agents.my_new_agent) initialize edildi.
+[2026-09-07 18:22:25,477] [MASTER_CONTROLLER] ERROR: ⚠️ 'PublicBenefitAnalystAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 18:22:25,477] [MASTER_CONTROLLER] ERROR: ⚠️ 'SentinelGuardAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 18:22:25,477] [MASTER_CONTROLLER] ERROR: ⚠️ 'SeoAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 18:22:25,477] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialAccountAutomationAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 18:22:25,477] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialImecePortalAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 20:40:51,094] [MyNewAgent] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-07 20:40:51,096] [MyNewAgent] INFO: 🚀 MyNewAgent başlatılıyor...
+[2026-09-07 20:40:51,096] [MyNewAgent] INFO: 📁 Agent ID: None
+[2026-09-07 20:40:51,096] [MyNewAgent] INFO: 🚀 MyNewAgent başlatıldı
+[2026-09-07 20:40:51,097] [MASTER_CONTROLLER] INFO: ✅ 'MyNewAgent' (trm_agents.my_new_agent) initialize edildi.
+[2026-09-07 20:40:51,097] [MASTER_CONTROLLER] ERROR: ⚠️ 'PublicBenefitAnalystAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 20:40:51,097] [MASTER_CONTROLLER] ERROR: ⚠️ 'SentinelGuardAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 20:40:51,097] [MASTER_CONTROLLER] ERROR: ⚠️ 'SeoAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 20:40:51,097] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialAccountAutomationAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 20:40:51,097] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialImecePortalAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-08 02:12:22,406] [MyNewAgent] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-08 02:12:22,410] [MyNewAgent] INFO: 🚀 MyNewAgent başlatılıyor...
+[2026-09-08 02:12:22,410] [MyNewAgent] INFO: 📁 Agent ID: None
+[2026-09-08 02:12:22,410] [MyNewAgent] INFO: 🚀 MyNewAgent başlatıldı
+[2026-09-08 02:12:22,410] [MASTER_CONTROLLER] INFO: ✅ 'MyNewAgent' (trm_agents.my_new_agent) initialize edildi.
+[2026-09-08 02:12:22,410] [MASTER_CONTROLLER] ERROR: ⚠️ 'PublicBenefitAnalystAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-08 02:12:22,410] [MASTER_CONTROLLER] ERROR: ⚠️ 'SentinelGuardAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-08 02:12:22,410] [MASTER_CONTROLLER] ERROR: ⚠️ 'SeoAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-08 02:12:22,412] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialAccountAutomationAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-08 02:12:22,412] [MASTER_CONTROLLER] ERROR: ⚠️ 'SocialImecePortalAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)

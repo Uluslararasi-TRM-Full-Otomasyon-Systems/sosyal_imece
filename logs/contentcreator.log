@@ -342,3 +342,159 @@
 [2026-09-02 15:40:54,560] [LegalShieldAgent-203] INFO: 📜 Hukuki altyapı yüklendi: 6 kayıt
 [2026-09-02 15:40:54,560] [LegalShieldAgent-203] INFO: 🚫 Hukuki sınıır iftira türleri: 8
 [2026-09-02 15:40:54,560] [MASTER_CONTROLLER] INFO: ✅ 'LegalShieldAgent' (trm_agents.legal_shield_agent) initialize edildi.
+[2026-09-06 00:08:31,245] [ContentCreator] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 00:08:31,247] [ContentCreator] INFO: 🚀 ContentCreator başlatılıyor...
+[2026-09-06 00:08:31,247] [ContentCreator] INFO: 📁 Agent ID: None
+[2026-09-06 00:08:31,247] [ContentCreator] INFO: 📝 İçerik tipi: {}
+[2026-09-06 00:08:31,247] [ContentCreator] INFO: 🎯 Varsayılan konu: {}
+[2026-09-06 00:08:31,247] [MASTER_CONTROLLER] INFO: ✅ 'ContentCreatorAgent' (trm_agents.content_creator_agent) initialize edildi.
+[2026-09-06 00:08:31,248] [MASTER_CONTROLLER] ERROR: ⚠️ 'FactCheckerAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:08:31,248] [MASTER_CONTROLLER] ERROR: ⚠️ 'FinansAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:08:31,249] [MASTER_CONTROLLER] INFO: ✅ 'TRMGlobalAffiliateRecruiterAgent' (trm_agents.global_affiliate_recruiter_agent) initialize edildi.
+[2026-09-06 00:08:31,251] [MASTER_CONTROLLER] INFO: ✅ 'TRMHumanAuditorAgent' (trm_agents.human_auditor_agent) initialize edildi.
+[2026-09-06 00:08:31,251] [MASTER_CONTROLLER] ERROR: ⚠️ 'IcerikAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:08:31,252] [MASTER_CONTROLLER] ERROR: ⚠️ 'LegalShieldAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:46:43,304] [ContentCreator] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 00:46:43,306] [ContentCreator] INFO: 🚀 ContentCreator başlatılıyor...
+[2026-09-06 00:46:43,306] [ContentCreator] INFO: 📁 Agent ID: None
+[2026-09-06 00:46:43,306] [ContentCreator] INFO: 📝 İçerik tipi: {}
+[2026-09-06 00:46:43,306] [ContentCreator] INFO: 🎯 Varsayılan konu: {}
+[2026-09-06 00:46:43,306] [MASTER_CONTROLLER] INFO: ✅ 'ContentCreatorAgent' (trm_agents.content_creator_agent) initialize edildi.
+[2026-09-06 00:46:43,306] [MASTER_CONTROLLER] ERROR: ⚠️ 'FactCheckerAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:46:43,306] [MASTER_CONTROLLER] ERROR: ⚠️ 'FinansAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:46:43,322] [MASTER_CONTROLLER] INFO: ✅ 'TRMGlobalAffiliateRecruiterAgent' (trm_agents.global_affiliate_recruiter_agent) initialize edildi.
+[2026-09-06 00:46:43,336] [MASTER_CONTROLLER] INFO: ✅ 'TRMHumanAuditorAgent' (trm_agents.human_auditor_agent) initialize edildi.
+[2026-09-06 00:46:43,336] [MASTER_CONTROLLER] ERROR: ⚠️ 'IcerikAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:46:43,337] [MASTER_CONTROLLER] ERROR: ⚠️ 'LegalShieldAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:48:13,028] [ContentCreator] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 00:48:13,028] [ContentCreator] INFO: 🚀 ContentCreator başlatılıyor...
+[2026-09-06 00:48:13,028] [ContentCreator] INFO: 📁 Agent ID: None
+[2026-09-06 00:48:13,028] [ContentCreator] INFO: 📝 İçerik tipi: {}
+[2026-09-06 00:48:13,030] [ContentCreator] INFO: 🎯 Varsayılan konu: {}
+[2026-09-06 00:48:13,030] [MASTER_CONTROLLER] INFO: ✅ 'ContentCreatorAgent' (trm_agents.content_creator_agent) initialize edildi.
+[2026-09-06 00:48:13,030] [MASTER_CONTROLLER] ERROR: ⚠️ 'FactCheckerAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:48:13,032] [MASTER_CONTROLLER] ERROR: ⚠️ 'FinansAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:48:13,039] [MASTER_CONTROLLER] INFO: ✅ 'TRMGlobalAffiliateRecruiterAgent' (trm_agents.global_affiliate_recruiter_agent) initialize edildi.
+[2026-09-06 00:48:13,039] [MASTER_CONTROLLER] INFO: ✅ 'TRMHumanAuditorAgent' (trm_agents.human_auditor_agent) initialize edildi.
+[2026-09-06 00:48:13,039] [MASTER_CONTROLLER] ERROR: ⚠️ 'IcerikAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:48:13,039] [MASTER_CONTROLLER] ERROR: ⚠️ 'LegalShieldAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:54:16,932] [ContentCreator] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 00:54:16,932] [ContentCreator] INFO: 🚀 ContentCreator başlatılıyor...
+[2026-09-06 00:54:16,934] [ContentCreator] INFO: 📁 Agent ID: None
+[2026-09-06 00:54:16,934] [ContentCreator] INFO: 📝 İçerik tipi: {}
+[2026-09-06 00:54:16,934] [ContentCreator] INFO: 🎯 Varsayılan konu: {}
+[2026-09-06 00:54:16,934] [MASTER_CONTROLLER] INFO: ✅ 'ContentCreatorAgent' (trm_agents.content_creator_agent) initialize edildi.
+[2026-09-06 00:54:16,935] [MASTER_CONTROLLER] ERROR: ⚠️ 'FactCheckerAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:54:16,935] [MASTER_CONTROLLER] ERROR: ⚠️ 'FinansAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:54:16,936] [MASTER_CONTROLLER] INFO: ✅ 'TRMGlobalAffiliateRecruiterAgent' (trm_agents.global_affiliate_recruiter_agent) initialize edildi.
+[2026-09-06 00:54:16,936] [MASTER_CONTROLLER] INFO: ✅ 'TRMHumanAuditorAgent' (trm_agents.human_auditor_agent) initialize edildi.
+[2026-09-06 00:54:16,936] [MASTER_CONTROLLER] ERROR: ⚠️ 'IcerikAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 00:54:16,938] [MASTER_CONTROLLER] ERROR: ⚠️ 'LegalShieldAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:17:53,448] [ContentCreator] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 01:17:53,448] [ContentCreator] INFO: 🚀 ContentCreator başlatılıyor...
+[2026-09-06 01:17:53,448] [ContentCreator] INFO: 📁 Agent ID: None
+[2026-09-06 01:17:53,448] [ContentCreator] INFO: 📝 İçerik tipi: {}
+[2026-09-06 01:17:53,448] [ContentCreator] INFO: 🎯 Varsayılan konu: {}
+[2026-09-06 01:17:53,448] [MASTER_CONTROLLER] INFO: ✅ 'ContentCreatorAgent' (trm_agents.content_creator_agent) initialize edildi.
+[2026-09-06 01:17:53,450] [MASTER_CONTROLLER] ERROR: ⚠️ 'FactCheckerAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:17:53,452] [MASTER_CONTROLLER] ERROR: ⚠️ 'FinansAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:17:53,454] [MASTER_CONTROLLER] INFO: ✅ 'TRMGlobalAffiliateRecruiterAgent' (trm_agents.global_affiliate_recruiter_agent) initialize edildi.
+[2026-09-06 01:17:53,454] [MASTER_CONTROLLER] INFO: ✅ 'TRMHumanAuditorAgent' (trm_agents.human_auditor_agent) initialize edildi.
+[2026-09-06 01:17:53,455] [MASTER_CONTROLLER] ERROR: ⚠️ 'IcerikAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:17:53,455] [MASTER_CONTROLLER] ERROR: ⚠️ 'LegalShieldAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:18:50,661] [ContentCreator] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 01:18:50,661] [ContentCreator] INFO: 🚀 ContentCreator başlatılıyor...
+[2026-09-06 01:18:50,661] [ContentCreator] INFO: 📁 Agent ID: None
+[2026-09-06 01:18:50,662] [ContentCreator] INFO: 📝 İçerik tipi: {}
+[2026-09-06 01:18:50,662] [ContentCreator] INFO: 🎯 Varsayılan konu: {}
+[2026-09-06 01:18:50,662] [MASTER_CONTROLLER] INFO: ✅ 'ContentCreatorAgent' (trm_agents.content_creator_agent) initialize edildi.
+[2026-09-06 01:18:50,662] [MASTER_CONTROLLER] ERROR: ⚠️ 'FactCheckerAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:18:50,662] [MASTER_CONTROLLER] ERROR: ⚠️ 'FinansAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:18:50,663] [MASTER_CONTROLLER] INFO: ✅ 'TRMGlobalAffiliateRecruiterAgent' (trm_agents.global_affiliate_recruiter_agent) initialize edildi.
+[2026-09-06 01:18:50,663] [MASTER_CONTROLLER] INFO: ✅ 'TRMHumanAuditorAgent' (trm_agents.human_auditor_agent) initialize edildi.
+[2026-09-06 01:18:50,664] [MASTER_CONTROLLER] ERROR: ⚠️ 'IcerikAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 01:18:50,664] [MASTER_CONTROLLER] ERROR: ⚠️ 'LegalShieldAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:29:19,880] [ContentCreator] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 02:29:19,881] [ContentCreator] INFO: 🚀 ContentCreator başlatılıyor...
+[2026-09-06 02:29:19,881] [ContentCreator] INFO: 📁 Agent ID: None
+[2026-09-06 02:29:19,881] [ContentCreator] INFO: 📝 İçerik tipi: {}
+[2026-09-06 02:29:19,881] [ContentCreator] INFO: 🎯 Varsayılan konu: {}
+[2026-09-06 02:29:19,882] [MASTER_CONTROLLER] INFO: ✅ 'ContentCreatorAgent' (trm_agents.content_creator_agent) initialize edildi.
+[2026-09-06 02:29:19,882] [MASTER_CONTROLLER] ERROR: ⚠️ 'FactCheckerAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:29:19,883] [MASTER_CONTROLLER] ERROR: ⚠️ 'FinansAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:29:19,884] [MASTER_CONTROLLER] INFO: ✅ 'TRMGlobalAffiliateRecruiterAgent' (trm_agents.global_affiliate_recruiter_agent) initialize edildi.
+[2026-09-06 02:29:19,884] [MASTER_CONTROLLER] INFO: ✅ 'TRMHumanAuditorAgent' (trm_agents.human_auditor_agent) initialize edildi.
+[2026-09-06 02:29:19,884] [MASTER_CONTROLLER] ERROR: ⚠️ 'IcerikAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:29:19,886] [MASTER_CONTROLLER] ERROR: ⚠️ 'LegalShieldAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:30:49,522] [ContentCreator] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 02:30:49,522] [ContentCreator] INFO: 🚀 ContentCreator başlatılıyor...
+[2026-09-06 02:30:49,524] [ContentCreator] INFO: 📁 Agent ID: None
+[2026-09-06 02:30:49,524] [ContentCreator] INFO: 📝 İçerik tipi: {}
+[2026-09-06 02:30:49,524] [ContentCreator] INFO: 🎯 Varsayılan konu: {}
+[2026-09-06 02:30:49,525] [MASTER_CONTROLLER] INFO: ✅ 'ContentCreatorAgent' (trm_agents.content_creator_agent) initialize edildi.
+[2026-09-06 02:30:49,525] [MASTER_CONTROLLER] ERROR: ⚠️ 'FactCheckerAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:30:49,526] [MASTER_CONTROLLER] ERROR: ⚠️ 'FinansAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:30:49,526] [MASTER_CONTROLLER] INFO: ✅ 'TRMGlobalAffiliateRecruiterAgent' (trm_agents.global_affiliate_recruiter_agent) initialize edildi.
+[2026-09-06 02:30:49,527] [MASTER_CONTROLLER] INFO: ✅ 'TRMHumanAuditorAgent' (trm_agents.human_auditor_agent) initialize edildi.
+[2026-09-06 02:30:49,527] [MASTER_CONTROLLER] ERROR: ⚠️ 'IcerikAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:30:49,528] [MASTER_CONTROLLER] ERROR: ⚠️ 'LegalShieldAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:33:22,981] [ContentCreator] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-06 02:33:22,982] [ContentCreator] INFO: 🚀 ContentCreator başlatılıyor...
+[2026-09-06 02:33:22,982] [ContentCreator] INFO: 📁 Agent ID: None
+[2026-09-06 02:33:22,983] [ContentCreator] INFO: 📝 İçerik tipi: {}
+[2026-09-06 02:33:22,983] [ContentCreator] INFO: 🎯 Varsayılan konu: {}
+[2026-09-06 02:33:22,983] [MASTER_CONTROLLER] INFO: ✅ 'ContentCreatorAgent' (trm_agents.content_creator_agent) initialize edildi.
+[2026-09-06 02:33:22,985] [MASTER_CONTROLLER] ERROR: ⚠️ 'FactCheckerAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:33:22,985] [MASTER_CONTROLLER] ERROR: ⚠️ 'FinansAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:33:22,985] [MASTER_CONTROLLER] INFO: ✅ 'TRMGlobalAffiliateRecruiterAgent' (trm_agents.global_affiliate_recruiter_agent) initialize edildi.
+[2026-09-06 02:33:22,986] [MASTER_CONTROLLER] INFO: ✅ 'TRMHumanAuditorAgent' (trm_agents.human_auditor_agent) initialize edildi.
+[2026-09-06 02:33:22,986] [MASTER_CONTROLLER] ERROR: ⚠️ 'IcerikAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-06 02:33:22,986] [MASTER_CONTROLLER] ERROR: ⚠️ 'LegalShieldAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 13:28:12,307] [ContentCreator] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-07 13:28:12,308] [ContentCreator] INFO: 🚀 ContentCreator başlatılıyor...
+[2026-09-07 13:28:12,318] [ContentCreator] INFO: 📁 Agent ID: None
+[2026-09-07 13:28:12,327] [ContentCreator] INFO: 📝 İçerik tipi: {}
+[2026-09-07 13:28:12,331] [ContentCreator] INFO: 🎯 Varsayılan konu: {}
+[2026-09-07 13:28:12,331] [MASTER_CONTROLLER] INFO: ✅ 'ContentCreatorAgent' (trm_agents.content_creator_agent) initialize edildi.
+[2026-09-07 13:28:12,500] [MASTER_CONTROLLER] ERROR: ⚠️ 'FactCheckerAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 13:28:12,546] [MASTER_CONTROLLER] ERROR: ⚠️ 'FinansAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 13:28:12,696] [MASTER_CONTROLLER] INFO: ✅ 'TRMGlobalAffiliateRecruiterAgent' (trm_agents.global_affiliate_recruiter_agent) initialize edildi.
+[2026-09-07 13:28:12,734] [MASTER_CONTROLLER] INFO: ✅ 'TRMHumanAuditorAgent' (trm_agents.human_auditor_agent) initialize edildi.
+[2026-09-07 13:28:12,751] [MASTER_CONTROLLER] ERROR: ⚠️ 'IcerikAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 13:28:12,768] [MASTER_CONTROLLER] ERROR: ⚠️ 'LegalShieldAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 18:22:25,457] [ContentCreator] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-07 18:22:25,457] [ContentCreator] INFO: 🚀 ContentCreator başlatılıyor...
+[2026-09-07 18:22:25,457] [ContentCreator] INFO: 📁 Agent ID: None
+[2026-09-07 18:22:25,457] [ContentCreator] INFO: 📝 İçerik tipi: {}
+[2026-09-07 18:22:25,457] [ContentCreator] INFO: 🎯 Varsayılan konu: {}
+[2026-09-07 18:22:25,457] [MASTER_CONTROLLER] INFO: ✅ 'ContentCreatorAgent' (trm_agents.content_creator_agent) initialize edildi.
+[2026-09-07 18:22:25,460] [MASTER_CONTROLLER] ERROR: ⚠️ 'FactCheckerAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 18:22:25,460] [MASTER_CONTROLLER] ERROR: ⚠️ 'FinansAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 18:22:25,460] [MASTER_CONTROLLER] INFO: ✅ 'TRMGlobalAffiliateRecruiterAgent' (trm_agents.global_affiliate_recruiter_agent) initialize edildi.
+[2026-09-07 18:22:25,462] [MASTER_CONTROLLER] INFO: ✅ 'TRMHumanAuditorAgent' (trm_agents.human_auditor_agent) initialize edildi.
+[2026-09-07 18:22:25,462] [MASTER_CONTROLLER] ERROR: ⚠️ 'IcerikAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 18:22:25,462] [MASTER_CONTROLLER] ERROR: ⚠️ 'LegalShieldAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 20:40:51,081] [ContentCreator] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-07 20:40:51,085] [ContentCreator] INFO: 🚀 ContentCreator başlatılıyor...
+[2026-09-07 20:40:51,085] [ContentCreator] INFO: 📁 Agent ID: None
+[2026-09-07 20:40:51,085] [ContentCreator] INFO: 📝 İçerik tipi: {}
+[2026-09-07 20:40:51,085] [ContentCreator] INFO: 🎯 Varsayılan konu: {}
+[2026-09-07 20:40:51,085] [MASTER_CONTROLLER] INFO: ✅ 'ContentCreatorAgent' (trm_agents.content_creator_agent) initialize edildi.
+[2026-09-07 20:40:51,086] [MASTER_CONTROLLER] ERROR: ⚠️ 'FactCheckerAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 20:40:51,086] [MASTER_CONTROLLER] ERROR: ⚠️ 'FinansAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 20:40:51,088] [MASTER_CONTROLLER] INFO: ✅ 'TRMGlobalAffiliateRecruiterAgent' (trm_agents.global_affiliate_recruiter_agent) initialize edildi.
+[2026-09-07 20:40:51,088] [MASTER_CONTROLLER] INFO: ✅ 'TRMHumanAuditorAgent' (trm_agents.human_auditor_agent) initialize edildi.
+[2026-09-07 20:40:51,088] [MASTER_CONTROLLER] ERROR: ⚠️ 'IcerikAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-07 20:40:51,088] [MASTER_CONTROLLER] ERROR: ⚠️ 'LegalShieldAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-08 02:12:22,397] [ContentCreator] INFO: ✅ global_config.json başarıyla yüklendi
+[2026-09-08 02:12:22,401] [ContentCreator] INFO: 🚀 ContentCreator başlatılıyor...
+[2026-09-08 02:12:22,401] [ContentCreator] INFO: 📁 Agent ID: None
+[2026-09-08 02:12:22,401] [ContentCreator] INFO: 📝 İçerik tipi: {}
+[2026-09-08 02:12:22,401] [ContentCreator] INFO: 🎯 Varsayılan konu: {}
+[2026-09-08 02:12:22,401] [MASTER_CONTROLLER] INFO: ✅ 'ContentCreatorAgent' (trm_agents.content_creator_agent) initialize edildi.
+[2026-09-08 02:12:22,403] [MASTER_CONTROLLER] ERROR: ⚠️ 'FactCheckerAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-08 02:12:22,403] [MASTER_CONTROLLER] ERROR: ⚠️ 'FinansAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-08 02:12:22,404] [MASTER_CONTROLLER] INFO: ✅ 'TRMGlobalAffiliateRecruiterAgent' (trm_agents.global_affiliate_recruiter_agent) initialize edildi.
+[2026-09-08 02:12:22,404] [MASTER_CONTROLLER] INFO: ✅ 'TRMHumanAuditorAgent' (trm_agents.human_auditor_agent) initialize edildi.
+[2026-09-08 02:12:22,404] [MASTER_CONTROLLER] ERROR: ⚠️ 'IcerikAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)
+[2026-09-08 02:12:22,404] [MASTER_CONTROLLER] ERROR: ⚠️ 'LegalShieldAgent' initialize edilirken hata: Extra data: line 29 column 1 (char 681)

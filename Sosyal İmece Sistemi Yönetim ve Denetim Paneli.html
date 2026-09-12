@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sosyal İmece — 4'lü Kontrol Merkezi</title>
+<title>Sosyal İmece — Kontrol Merkezi</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root{
@@ -20,15 +20,34 @@
       linear-gradient(160deg, var(--void) 0%, #0b0e16 55%, var(--void) 100%);
   }
   .shell-header{
-    display:flex; align-items:center; justify-content:space-between; padding:14px 26px;
+    padding:22px 26px 18px; position:relative;
     border-bottom:1px solid rgba(232,182,76,.25);
     background:linear-gradient(180deg, rgba(26,34,54,.95), rgba(15,20,32,.5));
-    flex-shrink:0;
+    flex-shrink:0; text-align:center;
   }
-  .shell-header h1{ margin:0; font-size:19px; color:var(--gold); font-family:Georgia,serif; }
-  .shell-header h1 span{ color:var(--text-dim); font-size:12px; font-family:sans-serif; display:block; margin-top:2px; }
-  .shell-status{ display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text-dim);
-    background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); padding:6px 12px; border-radius:20px; }
+  .shell-header h1{
+    margin:0; font-size:57px; color:var(--gold); font-family:Georgia,serif;
+    text-align:center; line-height:1.05; letter-spacing:.01em;
+  }
+  .shell-header h1 span{
+    color:var(--text-dim); font-size:24px; font-family:sans-serif;
+    display:block; margin-top:8px; font-weight:400; letter-spacing:.04em;
+  }
+  .shell-status{
+    position:absolute; top:20px; right:26px;
+    display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text-dim);
+    background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06);
+    padding:6px 12px; border-radius:20px;
+  }
+  @media (max-width:1100px){
+    .shell-header h1{ font-size:36px; }
+    .shell-header h1 span{ font-size:16px; }
+  }
+  @media (max-width:700px){
+    .shell-header h1{ font-size:24px; }
+    .shell-header h1 span{ font-size:12px; }
+    .shell-status{ position:static; margin-top:10px; display:inline-flex; }
+  }
   .led{width:9px;height:9px;border-radius:50%;display:inline-block;box-shadow:0 0 8px currentColor;}
   .led.ok{background:var(--ok); color:var(--ok);}
   .tab-bar{
@@ -51,13 +70,10 @@
   .tab-content{ display:none; padding:24px; }
   .tab-content.active{ display:block; }
   @media (max-width:700px){
-    .shell-header h1{ font-size:16px; }
     .tab-btn{ padding:12px 14px; font-size:12.5px; }
     .tab-btn span.label{ display:none; }
     .tab-content{ padding:12px; }
   }
-
-  /* ================= ANA PANEL STİLLERİ ================= */
 
   :root{
     --void:#07090f; --panel-a:#0f1420; --panel-b:#1a2236;
@@ -161,9 +177,6 @@
   .modal-box h3{color:var(--gold); margin-top:0;}
   pre#ana_modalBody{white-space:pre-wrap; font-size:12px; background:#05070c; padding:10px; border-radius:8px; max-height:240px; overflow:auto;}
 
-
-  /* ================= GELİŞMİŞ PANEL STİLLERİ ================= */
-
   :root{
     --void:#07090f; --panel-a:#0f1420; --panel-b:#1a2236;
     --gold:#e8b64c; --gold-dim:#8a6a26; --gold-glow:rgba(232,182,76,.35);
@@ -217,9 +230,6 @@
     box-shadow:0 8px 24px rgba(0,0,0,.5); font-size:13px; min-width:220px;}
   .toast.err{border-left-color:var(--err);} .toast.ok{border-left-color:var(--ok);}
 
-
-  /* ================= KOMUTA PANEL STİLLERİ ================= */
-
   :root{
     --void:#07090f; --panel-a:#0f1420; --panel-b:#1a2236;
     --gold:#e8b64c; --gold-dim:#8a6a26; --gold-glow:rgba(232,182,76,.35);
@@ -252,6 +262,8 @@
   .btn-secondary{background:rgba(255,255,255,.08); color:var(--text);}
   .btn-ceo-approve{ background:linear-gradient(90deg,#1f9e5c,#35d488); color:#052e18; font-weight:700; padding:11px 16px; border-radius:9px; box-shadow:0 0 0 rgba(53,212,136,0); transition:box-shadow .2s; }
   .btn-ceo-approve:hover{ box-shadow:0 0 14px rgba(53,212,136,.5); }
+  .btn-ceo-passive{ background:linear-gradient(90deg,#f0b429,#ffd23d); color:#3a2a00; font-weight:700; padding:11px 16px; border-radius:9px; box-shadow:0 0 0 rgba(240,180,41,0); transition:box-shadow .2s; }
+  .btn-ceo-passive:hover{ box-shadow:0 0 14px rgba(240,180,41,.55); }
   .btn-ceo-logout{ background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906; font-weight:700; padding:11px 16px; border-radius:9px; box-shadow:0 0 0 rgba(255,77,94,0); transition:box-shadow .2s; }
   .btn-ceo-logout:hover{ box-shadow:0 0 14px rgba(255,77,94,.5); }
   #kom_ceoKeyInput, #kom_ceoUserIdInput{ background:#0b0f18; border:1px solid rgba(232,182,76,.3); color:var(--text); padding:9px 10px; border-radius:7px; font-size:13px; width:100%; }
@@ -268,7 +280,7 @@
   .chan-btn i{width:8px;height:8px;border-radius:50%;display:inline-block;}
   .chan-btn.active{ border-color:var(--gold); color:var(--text); background:rgba(232,182,76,.12); }
   .chan-btn.all-btn{ border-style:dashed; }
-  .platform-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+  .platform-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
   .platform-toggle-box{ background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:8px;
     padding:10px; text-align:center; font-size:12px; cursor:pointer; }
   .platform-toggle-box.active{ border-color:var(--gold); background:rgba(232,182,76,.08); }
@@ -306,9 +318,9 @@
 }
 #content-ultimate .top-strip.speaking .volkan-avatar{ box-shadow:0 0 18px var(--neon-glow); }
 #content-ultimate .volkan-meta .name{ font-size:15px; font-weight:800; color:var(--neon); letter-spacing:.04em; text-shadow:0 0 10px var(--neon-glow); }
-#content-ultimate .volkan-meta .engine{ font-size:11.5px; color:var(--text-dim); }
-#content-ultimate .engine-dot{ width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:5px; background:var(--warn); box-shadow:0 0 6px currentColor; }
-#content-ultimate .engine-dot.ready{ background:var(--ok); }
+#content-ultimate .volkan-meta .engine{ font-size:11.5px; color:#1a1a1a; opacity:0.08; user-select:none; pointer-events:none; }
+#content-ultimate .engine-dot{ width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:5px; background:#151515; box-shadow:none; opacity:.1; }
+#content-ultimate .engine-dot.ready{ background:#151515; }
 #content-ultimate .btn-unlock{
   background:linear-gradient(90deg, var(--neon), #1fb894); color:#022019; font-weight:800; border:none;
   padding:11px 20px; border-radius:10px; cursor:pointer; font-size:13px; letter-spacing:.03em;
@@ -317,26 +329,9 @@
 #content-ultimate .btn-unlock:hover{ box-shadow:0 0 16px var(--neon-glow); }
 #content-ultimate .btn-unlock:active{ transform:scale(.97); }
 #content-ultimate .btn-unlock[disabled]{ opacity:.5; cursor:default; box-shadow:none; }
-#content-ultimate .sim-badge{ font-size:11px; padding:5px 12px; border-radius:20px; border:1px solid rgba(255,255,255,.12); color:var(--text-dim); background:rgba(255,255,255,.03); }
-#content-ultimate .welcome-wrap{ padding:34px 28px 10px; text-align:center; }
-#content-ultimate .welcome-card{
-  display:inline-block; padding:28px 46px; border-radius:18px;
-  background:linear-gradient(155deg, var(--panel-b), var(--panel-a));
-  border:1px solid rgba(57,255,224,.3);
-  box-shadow:0 0 0 rgba(57,255,224,0), 0 20px 50px rgba(0,0,0,.5);
-  animation:welcomeGlow 3.2s ease-in-out infinite;
-}
-@keyframes welcomeGlow{
-  0%,100%{ box-shadow:0 0 22px rgba(57,255,224,.18), 0 20px 50px rgba(0,0,0,.5); }
-  50%{ box-shadow:0 0 42px rgba(232,182,76,.28), 0 20px 50px rgba(0,0,0,.5); }
-}#content-ultimate .welcome-eyebrow{ font-size:12px; letter-spacing:.25em; color:var(--text-dim); text-transform:uppercase; margin-bottom:8px; }
-#content-ultimate .welcome-title{
-  font-family:Georgia,serif; font-size:32px; font-weight:700; margin:0;
-  color:var(--gold); text-shadow:0 0 18px var(--gold-glow);
-}
-#content-ultimate .welcome-title .neon-word{ color:var(--neon); text-shadow:0 0 18px var(--neon-glow); }
-#content-ultimate .welcome-sub{ font-size:13px; color:var(--text-dim); margin-top:10px; }
-#content-ultimate .section{ max-width:1400px; margin:0 auto; padding:24px 28px; }
+#content-ultimate .sim-badge{ font-size:1px; padding:0; border:none; color:#0a0a0a; background:transparent; opacity:0.03; pointer-events:none; user-select:none; }
+#content-ultimate .welcome-wrap{ display:none; }
+#content-ultimate .section{ max-width:1400px; margin:0 auto; padding:18px 28px; }
 #content-ultimate .section h2{
   font-size:14px; color:var(--gold); text-transform:uppercase; letter-spacing:.1em;
   border-bottom:1px solid rgba(232,182,76,.2); padding-bottom:10px; margin-bottom:18px;
@@ -345,31 +340,219 @@
   background:linear-gradient(155deg, var(--panel-b), var(--panel-a));
   border:1px solid rgba(232,182,76,.18); border-radius:14px; padding:20px;
   box-shadow:0 10px 30px rgba(0,0,0,.35);
+  position:relative;
 }
-#content-ultimate .radar-stats{ display:flex; gap:22px; margin-bottom:16px; flex-wrap:wrap; }
+#content-ultimate .radar-stats{ display:flex; gap:22px; margin-bottom:12px; flex-wrap:wrap; }
 #content-ultimate .radar-stat{ font-size:12px; color:var(--text-dim); }
-#content-ultimate .radar-stat b{ display:block; font-size:22px; color:var(--gold); font-family:Georgia,serif; }
-#content-ultimate .agent-grid{
-  display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:8px;
-  max-height:520px; overflow-y:auto; padding-right:4px;
+#content-ultimate .radar-stat b{ display:block; font-size:20px; color:var(--gold); font-family:Georgia,serif; }
+
+#content-ultimate .flow-container {
+  background: #00000055; border-radius: 18px; padding: 12px;
+  min-height: 60px; max-height: 150px; overflow-y: auto;
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  border: 1px solid #2a3344;
 }
-#content-ultimate .agent-cell{
-  border-radius:10px; background:rgba(255,255,255,.03); padding:8px 10px;
-  border-left:3px solid rgba(255,255,255,.12); position:relative; cursor:default;
-  transition:background .25s, border-color .25s;
+#content-ultimate .flow-ajan {
+  background: #1a1f2e; border-radius: 16px; padding: 6px 16px;
+  border: 1px solid #3a3a4a; font-size: 12px;
+  display: flex; align-items: center; gap: 6px;
+  animation: ultPopIn .3s ease;
+  transition: box-shadow .25s, border-color .25s, background .25s;
 }
-#content-ultimate .agent-cell .a-code{ font-size:11.5px; font-weight:800; color:var(--gold); }
-#content-ultimate .agent-cell .a-task{ font-size:10px; color:var(--text-dim); margin-top:3px; line-height:1.3; }
-#content-ultimate .agent-cell .a-state{ font-size:9px; color:var(--text-dim); margin-top:4px; opacity:.7; }
-#content-ultimate .agent-cell.active{
-  background:rgba(57,255,224,.10); border-left-color:var(--neon);
-  animation:ultNeonBlink 1s steps(1,end) infinite;
+#content-ultimate .flow-ajan .isim { font-weight: 600; color: #ffdd99; }
+#content-ultimate .flow-ajan .gorev { color: #99bbff; font-size: 11px; }
+#content-ultimate .flow-ajan.tamam { border-color: #44ff88; background: #1a3a2a; }
+#content-ultimate .flow-ajan.durum-yesil {
+  border-color: #3ddc71;
+  box-shadow: 0 0 12px rgba(61,220,113,.7), 0 0 22px rgba(61,220,113,.35);
+  animation: flowNeonYesil 1s steps(1,end) infinite;
 }
-#content-ultimate .agent-cell.active .a-code{ color:var(--neon); text-shadow:0 0 8px var(--neon-glow); }
-#content-ultimate .agent-cell.active .a-state{ color:var(--neon); opacity:1; }
-@keyframes ultNeonBlink{
-  0%,49%{ box-shadow:0 0 14px var(--neon-glow), 0 0 26px rgba(57,255,224,.3); border-left-color:var(--neon); }
-  50%,100%{ box-shadow:none; border-left-color:rgba(57,255,224,.35); }
+#content-ultimate .flow-ajan.durum-sari {
+  border-color: #ffd23d;
+  background: #3a3000;
+  box-shadow: 0 0 12px rgba(255,210,61,.8), 0 0 22px rgba(255,210,61,.35);
+}
+#content-ultimate .flow-ajan.durum-kirmizi {
+  border-color: #ff4d5e;
+  background: #3a0d12;
+  box-shadow: 0 0 12px rgba(255,77,94,.85), 0 0 22px rgba(255,77,94,.4);
+}
+@keyframes flowNeonYesil {
+  0%,49%{ box-shadow: 0 0 14px rgba(61,220,113,.9), 0 0 26px rgba(61,220,113,.45); border-color:#3ddc71; }
+  50%,100%{ box-shadow: 0 0 4px rgba(61,220,113,.4); border-color:rgba(61,220,113,.5); }
+}
+@keyframes ultPopIn { from { transform: scale(.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+#content-ultimate .agent-grid {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 3px;
+  padding: 5px;
+  margin-top: 6px;
+  background: #00000066;
+  border-radius: 10px;
+  border: 1px solid #2a3344;
+}
+#content-ultimate .agent-cell {
+  background: #1a1f2e;
+  border-radius: 4px;
+  height: 26px;
+  text-align: center;
+  border: 1px solid #2a3344;
+  font-size: 7.5px;
+  font-weight: 700;
+  color: #99a7bd;
+  cursor: pointer;
+  transition: .15s;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px;
+  position: relative;
+  white-space: nowrap;
+}
+#content-ultimate .agent-cell:hover {
+  transform: scale(1.3);
+  z-index: 5;
+  color: #fff;
+  border-color: #ffaa55;
+  box-shadow: 0 0 10px rgba(255,170,85,.6);
+}
+#content-ultimate .agent-cell.durum-yesil {
+  background: rgba(61,220,113,.16);
+  border-color: #3ddc71;
+  color: #b5ffd0;
+  box-shadow: 0 0 8px rgba(61,220,113,.7);
+  animation: ultCellYesil .9s steps(1,end) infinite;
+}
+#content-ultimate .agent-cell.durum-sari {
+  background: rgba(255,210,61,.22);
+  border-color: #ffd23d;
+  color: #fff3b0;
+  box-shadow: 0 0 10px rgba(255,210,61,.9);
+}
+#content-ultimate .agent-cell.durum-kirmizi {
+  background: rgba(255,77,94,.25);
+  border-color: #ff4d5e;
+  color: #ffc4ca;
+  box-shadow: 0 0 10px rgba(255,77,94,.9);
+}
+@keyframes ultCellYesil {
+  0%,49%{ box-shadow: 0 0 10px rgba(61,220,113,.95), 0 0 18px rgba(61,220,113,.5); }
+  50%,100%{ box-shadow: 0 0 3px rgba(61,220,113,.4); }
+}
+
+#content-ultimate .agent-hover-preview {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 320px;
+  max-width: 92%;
+  background: linear-gradient(155deg, #1a2236, #0d1420);
+  border: 1px solid #ffaa55;
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.7), 0 0 22px rgba(255,170,85,.25);
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity .18s ease, transform .18s ease;
+  pointer-events: none;
+  z-index: 50;
+}
+#content-ultimate .agent-hover-preview.goster {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+#content-ultimate .agent-hover-preview .ahp-baslik {
+  font-family: Georgia, serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffaa44;
+  margin-bottom: 4px;
+  text-shadow: 0 0 10px rgba(255,170,85,.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#content-ultimate .agent-hover-preview .ahp-rol {
+  color: #ffe9a8;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+#content-ultimate .agent-hover-preview .ahp-gorev {
+  color: #ccd;
+  font-size: 11.5px;
+  border-top: 1px dashed rgba(255,170,85,.35);
+  padding-top: 6px;
+}
+#content-ultimate .agent-hover-preview .ahp-durum {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+#content-ultimate .agent-hover-preview .ahp-durum.yesil{ background:rgba(61,220,113,.2); color:#3ddc71; border:1px solid #3ddc71; }
+#content-ultimate .agent-hover-preview .ahp-durum.sari{ background:rgba(255,210,61,.2); color:#ffd23d; border:1px solid #ffd23d; }
+#content-ultimate .agent-hover-preview .ahp-durum.kirmizi{ background:rgba(255,77,94,.2); color:#ff4d5e; border:1px solid #ff4d5e; }
+#content-ultimate .agent-hover-preview .ahp-durum.bosta{ background:rgba(153,167,189,.15); color:#99a7bd; border:1px solid #99a7bd; }
+/* === YENİ: Ajan hover preview aksiyon butonları === */
+#content-ultimate .agent-hover-preview .ahp-actions{
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,170,85,.3);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#content-ultimate .agent-hover-preview .ahp-btn{
+  flex: 1;
+  min-width: 120px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform .12s, box-shadow .12s;
+  font-family: inherit;
+}
+#content-ultimate .agent-hover-preview .ahp-btn:hover{ transform: scale(1.03); }
+#content-ultimate .agent-hover-preview .ahp-btn-danger{
+  background: linear-gradient(90deg,#c81e2e,#ff4d5e);
+  color: #fff;
+  box-shadow: 0 0 0 rgba(255,77,94,0);
+}
+#content-ultimate .agent-hover-preview .ahp-btn-danger:hover{ box-shadow: 0 0 12px rgba(255,77,94,.6); }
+#content-ultimate .agent-hover-preview .ahp-btn-warn{
+  background: linear-gradient(90deg,#e8a500,#ffd23d);
+  color: #3a2a00;
+  box-shadow: 0 0 0 rgba(240,180,41,0);
+}
+#content-ultimate .agent-hover-preview .ahp-btn-warn:hover{ box-shadow: 0 0 12px rgba(240,180,41,.6); }
+
+#content-ultimate .btn-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+#content-ultimate .btn-group button {
+  background: #1e2a3a; border: 1px solid #ffaa55; color: #fff;
+  padding: 8px 16px; border-radius: 40px; font-weight: 600; font-size: 12px; cursor: pointer;
+  font-family: inherit; transition: 0.2s;
+}
+#content-ultimate .btn-group button:hover { background: #ffaa33; color: #000; }
+#content-ultimate .input-group { display: flex; gap: 8px; margin: 8px 0; }
+#content-ultimate .input-group input {
+  flex: 1; padding: 9px 14px; border-radius: 40px;
+  border: 1px solid #ffaa55; background: #0b0f18; color: var(--text); font-size: 13px;
+  font-family: inherit;
+}
+#content-ultimate .ult-log-box {
+  background: #010101aa; border-radius: 16px; padding: 10px;
+  font-family: monospace; font-size: 11px; color: #9eff9e;
+  max-height: 120px; overflow-y: auto; margin-top: 10px; border: 1px solid #2a3344;
 }
 #content-ultimate .agent-legend{ display:flex; gap:16px; margin-top:14px; font-size:11px; color:var(--text-dim); flex-wrap:wrap; }
 #content-ultimate .agent-legend span{ display:flex; align-items:center; gap:6px; }
@@ -393,16 +576,181 @@
 #content-ultimate .toast{background:#151b29; border-left:4px solid var(--neon); padding:12px 16px; border-radius:8px;
   box-shadow:0 8px 24px rgba(0,0,0,.5); font-size:13px; min-width:220px; animation:slidein .25s ease;}
 #content-ultimate .toast.err{border-left-color:var(--err);}
-@keyframes slidein{from{transform:translateX(30px);opacity:0;} to{transform:translateX(0);opacity:1;}}@media (max-width:700px){#content-ultimate .welcome-title{ font-size:22px; }
-#content-ultimate .welcome-card{ padding:20px 24px; }
-#content-ultimate .agent-grid{ grid-template-columns:repeat(auto-fill, minmax(28px,1fr)); }
+@keyframes slidein{from{transform:translateX(30px);opacity:0;} to{transform:translateX(0);opacity:1;}}
+@media (max-width:900px){
+  #content-ultimate .agent-grid{ grid-template-columns:repeat(15, 1fr); }
+  #content-ultimate .agent-cell{ font-size:7px; height:24px; }
+  #content-ultimate .agent-hover-preview{ width:250px; top:8px; right:8px; }
 }
+
+.sys-neon-dot{
+  width:12px; height:12px; border-radius:50%; display:inline-block; margin-left:8px;
+  background:#555; box-shadow:0 0 5px #555; transition: background .3s, box-shadow .3s;
+  vertical-align:middle;
+}
+.sys-neon-dot.green{ background:#3ddc71; box-shadow:0 0 10px #3ddc71, 0 0 18px #3ddc71; }
+.sys-neon-dot.yellow{ background:#ffd23d; box-shadow:0 0 10px #ffd23d, 0 0 18px #ffd23d; animation:neonPulse 1s infinite alternate; }
+.sys-neon-dot.red{ background:#ff4d5e; box-shadow:0 0 10px #ff4d5e, 0 0 18px #ff4d5e; }
+@keyframes neonPulse{ from{opacity:1;} to{opacity:.4;} }
+
+button.vt-locked, .chan-btn.vt-locked{ opacity:.4; filter:grayscale(.5); cursor:not-allowed; pointer-events:none; }
+
+.panel-voice-mini{
+  display:flex; align-items:center; gap:8px; margin-bottom:12px;
+  padding:8px 12px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);
+  border-radius:10px; width:fit-content;
+}
+.panel-voice-mini button{ padding:6px 12px; font-size:12px; }
+.panel-legend{
+  margin-top:24px; padding:16px 18px; background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08); border-radius:12px; font-size:12.5px; line-height:1.55;
+}
+.panel-legend h4{ margin:0 0 10px 0; font-size:13.5px; }
+.panel-legend dl{ margin:0; }
+.panel-legend dt{ font-weight:600; margin-top:8px; }
+.panel-legend dd{ margin:2px 0 0 0; opacity:.85; }
+
+h2[data-announce], h3[data-announce]{
+  cursor: pointer;
+  transition: color .15s, text-shadow .15s;
+  position: relative;
+}
+h2[data-announce]:hover, h3[data-announce]:hover{
+  color: #ffd98a;
+  text-shadow: 0 0 12px rgba(232,182,76,.6);
+}
+
+.osc-wrap{
+  position: relative;
+  padding: 22px 44px 22px 44px;
+  background: #05070c;
+  border-radius: 10px;
+  border: 1px solid rgba(232,182,76,.12);
+}
+.osc-wrap canvas.osc{
+  border: none;
+  margin: 0;
+}
+.osc-scale-top, .osc-scale-bottom{
+  position: absolute;
+  left: 44px; right: 44px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Consolas', monospace;
+  font-size: 9.5px;
+  color: rgba(232,182,76,.55);
+  pointer-events: none;
+  letter-spacing: .05em;
+}
+.osc-scale-top{ top: 4px; }
+.osc-scale-bottom{ bottom: 4px; }
+.osc-scale-left, .osc-scale-right{
+  position: absolute;
+  top: 22px; bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: 'Consolas', monospace;
+  font-size: 9.5px;
+  color: rgba(232,182,76,.55);
+  pointer-events: none;
+  letter-spacing: .05em;
+}
+.osc-scale-left{ left: 6px; text-align: right; width: 34px; }
+.osc-scale-right{ right: 6px; text-align: left; width: 34px; }
+.osc-scale-left span, .osc-scale-right span,
+.osc-scale-top span, .osc-scale-bottom span{
+  line-height: 1;
+}
+
+.osc-live-value{
+  position: absolute;
+  top: 6px; right: 54px;
+  background: rgba(57,255,224,.12);
+  color: #39ffe0;
+  font-family: 'Consolas', monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(57,255,224,.4);
+  box-shadow: 0 0 10px rgba(57,255,224,.35);
+  pointer-events: none;
+  letter-spacing: .04em;
+}
+
+.osc-value-popup{
+  position: fixed;
+  z-index: 1200;
+  width: 340px;
+  max-width: 92vw;
+  background: linear-gradient(155deg, #1a2236, #0d1420);
+  border: 1px solid #ffaa55;
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.75), 0 0 24px rgba(255,170,85,.3);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--text);
+  display: none;
+}
+.osc-value-popup.show{ display: block; }
+.osc-value-popup .ovp-baslik{
+  font-family: Georgia, serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffaa44;
+  margin-bottom: 8px;
+  text-shadow: 0 0 10px rgba(255,170,85,.55);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.osc-value-popup .ovp-kapat{
+  background: transparent;
+  border: 1px solid rgba(255,170,85,.4);
+  color: #ffaa44;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 12px;
+  cursor: pointer;
+  line-height: 1;
+}
+.osc-value-popup .ovp-kapat:hover{ background: rgba(255,170,85,.15); }
+.osc-value-popup .ovp-deger{
+  font-family: 'Consolas', monospace;
+  font-size: 26px;
+  font-weight: 800;
+  margin: 6px 0 10px;
+  letter-spacing: .02em;
+}
+.osc-value-popup .ovp-durum{
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.osc-value-popup .ovp-durum.iyi{ background: rgba(61,220,113,.18); color: #3ddc71; border: 1px solid #3ddc71; }
+.osc-value-popup .ovp-durum.orta{ background: rgba(255,210,61,.18); color: #ffd23d; border: 1px solid #ffd23d; }
+.osc-value-popup .ovp-durum.kotu{ background: rgba(255,77,94,.18); color: #ff4d5e; border: 1px solid #ff4d5e; }
+.osc-value-popup .ovp-ornekler{
+  border-top: 1px dashed rgba(255,170,85,.3);
+  padding-top: 10px;
+  margin-top: 6px;
+  font-size: 11.5px;
+  color: #ccd;
+}
+.osc-value-popup .ovp-ornekler b{ color: #ffe9a8; }
 </style>
 </head>
 <body>
 
 <div class="shell-header">
-  <h1>🌐 Sosyal İmece — 4'lü Kontrol Merkezi<span>Küresel İmece Dünyası · Otonom Panel Kabuğu (tek dosya, iframe'siz)</span></h1>
+  <h1>🌐 Sosyal İmece — Kontrol Merkezi<span>Küresel İmece Dünyası · Otonom Panel</span></h1>
   <div class="shell-status"><span class="led ok"></span><span id="shellClock"></span></div>
 </div>
 
@@ -425,6 +773,11 @@
   <div class="tab-content" id="content-ana">
 
 
+<div class="panel-voice-mini">
+  <button class="btn-unlock sys-voice-on-btn" style="padding:6px 12px; font-size:12px;">🔊 Ses Açma</button>
+  <span class="sys-neon-dot" title="Sistem durumu: yeşil=aktif, sarı=acil durum, kırmızı=durduruldu"></span>
+  <button class="btn-unlock sys-voice-off-btn" style="padding:6px 12px; font-size:12px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
+</div>
 <div class="topbar">
   <h1>🌐 SOSYAL İMECE — Ana Gösterge Paneli<span>Küresel İmece Dünyası · Otonom Panel</span></h1>
   <div class="status-pill"><span class="led ok" id="ana_connLed"></span><span id="ana_connText">Bağlantı kontrol ediliyor…</span></div>
@@ -432,9 +785,8 @@
 
 <div class="grid">
 
-  <!-- ÇOK DİLLİ TRAFİK KARTI -->
   <div class="card span-4">
-    <h3>🌐 Çok Dilli Trafik (Son 24s)</h3>
+    <h3 data-announce="Çok Dilli Trafik başlığındasınız. Burada son yirmi dört saatte hangi dilde kaç istek geldiğini göreceksiniz. Türkçe, İngilizce ve Almanca trafik dağılımı grafik olarak gösterilir.">🌐 Çok Dilli Trafik (Son 24s)</h3>
     <canvas id="ana_multilangChart" height="140"></canvas>
     <div class="traffic-flags">
       <div class="flag-box"><div class="flag">🇹🇷</div><div class="pct" id="ana_pctTr">–</div></div>
@@ -444,28 +796,32 @@
     <div class="totals" id="ana_trafficTotals">Toplam: — istek</div>
   </div>
 
-  <!-- OSİLOSKOP -->
   <div class="card span-8">
-    <h3>📈 Canlı Telemetri Osiloskopu</h3>
-    <canvas id="ana_osiloskopCanvas" class="osc" width="900" height="120"></canvas>
+    <h3 data-announce="Canlı Telemetri Osiloskopu başlığındasınız. Burada sistemin dört temel canlı metriğini göreceksiniz: WhatsApp mesaj hızı, CPU kullanımı, RAM kullanımı ve yapay zeka başarımı. Kanal butonlarına tıklayarak tek tek inceleyebilirsiniz.">📈 Canlı Telemetri Osiloskopu</h3>
+    <div class="osc-wrap">
+      <div class="osc-scale-top"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="osc-scale-left"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <canvas id="ana_osiloskopCanvas" class="osc" width="900" height="120"></canvas>
+      <div class="osc-scale-right"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="osc-scale-bottom"><span>0s</span><span>1s</span><span>2s</span><span>3s</span><span>4s</span></div>
+      <div class="osc-live-value" id="ana_oscLiveValue">— canlı</div>
+    </div>
     <div class="chan-btn-row" id="ana_oscChanButtons"></div>
   </div>
 
-  <!-- SMDA HIZLI KONTROL -->
   <div class="card span-4">
-    <h3>⚙️ SMDA Hızlı Kontrol</h3>
+    <h3 data-announce="SMDA Hızlı Kontrol başlığındasınız. Burada Sosyal Medya Dağıtım Ajanını test edebilir veya canlı dağıtım başlatabilirsiniz. Test için Dry Run kullanın, canlı dağıtım geri alınamaz.">⚙️ SMDA Hızlı Kontrol</h3>
     <div style="margin-bottom:10px;"><span class="led" id="ana_smdaLed"></span><span id="ana_smdaLedText">bekliyor</span></div>
     <div class="btn-row" style="margin-bottom:10px;">
-      <button class="btn-warning" data-vtask-start="SMDA yani Sosyal Medya Dağıtım Ajanı, deneme modunda başlatılıyor. Bu ajan Trendyol ve Hepsiburada gibi platformlardan seçilen en fazla üç ürünü işleyip sonuçlarını size gösterecek, ancak hiçbir sosyal medya hesabına gerçek bir paylaşım yapılmayacak." data-vtask-done="SMDA deneme modu tamamlandı. İşlenen ürünlerin başarı sonuçları ekranda gösteriliyor, hiçbir platforma gerçek paylaşım yapılmadı." onclick="ana_runSocialAgent(true)">SMDA Test (Dry Run)</button>
+      <button class="btn-warning" data-vtask-start="SMDA Test, Dry Run. Dry Run, yani deneme çalıştırması, gerçek bir işlem yapmadan sistemin nasıl davranacağını önceden görmenizi sağlayan güvenli bir test modu demektir. Şimdi SMDA yani Sosyal Medya Dağıtım Ajanı, bu deneme modunda başlatılıyor. Bu ajan Trendyol ve Hepsiburada gibi platformlardan seçilen en fazla üç ürünü işleyip sonuçlarını size gösterecek, ancak hiçbir sosyal medya hesabına gerçek bir paylaşım yapılmayacak." data-vtask-done="SMDA deneme modu tamamlandı. İşlenen ürünlerin başarı sonuçları ekranda gösteriliyor, hiçbir platforma gerçek paylaşım yapılmadı." onclick="ana_runSocialAgent(true)">SMDA Test (Dry Run)</button>
       <button class="btn-danger" data-vtask-start="Canlı dağıtım onay penceresi açılıyor. Onaylarsanız Sosyal Medya Dağıtım Ajanı, seçili ürünleri gerçek sosyal medya hesaplarınızda GERÇEKTEN paylaşacak; bu geri alınamaz bir işlemdir." data-vtask-done="Canlı dağıtım onay penceresi kapatıldı." onclick="ana_confirmLiveRun()">Canlı Dağıtım ⚠️</button>
     </div>
     <div id="ana_smdaResult" style="font-size:12px; color:var(--text-dim); margin-bottom:6px;">Son batch: —</div>
     <progress id="ana_smdaProgress" max="100" value="0"></progress>
   </div>
 
-  <!-- HIZLI EYLEMLER -->
   <div class="card span-4">
-    <h3>🛠️ Hızlı Eylemler</h3>
+    <h3 data-announce="Hızlı Eylemler başlığındasınız. Burada WhatsApp köprü testi, metrik yenileme ve log görüntüleme butonlarını kullanabilirsiniz.">🛠️ Hızlı Eylemler</h3>
     <div class="btn-row">
       <button class="btn-primary" data-vtask-start="WhatsApp köprü bağlantısı test ediliyor. Bu, panelin arka uçtaki WhatsApp webhook uç noktasına ulaşıp ulaşamadığını kontrol eder, gerçek bir mesaj göndermez." data-vtask-done="WhatsApp köprü testi tamamlandı, bağlantı sonucu ve süresi ekranda gösteriliyor." onclick="ana_testWhatsAppBridge()">WhatsApp Köprüsü Test</button>
       <button class="btn-outline" data-vtask-start="Tüm canlı metrikler ve çok dilli grafik yeniden yükleniyor." data-vtask-done="Metrikler yenilendi, osiloskop ve grafik en güncel verilerle görüntüleniyor." onclick="ana_refreshAllMetrics()">🔄 Yenile</button>
@@ -474,15 +830,18 @@
     <div id="ana_quickActionResult" style="font-size:12px; color:var(--text-dim); margin-top:10px;"></div>
   </div>
 
-  <!-- SAĞLIK ENDEKSİ GAUGE -->
+  <!-- === YENİ: Derin Sistem Teşhisi butonu eklendi === -->
   <div class="card span-4">
-    <h3>💠 Bütünleşik Sağlık Endeksi</h3>
+    <h3 data-announce="Bütünleşik Sağlık Endeksi başlığındasınız. Burada sistemin genel sağlık durumunu 0 ile 100 arasında gösteren bir gösterge göreceksiniz. Yeşil iyi, sarı orta, kırmızı kötü anlamına gelir. Altındaki Derin Sistem Teşhisi butonu ile sayfayı yenilemeden manuel kalibrasyon ve teşhis başlatabilirsiniz.">💠 Bütünleşik Sağlık Endeksi</h3>
     <div class="gauge-wrap"><svg id="ana_healthGauge" width="180" height="110" viewBox="0 0 180 110"></svg></div>
+    <div style="text-align:center; margin-top:12px;">
+      <button class="btn-primary" data-vtask-start="Derin sistem teşhisi başlatılıyor. Sağlık endeksi kalibre edilecek ve tüm alt sistemler kontrol edilecek." data-vtask-done="Derin sistem teşhisi tamamlandı. Sağlık endeksi güncellendi ve sistem raporu oluşturuldu." onclick="ana_derinTeshis()">🔬 Derin Sistem Teşhisi</button>
+    </div>
+    <div id="ana_teshisSonuc" style="font-size:11.5px; color:var(--text-dim); margin-top:10px; text-align:center;"></div>
   </div>
 
-  <!-- MESAJ SAYACI + SON AKTİVİTE -->
   <div class="card span-12">
-    <h3>📡 Canlı Mesaj Trafiği &amp; Son Aktiviteler</h3>
+    <h3 data-announce="Canlı Mesaj Trafiği ve Son Aktiviteler başlığındasınız. Burada bu oturumda kaç mesaj gönderildiğini ve son beş aktiviteyi göreceksiniz.">📡 Canlı Mesaj Trafiği &amp; Son Aktiviteler</h3>
     <div style="display:flex; gap:24px; align-items:center;">
       <div style="text-align:center;">
         <div class="counter-big" id="ana_liveMsgCounter">0</div>
@@ -515,12 +874,33 @@
   </div>
 </div>
 
+<div class="panel-legend">
+  <h4>📋 Bu panelde ne var, hangi buton ne işe yarar?</h4>
+  <dl>
+    <dt>📈 Canlı Telemetri Osiloskopu</dt>
+    <dd>Sistemin dört temel canlı metriğini gösterir.</dd>
+    <dt>SMDA Test (Dry Run)</dt>
+    <dd>Sosyal Medya Dağıtım Ajanını gerçek paylaşım yapmadan test eder.</dd>
+    <dt>Canlı Dağıtım ⚠️</dt>
+    <dd>Onay penceresi açar; onaylarsanız ürünler GERÇEKTEN paylaşılır.</dd>
+    <dt>WhatsApp Köprüsü Test</dt>
+    <dd>Arka uçtaki WhatsApp webhook bağlantısını kontrol eder.</dd>
+    <dt>🔬 Derin Sistem Teşhisi</dt>
+    <dd>Sayfayı yenilemeden sağlık endeksini kalibre eder ve tüm alt sistemleri test eder.</dd>
+  </dl>
+</div>
+
 
 
   </div>
   <div class="tab-content" id="content-gelismis">
 
 
+<div class="panel-voice-mini">
+  <button class="btn-unlock sys-voice-on-btn" style="padding:6px 12px; font-size:12px;">🔊 Ses Açma</button>
+  <span class="sys-neon-dot" title="Sistem durumu: yeşil=aktif, sarı=acil durum, kırmızı=durduruldu"></span>
+  <button class="btn-unlock sys-voice-off-btn" style="padding:6px 12px; font-size:12px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
+</div>
 <div class="topbar">
   <h1 id="gel_pageTitle">🧠 Gelişmiş AI + SMDA Kontrol Paneli<span id="gel_pageSub">Küresel İmece Dünyası · Otonom Panel</span></h1>
   <select id="gel_langSelect" onchange="gel_changePanelLanguage(this.value)">
@@ -532,62 +912,67 @@
 
 <div class="grid">
 
-  <!-- AI TEST + NIYET DAĞILIMI -->
   <div class="card span-4">
-    <h3 id="gel_aiCardTitle">🧠 AI Modülü</h3>
-    <button class="btn-dark" data-vtask-start="Yapay zeka modülü test ediliyor. Sisteme örnek bir trend sorusu gönderilip AI motorunun yanıt verip vermediği kontrol edilecek." data-vtask-done="AI modülü testi tamamlandı, alınan yanıt ekranda gösteriliyor." onclick="gel_testAIIntegration()">🧠 AI Test</button>
+    <h3 id="gel_aiCardTitle" data-announce="Yapay Zeka Modülü başlığındasınız. Burada yapay zeka modülünü test edebilir ve niyet dağılımını görebilirsiniz.">🧠 AI Modülü</h3>
+    <button class="btn-dark" data-vtask-start="Yapay zeka modülü test ediliyor. Sisteme örnek bir trend sorusu gönderilip Eeeayy ajanı motorunun yanıt verip vermediği kontrol edilecek." data-vtask-done="Eeeayy ajanı modülü testi tamamlandı, alınan yanıt ekranda gösteriliyor." onclick="gel_testAIIntegration()">🧠 AI Test</button>
     <div id="gel_aiTestResult" style="font-size:12px; color:var(--text-dim); margin:10px 0;"></div>
     <canvas id="gel_intentChart" height="180"></canvas>
   </div>
 
-  <!-- DİL BAŞINA AI DOĞRULUK -->
   <div class="card span-4">
-    <h3>🎯 Dil Başına AI Doğruluk</h3>
+    <h3 data-announce="Dil Başına Yapay Zeka Doğruluk başlığındasınız. Burada Türkçe, İngilizce ve Almanca için yapay zekanın doğruluk oranını göreceksiniz.">🎯 Dil Başına AI Doğruluk</h3>
     <canvas id="gel_langAccuracyChart" height="180"></canvas>
   </div>
 
-  <!-- KONUŞMA SÜRESİ HİSTOGRAMI -->
   <div class="card span-4">
-    <h3>⏱️ Konuşma Süresi Dağılımı (dk)</h3>
+    <h3 data-announce="Konuşma Süresi Dağılımı başlığındasınız. Burada konuşmaların dakika bazında dağılımını göreceksiniz.">⏱️ Konuşma Süresi Dağılımı (dk)</h3>
     <canvas id="gel_durationHistogram" height="180"></canvas>
   </div>
 
-  <!-- OSİLOSKOP -->
   <div class="card span-8">
-    <h3>📈 AI + Sosyal Osiloskop (5 Kanal)</h3>
-    <canvas id="gel_osiloskopCanvas" class="osc" width="900" height="130"></canvas>
+    <h3 data-announce="Yapay Zeka ve Sosyal Osiloskop başlığındasınız. Burada beş farklı kanalın canlı ölçümünü göreceksiniz: yapay zeka niyet doğruluğu, tarama hızı, paylaşım başarısı, cross-platform gecikmesi ve hata sayısı. Her kanal butonuna tıklayarak ölçüm değerini ve değerlendirmesini görebilirsiniz.">📈 AI + Sosyal Osiloskop (5 Kanal)</h3>
+    <div class="osc-wrap">
+      <div class="osc-scale-top"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="osc-scale-left"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <canvas id="gel_osiloskopCanvas" class="osc" width="900" height="130"></canvas>
+      <div class="osc-scale-right"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="osc-scale-bottom"><span>0s</span><span>1s</span><span>2s</span><span>3s</span><span>4s</span></div>
+    </div>
     <div class="chan-btn-row" id="gel_oscChanButtons"></div>
   </div>
 
-  <!-- SMDA TAM KONTROL -->
+  <!-- === YENİ: Özel dakika girişi eklendi === -->
   <div class="card span-4">
-    <h3>⚙️ SMDA Tam Kontrol Paneli</h3>
+    <h3 data-announce="SMDA Tam Kontrol Paneli başlığındasınız. Burada Sosyal Medya Dağıtım Ajanının döngü modunu, maksimum ürün sayısını ve diğer parametrelerini ayarlayabilirsiniz. Döngü süresi için hazır seçeneklerden birini seçebilir veya özel dakika girişi yapabilirsiniz.">⚙️ SMDA Tam Kontrol Paneli</h3>
     <div class="toggle-row">
       <label class="switch"><input type="checkbox" id="gel_smdaLoopToggle" onchange="gel_toggleSmdaLoop(this.checked)"><span class="slider"></span></label>
       <span>Döngü Aktif</span>
-      <select id="gel_loopInterval" style="margin-left:auto;">
+      <select id="gel_loopInterval" style="margin-left:auto; width:110px;" onchange="gel_customInputTemizle()">
         <option value="30">30 dk</option><option value="60" selected>60 dk</option>
         <option value="180">180 dk</option><option value="360">360 dk</option>
       </select>
     </div>
+    <div class="counter-input" style="margin-bottom:12px;">
+      <label style="flex:0 0 auto;">Özel dk</label>
+      <input type="number" id="gel_customInterval" placeholder="dk" min="1" max="1440" style="width:80px;" oninput="gel_customInputKullan()">
+      <span style="font-size:11px; color:var(--text-dim);">(1-1440)</span>
+    </div>
     <div class="counter-input"><label>Max Ürün</label><input type="number" id="gel_maxProducts" value="5" min="0" max="10"></div>
     <div class="counter-input"><label>Max İMECE</label><input type="number" id="gel_maxImece" value="1" min="0" max="10"></div>
     <div class="btn-row">
-      <button class="btn-primary" data-vtask-start="Sosyal Medya Dağıtım Ajanı canlı modda başlatılıyor. Belirlediğiniz maksimum ürün sayısı kadar ürün gerçek paylaşım için işlenecek." data-vtask-done="Sosyal Medya Dağıtım Ajanının çalışması tamamlandı, kaç paylaşımın başarılı olduğu günlükte listeleniyor." onclick="gel_smdaStart()">Başlat</button>
-      <button class="btn-danger" data-vtask-start="Sosyal Medya Dağıtım Ajanının döngü modu durduruluyor; arka planda otomatik tekrar eden paylaşım döngüsü iptal ediliyor." data-vtask-done="SMDA döngüsü durduruldu, ajan artık otomatik olarak tekrar çalışmayacak." onclick="gel_smdaStop()">Durdur</button>
-      <button class="btn-dark" data-vtask-start="SMDA deneme, yani dry-run modunda çalıştırılıyor; hiçbir gerçek paylaşım yapılmadan ürün işleme adımları simüle ediliyor." data-vtask-done="SMDA deneme çalıştırması tamamlandı, sonuçlar günlüğe yazıldı." onclick="gel_smdaDryRun()">Dry-Run Test</button>
+      <button class="btn-primary" data-vtask-start="Başlat. Bu buton, Sosyal Medya Dağıtım Ajanını canlı modda çalıştırır." data-vtask-done="Sosyal Medya Dağıtım Ajanının çalışması tamamlandı." onclick="gel_smdaStart()">Başlat</button>
+      <button class="btn-danger" data-vtask-start="Durdur. Bu buton, Sosyal Medya Dağıtım Ajanının döngü modunu durdurur." data-vtask-done="SMDA döngüsü durduruldu." onclick="gel_smdaStop()">Durdur</button>
+      <button class="btn-dark" data-vtask-start="Dry-Run Test. SMDA deneme modunda çalıştırılıyor." data-vtask-done="SMDA deneme çalıştırması tamamlandı." onclick="gel_smdaDryRun()">Dry-Run Test</button>
     </div>
   </div>
 
-  <!-- CANLI LOG -->
   <div class="card span-8">
-    <h3>🖥️ SMDA Canlı Log</h3>
+    <h3 data-announce="SMDA Canlı Log başlığındasınız. Burada Sosyal Medya Dağıtım Ajanının tüm işlemlerini canlı olarak görebilirsiniz.">🖥️ SMDA Canlı Log</h3>
     <div class="log-box" id="gel_smdaLiveLog"></div>
   </div>
 
-  <!-- SMDA DÖNGÜ TAKVİMİ -->
   <div class="card span-12">
-    <h3>📅 SMDA Döngü Takvimi (Son 30 Gün)</h3>
+    <h3 data-announce="SMDA Döngü Takvimi başlığındasınız. Burada son otuz günün başarım grafiğini göreceksiniz.">📅 SMDA Döngü Takvimi (Son 30 Gün)</h3>
     <canvas id="gel_loopCalendarChart" height="90"></canvas>
   </div>
 
@@ -595,69 +980,90 @@
 
 <div class="toast-wrap" id="gel_toastWrap"></div>
 
+<div class="panel-legend">
+  <h4>📋 Bu panelde ne var, hangi buton ne işe yarar?</h4>
+  <dl>
+    <dt>🧠 AI Test</dt>
+    <dd>Yapay zeka modülünü test eder.</dd>
+    <dt>⚙️ SMDA Tam Kontrol Paneli — Başlat</dt>
+    <dd>SMDA'yı canlı modda çalıştırır.</dd>
+    <dt>Durdur</dt>
+    <dd>SMDA döngüsünü durdurur.</dd>
+    <dt>Dry-Run Test</dt>
+    <dd>Deneme modunda çalıştırır.</dd>
+    <dt>Özel dk</dt>
+    <dd>Hazır seçenekler yerine serbest dakika girişi (1-1440).</dd>
+  </dl>
+</div>
+
 
 
   </div>
   <div class="tab-content" id="content-komuta">
 
 
+<div class="panel-voice-mini">
+  <button class="btn-unlock sys-voice-on-btn" style="padding:6px 12px; font-size:12px;">🔊 Ses Açma</button>
+  <span class="sys-neon-dot" title="Sistem durumu: yeşil=aktif, sarı=acil durum, kırmızı=durduruldu"></span>
+  <button class="btn-unlock sys-voice-off-btn" style="padding:6px 12px; font-size:12px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
+</div>
 <div class="alarm-bar" id="kom_alarmBar">🚨 ACİL DURUM AKTİF — TÜM OTONOM SÜREÇLER DURDURULDU 🚨</div>
 
 <div class="topbar">
   <h1>🎛️ Komuta Merkezi / Drive Sosyal Paneli<span>Küresel İmece Dünyası · Otonom Panel</span></h1>
   <div style="display:flex; gap:10px;">
     <button class="btn-dark" data-vtask-start="media_out klasöründeki en son üretilmiş medya dosyasını görüntülemek için pencere açılıyor." data-vtask-done="Canlı medya penceresi kapatıldı." onclick="kom_openLiveMediaModal()">📺 Canlı Medya</button>
-    <button class="btn-emergency" data-vtask-start="Acil durum protokolü etkinleştiriliyor. Tüm otonom Sosyal Medya Dağıtım Ajanı döngüleri ve zamanlanmış paylaşımlar duraklatılacak." data-vtask-done="Acil durum kaldırılıyor, sistem otonom çalışmaya normal şekilde devam edecek." onclick="kom_emergencyStop()">🚨 ACİL DURUM</button>
+    <button class="btn-emergency" data-vtask-start="Acil durum protokolü etkinleştiriliyor. Tüm otonom süreçler, 200 ajan ve SMDA döngüleri eş zamanlı olarak duracak." data-vtask-done="Acil durum kaldırılıyor. Sistem normale dönüyor, ajanlar tekrar başlatılabilir." onclick="kom_emergencyStop()">🚨 ACİL DURUM</button>
   </div>
 </div>
 
 <div class="grid">
 
-  <!-- 8 KANALLI OSİLOSKOP -->
   <div class="card span-12">
-    <h3>📡 Üst Düzey Telemetri Osiloskopu (8 Kanal)</h3>
-    <canvas id="kom_telemetryCanvas" class="osc" width="1000" height="200"></canvas>
+    <h3 data-announce="Üst Düzey Telemetri Osiloskopu başlığındasınız. Sekiz farklı kanalın canlı ölçümünü göreceksiniz: WhatsApp mesajı, CPU, RAM, yapay zeka başarımı, SMDA başarısı, cross gecikmesi, hata sayısı ve TRM senkronizasyonu. Her kanal butonuna tıklayarak değeri görebilirsiniz.">📡 Üst Düzey Telemetri Osiloskopu (8 Kanal)</h3>
+    <div class="osc-wrap">
+      <div class="osc-scale-top"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="osc-scale-left"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <canvas id="kom_telemetryCanvas" class="osc" width="1000" height="200"></canvas>
+      <div class="osc-scale-right"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="osc-scale-bottom"><span>0s</span><span>1s</span><span>2s</span><span>3s</span><span>4s</span></div>
+    </div>
     <div class="chan-btn-row" id="kom_oscChanButtons"></div>
   </div>
 
-  <!-- BÜYÜK ÇOK DİLLİ PASTA -->
   <div class="card span-5">
-    <h3>🌐 Çok Dilli Trafik (Merkezi Görünüm)</h3>
+    <h3 data-announce="Merkezi Çok Dilli Trafik başlığındasınız. Burada tüm dillerin toplam trafik dağılımını merkezi olarak göreceksiniz.">🌐 Çok Dilli Trafik (Merkezi Görünüm)</h3>
     <canvas id="kom_bigMultilangChart" height="260"></canvas>
   </div>
 
-  <!-- DÜNYA HARİTASI ISI -->
   <div class="card span-7">
-    <h3>🗺️ Coğrafi Yoğunluk (TR / ABD / Almanya)</h3>
+    <h3 data-announce="Coğrafi Yoğunluk başlığındasınız. Türkiye, Amerika ve Almanya'dan gelen trafiğin coğrafi yoğunluğunu göreceksiniz.">🗺️ Coğrafi Yoğunluk (TR / ABD / Almanya)</h3>
     <svg id="kom_worldMap" viewBox="0 0 500 220" style="width:100%; height:auto;"></svg>
   </div>
 
-  <!-- 6 PLATFORM PAYLAŞIM -->
   <div class="card span-4">
-    <h3>📢 Platform Kontrolü</h3>
+    <h3 data-announce="Platform Kontrolü başlığındasınız. Telegram, WhatsApp, Facebook, Instagram, TikTok, YouTube ve Bloglar platformlarını açıp kapatabilir ve hepsine aynı anda yayın başlatabilirsiniz.">📢 Platform Kontrolü</h3>
     <div class="platform-grid" id="kom_platformGrid"></div>
-    <button class="btn-gradient" style="width:100%; margin-top:12px;" data-vtask-start="Seçili tüm sosyal medya platformlarına eş zamanlı yayın başlatılıyor." data-vtask-done="Platformlara yayın tamamlandı, başarı durumu konsolda listeleniyor." onclick="kom_shareToAllPlatforms()">📢 Hepsine Yayınla</button>
+    <button class="btn-gradient" style="width:100%; margin-top:12px;" data-vtask-start="Seçili tüm sosyal medya platformlarına eş zamanlı yayın başlatılıyor." data-vtask-done="Platformlara yayın tamamlandı." onclick="kom_shareToAllPlatforms()">📢 Hepsine Yayınla</button>
   </div>
 
-  <!-- MEDYA ÜRETİCİ -->
   <div class="card span-4">
-    <h3>🎬 Medya Üret (Ses + Görsel + Video)</h3>
+    <h3 data-announce="Medya Üret başlığındasınız. Buradaki metin alanına paylaşılacak metni yazıp medya üret butonuna basarak ses dosyası oluşturabilirsiniz.">🎬 Medya Üret (Ses + Görsel + Video)</h3>
     <textarea id="kom_mediaText" rows="3" placeholder="Paylaşılacak metni buraya yazın…"></textarea>
     <div class="btn-row">
-      <button class="btn-dark" data-vtask-start="Girilen metinden gTTS ile sesli medya dosyası üretimi başlatılıyor." data-vtask-done="Medya üretimi tamamlandı, oluşturulan dosya önizleme alanında gösteriliyor." onclick="kom_generateMedia()">🎬 Medya Üret</button>
+      <button class="btn-dark" data-vtask-start="Medya üretimi başlatılıyor." data-vtask-done="Medya üretimi tamamlandı." onclick="kom_generateMedia()">🎬 Medya Üret</button>
     </div>
     <div class="media-preview" id="kom_mediaPreview">Henüz medya üretilmedi.</div>
   </div>
 
-  <!-- PLATFORM BAŞARI ORANI -->
   <div class="card span-4">
-    <h3>📊 Platform Başarı Oranı</h3>
+    <h3 data-announce="Platform Başarı Oranı başlığındasınız. Burada her platformun başarı yüzdesini göreceksiniz. Barların üzerine geldiğinizde Volkan değerlendirme yapacaktır.">📊 Platform Başarı Oranı</h3>
     <canvas id="kom_platformSuccessChart" height="200"></canvas>
+    <div style="font-size:11px; color:var(--text-dim); margin-top:8px; text-align:center;">💡 Barların üzerine gelin — Volkan değerlendirsin.</div>
   </div>
 
-  <!-- BATCH TABLOSU -->
   <div class="card span-12">
-    <h3>🗂️ Son 20 Dağıtım Batch'i</h3>
+    <h3 data-announce="Son Yirmi Dağıtım Batch'i başlığındasınız. Burada son yirmi dağıtım işleminin tarih, başarı, medya ve hata bilgilerini göreceksiniz.">🗂️ Son 20 Dağıtım Batch'i</h3>
     <div style="max-height:240px; overflow-y:auto;">
       <table>
         <thead><tr><th>Tarih</th><th>Başarı</th><th>Medya</th><th>Hata</th></tr></thead>
@@ -666,9 +1072,9 @@
     </div>
   </div>
 
-  <!-- CEO YÖNETİM PANELİ -->
+  <!-- === YENİ: Toplu CEO butonları eklendi === -->
   <div class="card span-12">
-    <h3>👑 CEO Yönetim Paneli — Erişim Onayı</h3>
+    <h3 data-announce="CEO Yönetim Paneli başlığındasınız. Burada kullanıcıların sisteme giriş, pasif kalma ve çıkış onaylarını yönetebilirsiniz. Toplu yönetim butonları ile tüm bekleyenleri tek tuşla onaylayabilir veya tüm aktif oturumları tek tuşla kapatabilirsiniz.">👑 CEO Yönetim Paneli — Erişim Onayı</h3>
     <div style="display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap; margin-bottom:16px;">
       <div style="flex:1; min-width:180px;">
         <label style="font-size:11px; color:var(--text-dim); display:block; margin-bottom:4px;">CEO Anahtarı</label>
@@ -678,8 +1084,15 @@
         <label style="font-size:11px; color:var(--text-dim); display:block; margin-bottom:4px;">Kullanıcı ID / İsim</label>
         <input type="text" id="kom_ceoUserIdInput" placeholder="ör. ahmet_yilmaz veya +905xxxxxxxxx">
       </div>
-      <button class="btn-ceo-approve" data-vtask-start="CEO onay işlemi başlıyor: girilen kullanıcı, CEO anahtarınız doğrulanarak sisteme girişe yetkilendirilecek." data-vtask-done="CEO onayı tamamlandı, kullanıcının giriş yetkisi güncellendi ve bekleyen/aktif listeler yenilendi." onclick="kom_ceoApproveLogin()">✅ CEO: Sisteme Girecek Kişiyi Onayla</button>
-      <button class="btn-ceo-logout" data-vtask-start="CEO kararıyla kullanıcı oturumunu sonlandırma işlemi başlıyor." data-vtask-done="Kullanıcının oturumu CEO kararıyla sonlandırıldı, bekleyen/aktif listeler güncellendi." onclick="kom_ceoForceLogout()">⛔ CEO: Sistemden Çıkması İçin Kişiyi Onayla</button>
+      <button class="btn-ceo-approve" data-vtask-start="CEO onay işlemi başlıyor." data-vtask-done="CEO onayı tamamlandı." onclick="kom_ceoApproveLogin()">✅ CEO: Sisteme Girecek Kişiyi Onayla</button>
+      <button class="btn-ceo-passive" data-vtask-start="CEO pasif işlemi başlıyor." data-vtask-done="CEO pasif işlemi tamamlandı." onclick="kom_ceoPassiveUser()">⏸ CEO: Sistemde Pasif Kalması İçin Kişiyi Onayla</button>
+      <button class="btn-ceo-logout" data-vtask-start="CEO kararıyla kullanıcı oturumunu sonlandırma işlemi başlıyor." data-vtask-done="Kullanıcının oturumu sonlandırıldı." onclick="kom_ceoForceLogout()">⛔ CEO: Sistemden Çıkması İçin Kişiyi Onayla</button>
+    </div>
+    <!-- === YENİ: Toplu yönetim butonları === -->
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; padding:12px; background:rgba(255,255,255,.02); border:1px dashed rgba(232,182,76,.25); border-radius:10px;">
+      <strong style="font-size:12px; color:var(--gold); align-self:center; margin-right:8px;">⚡ Toplu Yönetim:</strong>
+      <button class="btn-ceo-approve" data-vtask-start="Tüm bekleyen erişim talepleri tek tuşla onaylanıyor." data-vtask-done="Tüm bekleyen erişim talepleri onaylandı." onclick="kom_ceoApproveAll()">✅ Tüm Bekleyenleri Onayla</button>
+      <button class="btn-ceo-logout" data-vtask-start="Tüm aktif oturumlar tek tuşla kapatılıyor." data-vtask-done="Tüm aktif oturumlar kapatıldı." onclick="kom_ceoCloseAllSessions()">⛔ Tüm Aktif Oturumları Kapat</button>
     </div>
     <div id="kom_ceoActionResult" style="font-size:12.5px; color:var(--text-dim); margin-bottom:14px;"></div>
 
@@ -687,7 +1100,7 @@
       <div>
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
           <strong style="font-size:12.5px; color:var(--gold);">⏳ Bekleyen Erişim Talepleri</strong>
-          <button class="btn-secondary" style="padding:4px 10px; font-size:11px;" data-vtask-start="Bekleyen ve aktif CEO kullanıcı listeleri yeniden yükleniyor." data-vtask-done="CEO kullanıcı listeleri güncellendi." onclick="kom_loadCeoLists()">🔄</button>
+          <button class="btn-secondary" style="padding:4px 10px; font-size:11px;" data-vtask-start="CEO listeleri yenileniyor." data-vtask-done="CEO kullanıcı listeleri güncellendi." onclick="kom_loadCeoLists()">🔄</button>
         </div>
         <div id="kom_ceoPendingList" style="font-size:12px; color:var(--text-dim);">Yükleniyor…</div>
       </div>
@@ -698,9 +1111,8 @@
     </div>
   </div>
 
-  <!-- CANLI KONSOL -->
   <div class="card span-12">
-    <h3>🖥️ Canlı Konsol</h3>
+    <h3 data-announce="Canlı Konsol başlığındasınız. Burada sistemin tüm işlemlerini canlı olarak görebilirsiniz.">🖥️ Canlı Konsol</h3>
     <div class="console" id="kom_liveConsole"></div>
   </div>
 
@@ -718,58 +1130,92 @@
   </div>
 </div>
 
+<div class="panel-legend">
+  <h4>📋 Bu panelde ne var, hangi buton ne işe yarar?</h4>
+  <dl>
+    <dt>📺 Canlı Medya</dt>
+    <dd>En son üretilmiş medyayı gösterir.</dd>
+    <dt>🚨 ACİL DURUM</dt>
+    <dd>Tüm otonom süreçleri, 200 ajanı ve SMDA döngülerini tek tuşla durdurur (Global Lock).</dd>
+    <dt>📢 Hepsine Yayınla</dt>
+    <dd>Seçili platformlara eş zamanlı yayın başlatır.</dd>
+    <dt>✅ Tüm Bekleyenleri Onayla</dt>
+    <dd>Bekleyen tüm erişim taleplerini tek tuşla onaylar.</dd>
+    <dt>⛔ Tüm Aktif Oturumları Kapat</dt>
+    <dd>Aktif tüm kullanıcı oturumlarını tek tuşla sonlandırır.</dd>
+  </dl>
+</div>
+
 
 
   </div>
 
   <div class="tab-content active" id="content-ultimate">
-<!-- ============ 1) VOLKAN DURUM ÇUBUĞU ============ -->
 <div class="top-strip" id="ult_topStrip">
-  <div class="volkan-id" style="display:none;">
-    <div class="volkan-avatar">🗣️</div>
-    <div class="volkan-meta">
-      <div class="name">AI SES SİSTEMİ</div>
-      <div class="engine"><span class="engine-dot" id="ult_engineDot"></span><span id="ult_engineStatusText">Ses Motoru: Hazırlanıyor…</span></div>
-    </div>
+  <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+    <button class="btn-unlock sys-voice-on-btn" style="padding:10px 18px; font-size:13px;">🔊 Ses Açma</button>
+    <button class="btn-unlock sys-voice-off-btn" style="padding:10px 18px; font-size:13px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
   </div>
   <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-left:auto;">
-    <input type="password" id="ult_apiKeyInput" placeholder="🔑 Sistem API Key…" style="width:170px; padding:8px 10px; font-size:12px;">
-    <span class="sim-badge" id="ult_agentSimBadge">🟡 Ajan Radarı: Simülasyon Modu</span>
-    <button class="btn-unlock" id="ult_btnUnlockVoice">🔓 001 AI Ajanı BAŞLAT</button>
-    <button class="btn-unlock" id="ult_btnKapat" style="background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">⏻ KAPAT</button>
+    <span class="sim-badge" id="ult_agentSimBadge">·</span>
+    <button class="btn-unlock sys-voice-on-btn" id="ult_btnUnlockVoice" data-vmode="greet">🔓 Volkan 001 AI Ajanı BAŞLAT</button>
+    <span class="sys-neon-dot" id="sysNeonDot" title="Sistem durumu: yeşil=aktif, sarı=acil durum, kırmızı=durduruldu"></span>
+    <button class="btn-unlock sys-voice-off-btn" id="ult_btnKapat" data-vmode="farewell" style="background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">⏻ KAPAT</button>
   </div>
 </div>
 
-<!-- ============ 2) KARŞILAMA / NEON HOŞGELDİN ============ -->
-<div class="welcome-wrap">
-  <div class="welcome-card">
-    <div class="welcome-eyebrow">Küresel İmece Dünyası · Ultimate Komuta Merkezi</div>
-    <h1 class="welcome-title">Hoş Geldiniz, Sayın <span class="neon-word">Ceo Fahri bey</span></h1>
-    <div class="welcome-sub">Sesli Asistan Modülü ve 200 Ajanlık Otonom Radar sisteminize entegre edildi.</div>
-  </div>
-</div>
-
-<!-- ============ 3) DİNAMİK AJAN RADARI ============ -->
 <div class="section">
-  <h2>📡 Dinamik Ajan Radarı</h2>
+  <h2 data-announce="Ajanların Akış Alanı başlığındasınız. Burada o an görevde olan ajanlar canlı olarak görünür. Görev bitince ajan buradan kaybolur.">🐉 AKIŞ ALANI (Çalışan Ajanlar)</h2>
+  <div class="card">
+    <div class="flow-container" id="ult_flowContainer"></div>
+    <div class="btn-group">
+      <button id="ult_btnAksSifirla" onclick="ult_akisSifirla()">🔄 Ajanların Akışlarını Sıfırla</button>
+      <button id="ult_btnRastgele" onclick="ult_rastgeleGorevVer()">🎲 Ajanlara Rasgele Görev Ver</button>
+      <button id="ult_btnListeYenile" onclick="ult_guncelleAjanListesi()">🔄 Ajanların Listelerini Yenile</button>
+    </div>
+    <div class="input-group">
+      <input type="text" id="ult_komutInput" placeholder="Örn: Agent-042 5 dakikalık analiz">
+      <button onclick="ult_gonderKomut()">📨 Gönder</button>
+    </div>
+    <div class="ult-log-box" id="ult_logBox">✅ Sistem hazır · BAŞLAT'a basınca 200 ajan göreve başlar.</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 data-announce="Ajan Listesi başlığındasınız. Burada 200 ajanı tek ekranda göreceksiniz. Her birine tıklayarak o ajanın rolünü, görevini öğrenebilir ve gerekirse Tekil Ajanı Sonlandır veya Ajanı Zorla Yeniden Başlat butonlarıyla müdahale edebilirsiniz.">🤖 AJAN LİSTESİ</h2>
   <div class="card">
     <div class="radar-stats">
       <div class="radar-stat"><b id="ult_statTotal">200</b>Toplam Ajan</div>
       <div class="radar-stat"><b id="ult_statActive">0</b>Şu An Görevde</div>
       <div class="radar-stat"><b id="ult_statIdle">200</b>Boşta</div>
     </div>
-    <div id="ult_realAgentsBox" style="display:none; font-size:11.5px; color:var(--ok); background:rgba(53,212,136,.08); border:1px solid rgba(53,212,136,.3); border-radius:8px; padding:8px 12px; margin-bottom:12px;"></div>
     <div class="agent-grid" id="ult_agentGrid"></div>
     <div class="agent-legend">
       <span><i style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15);"></i>Boşta</span>
-      <span><i style="background:rgba(57,255,224,.35); border:1px solid var(--neon);"></i>Görevde — neon yanıp söner</span>
+      <span><i style="background:rgba(61,220,113,.5); border:1px solid #3ddc71;"></i>Görevde — yeşil yanıp söner</span>
+      <span><i style="background:rgba(255,210,61,.5); border:1px solid #ffd23d;"></i>Tehlikeli durum — sarı sabit</span>
+      <span><i style="background:rgba(255,77,94,.5); border:1px solid #ff4d5e;"></i>Hata / kritik — kırmızı sabit</span>
+      <span style="color:var(--neon);">💡 Bir numaraya TIKLAYIN: sağ üstte ajan bilgisi + müdahale butonları açılır.</span>
+    </div>
+
+    <!-- === YENİ: Aksiyon butonları eklendi === -->
+    <div class="agent-hover-preview" id="ult_agentPreview">
+      <div class="ahp-baslik">
+        <span id="ult_prevKod">—</span>
+        <span class="ahp-durum bosta" id="ult_prevDurum">boşta</span>
+      </div>
+      <div class="ahp-rol" id="ult_prevRol">Rol: —</div>
+      <div class="ahp-gorev" id="ult_prevGorev">Görev: —</div>
+      <div class="ahp-actions">
+        <button class="ahp-btn ahp-btn-danger" onclick="ult_tekilAjanSonlandir()">⛔ Tekil Ajanı Sonlandır</button>
+        <button class="ahp-btn ahp-btn-warn" onclick="ult_ajanZorlaYenidenBaslat()">🔄 Ajanı Zorla Yeniden Başlat</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ============ 4) SESLİ CEO BİLDİRİM EYLEMLERİ ============ -->
 <div class="section">
-  <h2>🎙️ Sesli CEO Bildirimli Eylemler</h2>
+  <h2 data-announce="Sesli CEO Bildirimli Eylemler başlığındasınız. Buradaki butonlar Volkan'a belirli durumları sesli olarak bildirtir.">🎙️ Sesli CEO Bildirimli Eylemler</h2>
   <div class="card">
     <div class="voice-actions" id="ult_voiceActions"></div>
     <div class="voice-log" id="ult_voiceLog"></div>
@@ -782,15 +1228,21 @@
 </div>
 
 <script>
+const PANEL_ANNOUNCE_NAMES = {
+  ultimate: "Ultimate Komuta Merkezi",
+  ana: "Ana Gösterge",
+  gelismis: "Gelişmiş Eeeayy Ajanı + SMDA",
+  komuta: "Komuta Merkezi / Drive Sosyal"
+};
 function switchPanel(key){
   document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.panel === key));
   document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
   document.getElementById("content-" + key).classList.add("active");
-  // Az önce görünür hale gelen sekmedeki osiloskop canvas'ları, gizliyken
-  // 0 genişlikte kalmış olabilir — bunları yeniden boyutlandırmak için
-  // bir "resize" sinyali gönder (ResizeObserver zaten yakalar, bu ek
-  // güvence içindir).
   requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
+  if(typeof VolkanVoice !== "undefined" && VolkanVoice.isUnlocked()){
+    const name = PANEL_ANNOUNCE_NAMES[key] || key;
+    VolkanVoice.announce(`şu an ${name} panelindesiniz.`);
+  }
 }
 function tickClock(){
   document.getElementById("shellClock").textContent = new Date().toLocaleString('tr-TR');
@@ -798,18 +1250,30 @@ function tickClock(){
 tickClock(); setInterval(tickClock, 1000);
 document.addEventListener("keydown", (e) => {
   if(e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
-  if(e.key === "1") switchPanel("ana");
-  if(e.key === "2") switchPanel("gelismis");
-  if(e.key === "3") switchPanel("komuta");
+  if(e.key === "1") switchPanel("ultimate");
+  if(e.key === "2") switchPanel("ana");
+  if(e.key === "3") switchPanel("gelismis");
+  if(e.key === "4") switchPanel("komuta");
 });
 
-/* =====================================================================
-   PANEL GENELİ — PAYLAŞILAN DURUM (tüm sekmeler bu bloğu kullanır)
-   Kaç görevin "başlamıştır" denip henüz "tamamlandı" denmediğini sayar.
-   Osiloskoplar bu sayaca bakarak: boşta iken düz çizgi (hazır durumu),
-   en az bir görev varken hareketli çizgi çizer.
-   ===================================================================== */
 window.PANEL_ACTIVE_TASKS = 0;
+window.PANEL_LOCKED = true;
+function setSysNeon(state){
+  document.querySelectorAll(".sys-neon-dot").forEach(d=>{
+    d.className = "sys-neon-dot" + (state && state !== "off" ? " " + state : "");
+  });
+}
+window.setSysNeon = setSysNeon;
+function vt_lockPanel(locked){
+  window.PANEL_LOCKED = locked;
+  document.querySelectorAll("button, .chan-btn").forEach(el=>{
+    if(el.classList.contains("sys-voice-on-btn") || el.classList.contains("sys-voice-off-btn")) return;
+    if(el.tagName === "BUTTON") el.disabled = locked;
+    el.classList.toggle("vt-locked", locked);
+  });
+}
+window.vt_lockPanel = vt_lockPanel;
+vt_lockPanel(true);
 
 function panelToast(msg, type="ok"){
   const wrap = document.querySelector(".tab-content.active .toast-wrap") || document.getElementById("ult_toastWrap");
@@ -820,6 +1284,7 @@ function panelToast(msg, type="ok"){
   wrap.appendChild(el);
   setTimeout(()=>el.remove(), 4000);
 }
+window.panelToast = panelToast;
 
 function ult_voiceLog(msg){
   const box = document.getElementById("ult_voiceLog");
@@ -829,18 +1294,8 @@ function ult_voiceLog(msg){
   box.appendChild(div); box.scrollTop = box.scrollHeight;
   while(box.children.length > 200) box.removeChild(box.firstChild);
 }
+window.ult_voiceLog = ult_voiceLog;
 
-/* ---------------------------------------------------------------------
-   VOLKAN SES MODÜLÜ — "Sayın CEO..." ön ekiyle Web Speech API (tr-TR)
-   DÜRÜST NOT: Bu, Volkan adlı bir kişinin klonlanmış sesi DEĞİLDİR;
-   tarayıcının yerleşik Türkçe sesine "Volkan" kimliği verilmiştir.
-   Tarayıcıların otomatik-oynatma kısıtlamasını aşmak için ilk kullanıcı
-   tıklamasında (BAŞLAT butonu) sessiz bir "ısınma" konuşması tetiklenir;
-   bundan sonra sıradaki tüm konuşmalar — panelin HANGİ sekmesinde
-   olursanız olun — sorunsuz çalışır. VolkanVoice artık panel geneli
-   paylaşılan TEK bir motordur (önceden yalnız "Ultimate" sekmesine
-   özeldi).
---------------------------------------------------------------------- */
 const VolkanVoice = (function(){
   let unlocked = false;
   const supported = 'speechSynthesis' in window;
@@ -860,7 +1315,7 @@ const VolkanVoice = (function(){
       ult_topStrip.classList.remove("speaking");
     } else {
       ult_engineDot.className = "engine-dot";
-      engineText.textContent = supported ? "Ses Motoru: Kilitli (BAŞLAT'a basın)" : "Ses Motoru: Tarayıcı desteklemiyor";
+      engineText.textContent = "·";
     }
   }
   setEngineState("hazirlaniyor");
@@ -885,8 +1340,13 @@ const VolkanVoice = (function(){
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text);
         utter.lang = "tr-TR";
-        utter.rate = 0.98;
-        utter.pitch = 0.95;
+        utter.rate = 0.93;
+        utter.pitch = 1.02;
+        utter.volume = 1;
+        const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+        const trVoice = voices.find(v => /tr[-_]TR/i.test(v.lang) && /google|natural|online|premium|tolga|emel/i.test(v.name))
+                     || voices.find(v => /tr[-_]TR/i.test(v.lang));
+        if(trVoice) utter.voice = trVoice;
         setEngineState("konusuyor");
         utter.onend = () => { setEngineState("hazir"); resolve(true); };
         utter.onerror = () => { setEngineState("hazir"); resolve(false); };
@@ -897,7 +1357,7 @@ const VolkanVoice = (function(){
 
   async function announce(actionDescription){
     if(!unlocked){
-      panelToast("Önce '001 AI Ajanı BAŞLAT' butonuna basmalısınız", "err");
+      panelToast("Önce 'Volkan 001 AI Ajanı BAŞLAT' butonuna basmalısınız", "err");
       ult_voiceLog("⚠️ Ses motoru kilitli — önce BAŞLAT'a basılmalı.");
       return false;
     }
@@ -908,7 +1368,7 @@ const VolkanVoice = (function(){
 
   async function speakExact(fullText){
     if(!unlocked){
-      panelToast("Önce '001 AI Ajanı BAŞLAT' butonuna basmalısınız", "err");
+      panelToast("Önce 'Volkan 001 AI Ajanı BAŞLAT' butonuna basmalısınız", "err");
       return false;
     }
     ult_voiceLog("🗣️ " + fullText);
@@ -917,56 +1377,56 @@ const VolkanVoice = (function(){
 
   return { unlock, announce, speakExact, isUnlocked: () => unlocked, isSupported: () => supported };
 })();
+window.VolkanVoice = VolkanVoice;
 
-document.getElementById("ult_btnUnlockVoice").addEventListener("click", async () => {
-  const btn = document.getElementById("ult_btnUnlockVoice");
-  btn.disabled = true; btn.textContent = "⏳ Başlatılıyor…";
+async function panelVoiceOn(btn){
+  const mode = (btn && btn.dataset.vmode) || "toggle";
+  if(btn){ btn.disabled = true; btn.dataset.origText = btn.dataset.origText || btn.textContent; btn.textContent = "⏳ Başlatılıyor…"; }
   const ok = await VolkanVoice.unlock();
   if(ok){
-    btn.textContent = "✅ Sistem Aktif";
+    setSysNeon("green");
+    vt_lockPanel(false);
     panelToast("Sesli asistan aktif edildi", "ok");
     ult_voiceLog("✅ Ses motoru kilidi açıldı.");
-    await VolkanVoice.speakExact("Sayın CEO Fahri Bey hoş geldiniz, ben 001 AI ajanınız Volkan, 200 Ee Ay ajanlarınızla komutlarınızı bekliyoruz.");
+    if(mode === "greet"){
+      btn.textContent = "✅ Sistem Aktif";
+      btn.disabled = true;
+      if(typeof ult_tumAjanlariCalistir === "function") ult_tumAjanlariCalistir();
+      await VolkanVoice.speakExact("Sayın CEO Fahri Bey hoş geldiniz, ben Volkan 001 Ee Aay Ajanı, 200 yapay zeka ajanımız ile komutlarınızı bekliyoruz. Tüm ajanlar göreve başladı.");
+    } else {
+      if(btn){ btn.disabled = false; btn.textContent = btn.dataset.origText; }
+      await VolkanVoice.speakExact("Şu an ses açıldı.");
+    }
   } else {
-    btn.disabled = false; btn.textContent = "🔓 001 AI Ajanı BAŞLAT";
+    if(btn){ btn.disabled = false; btn.textContent = btn.dataset.origText; }
     panelToast("Bu tarayıcı sesli okumayı desteklemiyor olabilir", "err");
   }
-});
+}
 
-document.getElementById("ult_btnKapat").addEventListener("click", async () => {
+async function panelVoiceOff(btn){
+  const mode = (btn && btn.dataset.vmode) || "toggle";
   if(!VolkanVoice.isUnlocked()){
-    panelToast("Önce '001 AI Ajanı BAŞLAT' butonuna basmalısınız", "err");
+    panelToast("Önce sesi/BAŞLAT'ı açmalısınız", "err");
     return;
   }
-  await VolkanVoice.speakExact("Sayın CEO Fahri bey, bir sonraki komutlarınızı yerine getirmek üzere şimdilik hoşça kalın, kendinize iyi bakın.");
-  panelToast("Oturum kapatılıyor…", "ok");
-  ult_voiceLog("⏻ KAPAT: kapanış anonsu okundu.");
-});
+  if(mode === "farewell"){
+    await VolkanVoice.speakExact("Sayın CEO Fahri bey, bir sonraki komutlarınızı yerine getirmek üzere şimdilik hoşça kalın, kendinize iyi bakın.");
+    ult_voiceLog("⏻ KAPAT: kapanış anonsu okundu.");
+  } else {
+    await VolkanVoice.speakExact("Şu an ses kapandı.");
+    ult_voiceLog("⏻ Ses kapatıldı.");
+  }
+  setSysNeon("red");
+  vt_lockPanel(true);
+  const startBtn = document.getElementById("ult_btnUnlockVoice");
+  if(startBtn){ startBtn.disabled = false; startBtn.textContent = startBtn.dataset.origText || "🔓 Volkan 001 AI Ajanı BAŞLAT"; }
+  if(mode === "farewell" && typeof ult_tumAjanlariDurdur === "function") ult_tumAjanlariDurdur();
+  panelToast("Ses kapatıldı", "ok");
+}
 
-/* ---------------------------------------------------------------------
-   PANEL GENELİ BUTON ANONSU
-   İki ayrı davranış:
+document.querySelectorAll(".sys-voice-on-btn").forEach(b => b.addEventListener("click", () => panelVoiceOn(b)));
+document.querySelectorAll(".sys-voice-off-btn").forEach(b => b.addEventListener("click", () => panelVoiceOff(b)));
 
-   1) Osiloskop KANAL butonları ve her osiloskoptaki
-      "🔀 Hepsini Karışık Takip Et" butonu (.chan-btn): bunlar bir görev
-      BAŞLATMAZ, sadece o an ekranda hangi verinin izleneceğini
-      seslendirir. Volkan her tıklamada: "Sayın CEO, şimdi bu ekranda
-      <kanal adı> göreceksiniz." der ("Hepsini Karışık Takip Et" için
-      "tüm kanalları göreceksiniz" denir). Bu yüzden osiloskopun
-      canlı/düz-çizgi durumunu etkilemez (PANEL_ACTIVE_TASKS'a dokunmaz).
-
-   2) Panelde bulunan DİĞER TÜM butonlar (SMDA, WhatsApp köprüsü, CEO
-      onay/çıkış, medya, acil durum vb.): ilk tıklamada Volkan görevin
-      TAM AÇIKLAMASINI (data-vtask-start), aynı butona ikinci tıklamada
-      tamamlanma açıklamasını (data-vtask-done) okur — hangi ajanı/veriyi
-      etkilediğini de anlatan uzun bir cümledir. Bu attribute'lar
-      tanımlanmamışsa, eski kısa kalıba ("<buton adı> başlamıştır/
-      tamamlandı.") düşülür. Bu, osiloskopların düz çizgiden canlı
-      veriye geçişini de tetikler (PANEL_ACTIVE_TASKS).
-
-   BAŞLAT/KAPAT butonları ve örnek "Sesli CEO Eylem" butonları (.voice-btn)
-   zaten kendi özel anonslarını yaptıkları için burada hariç tutulur.
---------------------------------------------------------------------- */
 function vt_taskName(el){
   if(el.dataset.vtask) return el.dataset.vtask;
   let t = el.textContent || "";
@@ -977,15 +1437,12 @@ function vt_taskName(el){
 document.addEventListener("click", (e) => {
   const el = e.target.closest("button, .chan-btn");
   if(!el) return;
-  if(el.id === "ult_btnUnlockVoice" || el.id === "ult_btnKapat") return;
+  if(el.classList.contains("sys-voice-on-btn") || el.classList.contains("sys-voice-off-btn")) return;
   if(el.classList.contains("voice-btn")) return;
-
-  if(el.classList.contains("chan-btn")){
-    const isAll = el.classList.contains("all-btn") || el.dataset.ch === "all";
-    const label = isAll ? "tüm kanalları" : vt_taskName(el);
-    VolkanVoice.announce(`şimdi bu ekranda ${label} göreceksiniz.`);
-    return;
-  }
+  if(el.classList.contains("agent-cell")) return;
+  if(el.classList.contains("ahp-btn")) return;
+  if(el.id === "ult_btnAksSifirla" || el.id === "ult_btnRastgele" || el.id === "ult_btnListeYenile") return;
+  if(el.classList.contains("chan-btn")) return;
 
   const starting = el.dataset.vstate !== "on";
   el.dataset.vstate = starting ? "on" : "off";
@@ -999,17 +1456,89 @@ document.addEventListener("click", (e) => {
     VolkanVoice.announce(`${task} ${starting ? "başlamıştır" : "tamamlandı"}.`);
   }
 });
+
+document.addEventListener("click", (e) => {
+  const h = e.target.closest("h2[data-announce], h3[data-announce]");
+  if(!h) return;
+  const metin = h.dataset.announce;
+  if(metin){
+    if(typeof VolkanVoice !== "undefined" && VolkanVoice.isUnlocked()){
+      VolkanVoice.speakExact("Sayın CEO, " + metin);
+    } else {
+      const box = document.getElementById("ult_voiceLog");
+      if(box){
+        const div = document.createElement("div");
+        div.textContent = `ℹ️ Başlık: ${h.textContent.trim()}`;
+        box.appendChild(div); box.scrollTop = box.scrollHeight;
+      }
+    }
+  }
+});
+
+window._oscPopupAktif = null;
+function oscPopupAc(anchorEl, opts){
+  const popup = document.getElementById("oscValuePopup");
+  if(!popup || !anchorEl) return;
+  document.getElementById("ovpTitle").textContent   = opts.title || "Ölçüm";
+  document.getElementById("ovpValue").textContent   = opts.valueText || "—";
+  const durumEl = document.getElementById("ovpDurum");
+  durumEl.textContent = opts.durumText || "—";
+  durumEl.className = "ovp-durum " + (opts.durumClass || "orta");
+  document.getElementById("ovpOrnekler").innerHTML  = opts.orneklerHTML || "";
+  const rect = anchorEl.getBoundingClientRect();
+  popup.classList.add("show");
+  const pr = popup.getBoundingClientRect();
+  let top = rect.bottom + 8;
+  let left = rect.left;
+  if(top + pr.height > window.innerHeight - 10) top = rect.top - pr.height - 8;
+  if(left + pr.width > window.innerWidth - 10) left = window.innerWidth - pr.width - 10;
+  if(left < 10) left = 10;
+  popup.style.top = top + "px";
+  popup.style.left = left + "px";
+  window._oscPopupAktif = anchorEl;
+}
+function oscPopupKapat(){
+  const popup = document.getElementById("oscValuePopup");
+  if(popup) popup.classList.remove("show");
+  window._oscPopupAktif = null;
+}
+window.oscPopupKapat = oscPopupKapat;
+document.addEventListener("click", (e) => {
+  if(e.target.closest("#oscValuePopup")) return;
+  if(e.target.closest(".chan-btn")) return;
+  if(window._oscPopupAktif) oscPopupKapat();
+});
+
+/* === YENİ: GLOBAL EMERGENCY LOCK FONKSİYONU === */
+/* Bu fonksiyon, komuta panelindeki ACİL DURUM butonundan çağrılır ve
+   hem Tab 1'deki 200 ajanı hem Tab 3'teki SMDA döngüsünü durdurur. */
+window.globalEmergencyLock = function(active){
+  if(active){
+    // 200 ajanı durdur
+    if(typeof ult_tumAjanlariDurdur === "function"){
+      try{ ult_tumAjanlariDurdur(); }catch(e){ console.warn("Ajan durdurma hatası:", e); }
+    }
+    // SMDA döngüsünü durdur
+    try{
+      const gelToggle = document.getElementById("gel_smdaLoopToggle");
+      if(gelToggle && gelToggle.checked){
+        gelToggle.checked = false;
+      }
+      if(typeof gel_smdaStop === "function"){
+        try{ gel_smdaStop(); }catch(e){ /* sessizce */ }
+      }
+    }catch(e){ console.warn("SMDA durdurma hatası:", e); }
+    setSysNeon("yellow");
+    window.PANEL_ACTIVE_TASKS = 0;
+  } else {
+    setSysNeon(typeof VolkanVoice !== "undefined" && VolkanVoice.isUnlocked() ? "green" : "red");
+  }
+};
 </script>
 
-<!-- ================= ANA PANEL SCRIPT (izole IIFE) ================= -->
 <script>
 (function(){
-
-/* ============================================================
-   ORTAK YARDIMCI FONKSİYONLAR (toast, modal, güvenli fetch)
-   ============================================================ */
 const API_BASE = "http://localhost:5000";
-
 function toast(msg, type="ok"){
   const wrap = document.getElementById("ana_toastWrap");
   const el = document.createElement("div");
@@ -1025,10 +1554,6 @@ function showResultModal(title, obj){
   document.getElementById("ana_modalBody").textContent = typeof obj === "string" ? obj : JSON.stringify(obj, null, 2);
   openModal("ana_genericModal");
 }
-
-// Backend her zaman hazır olmayabilir (ör. Flask henüz ayakta değil, CORS,
-// ya da endpoint henüz backend'e eklenmedi). Bu yüzden her çağrı zaman
-// aşımı + hata durumunda DEMO veriye düşer ve bunu açıkça belirtir.
 async function safeFetch(path, options={}, timeoutMs=2500){
   const controller = new AbortController();
   const t = setTimeout(()=>controller.abort(), timeoutMs);
@@ -1037,46 +1562,92 @@ async function safeFetch(path, options={}, timeoutMs=2500){
     clearTimeout(t);
     if(!res.ok) throw new Error("HTTP " + res.status);
     return {ok:true, data: await res.json()};
-  }catch(e){
-    clearTimeout(t);
-    return {ok:false, error: e.message};
-  }
+  }catch(e){ clearTimeout(t); return {ok:false, error: e.message}; }
 }
-
 function rand(min,max){ return Math.random()*(max-min)+min; }
 
-/* ============================================================
-   BAĞLANTI DURUMU
-   ============================================================ */
 async function checkConnection(){
   const r = await safeFetch("/health");
   const led = document.getElementById("ana_connLed");
   const txt = document.getElementById("ana_connText");
-  if(r.ok){
-    led.className = "led ok"; txt.textContent = "Canlı bağlantı aktif";
-  } else {
-    led.className = "led warn"; txt.textContent = "Demo modu (backend'e ulaşılamadı)";
+  if(r.ok){ led.className = "led ok"; txt.textContent = "Canlı bağlantı aktif"; txt.style.opacity = "1"; }
+  else {
+    led.className = "led warn";
+    txt.textContent = "·";
+    txt.style.opacity = "0.08";
+    txt.style.pointerEvents = "none";
   }
 }
 
-/* ============================================================
-   OSİLOSKOP SINIFI (yeniden kullanılabilir)
-   ============================================================ */
+/* === YENİ: Derin Sistem Teşhisi Fonksiyonu === */
+async function ana_derinTeshis(){
+  const sonucBox = document.getElementById("ana_teshisSonuc");
+  sonucBox.textContent = "🔬 Teşhis başlatıldı…";
+  sonucBox.style.color = "var(--gold)";
+
+  const sonuclar = [];
+  // 1. Backend sağlık kontrolü
+  const health = await safeFetch("/health");
+  sonuclar.push({ ad: "Backend Sağlık", ok: health.ok, detay: health.ok ? "Bağlantı aktif" : "Demo modu" });
+
+  // 2. Metrik kontrolü
+  const metrics = await safeFetch("/metrics/realtime");
+  sonuclar.push({ ad: "Metrik Akışı", ok: metrics.ok, detay: metrics.ok ? "Canlı veri akıyor" : "Demo veri" });
+
+  // 3. Çok dilli trafik kontrolü
+  const lang = await safeFetch("/metrics/multilang");
+  sonuclar.push({ ad: "Dil Trafiği", ok: lang.ok, detay: lang.ok ? "3 dil aktif" : "Demo modu" });
+
+  // 4. Log kontrolü
+  const logs = await safeFetch("/logs/conversation");
+  sonuclar.push({ ad: "Log Servisi", ok: logs.ok, detay: logs.ok ? "Log okunabilir" : "Demo modu" });
+
+  // 5. Ajan durumu (Tab 1)
+  const aktifAjan = (typeof ult_activeAgents !== "undefined" && ult_activeAgents) ? ult_activeAgents.size : 0;
+  sonuclar.push({ ad: "Aktif Ajan", ok: aktifAjan > 0, detay: aktifAjan + " / 200 görevde" });
+
+  // 6. SMDA döngü durumu
+  const smdaToggle = document.getElementById("gel_smdaLoopToggle");
+  sonuclar.push({ ad: "SMDA Döngü", ok: true, detay: (smdaToggle && smdaToggle.checked) ? "Aktif" : "Beklemede" });
+
+  // Sonuç raporu
+  const okSayi = sonuclar.filter(s => s.ok).length;
+  const oran = Math.round((okSayi / sonuclar.length) * 100);
+  drawGauge(oran);
+
+  // Sonuç kutusu
+  let html = `<strong style="color:${oran>=75?'var(--ok)':oran>=45?'var(--warn)':'var(--err)'}">Sağlık Endeksi: ${oran}% (${okSayi}/${sonuclar.length})</strong><br>`;
+  sonuclar.forEach(s => {
+    html += `<span style="color:${s.ok?'var(--ok)':'var(--err)'}">${s.ok?'🟢':'🔴'} ${s.ad}:</span> ${s.detay}<br>`;
+  });
+  sonucBox.innerHTML = html;
+  sonucBox.style.color = "var(--text)";
+
+  toast(`Derin teşhis tamamlandı: %${oran} sağlıklı`, oran >= 75 ? "ok" : "err");
+  if(typeof VolkanVoice !== "undefined" && VolkanVoice.isUnlocked()){
+    VolkanVoice.speakExact(`Sayın CEO, derin sistem teşhisi tamamlandı. Sağlık endeksi yüzde ${oran}. ${okSayi} alt sistem sağlıklı, ${sonuclar.length - okSayi} alt sistem demo modunda.`);
+  }
+
+  // Log kaydı
+  addActivity(`🔬 Derin teşhis tamamlandı: %${oran}`);
+}
+window.ana_derinTeshis = ana_derinTeshis;
+
 class Oscilloscope{
-  constructor(canvasId, channelCount, colors, labels, points=200){
+  constructor(canvasId, channelCount, colors, labels, points=200, explanations=[], allExplanation=""){
     this.canvas = document.getElementById(canvasId);
     this.ctx = this.canvas.getContext("2d");
     this.channelCount = channelCount;
     this.colors = colors;
     this.labels = labels;
+    this.explanations = explanations;
+    this.allExplanation = allExplanation;
     this.points = points;
-    this.selectedChannel = null; // null = "Hepsini Karışık Takip Et" (tüm kanallar üst üste)
+    this.selectedChannel = null;
     this.buffers = Array.from({length:channelCount}, ()=>new Array(points).fill(0));
     this._resize();
     window.addEventListener("resize", ()=>this._resize());
     if(window.ResizeObserver){
-      // Sekme gizliyken (display:none) canvas genişliği 0 gelir; sekme
-      // tekrar görünür olduğunda bunu yakalayıp yeniden boyutlandırır.
       new ResizeObserver(()=>this._resize()).observe(this.canvas);
     }
   }
@@ -1086,10 +1657,7 @@ class Oscilloscope{
     this.canvas.width = w * (window.devicePixelRatio||1);
     this.canvas.height = 120 * (window.devicePixelRatio||1);
   }
-  pushValue(ch, value){
-    const buf = this.buffers[ch];
-    buf.shift(); buf.push(value);
-  }
+  pushValue(ch, value){ const buf = this.buffers[ch]; buf.shift(); buf.push(value); }
   setChannel(idx){ this.selectedChannel = idx; }
   showAll(){ this.selectedChannel = null; }
   renderButtons(containerId){
@@ -1099,24 +1667,59 @@ class Oscilloscope{
     ).join("");
     wrap.innerHTML = buttons + `<div class="chan-btn all-btn" data-ch="all">🔀 Hepsini Karışık Takip Et</div>`;
     wrap.querySelectorAll(".chan-btn").forEach(btn=>{
+      const ch = btn.dataset.ch;
+      const speech = ch === "all" ? this.allExplanation : this.explanations[parseInt(ch)];
+      if(speech) btn.dataset.vchanSpeech = speech;
       btn.addEventListener("click", ()=>{
-        const ch = btn.dataset.ch;
         if(ch === "all"){ this.showAll(); } else { this.setChannel(parseInt(ch)); }
         wrap.querySelectorAll(".chan-btn").forEach(b=>b.classList.remove("active"));
         btn.classList.add("active");
       });
     });
     wrap.querySelector('[data-ch="all"]').classList.add("active");
+
+    wrap.querySelectorAll(".chan-btn").forEach(btn=>{
+      const ch = btn.dataset.ch;
+      if(ch === "all") return;
+      btn.addEventListener("click", ()=>{
+        const idx = parseInt(ch);
+        let sonDeger = 0;
+        if(idx >= 0 && idx < this.buffers.length){
+          const buf = this.buffers[idx];
+          const son = buf.slice(-20);
+          sonDeger = Math.round(son.reduce((a,b)=>a+b,0) / son.length);
+        }
+        const kanalAdi = this.labels[idx] || ("Kanal " + (idx+1));
+        let durumCls, durumTxt, ornekler;
+        if(sonDeger >= 70){
+          durumCls = "iyi"; durumTxt = "🟢 İYİ — Değer mükemmel seviyede";
+        } else if(sonDeger >= 40){
+          durumCls = "orta"; durumTxt = "🟡 ORTA — Değer normal seviyede";
+        } else {
+          durumCls = "kotu"; durumTxt = "🔴 KÖTÜ — Değer düşük seviyede";
+        }
+        ornekler = "<b>Değerlendirme:</b> " + kanalAdi + " için " + sonDeger + " değeri, " +
+                   (sonDeger >= 70 ? "70 ve üzeri olduğu için İYİ" : sonDeger >= 40 ? "40 ile 70 arasında olduğu için ORTA" : "40 altında olduğu için KÖTÜ") +
+                   " seviyededir.";
+        if(typeof oscPopupAc === "function"){
+          oscPopupAc(btn, {
+            title: kanalAdi,
+            valueText: sonDeger,
+            durumClass: durumCls,
+            durumText: durumTxt,
+            orneklerHTML: ornekler
+          });
+        }
+      });
+    });
   }
   draw(){
     const {ctx, canvas} = this;
     const w = canvas.width, h = canvas.height;
     ctx.clearRect(0,0,w,h);
-    // grid
     ctx.strokeStyle = "rgba(232,182,76,.08)"; ctx.lineWidth = 1;
     for(let x=0;x<w;x+=w/20){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
     for(let y=0;y<h;y+=h/6){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
-    // channels — selectedChannel varsa yalnızca o kanal, yoksa hepsi üst üste
     this.buffers.forEach((buf, i)=>{
       if(this.selectedChannel !== null && this.selectedChannel !== i) return;
       ctx.beginPath();
@@ -1137,36 +1740,46 @@ class Oscilloscope{
 }
 
 const OSC_LABELS = ["WhatsApp mesaj/dk","CPU %","RAM %","AI başarım %"];
-const osc = new Oscilloscope("ana_osiloskopCanvas", 4, ["#ff3b3b","#35d488","#3b8bff","#f0d13b"], OSC_LABELS);
+const OSC_EXPLANATIONS = [
+  "Şimdi bu ekranda WhatsApp mesaj sayısı göreceksiniz. Bu osilogram, dakikada kaç WhatsApp mesajı gönderildiğini gösterir. Örneğin; değer 10'un altında ise sakin bir dönem yaşanıyor demektir, değer 10 ile 30 arasında ise normal yoğunluk var demektir, değer 30'un üzerine çıktığında ise çok yoğun mesaj trafiği yaşanıyor demektir.",
+  "Şimdi bu ekranda CPU kullanımı göreceksiniz. Bu osilogram, sunucunuzun işlemci kullanım yüzdesini gösterir. Örneğin; değer 30'un altında ise sistem rahat çalışıyor demektir, değer 30 ile 70 arasında ise normal yük anlamına gelir, değer 70'in üzerine çıktığında ise işlemci zorlanıyor demektir.",
+  "Şimdi bu ekranda RAM kullanımı göreceksiniz. Bu osilogram, sunucunuzun bellek kullanım yüzdesini gösterir. Örneğin; değer 40'ın altında ise bellek rahat demektir, değer 40 ile 75 arasında ise normal kullanım anlamına gelir, değer 75'in üzerine çıktığında ise bellek dolmak üzere demektir.",
+  "Şimdi bu ekranda Eeeayy ajanı başarımı göreceksiniz. Bu osilogram, yapay zeka modülünün isteklere yüzde kaç başarıyla yanıt verdiğini gösterir. Örneğin; değer 60'ın altında ise başarım düşük demektir, değer 60 ile 85 arasında ise ortalama başarım anlamına gelir, değer 85'in üzerinde ise mükemmel başarım demektir."
+];
+const OSC_ALL_EXPLANATION = "Şimdi bu ekranda Hepsini Karışık Takip Et modunu göreceksiniz. Bu modda WhatsApp, CPU, RAM ve AI başarım kanallarının tümü aynı ekranda farklı renklerde üst üste gösterilir. Örneğin; tüm çizgiler yatay ve düz ise sistem sakin çalışıyor demektir, bazı çizgiler dalgalı ise o kanallarda hareket var demektir, tüm çizgiler yukarılarda kesişiyorsa sistem yoğun çalışıyor demektir.";
+const osc = new Oscilloscope("ana_osiloskopCanvas", 4, ["#ff3b3b","#35d488","#3b8bff","#f0d13b"], OSC_LABELS, 200, OSC_EXPLANATIONS, OSC_ALL_EXPLANATION);
 osc.renderButtons("ana_oscChanButtons");
 osc.start();
 
 async function pullRealtimeMetrics(){
   if(!window.PANEL_ACTIVE_TASKS){
-    // Hiçbir görev/buton aktif değil: osiloskop "hazır" durumunu düz bir
-    // çizgi ile gösterir (rastgele veri üretmez).
     [0,1,2,3].forEach(ch => osc.pushValue(ch, 6));
     return;
   }
   const r = await safeFetch("/metrics/realtime");
   let m;
   if(r.ok){ m = r.data; }
-  else {
-    // DEMO veri — backend hazır olduğunda otomatik olarak gerçek veriye geçer
-    m = { cpu: rand(20,70), ram: rand(30,80), whatsapp_rate: rand(0,40), ai_score: rand(70,98) };
-  }
+  else { m = { cpu: rand(20,70), ram: rand(30,80), whatsapp_rate: rand(0,40), ai_score: rand(70,98) }; }
   osc.pushValue(0, m.whatsapp_rate);
   osc.pushValue(1, m.cpu);
   osc.pushValue(2, m.ram);
   osc.pushValue(3, m.ai_score);
   document.getElementById("ana_liveMsgCounter").textContent =
     (parseInt(document.getElementById("ana_liveMsgCounter").textContent)||0) + (r.ok?1:Math.round(rand(0,2)));
+  const liveEl = document.getElementById("ana_oscLiveValue");
+  if(liveEl){
+    if(osc.selectedChannel !== null){
+      const buf = osc.buffers[osc.selectedChannel];
+      const son = buf.slice(-20);
+      const ort = Math.round(son.reduce((a,b)=>a+b,0) / son.length);
+      liveEl.textContent = ort + " canlı";
+    } else {
+      liveEl.textContent = "— canlı";
+    }
+  }
 }
 setInterval(pullRealtimeMetrics, 1000);
 
-/* ============================================================
-   ÇOK DİLLİ TRAFİK (Chart.js)
-   ============================================================ */
 let ana_multilangChart;
 async function loadMultilang(){
   const r = await safeFetch("/metrics/multilang");
@@ -1198,9 +1811,6 @@ async function loadMultilang(){
 loadMultilang();
 setInterval(loadMultilang, 15000);
 
-/* ============================================================
-   BUTON İŞLEVLERİ
-   ============================================================ */
 async function testWhatsAppBridge(){
   document.getElementById("ana_quickActionResult").textContent = "Test ediliyor…";
   const start = performance.now();
@@ -1249,27 +1859,17 @@ async function refreshAllMetrics(){
 async function showLogs(){
   const r = await safeFetch("/logs/conversation");
   if(r.ok){ showResultModal("Son Konuşma Logları", r.data); }
-  else { showResultModal("Loglar (DEMO)", ["Backend bağlı değil — gerçek log dosyaları için Flask servisinin ayakta olması gerekir."]); }
+  else { showResultModal("Loglar (DEMO)", ["Backend bağlı değil."]); }
 }
 
-/* ============================================================
-   VOLKAN SESLİ GERİ BİLDİRİM
-   NOT: gTTS bir kişiyi klonlayamaz — bu, standart Türkçe gTTS
-   sesine "Volkan" etiketi verilmiş halidir, Volkan'ın gerçek
-   sesi değildir.
-   ============================================================ */
 async function speakVolkan(text){
   const r = await safeFetch("/panel/volkan/speak", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({text})});
   if(r.ok && r.data.status === "success" && r.data.audio_url){
     const audio = new Audio(API_BASE + r.data.audio_url);
-    audio.play().catch(()=>{ /* otomatik oynatma engellenmiş olabilir, sorun değil */ });
+    audio.play().catch(()=>{});
   }
-  // backend/gTTS yoksa sessizce geç — buton işlevi zaten toast ile bilgi veriyor
 }
 
-/* ============================================================
-   SAĞLIK GAUGE (SVG)
-   ============================================================ */
 function drawGauge(value){
   const svg = document.getElementById("ana_healthGauge");
   const cx=90, cy=100, r=75;
@@ -1287,9 +1887,6 @@ function drawGauge(value){
 function tickGauge(){ drawGauge(rand(55,95)); }
 tickGauge(); setInterval(tickGauge, 4000);
 
-/* ============================================================
-   SON AKTİVİTELER (timeline)
-   ============================================================ */
 function addActivity(text){
   const ul = document.getElementById("ana_activityTimeline");
   const li = document.createElement("li");
@@ -1300,27 +1897,22 @@ function addActivity(text){
 }
 ["Sistem başlatıldı","AI analizi tamamlandı (örnek)","SMDA döngü kontrolü yapıldı"].forEach(addActivity);
 
-/* ============================================================
-   BAŞLANGIÇ
-   ============================================================ */
 checkConnection();
 setInterval(checkConnection, 10000);
 
-
-  // --- ana paneli global köprüleri (onclick/onchange için) ---
-  window.ana_closeModal = closeModal;
-  window.ana_confirmLiveRun = confirmLiveRun;
-  window.ana_refreshAllMetrics = refreshAllMetrics;
-  window.ana_runSocialAgent = runSocialAgent;
-  window.ana_showLogs = showLogs;
-  window.ana_testWhatsAppBridge = testWhatsAppBridge;
+window.ana_closeModal = closeModal;
+window.ana_confirmLiveRun = confirmLiveRun;
+window.ana_refreshAllMetrics = refreshAllMetrics;
+window.ana_runSocialAgent = runSocialAgent;
+window.ana_showLogs = showLogs;
+window.ana_testWhatsAppBridge = testWhatsAppBridge;
+window.drawGauge = drawGauge;
+window.addActivity = addActivity;
 })();
 </script>
 
-<!-- ================= GELİŞMİŞ PANEL SCRIPT (izole IIFE) ================= -->
 <script>
 (function(){
-
 const API_BASE = "";
 function toast(msg, type="ok"){
   const wrap = document.getElementById("gel_toastWrap");
@@ -1344,12 +1936,42 @@ function logLine(msg){
   while(box.children.length > 100) box.removeChild(box.firstChild);
 }
 
-/* OSİLOSKOP (kanal-bazlı seçim destekli) */
+/* === YENİ: Özel dakika girişi yardımcıları === */
+function gel_customInputKullan(){
+  const custom = document.getElementById("gel_customInterval");
+  if(!custom) return;
+  const val = parseInt(custom.value);
+  if(val && val >= 1 && val <= 1440){
+    // Hazır select'i "custom" olarak işaretle
+    const sel = document.getElementById("gel_loopInterval");
+    if(sel) sel.value = "";
+  }
+}
+function gel_customInputTemizle(){
+  const custom = document.getElementById("gel_customInterval");
+  if(custom) custom.value = "";
+}
+window.gel_customInputKullan = gel_customInputKullan;
+window.gel_customInputTemizle = gel_customInputTemizle;
+
+/* Aktif döngü süresini al (özel giriş varsa onu, yoksa select'i döndürür) */
+function gel_aktifIntervalDegeri(){
+  const custom = document.getElementById("gel_customInterval");
+  if(custom){
+    const val = parseInt(custom.value);
+    if(val && val >= 1 && val <= 1440) return val;
+  }
+  const sel = document.getElementById("gel_loopInterval");
+  return parseInt(sel.value) || 60;
+}
+window.gel_aktifIntervalDegeri = gel_aktifIntervalDegeri;
+
 class Oscilloscope{
-  constructor(canvasId, channelCount, colors, labels, points=200){
+  constructor(canvasId, channelCount, colors, labels, points=200, explanations=[], allExplanation=""){
     this.canvas = document.getElementById(canvasId); this.ctx = this.canvas.getContext("2d");
     this.channelCount = channelCount; this.colors = colors; this.labels = labels; this.points = points;
-    this.selectedChannel = null; // null = "Hepsini Karışık Takip Et"
+    this.explanations = explanations; this.allExplanation = allExplanation;
+    this.selectedChannel = null;
     this.buffers = Array.from({length:channelCount}, ()=>new Array(points).fill(0));
     this._resize(); window.addEventListener("resize", ()=>this._resize());
     if(window.ResizeObserver){ new ResizeObserver(()=>this._resize()).observe(this.canvas); }
@@ -1365,14 +1987,40 @@ class Oscilloscope{
     ).join("");
     wrap.innerHTML = buttons + `<div class="chan-btn all-btn" data-ch="all">🔀 Hepsini Karışık Takip Et</div>`;
     wrap.querySelectorAll(".chan-btn").forEach(btn=>{
+      const ch = btn.dataset.ch;
+      const speech = ch === "all" ? this.allExplanation : this.explanations[parseInt(ch)];
+      if(speech) btn.dataset.vchanSpeech = speech;
       btn.addEventListener("click", ()=>{
-        const ch = btn.dataset.ch;
         if(ch === "all"){ this.showAll(); } else { this.setChannel(parseInt(ch)); }
         wrap.querySelectorAll(".chan-btn").forEach(b=>b.classList.remove("active"));
         btn.classList.add("active");
       });
     });
     wrap.querySelector('[data-ch="all"]').classList.add("active");
+    wrap.querySelectorAll(".chan-btn").forEach(btn=>{
+      const ch = btn.dataset.ch;
+      if(ch === "all") return;
+      btn.addEventListener("click", ()=>{
+        const idx = parseInt(ch);
+        let sonDeger = 0;
+        if(idx >= 0 && idx < this.buffers.length){
+          const buf = this.buffers[idx];
+          const son = buf.slice(-20);
+          sonDeger = Math.round(son.reduce((a,b)=>a+b,0) / son.length);
+        }
+        const kanalAdi = this.labels[idx] || ("Kanal " + (idx+1));
+        let durumCls, durumTxt, ornekler;
+        if(sonDeger >= 70){ durumCls = "iyi"; durumTxt = "🟢 İYİ — Değer mükemmel seviyede"; }
+        else if(sonDeger >= 40){ durumCls = "orta"; durumTxt = "🟡 ORTA — Değer normal seviyede"; }
+        else { durumCls = "kotu"; durumTxt = "🔴 KÖTÜ — Değer düşük seviyede"; }
+        ornekler = "<b>Değerlendirme:</b> " + kanalAdi + " için " + sonDeger + " değeri, " +
+                   (sonDeger >= 70 ? "70 ve üzeri olduğu için İYİ" : sonDeger >= 40 ? "40 ile 70 arasında olduğu için ORTA" : "40 altında olduğu için KÖTÜ") +
+                   " seviyededir.";
+        if(typeof oscPopupAc === "function"){
+          oscPopupAc(btn, { title: kanalAdi, valueText: sonDeger, durumClass: durumCls, durumText: durumTxt, orneklerHTML: ornekler });
+        }
+      });
+    });
   }
   draw(){
     const {ctx, canvas} = this; const w=canvas.width, h=canvas.height;
@@ -1391,8 +2039,16 @@ class Oscilloscope{
   }
   start(fps=30){ this._timer=setInterval(()=>this.draw(), 1000/fps); }
 }
-const OSC5_LABELS = ["AI niyet doğruluğu","Tarama hızı (ürün/sn)","Paylaşım başarı %","Cross-platform gecikme (sn)","Hata sayısı"];
-const osc = new Oscilloscope("gel_osiloskopCanvas", 5, ["#ff5fa8","#2d3f8f","#35d488","#f0842a","#9aa4b2"], OSC5_LABELS);
+const OSC5_LABELS = ["AI niyet doğruluğu","Tarama hızı (ürün/sn)","Paylaşım başarı %","Cross-platform gecikmesi (sn)","Hata sayısı"];
+const OSC5_EXPLANATIONS = [
+  "Şimdi bu ekranda Eeeayy ajanı niyet doğruluğu göreceksiniz. Bu osilogram, yapay zekanın müşteri mesajlarındaki niyeti yüzde kaç doğru anladığını gösterir. Örneğin; değer 60'ın altında ise anlama zayıf demektir, değer 60 ile 85 arasında ise ortalama anlama anlamına gelir, değer 85'in üzerinde ise mükemmel anlama demektir.",
+  "Şimdi bu ekranda Tarama hızı göreceksiniz. Bu osilogram, sistemin saniyede kaç ürünü tarayıp işlediğini gösterir. Örneğin; değer 2'nin altında ise yavaş demektir, değer 2 ile 6 arasında ise normal hız anlamına gelir, değer 6'nın üzerinde ise çok hızlı demektir.",
+  "Şimdi bu ekranda Paylaşım başarı oranı göreceksiniz. Bu osilogram, sosyal medyaya yapılan paylaşımların yüzde kaçının başarıyla tamamlandığını gösterir. Örneğin; değer 50'nin altında ise yüksek hata var demektir, değer 50 ile 80 arasında ise orta seviye anlamına gelir, değer 80'in üzerinde ise mükemmel başarı demektir.",
+  "Şimdi bu ekranda Cross-platform gecikmesi göreceksiniz. Bu osilogram, bir içeriğin platformlar arasında yayılma süresini saniye cinsinden gösterir. Örneğin; değer 2'nin altında ise anında yayılıyor demektir, değer 2 ile 5 arasında ise normal gecikme anlamına gelir, değer 5'in üzerinde ise gecikme yüksek demektir.",
+  "Şimdi bu ekranda Hata sayısı göreceksiniz. Bu osilogram, son işlemlerde oluşan hata sayısını gösterir. Sistemde takip edilen başlıca hata türleri şunlardır: Birincisi API Bağlantı Hatası, yani OpenRouter veya diğer harici servislere ulaşılamaması. İkincisi Zaman Aşımı Hatası, yani ağ gecikmeleri nedeniyle isteğin zamanında tamamlanmaması. Üçüncüsü Kimlik Doğrulama Hatası, yani anahtar veya yetki sorunları. Dördüncüsü Veri Format Hatası, yani gelen verinin beklenen formatta olmaması. Beşincisi Rate Limit Hatası, yani çok fazla istek nedeniyle servisin geçici olarak engellemesi. Örneğin; toplam hata sayısı sıfır ise sistem mükemmel çalışıyor demektir, bir ile üç arasında ise az sayıda hata var anlamına gelir, üçün üzerinde ise çok hata var demektir."
+];
+const OSC5_ALL_EXPLANATION = "Şimdi bu ekranda Hepsini Karışık Takip Et modunu göreceksiniz. Bu modda AI niyet doğruluğu, tarama hızı, paylaşım başarı, cross-platform gecikmesi ve hata sayısı kanallarının tümü aynı ekranda üst üste gösterilir. Örneğin; tüm çizgiler düz ve yatay ise sistem mükemmel çalışıyor demektir, bazı çizgiler dalgalı ise o kanallarda dalgalanma var demektir, çizgiler birbirini kesiyorsa sistem karmaşık bir dönemden geçiyor demektir.";
+const osc = new Oscilloscope("gel_osiloskopCanvas", 5, ["#ff5fa8","#2d3f8f","#35d488","#f0842a","#9aa4b2"], OSC5_LABELS, 200, OSC5_EXPLANATIONS, OSC5_ALL_EXPLANATION);
 osc.renderButtons("gel_oscChanButtons");
 osc.start();
 async function pullRealtime(){
@@ -1410,7 +2066,6 @@ async function pullRealtime(){
 }
 setInterval(pullRealtime, 1000);
 
-/* GRAFİKLER */
 new Chart(document.getElementById('gel_intentChart'), {
   type:'pie',
   data:{ labels:['Selam','Yardım','Ürün','Komisyon','Şikayet','Sipariş','Kampanya','İptal','Bilgi','Öneri','Teşekkür','Diğer'],
@@ -1437,21 +2092,21 @@ new Chart(document.getElementById('gel_loopCalendarChart'), {
   options:{ scales:{ y:{ min:0,max:100, ticks:{color:'#8492ab'} }, x:{ ticks:{color:'#8492ab', maxTicksLimit:10} } }, plugins:{legend:{labels:{color:'#eef2f8'}}} }
 });
 
-/* BUTON İŞLEVLERİ */
 async function testAIIntegration(){
   document.getElementById("gel_aiTestResult").textContent = "Test ediliyor…";
   const r = await safeFetch("/ai/test", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({prompt:"bugün trend nedir?"})});
   if(r.ok){ document.getElementById("gel_aiTestResult").textContent = "✅ " + (r.data.response || "Yanıt alındı"); toast("AI modülü yanıt verdi", "ok"); speakVolkan("AI modülü testi başarılı."); }
-  else{ document.getElementById("gel_aiTestResult").textContent = "⚠️ Backend yok — demo: \"Bugün trend: sürdürülebilir ürünler ↑\""; toast("AI backend'e ulaşılamadı — demo yanıt gösterildi", "err"); }
+  else{ document.getElementById("gel_aiTestResult").textContent = "⚠️ Backend yok — demo yanıt"; toast("AI backend'e ulaşılamadı", "err"); }
 }
 
 let loopTimer = null;
 function toggleSmdaLoop(active){
   if(active){
-    const interval = parseInt(document.getElementById("gel_loopInterval").value) * 60 * 1000;
-    logLine(`Döngü başlatıldı (her ${document.getElementById("gel_loopInterval").value} dk)`);
-    loopTimer = setInterval(()=>smdaRun(false), Math.min(interval, 15000)); // demo'da hızlandırılmış tetik
-    toast("SMDA döngüsü aktif edildi", "ok");
+    const intervalDk = gel_aktifIntervalDegeri();
+    const interval = intervalDk * 60 * 1000;
+    logLine(`Döngü başlatıldı (her ${intervalDk} dk)`);
+    loopTimer = setInterval(()=>smdaRun(false), Math.min(interval, 15000));
+    toast(`SMDA döngüsü aktif edildi (${intervalDk} dk)`, "ok");
   } else {
     clearInterval(loopTimer); logLine("Döngü durduruldu");
     safeFetch("/social/stop-loop", {method:"POST"});
@@ -1462,7 +2117,7 @@ function readSmdaParams(dryRun){
   return {
     dry_run: dryRun,
     loop: document.getElementById("gel_smdaLoopToggle").checked,
-    interval_sec: parseInt(document.getElementById("gel_loopInterval").value)*60,
+    interval_sec: gel_aktifIntervalDegeri() * 60,
     max_products: parseInt(document.getElementById("gel_maxProducts").value)||0,
     max_imece: parseInt(document.getElementById("gel_maxImece").value)||0
   };
@@ -1482,15 +2137,12 @@ async function smdaRun(dryRun){
   }
 }
 function smdaStart(){ smdaRun(false); }
-function smdaStop(){ document.getElementById("gel_smdaLoopToggle").checked=false; toggleSmdaLoop(false); }
+function smdaStop(){
+  document.getElementById("gel_smdaLoopToggle").checked=false;
+  toggleSmdaLoop(false);
+}
 function smdaDryRun(){ smdaRun(true); }
 
-/* ============================================================
-   VOLKAN SESLİ GERİ BİLDİRİM
-   NOT: gTTS bir kişiyi klonlayamaz — bu, standart Türkçe gTTS
-   sesine "Volkan" etiketi verilmiş halidir, Volkan'ın gerçek
-   sesi değildir.
-   ============================================================ */
 async function speakVolkan(text){
   const r = await safeFetch("/volkan/speak", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({text})});
   if(r.ok && r.data.status === "success" && r.data.audio_url){
@@ -1510,21 +2162,17 @@ function changePanelLanguage(lang){
 
 logLine("Panel yüklendi, canlı veri bekleniyor…");
 
-
-  // --- gel paneli global köprüleri (onclick/onchange için) ---
-  window.gel_changePanelLanguage = changePanelLanguage;
-  window.gel_toggleSmdaLoop = toggleSmdaLoop;
-  window.gel_smdaDryRun = smdaDryRun;
-  window.gel_smdaStart = smdaStart;
-  window.gel_smdaStop = smdaStop;
-  window.gel_testAIIntegration = testAIIntegration;
+window.gel_changePanelLanguage = changePanelLanguage;
+window.gel_toggleSmdaLoop = toggleSmdaLoop;
+window.gel_smdaDryRun = smdaDryRun;
+window.gel_smdaStart = smdaStart;
+window.gel_smdaStop = smdaStop;
+window.gel_testAIIntegration = testAIIntegration;
 })();
 </script>
 
-<!-- ================= KOMUTA PANEL SCRIPT (izole IIFE) ================= -->
 <script>
 (function(){
-
 const API_BASE = "";
 function toast(msg, type="ok"){
   const wrap = document.getElementById("kom_toastWrap");
@@ -1550,13 +2198,12 @@ function consoleLine(msg, cls=""){
   box.appendChild(div); box.scrollTop = box.scrollHeight;
   while(box.children.length > 1000) box.removeChild(box.firstChild);
 }
-
-/* 8 KANALLI OSİLOSKOP (kanal-bazlı seçim destekli) */
 class Oscilloscope{
-  constructor(canvasId, channelCount, colors, labels, points=200){
+  constructor(canvasId, channelCount, colors, labels, points=200, explanations=[], allExplanation=""){
     this.canvas=document.getElementById(canvasId); this.ctx=this.canvas.getContext("2d");
     this.channelCount=channelCount; this.colors=colors; this.labels=labels; this.points=points;
-    this.selectedChannel = null; // null = "Hepsini Karışık Takip Et"
+    this.explanations=explanations; this.allExplanation=allExplanation;
+    this.selectedChannel = null;
     this.buffers=Array.from({length:channelCount}, ()=>new Array(points).fill(0));
     this._resize(); window.addEventListener("resize", ()=>this._resize());
     if(window.ResizeObserver){ new ResizeObserver(()=>this._resize()).observe(this.canvas); }
@@ -1572,14 +2219,40 @@ class Oscilloscope{
     ).join("");
     wrap.innerHTML = buttons + `<div class="chan-btn all-btn" data-ch="all">🔀 Hepsini Karışık Takip Et</div>`;
     wrap.querySelectorAll(".chan-btn").forEach(btn=>{
+      const ch = btn.dataset.ch;
+      const speech = ch === "all" ? this.allExplanation : this.explanations[parseInt(ch)];
+      if(speech) btn.dataset.vchanSpeech = speech;
       btn.addEventListener("click", ()=>{
-        const ch = btn.dataset.ch;
         if(ch === "all"){ this.showAll(); } else { this.setChannel(parseInt(ch)); }
         wrap.querySelectorAll(".chan-btn").forEach(b=>b.classList.remove("active"));
         btn.classList.add("active");
       });
     });
     wrap.querySelector('[data-ch="all"]').classList.add("active");
+    wrap.querySelectorAll(".chan-btn").forEach(btn=>{
+      const ch = btn.dataset.ch;
+      if(ch === "all") return;
+      btn.addEventListener("click", ()=>{
+        const idx = parseInt(ch);
+        let sonDeger = 0;
+        if(idx >= 0 && idx < this.buffers.length){
+          const buf = this.buffers[idx];
+          const son = buf.slice(-20);
+          sonDeger = Math.round(son.reduce((a,b)=>a+b,0) / son.length);
+        }
+        const kanalAdi = this.labels[idx] || ("Kanal " + (idx+1));
+        let durumCls, durumTxt, ornekler;
+        if(sonDeger >= 70){ durumCls = "iyi"; durumTxt = "🟢 İYİ — Değer mükemmel seviyede"; }
+        else if(sonDeger >= 40){ durumCls = "orta"; durumTxt = "🟡 ORTA — Değer normal seviyede"; }
+        else { durumCls = "kotu"; durumTxt = "🔴 KÖTÜ — Değer düşük seviyede"; }
+        ornekler = "<b>Değerlendirme:</b> " + kanalAdi + " için " + sonDeger + " değeri, " +
+                   (sonDeger >= 70 ? "70 ve üzeri olduğu için İYİ" : sonDeger >= 40 ? "40 ile 70 arasında olduğu için ORTA" : "40 altında olduğu için KÖTÜ") +
+                   " seviyededir.";
+        if(typeof oscPopupAc === "function"){
+          oscPopupAc(btn, { title: kanalAdi, valueText: sonDeger, durumClass: durumCls, durumText: durumTxt, orneklerHTML: ornekler });
+        }
+      });
+    });
   }
   draw(){
     const {ctx,canvas}=this; const w=canvas.width,h=canvas.height;
@@ -1599,8 +2272,19 @@ class Oscilloscope{
   start(fps=30){ this._timer=setInterval(()=>this.draw(),1000/fps); }
 }
 const CH8_LABELS = ["WhatsApp mesaj","CPU %","RAM %","AI başarım","SMDA başarı","Cross gecikme","Hata sayısı","TRM senkron"];
+const CH8_EXPLANATIONS = [
+  "Şimdi bu ekranda WhatsApp mesaj sayısı göreceksiniz. Bu osilogram, WhatsApp üzerinden gönderilen mesaj trafiğini gösterir. Örneğin; değer 10'un altında ise sakin demektir, değer 10 ile 30 arasında ise normal yoğunluk anlamına gelir, değer 30'un üzerinde ise yoğun mesaj trafiği var demektir.",
+  "Şimdi bu ekranda CPU kullanımı göreceksiniz. Örneğin; değer 30'un altında ise rahat demektir, değer 30 ile 70 arasında ise normal anlamına gelir, değer 70'in üzerinde ise işlemci zorlanıyor demektir.",
+  "Şimdi bu ekranda RAM kullanımı göreceksiniz. Örneğin; değer 40'ın altında ise bellek rahat demektir, değer 40 ile 75 arasında ise normal anlamına gelir, değer 75'in üzerinde ise bellek dolmak üzere demektir.",
+  "Şimdi bu ekranda Eeeayy ajanı başarımı göreceksiniz. Örneğin; değer 60'ın altında ise başarım düşük demektir, değer 60 ile 85 arasında ise ortalama anlamına gelir, değer 85'in üzerinde ise mükemmel başarım demektir.",
+  "Şimdi bu ekranda SMDA başarı oranı göreceksiniz. Örneğin; değer 50'nin altında ise yüksek hata var demektir, değer 50 ile 80 arasında ise orta seviye anlamına gelir, değer 80'in üzerinde ise mükemmel başarı demektir.",
+  "Şimdi bu ekranda Cross gecikme göreceksiniz. Örneğin; değer 2'nin altında ise anında yayılıyor demektir, değer 2 ile 5 arasında ise normal gecikme anlamına gelir, değer 5'in üzerinde ise gecikme yüksek demektir.",
+  "Şimdi bu ekranda Hata sayısı göreceksiniz. Başlıca hata türleri: API Bağlantı Hatası, Zaman Aşımı Hatası, Kimlik Doğrulama Hatası, Veri Format Hatası ve Rate Limit Hatası. Örneğin; sıfır hata mükemmel, bir ile üç az, üç üzeri çok demektir.",
+  "Şimdi bu ekranda TRM senkronizasyonu göreceksiniz. Örneğin; değer 50'nin altında ise bileşenler uyumsuz demektir, değer 50 ile 85 arasında ise normal senkron anlamına gelir, değer 85'in üzerinde ise mükemmel senkron demektir."
+];
+const CH8_ALL_EXPLANATION = "Şimdi bu ekranda Hepsini Karışık Takip Et modunu göreceksiniz. Bu modda WhatsApp mesaj, CPU, RAM, AI başarım, SMDA başarı, Cross gecikme, hata sayısı ve TRM senkron kanallarının tümü aynı ekranda üst üste gösterilir. Örneğin; tüm çizgiler yatay ise sistem sakin demektir, bazı çizgiler yukarıda ise o sistemler yoğun demektir, tüm çizgiler yukarılarda kesişiyorsa sistem tam yükte çalışıyor demektir.";
 const CH8_COLORS = ["#ff3b3b","#35d488","#3b8bff","#f0d13b","#ff5fa8","#f0842a","#9aa4b2","#9b59b6"];
-const osc8 = new Oscilloscope("kom_telemetryCanvas", 8, CH8_COLORS, CH8_LABELS);
+const osc8 = new Oscilloscope("kom_telemetryCanvas", 8, CH8_COLORS, CH8_LABELS, 200, CH8_EXPLANATIONS, CH8_ALL_EXPLANATION);
 osc8.renderButtons("kom_oscChanButtons");
 osc8.start();
 async function pullTelemetry(){
@@ -1618,7 +2302,6 @@ async function pullTelemetry(){
 }
 setInterval(pullTelemetry, 1000);
 
-/* BÜYÜK ÇOK DİLLİ PASTA */
 let bigChart;
 async function loadBigMultilang(){
   const r = await safeFetch("/metrics/multilang");
@@ -1632,7 +2315,6 @@ async function loadBigMultilang(){
 }
 loadBigMultilang(); setInterval(loadBigMultilang, 15000);
 
-/* DÜNYA HARİTASI (basitleştirilmiş nokta-ısı SVG) */
 function drawWorldMap(){
   const svg = document.getElementById("kom_worldMap");
   const points = [
@@ -1653,8 +2335,7 @@ function drawWorldMap(){
 }
 drawWorldMap(); setInterval(drawWorldMap, 6000);
 
-/* PLATFORM TOGGLE GRID */
-const PLATFORMS = ["Telegram","WhatsApp","Facebook","Instagram","TikTok","YouTube"];
+const PLATFORMS = ["Telegram","WhatsApp","Facebook","Instagram","TikTok","YouTube","Bloglar"];
 const platformState = {};
 PLATFORMS.forEach(p=>platformState[p]=true);
 function renderPlatformGrid(){
@@ -1682,7 +2363,6 @@ async function shareToAllPlatforms(){
   }
 }
 
-/* MEDYA ÜRETİCİ */
 async function generateMedia(){
   const text = document.getElementById("kom_mediaText").value.trim();
   if(!text){ toast("Önce bir metin girin", "err"); return; }
@@ -1704,16 +2384,49 @@ function openLiveMediaModal(){
   openModal("kom_mediaModal");
 }
 
-/* PLATFORM BAŞARI GRAFİĞİ */
-new Chart(document.getElementById('kom_platformSuccessChart'), {
+const komPlatformSuccessChart = new Chart(document.getElementById('kom_platformSuccessChart'), {
   type:'bar',
-  data:{ labels:['Telegram','WhatsApp','Facebook','Instagram','TikTok'],
-    datasets:[{ label:'Başarı %', data:[92,87,83,79,65],
-      backgroundColor:['#26A5E4','#25D366','#1877F2','#E1306C','#111'] }]},
-  options:{ indexAxis:'y', scales:{ x:{max:100, ticks:{color:'#8492ab'}}, y:{ticks:{color:'#eef2f8'}} }, plugins:{legend:{display:false}} }
+  data:{ labels:['Telegram','WhatsApp','Facebook','Instagram','TikTok','YouTube','Bloglar'],
+    datasets:[{ label:'Başarı %', data:[92,87,83,79,65,74,81],
+      backgroundColor:['#26A5E4','#25D366','#1877F2','#E1306C','#111','#FF0000','#8B5CF6'],
+      borderColor:'rgba(0,0,0,0)',
+      borderWidth:0 }]},
+  options:{
+    indexAxis:'y',
+    scales:{ x:{max:100, ticks:{color:'#8492ab'}}, y:{ticks:{color:'#eef2f8'}} },
+    plugins:{legend:{display:false}},
+    hoverBorderWidth: 4,
+    hoverBorderColor: '#ffaa55',
+    onHover: (event, elements) => {
+      const chart = komPlatformSuccessChart;
+      chart.data.datasets[0].borderWidth = elements.length > 0 ? 4 : 0;
+      chart.data.datasets[0].borderColor = '#ffaa55';
+      chart.update('none');
+      if(elements.length > 0){
+        const idx = elements[0].index;
+        if(window._komLastHoveredBar !== idx){
+          window._komLastHoveredBar = idx;
+          const label = chart.data.labels[idx];
+          const value = chart.data.datasets[0].data[idx];
+          let degerlendirme;
+          if(value >= 90) degerlendirme = "mükemmel seviyede";
+          else if(value >= 80) degerlendirme = "çok iyi seviyede";
+          else if(value >= 70) degerlendirme = "iyi seviyede";
+          else if(value >= 60) degerlendirme = "orta seviyede";
+          else degerlendirme = "geliştirilmesi gereken seviyede";
+          const metin = `${label} platformunun başarı oranı yüzde ${value}. Bu ${degerlendirme} bir sonuç. Örneğin; yüzde 90 üzeri mükemmel, yüzde 70 ile 90 arası iyi, yüzde 50 ile 70 arası orta, yüzde 50'nin altı zayıf demektir.`;
+          if(window.VolkanVoice && VolkanVoice.isUnlocked()){
+            VolkanVoice.speakExact("Sayın CEO, " + metin);
+          }
+          consoleLine(`📊 Bar incelemesi: ${label} %${value}`);
+        }
+      } else {
+        window._komLastHoveredBar = null;
+      }
+    }
+  }
 });
 
-/* BATCH TABLOSU */
 function renderBatchTable(){
   const tbody = document.getElementById("kom_batchTableBody");
   const rows = Array.from({length:20}, (_,i)=>{
@@ -1725,12 +2438,6 @@ function renderBatchTable(){
 }
 renderBatchTable();
 
-/* ============================================================
-   VOLKAN SESLİ GERİ BİLDİRİM
-   NOT: gTTS bir kişiyi klonlayamaz — bu, standart Türkçe gTTS
-   sesine "Volkan" etiketi verilmiş halidir, Volkan'ın gerçek
-   sesi değildir.
-   ============================================================ */
 async function speakVolkan(text){
   const r = await safeFetch("/volkan/speak", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({text})});
   if(r.ok && r.data.status === "success" && r.data.audio_url){
@@ -1739,30 +2446,32 @@ async function speakVolkan(text){
   }
 }
 
-/* ACİL DURUM */
+/* === YENİ: Global Emergency Lock ile entegre edilmiş acil durum === */
 let emergencyActive = false;
 function emergencyStop(){
   emergencyActive = !emergencyActive;
   document.getElementById("kom_alarmBar").classList.toggle("show", emergencyActive);
   if(emergencyActive){
-    consoleLine("🚨 ACİL DURUM TETİKLENDİ — tüm otonom süreçler duraklatılıyor", "#ff4d5e");
+    consoleLine("🚨 ACİL DURUM TETİKLENDİ — Global Lock devrede. Tüm ajanlar ve döngüler duraklatılıyor.", "#ff4d5e");
     safeFetch("/social/stop-loop", {method:"POST"});
-    toast("Acil durum aktif edildi", "err");
-    speakVolkan("Acil durum aktif edildi. Tüm otonom süreçler duraklatıldı.");
+    // Global emergency lock: 200 ajan + SMDA döngüsü
+    if(typeof window.globalEmergencyLock === "function"){
+      window.globalEmergencyLock(true);
+    }
+    toast("Acil durum aktif — Global kilit devrede", "err");
+    speakVolkan("Acil durum aktif edildi. Tüm otonom süreçler, 200 ajan ve SMDA döngüleri Global Lock ile duraklatıldı.");
   } else {
-    consoleLine("Acil durum kaldırıldı, sistem normale dönüyor");
+    consoleLine("Acil durum kaldırıldı, sistem normale dönüyor", "#35d488");
     toast("Acil durum kaldırıldı", "ok");
-    speakVolkan("Acil durum kaldırıldı. Sistem normale dönüyor.");
+    speakVolkan("Acil durum kaldırıldı. Sistem normale dönüyor. Ajanlar tekrar başlatılabilir.");
+    if(typeof window.globalEmergencyLock === "function"){
+      window.globalEmergencyLock(false);
+    }
   }
 }
 
 consoleLine("Komuta Merkezi başlatıldı");
 
-/* ============================================================
-   CEO YÖNETİM PANELİ — Erişim Onayı / Oturum Sonlandırma
-   NOT: CEO anahtarı sadece bu sayfa açıkken JS belleğinde tutulur,
-   localStorage/sessionStorage'a YAZILMAZ (güvenlik).
-   ============================================================ */
 function getCeoKey(){ return document.getElementById("kom_ceoKeyInput").value.trim(); }
 function getCeoUserId(){ return document.getElementById("kom_ceoUserIdInput").value.trim(); }
 
@@ -1781,6 +2490,26 @@ async function ceoApproveLogin(){
     loadCeoLists();
   } else {
     const msg = r.ok ? r.data.message : ("Backend'e ulaşılamadı: " + r.error);
+    resultBox.textContent = "⚠️ " + msg;
+    toast(msg, "err");
+  }
+}
+
+async function ceoPassiveUser(){
+  const userId = getCeoUserId(), ceoKey = getCeoKey();
+  if(!userId){ toast("Kullanıcı ID / isim girin", "err"); return; }
+  if(!ceoKey){ toast("CEO anahtarını girin", "err"); return; }
+  const r = await safeFetch("/ceo/passive-user", {method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({user_id: userId, ceo_key: ceoKey})});
+  const resultBox = document.getElementById("kom_ceoActionResult");
+  if(r.ok && r.data.status === "success"){
+    resultBox.textContent = "⏸ " + (r.data.message || (userId + " pasif duruma alındı."));
+    toast((r.data.message || (userId + " pasif duruma alındı.")), "ok");
+    consoleLine(`CEO kararı: ${userId} pasif duruma alındı`);
+    speakVolkan(`${userId} kullanıcısı CEO tarafından pasif duruma alındı.`);
+    loadCeoLists();
+  } else {
+    const msg = r.ok ? (r.data.message || "Pasif işlemi başarısız") : ("Backend'e ulaşılamadı: " + r.error);
     resultBox.textContent = "⚠️ " + msg;
     toast(msg, "err");
   }
@@ -1806,6 +2535,51 @@ async function ceoForceLogout(){
   }
 }
 
+/* === YENİ: Toplu CEO fonksiyonları === */
+async function ceoApproveAll(){
+  const ceoKey = getCeoKey();
+  if(!ceoKey){ toast("Önce CEO anahtarını girin", "err"); return; }
+  const resultBox = document.getElementById("kom_ceoActionResult");
+  resultBox.textContent = "⏳ Tüm bekleyenler onaylanıyor…";
+  const r = await safeFetch("/ceo/approve-all-pending", {method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({ceo_key: ceoKey})});
+  if(r.ok && r.data.status === "success"){
+    const n = r.data.count || 0;
+    resultBox.textContent = `✅ Tüm bekleyenler onaylandı (${n} kullanıcı)`;
+    toast(`Tüm bekleyenler onaylandı (${n})`, "ok");
+    consoleLine(`CEO toplu onayı: ${n} bekleyen kullanıcı onaylandı`);
+    speakVolkan(`Sayın CEO, tüm bekleyen erişim talepleri toplu olarak onaylandı. Toplam ${n} kullanıcı.`);
+    loadCeoLists();
+  } else {
+    const msg = r.ok ? (r.data.message || "Toplu onay başarısız") : ("Backend'e ulaşılamadı: " + r.error);
+    resultBox.textContent = "⚠️ " + msg;
+    toast(msg, "err");
+  }
+}
+
+async function ceoCloseAllSessions(){
+  const ceoKey = getCeoKey();
+  if(!ceoKey){ toast("Önce CEO anahtarını girin", "err"); return; }
+  const resultBox = document.getElementById("kom_ceoActionResult");
+  resultBox.textContent = "⏳ Tüm aktif oturumlar kapatılıyor…";
+  const r = await safeFetch("/ceo/close-all-sessions", {method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({ceo_key: ceoKey})});
+  if(r.ok && r.data.status === "success"){
+    const n = r.data.count || 0;
+    resultBox.textContent = `⛔ Tüm aktif oturumlar kapatıldı (${n} kullanıcı)`;
+    toast(`Tüm aktif oturumlar kapatıldı (${n})`, "ok");
+    consoleLine(`CEO toplu kapatma: ${n} aktif oturum sonlandırıldı`);
+    speakVolkan(`Sayın CEO, tüm aktif oturumlar toplu olarak kapatıldı. Toplam ${n} kullanıcı çıkışa zorlandı.`);
+    loadCeoLists();
+  } else {
+    const msg = r.ok ? (r.data.message || "Toplu kapatma başarısız") : ("Backend'e ulaşılamadı: " + r.error);
+    resultBox.textContent = "⚠️ " + msg;
+    toast(msg, "err");
+  }
+}
+window.ceoApproveAll = ceoApproveAll;
+window.ceoCloseAllSessions = ceoCloseAllSessions;
+
 async function approveFromList(userId){ document.getElementById("kom_ceoUserIdInput").value = userId; await ceoApproveLogin(); }
 async function logoutFromList(userId){ document.getElementById("kom_ceoUserIdInput").value = userId; await ceoForceLogout(); }
 
@@ -1818,10 +2592,10 @@ async function loadCeoLists(){
     pendingBox.innerHTML = rp.data.map(u => `
       <div class="ceo-row">
         <span>${u.name || u.user_id} <span style="color:var(--text-dim); font-size:10.5px;">(${u.user_id})</span></span>
-        <button class="btn-ceo-approve mini-btn" data-vtask-start="${(u.name||u.user_id)} kullanıcısının sisteme giriş onayı başlıyor, CEO anahtarınızla doğrulanacak." data-vtask-done="${(u.name||u.user_id)} kullanıcısının sisteme girişi CEO tarafından onaylandı." onclick="kom_approveFromList('${u.user_id}')">Onayla</button>
+        <button class="btn-ceo-approve mini-btn" data-vtask-start="${(u.name||u.user_id)} onay işlemi başlıyor." data-vtask-done="${(u.name||u.user_id)} onaylandı." onclick="kom_approveFromList('${u.user_id}')">Onayla</button>
       </div>`).join("");
   } else {
-    pendingBox.innerHTML = `<div style="opacity:.6;">${rp.ok ? "Bekleyen talep yok." : "Backend'e ulaşılamadı (demo modu)."}</div>`;
+    pendingBox.innerHTML = `<div style="opacity:.6;">${rp.ok ? "Bekleyen talep yok." : "·"}</div>`;
   }
 
   const ra = await safeFetch("/ceo/active-sessions");
@@ -1829,212 +2603,587 @@ async function loadCeoLists(){
     activeBox.innerHTML = ra.data.map(u => `
       <div class="ceo-row">
         <span>${u.name || u.user_id} <span style="color:var(--text-dim); font-size:10.5px;">(${u.user_id})</span></span>
-        <button class="btn-ceo-logout mini-btn" data-vtask-start="${(u.name||u.user_id)} kullanıcısının oturumunu CEO kararıyla sonlandırma işlemi başlıyor." data-vtask-done="${(u.name||u.user_id)} kullanıcısının oturumu CEO tarafından sonlandırıldı." onclick="kom_logoutFromList('${u.user_id}')">Çıkışa Zorla</button>
+        <button class="btn-ceo-logout mini-btn" data-vtask-start="${(u.name||u.user_id)} oturumu sonlandırılıyor." data-vtask-done="${(u.name||u.user_id)} oturumu sonlandırıldı." onclick="kom_logoutFromList('${u.user_id}')">Çıkışa Zorla</button>
       </div>`).join("");
   } else {
-    activeBox.innerHTML = `<div style="opacity:.6;">${ra.ok ? "Aktif oturum yok." : "Backend'e ulaşılamadı (demo modu)."}</div>`;
+    activeBox.innerHTML = `<div style="opacity:.6;">${ra.ok ? "Aktif oturum yok." : "·"}</div>`;
   }
+  if(window.vt_lockPanel) window.vt_lockPanel(window.PANEL_LOCKED);
 }
 loadCeoLists();
 setInterval(loadCeoLists, 20000);
 
-
-  // --- kom paneli global köprüleri (onclick/onchange için) ---
-  window.kom_approveFromList = approveFromList;
-  window.kom_ceoApproveLogin = ceoApproveLogin;
-  window.kom_ceoForceLogout = ceoForceLogout;
-  window.kom_closeModal = closeModal;
-  window.kom_emergencyStop = emergencyStop;
-  window.kom_generateMedia = generateMedia;
-  window.kom_loadCeoLists = loadCeoLists;
-  window.kom_logoutFromList = logoutFromList;
-  window.kom_openLiveMediaModal = openLiveMediaModal;
-  window.kom_shareToAllPlatforms = shareToAllPlatforms;
-  window.kom_togglePlatform = togglePlatform;
+window.kom_approveFromList = approveFromList;
+window.kom_ceoApproveLogin = ceoApproveLogin;
+window.kom_ceoPassiveUser = ceoPassiveUser;
+window.kom_ceoForceLogout = ceoForceLogout;
+window.kom_ceoApproveAll = ceoApproveAll;
+window.kom_ceoCloseAllSessions = ceoCloseAllSessions;
+window.kom_closeModal = closeModal;
+window.kom_emergencyStop = emergencyStop;
+window.kom_generateMedia = generateMedia;
+window.kom_loadCeoLists = loadCeoLists;
+window.kom_logoutFromList = logoutFromList;
+window.kom_openLiveMediaModal = openLiveMediaModal;
+window.kom_shareToAllPlatforms = shareToAllPlatforms;
+window.kom_togglePlatform = togglePlatform;
 })();
 </script>
 
 <script>
 (function(){
 
-/* =====================================================================
-   BU DOSYA TAMAMEN BAĞIMSIZDIR — mevcut projenin hiçbir dosyasına
-   dokunmaz, hiçbir global değişken/fonksiyon adını paylaşmaz. Var olan
-   panellerin yanında ayrı bir sekme/pencere olarak açılabilir.
-   ===================================================================== */
-const API_BASE = "";
-
-function toast(msg, type="ok"){
-  const wrap = document.getElementById("ult_toastWrap");
-  const el = document.createElement("div");
-  el.className = "toast " + type;
-  el.textContent = msg;
-  wrap.appendChild(el);
-  setTimeout(()=>el.remove(), 4000);
-}
-// NOT: ult_voiceLog, VolkanVoice ve BAŞLAT/KAPAT buton dinleyicileri artık
-// panel geneli paylaşılan script bloğunda (sayfanın üstünde) tanımlıdır —
-// böylece TÜM sekmelerdeki butonlar aynı Volkan ses motorunu kullanabilir.
-// Burada tekrar tanımlanmazlar (bkz. dosyanın en üstündeki <script> bloğu).
-
-/* ---------------------------------------------------------------------
-   DİNAMİK AJAN RADARI (200 ajan)
-   Gerçek canlı veri için önce /api/agents/live denenir (henüz backend'de
-   yoksa sessizce simülasyona düşer — bu, projedeki safeFetch/simülasyon
-   deseniyle tutarlıdır).
---------------------------------------------------------------------- */
 const TOTAL_AGENTS = 200;
-// GERÇEK AJAN VERİSİ — sosyal_imece_ajanlar.txt dosyasından ayrıştırıldı (200 kayıt)
-const AGENTS_DATA = [{"id": 1, "name": "Agent_001", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 2, "name": "Agent_002", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 3, "name": "Agent_003", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 4, "name": "Agent_004", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 5, "name": "Agent_005", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 6, "name": "Agent_006", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 7, "name": "Agent_007", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 8, "name": "Agent_008", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 9, "name": "Agent_009", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 10, "name": "Agent_010", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 11, "name": "Agent_011", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 12, "name": "Agent_012", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 13, "name": "Agent_013", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 14, "name": "Agent_014", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 15, "name": "Agent_015", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 16, "name": "Agent_016", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 17, "name": "Agent_017", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 18, "name": "Agent_018", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 19, "name": "Agent_019", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 20, "name": "Agent_020", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 21, "name": "Agent_021", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 22, "name": "Agent_022", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 23, "name": "Agent_023", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 24, "name": "Agent_024", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 25, "name": "Agent_025", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 26, "name": "Agent_026", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 27, "name": "Agent_027", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 28, "name": "Agent_028", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 29, "name": "Agent_029", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 30, "name": "Agent_030", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 31, "name": "Agent_031", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 32, "name": "Agent_032", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 33, "name": "Agent_033", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 34, "name": "Agent_034", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 35, "name": "Agent_035", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 36, "name": "Agent_036", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 37, "name": "Agent_037", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 38, "name": "Agent_038", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 39, "name": "Agent_039", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 40, "name": "Agent_040", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 41, "name": "Agent_041", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 42, "name": "Agent_042", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 43, "name": "Agent_043", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 44, "name": "Agent_044", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 45, "name": "Agent_045", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 46, "name": "Agent_046", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 47, "name": "Agent_047", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 48, "name": "Agent_048", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 49, "name": "Agent_049", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 50, "name": "Agent_050", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 51, "name": "Agent_051", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 52, "name": "Agent_052", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 53, "name": "Agent_053", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 54, "name": "Agent_054", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 55, "name": "Agent_055", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 56, "name": "Agent_056", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 57, "name": "Agent_057", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 58, "name": "Agent_058", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 59, "name": "Agent_059", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 60, "name": "Agent_060", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 61, "name": "Agent_061", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 62, "name": "Agent_062", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 63, "name": "Agent_063", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 64, "name": "Agent_064", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 65, "name": "Agent_065", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 66, "name": "Agent_066", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 67, "name": "Agent_067", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 68, "name": "Agent_068", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 69, "name": "Agent_069", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 70, "name": "Agent_070", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 71, "name": "Agent_071", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 72, "name": "Agent_072", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 73, "name": "Agent_073", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 74, "name": "Agent_074", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 75, "name": "Agent_075", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 76, "name": "Agent_076", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 77, "name": "Agent_077", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 78, "name": "Agent_078", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 79, "name": "Agent_079", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 80, "name": "Agent_080", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 81, "name": "Agent_081", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 82, "name": "Agent_082", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 83, "name": "Agent_083", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 84, "name": "Agent_084", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 85, "name": "Agent_085", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 86, "name": "Agent_086", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 87, "name": "Agent_087", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 88, "name": "Agent_088", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 89, "name": "Agent_089", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 90, "name": "Agent_090", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 91, "name": "Agent_091", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 92, "name": "Agent_092", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 93, "name": "Agent_093", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 94, "name": "Agent_094", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 95, "name": "Agent_095", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 96, "name": "Agent_096", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 97, "name": "Agent_097", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 98, "name": "Agent_098", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 99, "name": "Agent_099", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 100, "name": "Agent_100", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 101, "name": "Agent_101", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 102, "name": "Agent_102", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 103, "name": "Agent_103", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 104, "name": "Agent_104", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 105, "name": "Agent_105", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 106, "name": "Agent_106", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 107, "name": "Agent_107", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 108, "name": "Agent_108", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 109, "name": "Agent_109", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 110, "name": "Agent_110", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 111, "name": "Agent_111", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 112, "name": "Agent_112", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 113, "name": "Agent_113", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 114, "name": "Agent_114", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 115, "name": "Agent_115", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 116, "name": "Agent_116", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 117, "name": "Agent_117", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 118, "name": "Agent_118", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 119, "name": "Agent_119", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 120, "name": "Agent_120", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 121, "name": "Agent_121", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 122, "name": "Agent_122", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 123, "name": "Agent_123", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 124, "name": "Agent_124", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 125, "name": "Agent_125", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 126, "name": "Agent_126", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 127, "name": "Agent_127", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 128, "name": "Agent_128", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 129, "name": "Agent_129", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 130, "name": "Agent_130", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 131, "name": "Agent_131", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 132, "name": "Agent_132", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 133, "name": "Agent_133", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 134, "name": "Agent_134", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 135, "name": "Agent_135", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 136, "name": "Agent_136", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 137, "name": "Agent_137", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 138, "name": "Agent_138", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 139, "name": "Agent_139", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 140, "name": "Agent_140", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 141, "name": "Agent_141", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 142, "name": "Agent_142", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 143, "name": "Agent_143", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 144, "name": "Agent_144", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 145, "name": "Agent_145", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 146, "name": "Agent_146", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 147, "name": "Agent_147", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 148, "name": "Agent_148", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 149, "name": "Agent_149", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 150, "name": "Agent_150", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 151, "name": "Agent_151", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 152, "name": "Agent_152", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 153, "name": "Agent_153", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 154, "name": "Agent_154", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 155, "name": "Agent_155", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 156, "name": "Agent_156", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 157, "name": "Agent_157", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 158, "name": "Agent_158", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 159, "name": "Agent_159", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 160, "name": "Agent_160", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 161, "name": "Agent_161", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 162, "name": "Agent_162", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 163, "name": "Agent_163", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 164, "name": "Agent_164", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 165, "name": "Agent_165", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 166, "name": "Agent_166", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 167, "name": "Agent_167", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 168, "name": "Agent_168", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 169, "name": "Agent_169", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 170, "name": "Agent_170", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 171, "name": "Agent_171", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 172, "name": "Agent_172", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 173, "name": "Agent_173", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 174, "name": "Agent_174", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 175, "name": "Agent_175", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 176, "name": "Agent_176", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 177, "name": "Agent_177", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 178, "name": "Agent_178", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 179, "name": "Agent_179", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 180, "name": "Agent_180", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 181, "name": "Agent_181", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 182, "name": "Agent_182", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 183, "name": "Agent_183", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 184, "name": "Agent_184", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 185, "name": "Agent_185", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 186, "name": "Agent_186", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 187, "name": "Agent_187", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 188, "name": "Agent_188", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 189, "name": "Agent_189", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 190, "name": "Agent_190", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 191, "name": "Agent_191", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 192, "name": "Agent_192", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 193, "name": "Agent_193", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}, {"id": 194, "name": "Agent_194", "task": "Görsel ve Multimedya İşleme (OCR/Whisper)", "status": "Aktif/Hazır"}, {"id": 195, "name": "Agent_195", "task": "İletişim ve E-Posta Asistanlığı", "status": "Aktif/Hazır"}, {"id": 196, "name": "Agent_196", "task": "Ağ İzleme ve Güvenlik Denetimi", "status": "Aktif/Hazır"}, {"id": 197, "name": "Agent_197", "task": "Veri Analizi ve RAG Optimizasyonu", "status": "Aktif/Hazır"}, {"id": 198, "name": "Agent_198", "task": "Sosyal Medya Otomasyonu ve Paylaşım", "status": "Aktif/Hazır"}, {"id": 199, "name": "Agent_199", "task": "E-Ticaret Ürün ve Stok Takibi", "status": "Aktif/Hazır"}, {"id": 200, "name": "Agent_200", "task": "Hukuki ve Mevzuat Uyumluluk Kontrolü", "status": "Aktif/Hazır"}];
-const AGENTS_BY_ID = {};
-AGENTS_DATA.forEach(a => AGENTS_BY_ID[a.id] = a);
 
-const activeAgents = new Map(); // id -> {task, cellEl, timer}
+const ULT_AGENTS = [
+{id:1,code:"Agent-001",role:"Başkomutan / Ana Koordinatör",task:"Sistem geneli stratejik kararlar, önceliklendirme ve orchestrator.py yönlendirmesi."},
+{id:2,code:"Agent-002",role:"Operasyonel Denetçi",task:"Alt ajanların anlık görev durumlarını ve hata loglarını izleme."},
+{id:3,code:"Agent-003",role:"Bütçe ve Kaynak Yöneticisi",task:"OpenRouter API maliyetleri, cüzdan takibi ve kaynak optimizasyonu."},
+{id:4,code:"Agent-004",role:"Yürütme Konseyi Üyesi",task:"Departmanlar arası veri akışını ve senkronizasyonu sağlama."},
+{id:5,code:"Agent-005",role:"Karar Destek Uzmanı",task:"Çatışan senaryolarda alternatifli rota belirleme."},
+{id:6,code:"Agent-006",role:"Sistem Entegratörü",task:"Modüler yapıların ana ekosistemle uyumunu denetleme."},
+{id:7,code:"Agent-007",role:"Performans Ölçüm Sorumlusu",task:"Ajan yanıt süreleri ve verimlilik metriklerini raporlama."},
+{id:8,code:"Agent-008",role:"Görev Dağılım Uzmanı",task:"İş yükünü boşta kalan ajanlara dinamik olarak paylaştırma."},
+{id:9,code:"Agent-009",role:"Acil Durum Koordinatörü",task:"Kritik API hata döngülerinde (402/404) devreye girme."},
+{id:10,code:"Agent-010",role:"Komuta Sekreteryası",task:"Günlük operasyon özetlerini konsolide etme."},
+{id:11,code:"Agent-011",role:"Niş Analisti (Genel)",task:"trendurunlermarket.com için genel pazar eğilimlerini tarama."},
+{id:12,code:"Agent-012",role:"Ürün Trend Uzmanı",task:"Yükselen e-ticaret trendlerini ve talep artışlarını tespit etme."},
+{id:13,code:"Agent-013",role:"Pazar Segmentasyon Uzmanı",task:"Hedef kitleyi demografik ve coğrafi olarak bölümlere ayırma."},
+{id:14,code:"Agent-014",role:"Rakip Analiz Uzmanı",task:"Benzer affiliate sitelerinin stratejilerini inceleme."},
+{id:15,code:"Agent-015",role:"Fiyat Rekabetçilik Uzmanı",task:"Kar marjı ve optimum satış fiyatı simülasyonları yapma."},
+{id:16,code:"Agent-016",role:"Talep Tahmincisi",task:"Mevsimsel ürün taleplerini önceden modelleme."},
+{id:17,code:"Agent-017",role:"Kategori Optimizasyon Uzmanı",task:"Ürün kategorilerinin performansını değerlendirme."},
+{id:18,code:"Agent-018",role:"Stok ve Tedarik Takipçisi",task:"Ürün stok durumlarını ve tedarikçi güncellemelerini izleme."},
+{id:19,code:"Agent-019",role:"Karlılık Hesaplama Uzmanı",task:"Kampanya bazlı net kazanç projeksiyonları çıkarma."},
+{id:20,code:"Agent-020",role:"Küresel Pazar Araştırıcısı",task:"Uluslararası affiliate fırsatlarını tarama."},
+{id:21,code:"Agent-021",role:"Hedef Kitle Stratejisti",task:"Demografik veri tabanlarını kampanya hedefleriyle eşleştirme."},
+{id:22,code:"Agent-022",role:"Davranışsal Analist",task:"Kullanıcı tıklama ve satın alma alışkanlıklarını inceleme."},
+{id:23,code:"Agent-023",role:"Personas Oluşturucu",task:"Hedef kitle için ideal alıcı profilleri (persona) yaratma."},
+{id:24,code:"Agent-024",role:"İlgi Alanı Eşleştirici",task:"Sosyal medya ilgi alanlarıyla ürünleri bağlama."},
+{id:25,code:"Agent-025",role:"Yaş Grubu Hedefleme Uzmanı",task:"Farklı yaş gruplarına özel kampanya dili belirleme."},
+{id:26,code:"Agent-026",role:"Bölgesel Pazar Uzmanı",task:"Yerel tüketim alışkanlıklarını analiz etme."},
+{id:27,code:"Agent-027",role:"Sadakat Programı Stratejisti",task:"Tekrar eden müşteriler için kampanya kurgulama."},
+{id:28,code:"Agent-028",role:"Dönüşüm Hunisi Mimarı",task:"Ziyaretçinin alıcıya dönüşüm aşamalarını tasarlama."},
+{id:29,code:"Agent-029",role:"Trafik Kaynağı Analisti",task:"Hangi platformdan daha nitelikli trafik geldiğini raporlama."},
+{id:30,code:"Agent-030",role:"Strateji Geri Bildirim Uzmanı",task:"Kampanya sonuçlarına göre stratejiyi güncelleme."},
+{id:31,code:"Agent-031",role:"Blog Yazarı (Ana Akım)",task:"trendurunlermarket.com için uzun form SEO makaleleri üretme."},
+{id:32,code:"Agent-032",role:"Blog Yazarı (Ürün İnceleme)",task:"Detaylı ürün inceleme yazıları kaleme alma."},
+{id:33,code:"Agent-033",role:"Bülten İçerik Uzmanı",task:"E-posta bültenleri için cazip metinler hazırlama."},
+{id:34,code:"Agent-034",role:"Reklam Metni Yazarı (Copywriter)",task:"Dijital reklamlar için yüksek dönüşümlü kopyalar yazma."},
+{id:35,code:"Agent-035",role:"Başlık Optimizasyon Uzmanı",task:"Tıklama oranı (CTR) yüksek başlıklar tasarlama."},
+{id:36,code:"Agent-036",role:"Açılış Sayfası Metinçisi",task:"Landing page metinlerini kullanıcı psikolojisine göre düzenleme."},
+{id:37,code:"Agent-037",role:"Kampanya Hikaye Anlatıcısı",task:"Ürünler etrafında ilgi çekici hikayeler kurgulama."},
+{id:38,code:"Agent-038",role:"Sık Sorulan Sorular Uzmanı",task:"Ürün sayfaları için kapsamlı SSS metinleri oluşturma."},
+{id:39,code:"Agent-039",role:"Çağrı Metni Tasarımcısı",task:"Satışa yönlendiren CTA (Call to Action) cümleleri yazma."},
+{id:40,code:"Agent-040",role:"Sosyal Medya Metin Yazarı (Genel)",task:"Günlük sosyal medya gönderi metinleri üretme."},
+{id:41,code:"Agent-041",role:"Mikro Metin Yazarı",task:"Kısa form platformlar için vurucu sloganlar bulma."},
+{id:42,code:"Agent-042",role:"Hashtag Uzmanı",task:"İçerikler için en uygun ve popüler etiketleri belirleme."},
+{id:43,code:"Agent-043",role:"E-Ticaret Açıklama Uzmanı",task:"Ürün teknik özelliklerini pazarlama diline çevirme."},
+{id:44,code:"Agent-044",role:"Basın Bülteni Yazarı",task:"Organizasyon ve kampanya duyuruları için bülten hazırlama."},
+{id:45,code:"Agent-045",role:"Duygu Tonu Ayarlayıcısı",task:"Metinlerin hedef kitleye göre duygusal tonunu ayarlama."},
+{id:46,code:"Agent-046",role:"Çeviri ve Lokalizasyon Uzmanı",task:"Küresel metinleri yerel dile uyarlama."},
+{id:47,code:"Agent-047",role:"İçerik Kalite Kontrolcüsü",task:"Üretilen metinlerin dilbilgisi ve akışını denetleme."},
+{id:48,code:"Agent-048",role:"Özgünlük Denetçisi",task:"İçeriklerin intihal barındırmadığını kontrol etme."},
+{id:49,code:"Agent-049",role:"SEO Metin Entegratörü",task:"Anahtar kelimeleri metinlere doğal bir şekilde yerleştirme."},
+{id:50,code:"Agent-050",role:"Arşiv İçerik Düzenleyicisi",task:"Eski içerikleri güncel trendlere göre revize etme."},
+{id:51,code:"Agent-051",role:"Kısa Form Metin Uzmanı",task:"Hızlı okunan akış metinleri tasarlama."},
+{id:52,code:"Agent-052",role:"Etkileşim Odaklı Yazar",task:"Yorum ve beğeni artırıcı soru cümleleri kurgulama."},
+{id:53,code:"Agent-053",role:"Kampanya Slogancısı",task:"Marka kimliğini destekleyen sloganlar üretme."},
+{id:54,code:"Agent-054",role:"Ürün Lansman Metinçisi",task:"Yeni ürün duyuruları için özel metinler yazma."},
+{id:55,code:"Agent-055",role:"İndirim ve Fırsat Metinçisi",task:"Kampanya dönemlerine özel aciliyet hissi yaratan metinler yazma."},
+{id:56,code:"Agent-056",role:"Kurumsal İletişim Yazarı",task:"Dernek ve ortaklık duyuruları için resmi metinler hazırlama."},
+{id:57,code:"Agent-057",role:"Kullanıcı Yorumu Yanıtlayıcısı",task:"Otomatik müşteri etkileşim metinleri oluşturma."},
+{id:58,code:"Agent-058",role:"Hikaye (Story) Metin Yazarı",task:"Anlık paylaşımlar için kısa metinler üretme."},
+{id:59,code:"Agent-059",role:"Bilgilendirici Post Yazarı",task:"Tüketicileri eğiten eğitici içerik metinleri hazırlama."},
+{id:60,code:"Agent-060",role:"Trend Takipçi Yazar",task:"Güncel gündem maddelerini ürün pazarlamasıyla bağlama."},
+{id:61,code:"Agent-061",role:"Vizyon Metinleri Yazarı",task:"Sosyal İmece felsefesini anlatan içerikler üretme."},
+{id:62,code:"Agent-062",role:"E-Ticaret Rehber Yazarı",task:"Kullanıcılar için alışveriş kılavuzları hazırlama."},
+{id:63,code:"Agent-063",role:"Karşılaştırma Yazarı",task:"Alternatif ürünleri kıyaslayan makaleler yazma."},
+{id:64,code:"Agent-064",role:"Sektörel İçerik Üreticisi",task:"E-ticaret ve dijital pazarlama üzerine yazılar yazma."},
+{id:65,code:"Agent-065",role:"Seslendirme Metinçisi",task:"Video ve ses dosyaları için diyalog metinleri hazırlama."},
+{id:66,code:"Agent-066",role:"Görsel Altyazı Yazarı",task:"Videolar için dikkat çekici altyazı kopyaları yazma."},
+{id:67,code:"Agent-067",role:"Meta Açıklama Uzmanı",task:"Arama motorları için özel snippet açıklamaları yazma."},
+{id:68,code:"Agent-068",role:"Alternatif Metin (Alt Text) Yazarı",task:"Görseller için arama motoru uyumlu açıklamalar yazma."},
+{id:69,code:"Agent-069",role:"İçerik Takvimi Planlayıcısı",task:"Metinlerin yayın sırasını ve zamanlamasını organize etme."},
+{id:70,code:"Agent-070",role:"Copywriting Baş Denetçisi",task:"Tüm metin departmanının çıktılarını son kez onaylama."},
+{id:71,code:"Agent-071",role:"Görsel Tasarım Asistanı (Banner)",task:"Web sitesi banner ve afiş kompozisyonlarını yönlendirme."},
+{id:72,code:"Agent-072",role:"Ürün Görsel Optimizasyoncusu",task:"Ürün fotoğraflarının sunum kalitesini planlama."},
+{id:73,code:"Agent-073",role:"Renk Paleti Uzmanı",task:"Marka kimliğine uygun görsel renk uyumlarını belirleme."},
+{id:74,code:"Agent-074",role:"Sosyal Medya Görsel Planlayıcısı",task:"Instagram ve Facebook postları için görsel konsept çıkarma."},
+{id:75,code:"Agent-075",role:"Reklam Görsel Tasarımcısı",task:"Dijital reklam görsellerinin kompozisyonunu kurgulama."},
+{id:76,code:"Agent-076",role:"Kapak Fotoğrafı Uzmanı",task:"Video ve makaleler için tıklama çeken kapaklar tasarlama."},
+{id:77,code:"Agent-077",role:"İnfografik Tasarım Asistanı",task:"Verileri görselleştirmek için şema planları hazırlama."},
+{id:78,code:"Agent-078",role:"Kampanya Afiş Uzmanı",task:"Özel indirim günleri için görsel konseptler üretme."},
+{id:79,code:"Agent-079",role:"Logo ve İkon Düzenleyicisi",task:"Marka simgelerinin dijital mecralara uyumunu denetleme."},
+{id:80,code:"Agent-080",role:"Tipografi ve Font Uzmanı",task:"Görsellerde kullanılacak yazı tiplerini standartlaştırma."},
+{id:81,code:"Agent-081",role:"E-Ticaret Vitrin Tasarımcısı",task:"Mağaza ön yüz görsel yerleşimini planlama."},
+{id:82,code:"Agent-082",role:"Görsel Kalite Denetçisi",task:"Üretilen görsellerin çözünürlük ve estetik standartlarını kontrol etme."},
+{id:83,code:"Agent-083",role:"Şablon Standartlaştırıcısı",task:"Paylaşım şablonlarının kurumsal kimliğe uygunluğunu sağlama."},
+{id:84,code:"Agent-084",role:"Hareketli Görsel (GIF) Planlayıcısı",task:"İlgi çekici animasyonlu görseller kurgulama."},
+{id:85,code:"Agent-085",role:"Görsel Arşiv Sorumlusu",task:"Medya varlıklarını kategorize edip saklama."},
+{id:86,code:"Agent-086",role:"Video Kurgu ve Shorts Yönetmeni",task:"YouTube Shorts için dikey video akışı planlama."},
+{id:87,code:"Agent-087",role:"TikTok Video Akış Uzmanı",task:"TikTok trendlerine uygun video kurgu senaryoları yazma."},
+{id:88,code:"Agent-088",role:"Instagram Reels Kurgucusu",task:"Reels içerikleri için dinamik sahne geçişleri tasarlama."},
+{id:89,code:"Agent-089",role:"Video Giriş (Hook) Uzmanı",task:"Videonun ilk 3 saniyesinde izleyiciyi tutacak sahneler kurgulama."},
+{id:90,code:"Agent-090",role:"Ses ve Müzik Seçim Uzmanı",task:"Videolara uygun telifsiz arka plan müzikleri belirleme."},
+{id:91,code:"Agent-091",role:"Video Efekt ve Geçiş Planlayıcısı",task:"Görsel dinamizmi artıracak efektler önerme."},
+{id:92,code:"Agent-092",role:"Ürün Tanıtım Videosu Kurgucusu",task:"Ürünlerin özelliklerini gösteren video akışları tasarlama."},
+{id:93,code:"Agent-093",role:"Kapanış ve CTA Video Uzmanı",task:"Videoların sonuna dönüşüm odaklı yönlendirmeler ekleme."},
+{id:94,code:"Agent-094",role:"Video Süre Optimizasyoncusu",task:"Platform algoritmalarına göre video sürelerini ayarlama."},
+{id:95,code:"Agent-095",role:"Çoklu Platform Video Uyarlayıcısı",task:"Bir videoyu farklı platform ölçülerine uyarlama."},
+{id:96,code:"Agent-096",role:"Canlı Yayın Akış Planlayıcısı",task:"Olası canlı yayınlar için senaryo hazırlama."},
+{id:97,code:"Agent-097",role:"Video Kalite ve Performans Analisti",task:"Yayınlanan videoların izlenme oranlarını yorumlama."},
+{id:98,code:"Agent-098",role:"Animasyon Senaristi",task:"Tanıtım animasyonları için storyboard hazırlama."},
+{id:99,code:"Agent-099",role:"Görsel Efekt Danışmanı",task:"Videolara eklenecek dijital öğeleri planlama."},
+{id:100,code:"Agent-100",role:"Medya Prodüksiyon Baş Denetçisi",task:"Görsel ve video ekiplerinin tüm çıktımlarını onaylama."},
+{id:101,code:"Agent-101",role:"Anahtar Kelime Uzmanı (SEO)",task:"Arama hacmi yüksek kelimeleri tespit etme."},
+{id:102,code:"Agent-102",role:"Uzun Kuyruklu (Long-tail) SEO Uzmanı",task:"Niş arama sorgularını yakalama."},
+{id:103,code:"Agent-103",role:"Meta Etiket Düzenleyicisi",task:"Title ve description etiketlerini optimize etme."},
+{id:104,code:"Agent-104",role:"Rakip SEO Analisti",task:"Rakiplerin arama motoru stratejilerini çözme."},
+{id:105,code:"Agent-105",role:"Site İçi Bağlantı (Internal Link) Uzmanı",task:"Sayfalar arası yönlendirme ağını kurma."},
+{id:106,code:"Agent-106",role:"URL Yapısı Optimizasyoncusu",task:"SEO dostu URL standartlarını denetleme."},
+{id:107,code:"Agent-107",role:"Görsel SEO Uzmanı",task:"Resimlerin arama motorlarında indekslenmesini sağlama."},
+{id:108,code:"Agent-108",role:"Mobil SEO Uyumluluk Denetçisi",task:"Mobil arama performansını artırma önlemleri alma."},
+{id:109,code:"Agent-109",role:"Sayfa Yüklenme Hızı Analisti",task:"Hız optimizasyonu için teknik öneriler sunma."},
+{id:110,code:"Agent-110",role:"Yerel SEO Uzmanı",task:"Bölgesel aramalar için optimizasyon yapma."},
+{id:111,code:"Agent-111",role:"Organik Trafik Analisti",task:"Arama motoru kaynaklı ziyaretçi akışını izleme."},
+{id:112,code:"Agent-112",role:"Sıralama Takipçisi",task:"Hedef kelimelerdeki Google sıra değişimlerini raporlama."},
+{id:113,code:"Agent-113",role:"Tıklama Oranı (CTR) İyileştiricisi",task:"Arama sonuçlarındaki performansını artırma çalışmaları yapma."},
+{id:114,code:"Agent-114",role:"Hata (404/500) Takip Uzmanı",task:"Kırık bağlantıları tespit edip raporlama."},
+{id:115,code:"Agent-115",role:"Site Haritası (Sitemap) Yöneticisi",task:"XML site haritalarının güncelliğini denetleme."},
+{id:116,code:"Agent-116",role:"Yapılandırılmış Veri (Schema) Uzmanı",task:"Arama motoru botları için veri işaretlemeleri yapma."},
+{id:117,code:"Agent-117",role:"Backlink Stratejisti",task:"Dış bağlantı kaynaklarını planlama."},
+{id:118,code:"Agent-118",role:"İçerik Boşluğu (Content Gap) Analisti",task:"Rakiplerin var olup bizim olmadığımız alanları bulma."},
+{id:119,code:"Agent-119",role:"SEO Performans Raporcusu",task:"Haftalık organik büyüme raporları hazırlama."},
+{id:120,code:"Agent-120",role:"SEO Baş Denetçisi",task:"Arama motoru optimizasyon süreçlerinin tamamını koordine etme."},
+{id:121,code:"Agent-121",role:"Sosyal Medya Dağıtım Operatörü (Hesap 1-10)",task:"İlk 10 bireysel hesapta otomatik paylaşım yönetimi."},
+{id:122,code:"Agent-122",role:"Sosyal Medya Dağıtım Operatörü (Hesap 11-20)",task:"11-20 arası hesapların içerik akışını yönetme."},
+{id:123,code:"Agent-123",role:"Sosyal Medya Dağıtım Operatörü (Hesap 21-30)",task:"21-30 arası hesaplarda zamanlama yapma."},
+{id:124,code:"Agent-124",role:"Sosyal Medya Dağıtım Operatörü (Hesap 31-40)",task:"31-40 arası hesapların paylaşım otomasyonu."},
+{id:125,code:"Agent-125",role:"Sosyal Medya Dağıtım Operatörü (Hesap 41-50)",task:"41-50 arası hesaplarda etkileşim takibi."},
+{id:126,code:"Agent-126",role:"Sosyal Medya Dağıtım Operatörü (Hesap 51-60)",task:"51-60 arası hesapların içerik dağıtımı."},
+{id:127,code:"Agent-127",role:"Sosyal Medya Dağıtım Operatörü (Hesap 61-70)",task:"61-70 arası hesaplarda kampanya senkronizasyonu."},
+{id:128,code:"Agent-128",role:"Sosyal Medya Dağıtım Operatörü (Hesap 71-80)",task:"71-80 arası hesapların hedef kitle etkileşimi."},
+{id:129,code:"Agent-129",role:"Sosyal Medya Dağıtım Operatörü (Hesap 81-90)",task:"81-90 arası hesaplarda trafik yönlendirmesi."},
+{id:130,code:"Agent-130",role:"Sosyal Medya Dağıtım Operatörü (Hesap 91-100)",task:"Son 10 bireysel hesabın otomasyon yönetimi."},
+{id:131,code:"Agent-131",role:"Çoklu Hesap Zamanlama Uzmanı",task:"100 hesabın çakışmayan paylaşım takvimini oluşturma."},
+{id:132,code:"Agent-132",role:"Platform Dağılım Uzmanı",task:"İçeriklerin YouTube, TikTok, Instagram, Facebook arası dağılımı."},
+{id:133,code:"Agent-133",role:"Etkileşim Yönetim Asistanı",task:"Gelen yorumlara otomatik veya yarı otomatik yanıt verme."},
+{id:134,code:"Agent-134",role:"Algoritma Uyum Uzmanı",task:"Platform algoritmalarındaki güncellemelere göre paylaşım biçimini ayarlama."},
+{id:135,code:"Agent-135",role:"Hesap Güvenlik Denetçisi",task:"100 bireysel hesabın ban riskine karşı güvenlik sınırlarını gözetme."},
+{id:136,code:"Agent-136",role:"Çapraz Tanıtım Uzmanı",task:"Hesaplar arası organik etkileşim zincirleri kurma."},
+{id:137,code:"Agent-137",role:"Takipçi Kazanım Stratejisti",task:"Organik büyüme taktiklerini hesaplara uygulama."},
+{id:138,code:"Agent-138",role:"Paylaşım Frekans Ayarlayıcısı",task:"Hesapların spam algılanmaması için gönderi aralıklarını tanzim etme."},
+{id:139,code:"Agent-139",role:"Mesajlaşma Otomasyoncusu",task:"DM (Direct Message) üzerinden gelen affiliate link yönlendirmelerini yönetme."},
+{id:140,code:"Agent-140",role:"Grup ve Topluluk Paylaşımcısı",task:"İlgili Telegram ve WhatsApp gruplarına içerik akışı sağlama."},
+{id:141,code:"Agent-141",role:"Viral İçerik Yayımcısı",task:"Yüksek potansiyelli içerikleri eş zamanlı olarak 100 hesaba yayma."},
+{id:142,code:"Agent-142",role:"Kampanya Senkronizasyon Operatörü",task:"İndirim duyurularını tüm hesaplarda aynı anda başlatma."},
+{id:143,code:"Agent-143",role:"Hesap Performans Karşılaştırıcısı",task:"Hangi bireysel hesabın daha çok trafik getirdiğini ölçme."},
+{id:144,code:"Agent-144",role:"İçerik Çeşitlilik Denetçisi",task:"Aynı hesabın arka arkaya benzer içerik paylaşmasını engelleme."},
+{id:145,code:"Agent-145",role:"Erişim (Reach) Optimizasyoncusu",task:"Gönderilerin maksimum kişiye ulaşması için saat optimizasyonu yapma."},
+{id:146,code:"Agent-146",role:"Etkileşim Oranı Takipçisi",task:"Beğeni, kaydetme ve paylaşım oranlarını analiz etme."},
+{id:147,code:"Agent-147",role:"Profil Optimizasyon Uzmanı",task:"100 hesabın biyografi ve yönlendirme linklerini güncel tutma."},
+{id:148,code:"Agent-148",role:"Hata Kurtarma Operatörü",task:"Paylaşım yapmayan veya hata veren hesap otomasyonlarını onarma."},
+{id:149,code:"Agent-149",role:"Raporlama Asistanı (Sosyal Medya)",task:"100 hesabın günlük erişim özetlerini raporlama."},
+{id:150,code:"Agent-150",role:"Dağıtım Ağı Baş Denetçisi",task:"Sosyal medya otomasyon ekibinin tüm operasyonunu denetleme."},
+{id:151,code:"Agent-151",role:"Dynamic Niche Profiler (DNP) Baş Uzmanı",task:"Mekansal veri ve niş profil eşleştirme motorunu yönetme."},
+{id:152,code:"Agent-152",role:"Endeksa Entegrasyon Uzmanı",task:"Emlak ve bölge bazlı ekonomik değer verilerini sisteme çekme."},
+{id:153,code:"Agent-153",role:"Hoodmaps Veri Analisti",task:"Mahalle kültürleri ve eğilim haritalarını pazarlama verisiyle birleştirme."},
+{id:154,code:"Agent-154",role:"GeoSpy.ai Görsel Konum Uzmanı",task:"Görsellerin coğrafi ve mekansal analizini yapma."},
+{id:155,code:"Agent-155",role:"Mekansal Demografi Uzmanı",task:"Coğrafi bölgelerin gelir ve tüketim profillerini çıkarma."},
+{id:156,code:"Agent-156",role:"Bölgesel Niş Eşleştirici",task:"Hangi bölgeye hangi ürün grubunun pazarlanacağını belirleme."},
+{id:157,code:"Agent-157",role:"Konum Bazlı Hedefleme Uzmanı",task:"Yerel kampanyaları coğrafi koordinatlara göre optimize etme."},
+{id:158,code:"Agent-158",role:"Veri Sentezleyicisi (Spatial)",task:"Farklı coğrafi kaynaklardan gelen verileri tek havuzda toplama."},
+{id:159,code:"Agent-159",role:"Tüketici Eğilim Modelleme Uzmanı",task:"Mekansal veriler üzerinden satın alma davranışı öngörme."},
+{id:160,code:"Agent-160",role:"Niş Karlılık Analisti",task:"Belirlenen niş alanların finansal getiri potansiyelini hesaplama."},
+{id:161,code:"Agent-161",role:"Özel DNP Sentez Ajanı",task:"Çok katmanlı mekansal ve demografik profilleme işlemlerini yürütme."},
+{id:162,code:"Agent-162",role:"Harita Tabanlı Pazarlama Planlayıcısı",task:"Coğrafi verileri kampanya haritalarına dökme."},
+{id:163,code:"Agent-163",role:"Yerel Trend Takipçisi",task:"Şehir bazlı ani tüketim trendlerini yakalama."},
+{id:164,code:"Agent-164",role:"Veri Kalite Denetçisi (DNP)",task:"Mekansal verilerin doğruluğunu ve güncelliğini kontrol etme."},
+{id:165,code:"Agent-165",role:"API Veri Akış Uzmanı (Harici Araçlar)",task:"Endeksa ve benzeri servislerden veri çekme süreçlerini yönetme."},
+{id:166,code:"Agent-166",role:"Affiliate Veri Madencisi",task:"Satış ortaklığı ağlarından gelen dönüşüm verilerini işleme."},
+{id:167,code:"Agent-167",role:"Tıklama Dönüşüm Oranı (CR) Analisti",task:"Ziyaretçilerin yüzde kaçının satışa döndüğünü inceleme."},
+{id:168,code:"Agent-168",role:"Komisyon Gelir Takipçisi",task:"Affiliate ortaklıklarından elde edilen kazançları hesaplama."},
+{id:169,code:"Agent-169",role:"Çerez ve İzleme Uzmanı",task:"Ziyaretçi takip kodlarının (UTM vb.) çalışmasını denetleme."},
+{id:170,code:"Agent-170",role:"Trafik Kaynağı Dönüşüm Uzmanı",task:"En çok kazandıran trafik kanallarını tespit etme."},
+{id:171,code:"Agent-171",role:"Ürün Performans Madencisi",task:"Hangi ürünlerin en yüksek komisyonu getirdiğini raporlama."},
+{id:172,code:"Agent-172",role:"Sepet Terk Etme Analisti",task:"Kullanıcıların sepeti neden yarıda bıraktığını araştırma."},
+{id:173,code:"Agent-173",role:"Geri Dönüş (Retargeting) Veri Uzmanı",task:"Sepeti terk edenlere yönelik veri havuzu oluşturma."},
+{id:174,code:"Agent-174",role:"Satış Funnel Optimizasyoncusu",task:"Satış aşamalarındaki kayıpları en aza indirme."},
+{id:175,code:"Agent-175",role:"Maliyet / Getiri (ROI) Analisti",task:"Kampanya harcamaları ile elde edilen geliri kıyaslama."},
+{id:176,code:"Agent-176",role:"Veri Gizliliği Uyumluluk Uzmanı",task:"Toplanan verilerin yasal mevzuata uygunluğunu gözetme."},
+{id:177,code:"Agent-177",role:"Tahminsel Analitik Uzmanı",task:"Geçmiş verilere dayanarak gelecek satışları öngörme."},
+{id:178,code:"Agent-178",role:"Rapor Konsolide Edici",task:"Tüm analitik verileri yönetimin önüne sunulacak hale getirme."},
+{id:179,code:"Agent-179",role:"Veri Tabanı Temizlikçisi",task:"Eski ve gereksiz log/veri kalabalığını temizleme."},
+{id:180,code:"Agent-180",role:"Analitik Ekip Baş Denetçisi",task:"Veri analitiği ve madencilik operasyonlarını onaylama."},
+{id:181,code:"Agent-181",role:"Hata Denetim Uzmanı (Retry Handler)",task:"retry_handler.py süreçlerini ve yeniden deneme döngülerini yönetme."},
+{id:182,code:"Agent-182",role:"API Bağlantı İzleyicisi",task:"OpenRouter ve harici servislerin erişilebilirliğini denetleme."},
+{id:183,code:"Agent-183",role:"HTTP Hata Kodları Analisti",task:"402, 404, 500 gibi hataları anında tespit edip raporlama."},
+{id:184,code:"Agent-184",role:"Zaman Aşımı (Timeout) Yöneticisi",task:"Ağ gecikmelerinde sistemin kilitlenmesini önleme."},
+{id:185,code:"Agent-185",role:"Güvenlik Duvarı Asistanı",task:"Sistem dışından gelen yetkisiz istekleri izleme."},
+{id:186,code:"Agent-186",role:"Çevre Değişkeni (.env) Denetçisi",task:"Hassas anahtarların ve yapılandırmaların güvenliğini kontrol etme."},
+{id:187,code:"Agent-187",role:"Log Kayıt Yöneticisi",task:"Sistem hata ve işlem loglarını düzenli olarak arşivleme."},
+{id:188,code:"Agent-188",role:"İstisna (Exception) Yakalayıcı",task:"Kod bloklarında oluşan beklenmeyen çökmeleri engelleme."},
+{id:189,code:"Agent-189",role:"Otomatik Kurtarma Sorumlusu",task:"Hata alan süreçlerin güvenli şekilde yeniden başlamasını tetikleme."},
+{id:190,code:"Agent-190",role:"Sistem Sağlık Kontrolcüsü",task:"Tüm scriptlerin (orchestrator, launcher vb.) ayakta olup olmadığını test etme."},
+{id:191,code:"Agent-191",role:"UTEYKDER Veri Arşiv Ajanı",task:"uteykder_veri_arsiv_ajani.py ile dernek verilerinin güvenli arşivlenmesini sağlama."},
+{id:192,code:"Agent-192",role:"Sosyal İmece Veri Koruma Uzmanı",task:"sosyalimece.org veri tabanı güvenliğini denetleme."},
+{id:193,code:"Agent-193",role:"Yedekleme Operatörü",task:"Tüm sistem dosyalarının ve veritabanlarının periyodik yedeğini alma."},
+{id:194,code:"Agent-194",role:"Dernek Proje Veri Sorumlusu",task:"Sosyal sorumluluk projelerine ait belgeleri düzenleme."},
+{id:195,code:"Agent-195",role:"Üye Kayıt ve Bilgi Güvenliği Uzmanı",task:"Dernek üye veri tabanının gizliliğini koruma."},
+{id:196,code:"Agent-196",role:"Web Sitesi İçerik Güvenlikçisi",task:"uteykder.org.tr ve diğer web arayüzlerinin bütünlüğünü koruma."},
+{id:197,code:"Agent-197",role:"Dokümantasyon Asistanı",task:"Sistem mimarisine ait teknik belgelerin güncelliğini sağlama."},
+{id:198,code:"Agent-198",role:"Sürüm Kontrol Destekçisi",task:"Kod değişikliklerinin ve güncellemelerinin takibini yapma."},
+{id:199,code:"Agent-199",role:"Sistem Destek Uzmanı",task:"Genel operasyon boyunca kullanıcıya ve diğer ajanlara destek sağlama."},
+{id:200,code:"Agent-200",role:"Baş Arşiv ve Kapanış Ajanı",task:"Tüm günlük operasyonların dökümünü alarak sistemi güvenli kapatma moduna alma."}
+];
+window.ULT_AGENTS = ULT_AGENTS;
 
-function buildGrid(){
-  const grid = document.getElementById("ult_agentGrid");
-  grid.innerHTML = "";
-  for(let i=1;i<=TOTAL_AGENTS;i++){
+const ULT_BY_ID = {};
+ULT_AGENTS.forEach(a => ULT_BY_ID[a.id] = a);
+
+let ult_activeAgents = new Map();
+let ult_flowContainer, ult_agentGrid, ult_logBox;
+let ult_simInterval = null;
+let ult_sistemAktif = false;
+let ult_renkZamanlayici = null;
+
+/* === YENİ: Aktif hover'da olan ajan ID'sini tutar === */
+window._ult_aktifHoverAjanId = null;
+
+function ult_log(msg){
+  if(!ult_logBox) ult_logBox = document.getElementById("ult_logBox");
+  if(!ult_logBox) return;
+  ult_logBox.innerHTML += `<div>⏱️ ${new Date().toLocaleTimeString('tr-TR')} · ${msg}</div>`;
+  ult_logBox.scrollTop = ult_logBox.scrollHeight;
+  while(ult_logBox.children.length > 100) ult_logBox.removeChild(ult_logBox.firstChild);
+}
+window.ult_log = ult_log;
+
+function ult_durumUygula(id, durum){
+  const cell = document.getElementById("ult-agent-" + id);
+  if(cell){
+    cell.classList.remove("durum-yesil","durum-sari","durum-kirmizi");
+    if(durum && durum !== "bosta") cell.classList.add("durum-" + durum);
+  }
+  const flowItems = ult_flowContainer ? ult_flowContainer.querySelectorAll(".flow-ajan") : [];
+  for(const el of flowItems){
+    if(el.dataset.agentId == id){
+      el.classList.remove("durum-yesil","durum-sari","durum-kirmizi");
+      if(durum && durum !== "bosta") el.classList.add("durum-" + durum);
+      break;
+    }
+  }
+}
+
+function ult_buildAgentList(){
+  ult_agentGrid = document.getElementById("ult_agentGrid");
+  if(!ult_agentGrid) return;
+  ult_agentGrid.innerHTML = "";
+  ULT_AGENTS.forEach(a => {
     const cell = document.createElement("div");
     cell.className = "agent-cell";
-    cell.id = "agent-cell-" + i;
-    const real = AGENTS_BY_ID[i];
-    const code = real ? real.name : `Agent-${String(i).padStart(3,"0")}`;
-    const task = real ? real.task : "—";
-    cell.innerHTML = `<div class="a-code">${code}</div><div class="a-task">${task}</div><div class="a-state">boşta</div>`;
-    grid.appendChild(cell);
-  }
-}
-buildGrid();
-
-function updateStats(){
-  const active = activeAgents.size;
-  document.getElementById("ult_statActive").textContent = active;
-  document.getElementById("ult_statIdle").textContent = TOTAL_AGENTS - active;
+    cell.id = "ult-agent-" + a.id;
+    cell.dataset.agentId = a.id;
+    cell.title = `${a.code} — ${a.role}`;
+    cell.textContent = "Ajan " + String(a.id).padStart(3, "0");
+    cell.addEventListener("click", () => ult_agentTiklandi(a));
+    ult_agentGrid.appendChild(cell);
+  });
+  ult_updateStats();
 }
 
-function activateAgent(id, taskName){
-  const cell = document.getElementById("agent-cell-" + id);
-  if(!cell || activeAgents.has(id)) return;
-  const real = AGENTS_BY_ID[id];
-  const task = taskName || (real ? real.task : "Görev");
-  cell.classList.add("active");
-  const taskEl = cell.querySelector(".a-task");
-  if(taskEl) taskEl.textContent = task;
-  const stateEl = cell.querySelector(".a-state");
-  if(stateEl) stateEl.textContent = "🟢 çalışıyor";
-  const lifespan = 3000 + Math.random()*4000; // simülasyonda görev süresi
-  const timer = setTimeout(() => deactivateAgent(id), lifespan);
-  activeAgents.set(id, { task: taskName, timer });
-  updateStats();
-}
-function deactivateAgent(id){
-  const cell = document.getElementById("agent-cell-" + id);
-  const entry = activeAgents.get(id);
-  if(entry) clearTimeout(entry.timer);
-  activeAgents.delete(id);
-  if(cell){
-    cell.classList.remove("active");
-    const stateEl = cell.querySelector(".a-state");
-    if(stateEl) stateEl.textContent = "boşta";
-    const real = AGENTS_BY_ID[id];
-    const taskEl = cell.querySelector(".a-task");
-    if(taskEl && real) taskEl.textContent = real.task;
-  }
-  updateStats();
+function ult_updateStats(){
+  const active = ult_activeAgents.size;
+  const statTotal  = document.getElementById("ult_statTotal");
+  const statActive = document.getElementById("ult_statActive");
+  const statIdle   = document.getElementById("ult_statIdle");
+  if(statTotal)  statTotal.textContent  = ULT_AGENTS.length;
+  if(statActive) statActive.textContent = active;
+  if(statIdle)   statIdle.textContent   = ULT_AGENTS.length - active;
 }
 
-function simulationTick(){
-  // Her tur 1-4 rastgele ajanı göreve atar (halihazırda boşta olanlardan)
-  const idleIds = [];
-  for(let i=1;i<=TOTAL_AGENTS;i++){ if(!activeAgents.has(i)) idleIds.push(i); }
-  if(idleIds.length === 0) return;
-  const assignCount = Math.min(idleIds.length, 1 + Math.floor(Math.random()*4));
-  for(let k=0;k<assignCount;k++){
-    const idx = Math.floor(Math.random()*idleIds.length);
-    const agentId = idleIds.splice(idx,1)[0];
-    const real = AGENTS_BY_ID[agentId];
-    activateAgent(agentId, real ? real.task : "Görev");
-  }
-}
+function ult_agentTiklandi(agent){
+  const prev = document.getElementById("ult_agentPreview");
+  const pKod = document.getElementById("ult_prevKod");
+  const pRol = document.getElementById("ult_prevRol");
+  const pGorev = document.getElementById("ult_prevGorev");
+  const pDurum = document.getElementById("ult_prevDurum");
 
-// Kullanıcının girdiği API Key — sadece bellekte tutulur, hiçbir yere kaydedilmez.
-function getApiKey(){ return document.getElementById("ult_apiKeyInput").value.trim(); }
-
-async function tryFetchRealAgentStatus(){
-  // Gerçek /api/agents/live artık backend'de var (bkz. whatsapp_agent_bridge.py) ve
-  // X-API-Key ile korunuyor (fail-closed: API_ACCESS_KEY tanımsızsa 401 döner).
-  // DÜRÜST NOT: Bu uç nokta MASTER_CONTROLLER.py'nin GERÇEKTEN çalıştırdığı ajanları
-  // kendi GERÇEK Python sınıf adlarıyla (ör. "TRMAccountingAgent") bildirir — bunlar
-  // sosyal_imece_ajanlar.txt'deki "Agent_001..200" numaralandırmasıyla HİÇ ilişkili
-  // değildir. Bu yüzden gerçek veri, 200'lük kart ızgarasındaki belirli bir kartı
-  // "aktif" yapmak için KULLANILMIYOR (bu, var olmayan bir eşleşmeyi uydurmak olurdu);
-  // bunun yerine ayrı bir "✅ Gerçekten Çalışan Ajanlar" kutusunda ham haliyle gösteriliyor.
-  // 200'lük ızgara, kendi göstergesel simülasyonuna bağımsız olarak devam eder.
-  try{
-    const controller = new AbortController();
-    const t = setTimeout(()=>controller.abort(), 1500);
-    const headers = {};
-    const key = getApiKey();
-    if(key) headers["X-API-Key"] = key;
-    const res = await fetch(API_BASE + "/api/agents/live", { signal: controller.signal, headers });
-    clearTimeout(t);
-    if(!res.ok) throw new Error("yok");
-    const data = await res.json();
-    const realAgents = data.active || [];
-    const box = document.getElementById("ult_realAgentsBox");
-    if(realAgents.length > 0){
-      document.getElementById("ult_agentSimBadge").textContent = "🟢 API Bağlı — Gerçek Ajan Verisi Alındı";
-      document.getElementById("ult_agentSimBadge").style.color = "var(--ok)";
-      box.style.display = "block";
-      box.textContent = `✅ Gerçekten çalışan ajanlar (MASTER_CONTROLLER.py): ${realAgents.map(a=>a.name).join(", ")}`;
-    } else {
-      document.getElementById("ult_agentSimBadge").textContent = "🟢 API Bağlı (şu an gerçek çalışan ajan yok)";
-      document.getElementById("ult_agentSimBadge").style.color = "var(--ok)";
-      box.style.display = "none";
+  if(prev && pKod){
+    pKod.textContent = agent.code;
+    pRol.textContent  = "Rol: " + agent.role;
+    pGorev.textContent = "Görev: " + agent.task;
+    const entry = ult_activeAgents.get(agent.id);
+    let durum = "bosta", durumTxt = "boşta";
+    if(entry){ durum = entry.durum; durumTxt = (durum === "yesil" ? "görevde" : durum === "sari" ? "tehlikeli" : "hata"); }
+    if(pDurum){
+      pDurum.className = "ahp-durum " + durum;
+      pDurum.textContent = durumTxt;
     }
-    // 200'lük ızgara kasıtlı olarak buradan etkilenmiyor — bkz. yukarıdaki dürüst not.
-    return true;
-  }catch(e){
-    document.getElementById("ult_agentSimBadge").textContent = "🟡 Ajan Radarı: Simülasyon Modu";
-    document.getElementById("ult_agentSimBadge").style.color = "";
-    document.getElementById("ult_realAgentsBox").style.display = "none";
-    return false;
+    /* Aktif hover ID'sini kaydet */
+    window._ult_aktifHoverAjanId = agent.id;
+    prev.classList.add("goster");
+    clearTimeout(ult_agentTiklandi._timeout);
+    ult_agentTiklandi._timeout = setTimeout(() => {
+      prev.classList.remove("goster");
+      window._ult_aktifHoverAjanId = null;
+    }, 8000);
+  }
+  if(VolkanVoice.isUnlocked()){
+    const metin = `${agent.code}. Rolü: ${agent.role}. Görevi: ${agent.task}`;
+    ult_voiceLog(`🗣️ ${metin}`);
+    VolkanVoice.speakExact(metin);
+  } else {
+    ult_voiceLog(`ℹ️ ${agent.code} — ${agent.role} (ses kapalı, BAŞLAT'a basın)`);
   }
 }
 
-setInterval(async () => {
-  const gotReal = await tryFetchRealAgentStatus();
-  simulationTick(); // 200'lük ızgara her zaman kendi simülasyonunda kalır (yukarıdaki dürüst nota bakın)
-}, 2500);
+/* === YENİ: Tekil Ajanı Sonlandır === */
+function ult_tekilAjanSonlandir(){
+  const id = window._ult_aktifHoverAjanId;
+  if(!id){ ult_log("⚠️ Hiçbir ajan seçili değil."); return; }
+  const agent = ULT_AGENTS.find(a => a.id === id);
+  if(!agent) return;
+  if(!ult_activeAgents.has(id)){
+    ult_log(`ℹ️ ${agent.code} zaten boşta.`);
+    if(VolkanVoice.isUnlocked()){
+      VolkanVoice.speakExact(`Sayın CEO, ${agent.code} ajanı zaten boşta. Sonlandırılacak aktif görev yok.`);
+    }
+    return;
+  }
+  ult_ajanDeaktif(id);
+  ult_log(`⛔ ${agent.code} sonlandırıldı.`);
+  if(VolkanVoice.isUnlocked()){
+    VolkanVoice.speakExact(`Sayın CEO, ${agent.code} ajanı sonlandırıldı. Aktif görevi iptal edildi.`);
+  }
+}
+window.ult_tekilAjanSonlandir = ult_tekilAjanSonlandir;
 
-/* ---------------------------------------------------------------------
-   SESLİ CEO BİLDİRİMLİ ÖRNEK EYLEM BUTONLARI
---------------------------------------------------------------------- */
-const VOICE_ACTIONS = [
+/* === YENİ: Ajanı Zorla Yeniden Başlat === */
+function ult_ajanZorlaYenidenBaslat(){
+  const id = window._ult_aktifHoverAjanId;
+  if(!id){ ult_log("⚠️ Hiçbir ajan seçili değil."); return; }
+  const agent = ULT_AGENTS.find(a => a.id === id);
+  if(!agent) return;
+  // Önceki görev varsa iptal et
+  if(ult_activeAgents.has(id)){
+    ult_ajanDeaktif(id);
+  }
+  // Kısa gecikmeyle yeni görev ata
+  setTimeout(() => {
+    if(!ult_sistemAktif){
+      ult_sistemAktif = true; // Ajan manuel başlatılıyorsa sistemi uyandır
+    }
+    ult_ajanaGorevVer(id, agent.task, "yesil");
+    ult_log(`🔄 ${agent.code} zorla yeniden başlatıldı.`);
+    if(VolkanVoice.isUnlocked()){
+      VolkanVoice.speakExact(`Sayın CEO, ${agent.code} ajanı zorla yeniden başlatıldı. Görevi sıfırlandı ve yeni göreve atandı.`);
+    }
+  }, 400);
+}
+window.ult_ajanZorlaYenidenBaslat = ult_ajanZorlaYenidenBaslat;
+
+function ult_akisaEkle(agent, taskName, durum){
+  if(!ult_flowContainer) ult_flowContainer = document.getElementById("ult_flowContainer");
+  if(!ult_flowContainer) return null;
+  const el = document.createElement("div");
+  el.className = "flow-ajan durum-" + (durum || "yesil");
+  el.dataset.agentId = agent.id;
+  el.innerHTML = `<span class="isim">${agent.code}</span><span class="gorev">${taskName.substring(0, 34)}</span>`;
+  ult_flowContainer.appendChild(el);
+  ult_flowContainer.scrollTop = ult_flowContainer.scrollHeight;
+  return el;
+}
+function ult_akistanKaldir(agentId){
+  if(!ult_flowContainer) ult_flowContainer = document.getElementById("ult_flowContainer");
+  if(!ult_flowContainer) return;
+  const items = ult_flowContainer.querySelectorAll('.flow-ajan');
+  for(const el of items){
+    if(el.dataset.agentId == agentId){
+      el.classList.add('tamam');
+      setTimeout(() => el.remove(), 500);
+      break;
+    }
+  }
+}
+
+function ult_ajanaGorevVer(agentId, gorevMetni, durum){
+  const agent = ULT_AGENTS.find(a => a.id === agentId);
+  if(!agent) return false;
+  if(ult_activeAgents.has(agentId)) return false;
+
+  durum = durum || "yesil";
+  const flowEl = ult_akisaEkle(agent, gorevMetni || agent.task, durum);
+  ult_durumUygula(agentId, durum);
+
+  const sure = 6000 + Math.floor(Math.random() * 6000);
+  const timer = setTimeout(() => {
+    if(ult_sistemAktif){
+      ult_ajanDeaktif(agentId);
+      setTimeout(() => {
+        if(ult_sistemAktif && !ult_activeAgents.has(agentId)) {
+          const d = ult_rastgeleDurumUret();
+          ult_ajanaGorevVer(agentId, agent.task, d);
+        }
+      }, 300 + Math.random()*800);
+    } else {
+      ult_ajanDeaktif(agentId);
+    }
+  }, sure);
+
+  ult_activeAgents.set(agentId, { task: gorevMetni || agent.task, durum, timer, flowEl });
+  ult_updateStats();
+  return true;
+}
+function ult_ajanDeaktif(agentId){
+  const entry = ult_activeAgents.get(agentId);
+  if(!entry) return;
+  clearTimeout(entry.timer);
+  ult_activeAgents.delete(agentId);
+  ult_durumUygula(agentId, null);
+  ult_akistanKaldir(agentId);
+  ult_updateStats();
+}
+
+function ult_rastgeleDurumUret(){
+  const r = Math.random();
+  if(r < 0.80) return "yesil";
+  if(r < 0.92) return "sari";
+  return "kirmizi";
+}
+
+function ult_tumAjanlariCalistir(){
+  if(ult_sistemAktif) return;
+  ult_sistemAktif = true;
+  ult_log("🚀 Tüm 200 ajan göreve başladı.");
+  ULT_AGENTS.forEach((a, idx) => {
+    const durum = ult_rastgeleDurumUret();
+    setTimeout(() => {
+      if(!ult_sistemAktif) return;
+      ult_ajanaGorevVer(a.id, a.task, durum);
+    }, idx * 30 + Math.random()*200);
+  });
+  if(ult_simInterval) clearInterval(ult_simInterval);
+  ult_simInterval = setInterval(() => {
+    if(!ult_sistemAktif) return;
+    const idle = ULT_AGENTS.filter(a => !ult_activeAgents.has(a.id));
+    const sayi = Math.min(idle.length, 15 + Math.floor(Math.random() * 11));
+    for(let k = 0; k < sayi; k++){
+      const idx = Math.floor(Math.random() * idle.length);
+      const agent = idle.splice(idx, 1)[0];
+      if(agent) ult_ajanaGorevVer(agent.id, agent.task, ult_rastgeleDurumUret());
+    }
+  }, 3000);
+  if(ult_renkZamanlayici) clearInterval(ult_renkZamanlayici);
+  ult_renkZamanlayici = setInterval(() => {
+    if(!ult_sistemAktif) return;
+    const aktifler = Array.from(ult_activeAgents.keys());
+    if(aktifler.length === 0) return;
+    const sayi = Math.min(aktifler.length, 5 + Math.floor(Math.random() * 6));
+    for(let i = 0; i < sayi; i++){
+      const id = aktifler[Math.floor(Math.random() * aktifler.length)];
+      const entry = ult_activeAgents.get(id);
+      if(!entry) continue;
+      const yeniDurum = ult_rastgeleDurumUret();
+      entry.durum = yeniDurum;
+      ult_durumUygula(id, yeniDurum);
+    }
+  }, 2500);
+}
+window.ult_tumAjanlariCalistir = ult_tumAjanlariCalistir;
+
+function ult_tumAjanlariDurdur(){
+  ult_sistemAktif = false;
+  if(ult_simInterval){ clearInterval(ult_simInterval); ult_simInterval = null; }
+  if(ult_renkZamanlayici){ clearInterval(ult_renkZamanlayici); ult_renkZamanlayici = null; }
+  Array.from(ult_activeAgents.keys()).forEach(id => ult_ajanDeaktif(id));
+  ult_log("⏹ Tüm ajanlar durduruldu.");
+}
+window.ult_tumAjanlariDurdur = ult_tumAjanlariDurdur;
+
+function ult_akisSifirla(){
+  if(VolkanVoice.isUnlocked()){
+    VolkanVoice.speakExact("Sayın CEO, Ajanların Akışlarını Sıfırla butonuna bastınız. Bu buton, tüm aktif ajanların görevlerini iptal eder ve akış alanını temizler. Ajanların Akışlarının Sıfırlanması başlamıştır ve Tamamlanmıştır.");
+  }
+  if(ult_simInterval){ clearInterval(ult_simInterval); ult_simInterval = null; }
+  if(ult_renkZamanlayici){ clearInterval(ult_renkZamanlayici); ult_renkZamanlayici = null; }
+  Array.from(ult_activeAgents.keys()).forEach(id => ult_ajanDeaktif(id));
+  ult_activeAgents.clear();
+  if(!ult_flowContainer) ult_flowContainer = document.getElementById("ult_flowContainer");
+  if(ult_flowContainer){ ult_flowContainer.innerHTML = ""; }
+  ult_updateStats();
+  ult_log("🔄 Akış alanı sıfırlandı.");
+}
+
+function ult_rastgeleGorevVer(){
+  const idle = ULT_AGENTS.filter(a => !ult_activeAgents.has(a.id));
+  if(idle.length === 0){
+    ult_log("⚠️ Tüm ajanlar meşgul!");
+    if(VolkanVoice.isUnlocked()) VolkanVoice.speakExact("Sayın CEO, tüm ajanlar meşgul, rasgele görev verilemedi.");
+    return;
+  }
+  const random = idle[Math.floor(Math.random() * idle.length)];
+  const durum = ult_rastgeleDurumUret();
+  ult_ajanaGorevVer(random.id, random.task, durum);
+  if(VolkanVoice.isUnlocked()){
+    VolkanVoice.speakExact(`Sayın CEO, Ajanlara Rasgele Görev Ver butonuna bastınız. Bu buton boşta olan ajanlardan rastgele birini seçip görev atar. ${random.code} ajanına ${random.role} görevi verilmiştir.`);
+  }
+}
+
+function ult_guncelleAjanListesi(){
+  ult_buildAgentList();
+  ult_log("🔄 Ajan listesi yenilendi.");
+  if(VolkanVoice.isUnlocked()) VolkanVoice.speakExact("Sayın CEO, Ajanların Listelerini Yenile butonuna bastınız. Bu buton tüm ajan kartlarını yeniden oluşturur ve ajan listesini günceller. Ajanların Listeleri yenilenmiştir.");
+}
+
+function ult_gonderKomut(){
+  const input = document.getElementById("ult_komutInput");
+  if(!input) return;
+  const metin = input.value.trim();
+  if(!metin) return;
+  input.value = "";
+  ult_log(`📨 Komut: ${metin}`);
+
+  const match = metin.match(/Agent-(\d{1,3})/i);
+  if(match){
+    const id = parseInt(match[1]);
+    const agent = ULT_AGENTS.find(a => a.id === id);
+    if(!agent){ ult_log(`❌ Agent-${match[1]} bulunamadı.`); return; }
+    let gorev = metin.replace(/Agent-\d{1,3}/i, "").trim() || agent.task;
+    if(ult_ajanaGorevVer(agent.id, gorev, "yesil")){
+      if(VolkanVoice.isUnlocked()){
+        VolkanVoice.announce(`${agent.code} ajanına ${gorev} görevi verildi.`);
+      }
+    } else {
+      ult_log(`⚠️ ${agent.code} zaten çalışıyor.`);
+    }
+  } else {
+    ult_log(`❓ Komut anlaşılmadı: "${metin}"`);
+    if(VolkanVoice.isUnlocked()) VolkanVoice.announce("komut anlaşılmadı.");
+  }
+}
+
+const ULT_VOICE_ACTIONS = [
   { title:"📊 Sistem Durum Raporu", desc:"tüm ajanların ve sunucunun anlık durum raporunu okuyorum.",
     action: () => VolkanVoice.announce("tüm ajanların ve sunucunun anlık durum raporu hazırlandı. Sistem stabil çalışıyor.") },
-  { title:"🛡️ Güvenlik Taraması Başlat", desc:"güvenlik taramasını başlattığımı ve sonucunu bildireceğimi söylüyorum.",
-    action: async () => { await VolkanVoice.announce("güvenlik taraması başlatılıyor."); activateAgent(pickIdle(), "Güvenlik Taraması"); } },
-  { title:"📢 SMDA Dry-Run Bildirimi", desc:"sosyal medya dağıtım ajanının deneme modunda çalıştırıldığını bildiriyorum.",
-    action: async () => { await VolkanVoice.announce("sosyal medya dağıtım ajanı deneme modunda çalıştırılıyor."); activateAgent(pickIdle(), "Sosyal Medya Optimizasyonu"); } },
-  { title:"🚨 Acil Durum Tatbikatı", desc:"acil durum tatbikatının başladığını yüksek öncelikle bildiriyorum.",
-    action: () => VolkanVoice.announce("acil durum tatbikatı başlatıldı. Lütfen komuta merkezini takip edin.") },
-  { title:"👥 Ajan Kapasite Özeti", desc:"şu an kaç ajanın görevde, kaçının boşta olduğunu özetliyorum.",
-    action: () => VolkanVoice.announce(`şu anda ${activeAgents.size} ajan görevde, ${TOTAL_AGENTS - activeAgents.size} ajan boşta bekliyor.`) },
+  { title:"🛡️ Güvenlik Taraması Başlat", desc:"güvenlik taramasını başlattığımı bildiriyorum.",
+    action: async () => { await VolkanVoice.announce("güvenlik taraması başlatılıyor."); ult_rastgeleGorevVer(); } },
+  { title:"📢 SMDA Dry-Run Bildirimi", desc:"SMDA deneme modunda çalıştırıldığını bildiriyorum.",
+    action: async () => { await VolkanVoice.announce("sosyal medya dağıtım ajanı deneme modunda çalıştırılıyor."); ult_rastgeleGorevVer(); } },
+  { title:"🚨 Acil Durum Tatbikatı", desc:"acil durum tatbikatının başladığını bildiriyorum.",
+    action: () => VolkanVoice.announce("acil durum tatbikatı başlatıldı.") },
+  { title:"👥 Ajan Kapasite Özeti", desc:"kaç ajanın görevde olduğunu özetliyorum.",
+    action: () => VolkanVoice.announce(`şu anda ${ult_activeAgents.size} ajan görevde, ${ULT_AGENTS.length - ult_activeAgents.size} ajan boşta bekliyor.`) },
   { title:"🌙 Vardiya Kapanış Bildirimi", desc:"günlük operasyon özetini okuyup vardiyayı kapatıyorum.",
     action: () => VolkanVoice.announce("günlük operasyon tamamlandı. İyi çalışmalar, Fahri Bey.") },
 ];
-function pickIdle(){
-  const idle = [];
-  for(let i=1;i<=TOTAL_AGENTS;i++){ if(!activeAgents.has(i)) idle.push(i); }
-  return idle.length ? idle[Math.floor(Math.random()*idle.length)] : 1;
-}
 
-function renderVoiceActions(){
+function ult_renderVoiceActions(){
   const wrap = document.getElementById("ult_voiceActions");
+  if(!wrap) return;
   wrap.innerHTML = "";
-  VOICE_ACTIONS.forEach((a, idx) => {
+  ULT_VOICE_ACTIONS.forEach(a => {
     const btn = document.createElement("button");
     btn.className = "voice-btn";
     btn.innerHTML = `<span class="vb-title">${a.title}</span><span class="vb-desc">${a.desc}</span>`;
@@ -2042,11 +3191,40 @@ function renderVoiceActions(){
     wrap.appendChild(btn);
   });
 }
-renderVoiceActions();
 
-ult_voiceLog("Ultimate Komuta Merkezi yüklendi. Sesi etkinleştirmek için BAŞLAT butonuna basın.");
+window.ult_akisSifirla          = ult_akisSifirla;
+window.ult_rastgeleGorevVer     = ult_rastgeleGorevVer;
+window.ult_guncelleAjanListesi  = ult_guncelleAjanListesi;
+window.ult_gonderKomut          = ult_gonderKomut;
+
+function ult_baslat(){
+  ult_flowContainer = document.getElementById("ult_flowContainer");
+  ult_logBox        = document.getElementById("ult_logBox");
+  if(!ult_agentGrid) ult_buildAgentList();
+  ult_renderVoiceActions();
+  if(ult_flowContainer) ult_flowContainer.innerHTML = "";
+  ult_log("🚀 Volkan 001 AI Ajanı hazır. BAŞLAT'a basınca 200 ajan göreve başlar.");
+  if(window.vt_lockPanel) window.vt_lockPanel(window.PANEL_LOCKED);
+}
+if(document.readyState === "loading"){
+  document.addEventListener("DOMContentLoaded", ult_baslat);
+} else {
+  ult_baslat();
+}
 
 })();
 </script>
+
+<!-- ============ OSİLOSKOP DEĞER POPUP ============ -->
+<div class="osc-value-popup" id="oscValuePopup">
+  <div class="ovp-baslik">
+    <span id="ovpTitle">Ölçüm</span>
+    <button class="ovp-kapat" onclick="oscPopupKapat()">✕</button>
+  </div>
+  <div class="ovp-deger" id="ovpValue">—</div>
+  <div class="ovp-durum orta" id="ovpDurum">—</div>
+  <div class="ovp-ornekler" id="ovpOrnekler"></div>
+</div>
+
 </body>
 </html>

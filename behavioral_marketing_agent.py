@@ -6,6 +6,7 @@ import json
 import random
 from datetime import datetime, timedelta
 from collections import defaultdict
+import config
 
 class BehavioralMarketingAgent:
     def __init__(self, brand_catalog=None, social_accounts_pool=None):
@@ -17,6 +18,17 @@ class BehavioralMarketingAgent:
         - Davranışsal Takip ve Geri Besleme (Feedback Loop)
         - Ruh Hali / Niyet Tespiti
         """
+        # Config'den sistem ayarlarını al
+        self.system_name = config._cfg.get("system_name", "SOSYAL İMECE")
+        self.version = config._cfg.get("version", "3.0.0")
+        self.max_agents = config._cfg.get("max_agents", 165)
+        
+        # Sosyal medya ayarları
+        social_config = config._cfg.get("social_media", {})
+        self.platforms = social_config.get("platforms", ["YouTube_Shorts", "TikTok", "Instagram_Reels"])
+        self.upload_interval = social_config.get("upload_interval", 300)
+        self.auto_upload = social_config.get("auto_upload", True)
+        
         self.brand_catalog = brand_catalog or []
         self.social_accounts_pool = social_accounts_pool or []
         

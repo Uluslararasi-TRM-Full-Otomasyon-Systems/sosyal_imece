@@ -14,6 +14,7 @@ def get_user_agent():
 import os
 import json
 from datetime import datetime
+import config
 
 class TRMAccountingAgent:
     def __init__(self):
@@ -22,6 +23,19 @@ class TRMAccountingAgent:
         self.version = "1.0.0"
         self.company_tax_rate = 0.20  # %20 Kurumlar Vergisi (Simülasyon)
         self.stopaj_rate = 0.10      # %10 Gider Pusulası Stopajı
+        
+        # Config'den finans bilgilerini al
+        financial_config = config._cfg.get("financial", {})
+        self.account_holder = financial_config.get("account_holder", "Mehmet Fahri Güzel")
+        self.bank_name = financial_config.get("bank_name", "Kuveyt Türk Katılım Bankası AŞ.")
+        self.iban = financial_config.get("iban", "TR24 0020 5000 0954 0781 5000 01")
+        self.tc_kimlik_no = financial_config.get("tc_kimlik_no", "30304100922")
+        
+        # İletişim bilgisi
+        contact_config = config._cfg.get("contact", {})
+        self.primary_phone = contact_config.get("primary_phone", "+905426235116")
+        
+        print(f"[CONFIG] Finans bilgileri yüklendi: {self.account_holder} | {self.bank_name} | {self.iban}")
         
     def calculate_corporate_income_and_tax(self, gross_income):
         """

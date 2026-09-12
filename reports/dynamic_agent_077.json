@@ -1,11 +1,11 @@
 {
     "agent_id": 77,
     "agent_name": "TRM_Core_Agent_077",
-    "category": "Denetim Destek",
+    "category": "Lojistik",
     "status": "success",
     "metrics": {
-        "kontrol_durumu": "Tamamlandı",
-        "risk_skoru": "Düşük"
+        "rota_optimizasyonu": "Aktif",
+        "gecikme_orani": "%0.2"
     },
-    "timestamp": "2026-09-02 15:40:59"
+    "timestamp": "2026-09-08 02:12:22"
 }
