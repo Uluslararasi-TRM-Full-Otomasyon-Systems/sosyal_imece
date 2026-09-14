@@ -1,0 +1,1201 @@
+--- SOSYAL IMECE MASTER FILO SIMULASYON LOGLARI (2026-09-12 22:38:52) ---
+[FLEET-EXEC] Gorev #1/1200 | Hesap: User-001 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #2/1200 | Hesap: User-001 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #3/1200 | Hesap: User-001 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #4/1200 | Hesap: User-001 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #5/1200 | Hesap: User-001 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #6/1200 | Hesap: User-001 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #7/1200 | Hesap: User-001 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #8/1200 | Hesap: User-001 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #9/1200 | Hesap: User-001 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #10/1200 | Hesap: User-001 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #11/1200 | Hesap: User-001 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #12/1200 | Hesap: User-001 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #13/1200 | Hesap: User-002 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #14/1200 | Hesap: User-002 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #15/1200 | Hesap: User-002 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #16/1200 | Hesap: User-002 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #17/1200 | Hesap: User-002 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #18/1200 | Hesap: User-002 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #19/1200 | Hesap: User-002 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #20/1200 | Hesap: User-002 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #21/1200 | Hesap: User-002 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #22/1200 | Hesap: User-002 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #23/1200 | Hesap: User-002 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #24/1200 | Hesap: User-002 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #25/1200 | Hesap: User-003 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #26/1200 | Hesap: User-003 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #27/1200 | Hesap: User-003 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #28/1200 | Hesap: User-003 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #29/1200 | Hesap: User-003 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #30/1200 | Hesap: User-003 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #31/1200 | Hesap: User-003 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #32/1200 | Hesap: User-003 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #33/1200 | Hesap: User-003 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #34/1200 | Hesap: User-003 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #35/1200 | Hesap: User-003 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #36/1200 | Hesap: User-003 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #37/1200 | Hesap: User-004 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #38/1200 | Hesap: User-004 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #39/1200 | Hesap: User-004 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #40/1200 | Hesap: User-004 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #41/1200 | Hesap: User-004 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #42/1200 | Hesap: User-004 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #43/1200 | Hesap: User-004 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #44/1200 | Hesap: User-004 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #45/1200 | Hesap: User-004 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #46/1200 | Hesap: User-004 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #47/1200 | Hesap: User-004 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #48/1200 | Hesap: User-004 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #49/1200 | Hesap: User-005 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #50/1200 | Hesap: User-005 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #51/1200 | Hesap: User-005 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #52/1200 | Hesap: User-005 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #53/1200 | Hesap: User-005 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #54/1200 | Hesap: User-005 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #55/1200 | Hesap: User-005 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #56/1200 | Hesap: User-005 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #57/1200 | Hesap: User-005 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #58/1200 | Hesap: User-005 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #59/1200 | Hesap: User-005 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #60/1200 | Hesap: User-005 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #61/1200 | Hesap: User-006 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #62/1200 | Hesap: User-006 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #63/1200 | Hesap: User-006 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #64/1200 | Hesap: User-006 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #65/1200 | Hesap: User-006 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #66/1200 | Hesap: User-006 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #67/1200 | Hesap: User-006 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #68/1200 | Hesap: User-006 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #69/1200 | Hesap: User-006 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #70/1200 | Hesap: User-006 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #71/1200 | Hesap: User-006 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #72/1200 | Hesap: User-006 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #73/1200 | Hesap: User-007 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #74/1200 | Hesap: User-007 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #75/1200 | Hesap: User-007 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #76/1200 | Hesap: User-007 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #77/1200 | Hesap: User-007 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #78/1200 | Hesap: User-007 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #79/1200 | Hesap: User-007 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #80/1200 | Hesap: User-007 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #81/1200 | Hesap: User-007 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #82/1200 | Hesap: User-007 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #83/1200 | Hesap: User-007 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #84/1200 | Hesap: User-007 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #85/1200 | Hesap: User-008 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #86/1200 | Hesap: User-008 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #87/1200 | Hesap: User-008 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #88/1200 | Hesap: User-008 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #89/1200 | Hesap: User-008 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #90/1200 | Hesap: User-008 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #91/1200 | Hesap: User-008 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #92/1200 | Hesap: User-008 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #93/1200 | Hesap: User-008 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #94/1200 | Hesap: User-008 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #95/1200 | Hesap: User-008 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #96/1200 | Hesap: User-008 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #97/1200 | Hesap: User-009 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #98/1200 | Hesap: User-009 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #99/1200 | Hesap: User-009 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #100/1200 | Hesap: User-009 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #101/1200 | Hesap: User-009 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #102/1200 | Hesap: User-009 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #103/1200 | Hesap: User-009 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #104/1200 | Hesap: User-009 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #105/1200 | Hesap: User-009 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #106/1200 | Hesap: User-009 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #107/1200 | Hesap: User-009 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #108/1200 | Hesap: User-009 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #109/1200 | Hesap: User-010 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #110/1200 | Hesap: User-010 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #111/1200 | Hesap: User-010 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #112/1200 | Hesap: User-010 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #113/1200 | Hesap: User-010 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #114/1200 | Hesap: User-010 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #115/1200 | Hesap: User-010 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #116/1200 | Hesap: User-010 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #117/1200 | Hesap: User-010 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #118/1200 | Hesap: User-010 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #119/1200 | Hesap: User-010 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #120/1200 | Hesap: User-010 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #121/1200 | Hesap: User-011 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #122/1200 | Hesap: User-011 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #123/1200 | Hesap: User-011 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #124/1200 | Hesap: User-011 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #125/1200 | Hesap: User-011 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #126/1200 | Hesap: User-011 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #127/1200 | Hesap: User-011 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #128/1200 | Hesap: User-011 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #129/1200 | Hesap: User-011 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #130/1200 | Hesap: User-011 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #131/1200 | Hesap: User-011 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #132/1200 | Hesap: User-011 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #133/1200 | Hesap: User-012 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #134/1200 | Hesap: User-012 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #135/1200 | Hesap: User-012 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #136/1200 | Hesap: User-012 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #137/1200 | Hesap: User-012 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #138/1200 | Hesap: User-012 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #139/1200 | Hesap: User-012 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #140/1200 | Hesap: User-012 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #141/1200 | Hesap: User-012 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #142/1200 | Hesap: User-012 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #143/1200 | Hesap: User-012 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #144/1200 | Hesap: User-012 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #145/1200 | Hesap: User-013 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #146/1200 | Hesap: User-013 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #147/1200 | Hesap: User-013 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #148/1200 | Hesap: User-013 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #149/1200 | Hesap: User-013 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #150/1200 | Hesap: User-013 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #151/1200 | Hesap: User-013 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #152/1200 | Hesap: User-013 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #153/1200 | Hesap: User-013 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #154/1200 | Hesap: User-013 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #155/1200 | Hesap: User-013 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #156/1200 | Hesap: User-013 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #157/1200 | Hesap: User-014 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #158/1200 | Hesap: User-014 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #159/1200 | Hesap: User-014 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #160/1200 | Hesap: User-014 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #161/1200 | Hesap: User-014 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #162/1200 | Hesap: User-014 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #163/1200 | Hesap: User-014 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #164/1200 | Hesap: User-014 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #165/1200 | Hesap: User-014 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #166/1200 | Hesap: User-014 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #167/1200 | Hesap: User-014 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #168/1200 | Hesap: User-014 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #169/1200 | Hesap: User-015 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #170/1200 | Hesap: User-015 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #171/1200 | Hesap: User-015 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #172/1200 | Hesap: User-015 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #173/1200 | Hesap: User-015 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #174/1200 | Hesap: User-015 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #175/1200 | Hesap: User-015 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #176/1200 | Hesap: User-015 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #177/1200 | Hesap: User-015 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #178/1200 | Hesap: User-015 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #179/1200 | Hesap: User-015 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #180/1200 | Hesap: User-015 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #181/1200 | Hesap: User-016 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #182/1200 | Hesap: User-016 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #183/1200 | Hesap: User-016 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #184/1200 | Hesap: User-016 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #185/1200 | Hesap: User-016 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #186/1200 | Hesap: User-016 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #187/1200 | Hesap: User-016 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #188/1200 | Hesap: User-016 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #189/1200 | Hesap: User-016 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #190/1200 | Hesap: User-016 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #191/1200 | Hesap: User-016 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #192/1200 | Hesap: User-016 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #193/1200 | Hesap: User-017 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #194/1200 | Hesap: User-017 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #195/1200 | Hesap: User-017 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #196/1200 | Hesap: User-017 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #197/1200 | Hesap: User-017 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #198/1200 | Hesap: User-017 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #199/1200 | Hesap: User-017 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #200/1200 | Hesap: User-017 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #201/1200 | Hesap: User-017 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #202/1200 | Hesap: User-017 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #203/1200 | Hesap: User-017 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #204/1200 | Hesap: User-017 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #205/1200 | Hesap: User-018 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #206/1200 | Hesap: User-018 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #207/1200 | Hesap: User-018 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #208/1200 | Hesap: User-018 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #209/1200 | Hesap: User-018 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #210/1200 | Hesap: User-018 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #211/1200 | Hesap: User-018 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #212/1200 | Hesap: User-018 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #213/1200 | Hesap: User-018 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #214/1200 | Hesap: User-018 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #215/1200 | Hesap: User-018 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #216/1200 | Hesap: User-018 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #217/1200 | Hesap: User-019 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #218/1200 | Hesap: User-019 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #219/1200 | Hesap: User-019 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #220/1200 | Hesap: User-019 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #221/1200 | Hesap: User-019 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #222/1200 | Hesap: User-019 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #223/1200 | Hesap: User-019 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #224/1200 | Hesap: User-019 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #225/1200 | Hesap: User-019 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #226/1200 | Hesap: User-019 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #227/1200 | Hesap: User-019 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #228/1200 | Hesap: User-019 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #229/1200 | Hesap: User-020 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #230/1200 | Hesap: User-020 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #231/1200 | Hesap: User-020 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #232/1200 | Hesap: User-020 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #233/1200 | Hesap: User-020 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #234/1200 | Hesap: User-020 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #235/1200 | Hesap: User-020 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #236/1200 | Hesap: User-020 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #237/1200 | Hesap: User-020 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #238/1200 | Hesap: User-020 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #239/1200 | Hesap: User-020 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #240/1200 | Hesap: User-020 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #241/1200 | Hesap: User-021 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #242/1200 | Hesap: User-021 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #243/1200 | Hesap: User-021 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #244/1200 | Hesap: User-021 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #245/1200 | Hesap: User-021 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #246/1200 | Hesap: User-021 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #247/1200 | Hesap: User-021 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #248/1200 | Hesap: User-021 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #249/1200 | Hesap: User-021 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #250/1200 | Hesap: User-021 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #251/1200 | Hesap: User-021 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #252/1200 | Hesap: User-021 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #253/1200 | Hesap: User-022 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #254/1200 | Hesap: User-022 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #255/1200 | Hesap: User-022 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #256/1200 | Hesap: User-022 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #257/1200 | Hesap: User-022 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #258/1200 | Hesap: User-022 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #259/1200 | Hesap: User-022 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #260/1200 | Hesap: User-022 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #261/1200 | Hesap: User-022 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #262/1200 | Hesap: User-022 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #263/1200 | Hesap: User-022 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #264/1200 | Hesap: User-022 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #265/1200 | Hesap: User-023 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #266/1200 | Hesap: User-023 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #267/1200 | Hesap: User-023 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #268/1200 | Hesap: User-023 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #269/1200 | Hesap: User-023 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #270/1200 | Hesap: User-023 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #271/1200 | Hesap: User-023 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #272/1200 | Hesap: User-023 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #273/1200 | Hesap: User-023 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #274/1200 | Hesap: User-023 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #275/1200 | Hesap: User-023 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #276/1200 | Hesap: User-023 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #277/1200 | Hesap: User-024 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #278/1200 | Hesap: User-024 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #279/1200 | Hesap: User-024 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #280/1200 | Hesap: User-024 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #281/1200 | Hesap: User-024 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #282/1200 | Hesap: User-024 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #283/1200 | Hesap: User-024 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #284/1200 | Hesap: User-024 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #285/1200 | Hesap: User-024 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #286/1200 | Hesap: User-024 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #287/1200 | Hesap: User-024 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #288/1200 | Hesap: User-024 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #289/1200 | Hesap: User-025 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #290/1200 | Hesap: User-025 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #291/1200 | Hesap: User-025 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #292/1200 | Hesap: User-025 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #293/1200 | Hesap: User-025 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #294/1200 | Hesap: User-025 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #295/1200 | Hesap: User-025 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #296/1200 | Hesap: User-025 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #297/1200 | Hesap: User-025 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #298/1200 | Hesap: User-025 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #299/1200 | Hesap: User-025 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #300/1200 | Hesap: User-025 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #301/1200 | Hesap: User-026 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #302/1200 | Hesap: User-026 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #303/1200 | Hesap: User-026 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #304/1200 | Hesap: User-026 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #305/1200 | Hesap: User-026 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #306/1200 | Hesap: User-026 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #307/1200 | Hesap: User-026 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #308/1200 | Hesap: User-026 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #309/1200 | Hesap: User-026 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #310/1200 | Hesap: User-026 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #311/1200 | Hesap: User-026 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #312/1200 | Hesap: User-026 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #313/1200 | Hesap: User-027 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #314/1200 | Hesap: User-027 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #315/1200 | Hesap: User-027 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #316/1200 | Hesap: User-027 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #317/1200 | Hesap: User-027 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #318/1200 | Hesap: User-027 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #319/1200 | Hesap: User-027 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #320/1200 | Hesap: User-027 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #321/1200 | Hesap: User-027 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #322/1200 | Hesap: User-027 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #323/1200 | Hesap: User-027 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #324/1200 | Hesap: User-027 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #325/1200 | Hesap: User-028 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #326/1200 | Hesap: User-028 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #327/1200 | Hesap: User-028 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #328/1200 | Hesap: User-028 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #329/1200 | Hesap: User-028 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #330/1200 | Hesap: User-028 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #331/1200 | Hesap: User-028 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #332/1200 | Hesap: User-028 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #333/1200 | Hesap: User-028 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #334/1200 | Hesap: User-028 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #335/1200 | Hesap: User-028 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #336/1200 | Hesap: User-028 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #337/1200 | Hesap: User-029 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #338/1200 | Hesap: User-029 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #339/1200 | Hesap: User-029 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #340/1200 | Hesap: User-029 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #341/1200 | Hesap: User-029 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #342/1200 | Hesap: User-029 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #343/1200 | Hesap: User-029 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #344/1200 | Hesap: User-029 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #345/1200 | Hesap: User-029 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #346/1200 | Hesap: User-029 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #347/1200 | Hesap: User-029 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #348/1200 | Hesap: User-029 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #349/1200 | Hesap: User-030 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #350/1200 | Hesap: User-030 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #351/1200 | Hesap: User-030 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #352/1200 | Hesap: User-030 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #353/1200 | Hesap: User-030 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #354/1200 | Hesap: User-030 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #355/1200 | Hesap: User-030 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #356/1200 | Hesap: User-030 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #357/1200 | Hesap: User-030 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #358/1200 | Hesap: User-030 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #359/1200 | Hesap: User-030 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #360/1200 | Hesap: User-030 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #361/1200 | Hesap: User-031 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #362/1200 | Hesap: User-031 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #363/1200 | Hesap: User-031 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #364/1200 | Hesap: User-031 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #365/1200 | Hesap: User-031 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #366/1200 | Hesap: User-031 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #367/1200 | Hesap: User-031 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #368/1200 | Hesap: User-031 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #369/1200 | Hesap: User-031 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #370/1200 | Hesap: User-031 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #371/1200 | Hesap: User-031 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #372/1200 | Hesap: User-031 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #373/1200 | Hesap: User-032 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #374/1200 | Hesap: User-032 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #375/1200 | Hesap: User-032 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #376/1200 | Hesap: User-032 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #377/1200 | Hesap: User-032 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #378/1200 | Hesap: User-032 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #379/1200 | Hesap: User-032 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #380/1200 | Hesap: User-032 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #381/1200 | Hesap: User-032 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #382/1200 | Hesap: User-032 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #383/1200 | Hesap: User-032 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #384/1200 | Hesap: User-032 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #385/1200 | Hesap: User-033 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #386/1200 | Hesap: User-033 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #387/1200 | Hesap: User-033 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #388/1200 | Hesap: User-033 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #389/1200 | Hesap: User-033 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #390/1200 | Hesap: User-033 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #391/1200 | Hesap: User-033 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #392/1200 | Hesap: User-033 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #393/1200 | Hesap: User-033 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #394/1200 | Hesap: User-033 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #395/1200 | Hesap: User-033 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #396/1200 | Hesap: User-033 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #397/1200 | Hesap: User-034 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #398/1200 | Hesap: User-034 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #399/1200 | Hesap: User-034 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #400/1200 | Hesap: User-034 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #401/1200 | Hesap: User-034 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #402/1200 | Hesap: User-034 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #403/1200 | Hesap: User-034 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #404/1200 | Hesap: User-034 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #405/1200 | Hesap: User-034 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #406/1200 | Hesap: User-034 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #407/1200 | Hesap: User-034 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #408/1200 | Hesap: User-034 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #409/1200 | Hesap: User-035 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #410/1200 | Hesap: User-035 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #411/1200 | Hesap: User-035 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #412/1200 | Hesap: User-035 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #413/1200 | Hesap: User-035 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #414/1200 | Hesap: User-035 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #415/1200 | Hesap: User-035 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #416/1200 | Hesap: User-035 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #417/1200 | Hesap: User-035 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #418/1200 | Hesap: User-035 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #419/1200 | Hesap: User-035 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #420/1200 | Hesap: User-035 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #421/1200 | Hesap: User-036 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #422/1200 | Hesap: User-036 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #423/1200 | Hesap: User-036 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #424/1200 | Hesap: User-036 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #425/1200 | Hesap: User-036 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #426/1200 | Hesap: User-036 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #427/1200 | Hesap: User-036 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #428/1200 | Hesap: User-036 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #429/1200 | Hesap: User-036 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #430/1200 | Hesap: User-036 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #431/1200 | Hesap: User-036 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #432/1200 | Hesap: User-036 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #433/1200 | Hesap: User-037 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #434/1200 | Hesap: User-037 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #435/1200 | Hesap: User-037 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #436/1200 | Hesap: User-037 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #437/1200 | Hesap: User-037 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #438/1200 | Hesap: User-037 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #439/1200 | Hesap: User-037 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #440/1200 | Hesap: User-037 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #441/1200 | Hesap: User-037 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #442/1200 | Hesap: User-037 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #443/1200 | Hesap: User-037 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #444/1200 | Hesap: User-037 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #445/1200 | Hesap: User-038 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #446/1200 | Hesap: User-038 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #447/1200 | Hesap: User-038 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #448/1200 | Hesap: User-038 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #449/1200 | Hesap: User-038 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #450/1200 | Hesap: User-038 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #451/1200 | Hesap: User-038 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #452/1200 | Hesap: User-038 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #453/1200 | Hesap: User-038 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #454/1200 | Hesap: User-038 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #455/1200 | Hesap: User-038 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #456/1200 | Hesap: User-038 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #457/1200 | Hesap: User-039 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #458/1200 | Hesap: User-039 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #459/1200 | Hesap: User-039 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #460/1200 | Hesap: User-039 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #461/1200 | Hesap: User-039 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #462/1200 | Hesap: User-039 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #463/1200 | Hesap: User-039 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #464/1200 | Hesap: User-039 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #465/1200 | Hesap: User-039 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #466/1200 | Hesap: User-039 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #467/1200 | Hesap: User-039 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #468/1200 | Hesap: User-039 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #469/1200 | Hesap: User-040 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #470/1200 | Hesap: User-040 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #471/1200 | Hesap: User-040 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #472/1200 | Hesap: User-040 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #473/1200 | Hesap: User-040 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #474/1200 | Hesap: User-040 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #475/1200 | Hesap: User-040 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #476/1200 | Hesap: User-040 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #477/1200 | Hesap: User-040 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #478/1200 | Hesap: User-040 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #479/1200 | Hesap: User-040 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #480/1200 | Hesap: User-040 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #481/1200 | Hesap: User-041 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #482/1200 | Hesap: User-041 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #483/1200 | Hesap: User-041 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #484/1200 | Hesap: User-041 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #485/1200 | Hesap: User-041 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #486/1200 | Hesap: User-041 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #487/1200 | Hesap: User-041 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #488/1200 | Hesap: User-041 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #489/1200 | Hesap: User-041 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #490/1200 | Hesap: User-041 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #491/1200 | Hesap: User-041 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #492/1200 | Hesap: User-041 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #493/1200 | Hesap: User-042 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #494/1200 | Hesap: User-042 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #495/1200 | Hesap: User-042 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #496/1200 | Hesap: User-042 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #497/1200 | Hesap: User-042 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #498/1200 | Hesap: User-042 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #499/1200 | Hesap: User-042 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #500/1200 | Hesap: User-042 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #501/1200 | Hesap: User-042 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #502/1200 | Hesap: User-042 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #503/1200 | Hesap: User-042 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #504/1200 | Hesap: User-042 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #505/1200 | Hesap: User-043 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #506/1200 | Hesap: User-043 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #507/1200 | Hesap: User-043 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #508/1200 | Hesap: User-043 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #509/1200 | Hesap: User-043 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #510/1200 | Hesap: User-043 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #511/1200 | Hesap: User-043 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #512/1200 | Hesap: User-043 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #513/1200 | Hesap: User-043 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #514/1200 | Hesap: User-043 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #515/1200 | Hesap: User-043 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #516/1200 | Hesap: User-043 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #517/1200 | Hesap: User-044 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #518/1200 | Hesap: User-044 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #519/1200 | Hesap: User-044 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #520/1200 | Hesap: User-044 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #521/1200 | Hesap: User-044 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #522/1200 | Hesap: User-044 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #523/1200 | Hesap: User-044 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #524/1200 | Hesap: User-044 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #525/1200 | Hesap: User-044 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #526/1200 | Hesap: User-044 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #527/1200 | Hesap: User-044 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #528/1200 | Hesap: User-044 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #529/1200 | Hesap: User-045 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #530/1200 | Hesap: User-045 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #531/1200 | Hesap: User-045 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #532/1200 | Hesap: User-045 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #533/1200 | Hesap: User-045 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #534/1200 | Hesap: User-045 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #535/1200 | Hesap: User-045 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #536/1200 | Hesap: User-045 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #537/1200 | Hesap: User-045 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #538/1200 | Hesap: User-045 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #539/1200 | Hesap: User-045 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #540/1200 | Hesap: User-045 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #541/1200 | Hesap: User-046 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #542/1200 | Hesap: User-046 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #543/1200 | Hesap: User-046 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #544/1200 | Hesap: User-046 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #545/1200 | Hesap: User-046 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #546/1200 | Hesap: User-046 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #547/1200 | Hesap: User-046 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #548/1200 | Hesap: User-046 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #549/1200 | Hesap: User-046 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #550/1200 | Hesap: User-046 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #551/1200 | Hesap: User-046 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #552/1200 | Hesap: User-046 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #553/1200 | Hesap: User-047 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #554/1200 | Hesap: User-047 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #555/1200 | Hesap: User-047 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #556/1200 | Hesap: User-047 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #557/1200 | Hesap: User-047 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #558/1200 | Hesap: User-047 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #559/1200 | Hesap: User-047 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #560/1200 | Hesap: User-047 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #561/1200 | Hesap: User-047 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #562/1200 | Hesap: User-047 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #563/1200 | Hesap: User-047 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #564/1200 | Hesap: User-047 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #565/1200 | Hesap: User-048 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #566/1200 | Hesap: User-048 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #567/1200 | Hesap: User-048 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #568/1200 | Hesap: User-048 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #569/1200 | Hesap: User-048 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #570/1200 | Hesap: User-048 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #571/1200 | Hesap: User-048 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #572/1200 | Hesap: User-048 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #573/1200 | Hesap: User-048 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #574/1200 | Hesap: User-048 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #575/1200 | Hesap: User-048 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #576/1200 | Hesap: User-048 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #577/1200 | Hesap: User-049 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #578/1200 | Hesap: User-049 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #579/1200 | Hesap: User-049 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #580/1200 | Hesap: User-049 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #581/1200 | Hesap: User-049 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #582/1200 | Hesap: User-049 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #583/1200 | Hesap: User-049 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #584/1200 | Hesap: User-049 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #585/1200 | Hesap: User-049 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #586/1200 | Hesap: User-049 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #587/1200 | Hesap: User-049 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #588/1200 | Hesap: User-049 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #589/1200 | Hesap: User-050 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #590/1200 | Hesap: User-050 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #591/1200 | Hesap: User-050 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #592/1200 | Hesap: User-050 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #593/1200 | Hesap: User-050 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #594/1200 | Hesap: User-050 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #595/1200 | Hesap: User-050 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #596/1200 | Hesap: User-050 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #597/1200 | Hesap: User-050 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #598/1200 | Hesap: User-050 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #599/1200 | Hesap: User-050 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #600/1200 | Hesap: User-050 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #601/1200 | Hesap: User-051 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #602/1200 | Hesap: User-051 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #603/1200 | Hesap: User-051 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #604/1200 | Hesap: User-051 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #605/1200 | Hesap: User-051 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #606/1200 | Hesap: User-051 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #607/1200 | Hesap: User-051 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #608/1200 | Hesap: User-051 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #609/1200 | Hesap: User-051 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #610/1200 | Hesap: User-051 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #611/1200 | Hesap: User-051 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #612/1200 | Hesap: User-051 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #613/1200 | Hesap: User-052 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #614/1200 | Hesap: User-052 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #615/1200 | Hesap: User-052 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #616/1200 | Hesap: User-052 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #617/1200 | Hesap: User-052 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #618/1200 | Hesap: User-052 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #619/1200 | Hesap: User-052 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #620/1200 | Hesap: User-052 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #621/1200 | Hesap: User-052 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #622/1200 | Hesap: User-052 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #623/1200 | Hesap: User-052 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #624/1200 | Hesap: User-052 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #625/1200 | Hesap: User-053 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #626/1200 | Hesap: User-053 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #627/1200 | Hesap: User-053 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #628/1200 | Hesap: User-053 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #629/1200 | Hesap: User-053 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #630/1200 | Hesap: User-053 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #631/1200 | Hesap: User-053 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #632/1200 | Hesap: User-053 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #633/1200 | Hesap: User-053 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #634/1200 | Hesap: User-053 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #635/1200 | Hesap: User-053 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #636/1200 | Hesap: User-053 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #637/1200 | Hesap: User-054 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #638/1200 | Hesap: User-054 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #639/1200 | Hesap: User-054 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #640/1200 | Hesap: User-054 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #641/1200 | Hesap: User-054 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #642/1200 | Hesap: User-054 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #643/1200 | Hesap: User-054 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #644/1200 | Hesap: User-054 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #645/1200 | Hesap: User-054 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #646/1200 | Hesap: User-054 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #647/1200 | Hesap: User-054 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #648/1200 | Hesap: User-054 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #649/1200 | Hesap: User-055 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #650/1200 | Hesap: User-055 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #651/1200 | Hesap: User-055 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #652/1200 | Hesap: User-055 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #653/1200 | Hesap: User-055 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #654/1200 | Hesap: User-055 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #655/1200 | Hesap: User-055 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #656/1200 | Hesap: User-055 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #657/1200 | Hesap: User-055 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #658/1200 | Hesap: User-055 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #659/1200 | Hesap: User-055 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #660/1200 | Hesap: User-055 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #661/1200 | Hesap: User-056 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #662/1200 | Hesap: User-056 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #663/1200 | Hesap: User-056 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #664/1200 | Hesap: User-056 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #665/1200 | Hesap: User-056 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #666/1200 | Hesap: User-056 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #667/1200 | Hesap: User-056 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #668/1200 | Hesap: User-056 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #669/1200 | Hesap: User-056 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #670/1200 | Hesap: User-056 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #671/1200 | Hesap: User-056 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #672/1200 | Hesap: User-056 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #673/1200 | Hesap: User-057 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #674/1200 | Hesap: User-057 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #675/1200 | Hesap: User-057 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #676/1200 | Hesap: User-057 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #677/1200 | Hesap: User-057 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #678/1200 | Hesap: User-057 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #679/1200 | Hesap: User-057 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #680/1200 | Hesap: User-057 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #681/1200 | Hesap: User-057 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #682/1200 | Hesap: User-057 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #683/1200 | Hesap: User-057 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #684/1200 | Hesap: User-057 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #685/1200 | Hesap: User-058 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #686/1200 | Hesap: User-058 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #687/1200 | Hesap: User-058 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #688/1200 | Hesap: User-058 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #689/1200 | Hesap: User-058 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #690/1200 | Hesap: User-058 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #691/1200 | Hesap: User-058 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #692/1200 | Hesap: User-058 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #693/1200 | Hesap: User-058 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #694/1200 | Hesap: User-058 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #695/1200 | Hesap: User-058 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #696/1200 | Hesap: User-058 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #697/1200 | Hesap: User-059 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #698/1200 | Hesap: User-059 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #699/1200 | Hesap: User-059 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #700/1200 | Hesap: User-059 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #701/1200 | Hesap: User-059 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #702/1200 | Hesap: User-059 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #703/1200 | Hesap: User-059 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #704/1200 | Hesap: User-059 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #705/1200 | Hesap: User-059 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #706/1200 | Hesap: User-059 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #707/1200 | Hesap: User-059 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #708/1200 | Hesap: User-059 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #709/1200 | Hesap: User-060 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #710/1200 | Hesap: User-060 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #711/1200 | Hesap: User-060 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #712/1200 | Hesap: User-060 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #713/1200 | Hesap: User-060 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #714/1200 | Hesap: User-060 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #715/1200 | Hesap: User-060 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #716/1200 | Hesap: User-060 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #717/1200 | Hesap: User-060 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #718/1200 | Hesap: User-060 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #719/1200 | Hesap: User-060 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #720/1200 | Hesap: User-060 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #721/1200 | Hesap: User-061 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #722/1200 | Hesap: User-061 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #723/1200 | Hesap: User-061 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #724/1200 | Hesap: User-061 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #725/1200 | Hesap: User-061 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #726/1200 | Hesap: User-061 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #727/1200 | Hesap: User-061 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #728/1200 | Hesap: User-061 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #729/1200 | Hesap: User-061 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #730/1200 | Hesap: User-061 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #731/1200 | Hesap: User-061 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #732/1200 | Hesap: User-061 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #733/1200 | Hesap: User-062 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #734/1200 | Hesap: User-062 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #735/1200 | Hesap: User-062 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #736/1200 | Hesap: User-062 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #737/1200 | Hesap: User-062 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #738/1200 | Hesap: User-062 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #739/1200 | Hesap: User-062 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #740/1200 | Hesap: User-062 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #741/1200 | Hesap: User-062 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #742/1200 | Hesap: User-062 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #743/1200 | Hesap: User-062 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #744/1200 | Hesap: User-062 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #745/1200 | Hesap: User-063 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #746/1200 | Hesap: User-063 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #747/1200 | Hesap: User-063 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #748/1200 | Hesap: User-063 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #749/1200 | Hesap: User-063 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #750/1200 | Hesap: User-063 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #751/1200 | Hesap: User-063 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #752/1200 | Hesap: User-063 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #753/1200 | Hesap: User-063 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #754/1200 | Hesap: User-063 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #755/1200 | Hesap: User-063 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #756/1200 | Hesap: User-063 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #757/1200 | Hesap: User-064 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #758/1200 | Hesap: User-064 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #759/1200 | Hesap: User-064 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #760/1200 | Hesap: User-064 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #761/1200 | Hesap: User-064 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #762/1200 | Hesap: User-064 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #763/1200 | Hesap: User-064 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #764/1200 | Hesap: User-064 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #765/1200 | Hesap: User-064 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #766/1200 | Hesap: User-064 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #767/1200 | Hesap: User-064 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #768/1200 | Hesap: User-064 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #769/1200 | Hesap: User-065 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #770/1200 | Hesap: User-065 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #771/1200 | Hesap: User-065 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #772/1200 | Hesap: User-065 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #773/1200 | Hesap: User-065 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #774/1200 | Hesap: User-065 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #775/1200 | Hesap: User-065 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #776/1200 | Hesap: User-065 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #777/1200 | Hesap: User-065 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #778/1200 | Hesap: User-065 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #779/1200 | Hesap: User-065 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #780/1200 | Hesap: User-065 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #781/1200 | Hesap: User-066 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #782/1200 | Hesap: User-066 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #783/1200 | Hesap: User-066 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #784/1200 | Hesap: User-066 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #785/1200 | Hesap: User-066 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #786/1200 | Hesap: User-066 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #787/1200 | Hesap: User-066 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #788/1200 | Hesap: User-066 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #789/1200 | Hesap: User-066 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #790/1200 | Hesap: User-066 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #791/1200 | Hesap: User-066 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #792/1200 | Hesap: User-066 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #793/1200 | Hesap: User-067 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #794/1200 | Hesap: User-067 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #795/1200 | Hesap: User-067 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #796/1200 | Hesap: User-067 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #797/1200 | Hesap: User-067 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #798/1200 | Hesap: User-067 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #799/1200 | Hesap: User-067 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #800/1200 | Hesap: User-067 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #801/1200 | Hesap: User-067 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #802/1200 | Hesap: User-067 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #803/1200 | Hesap: User-067 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #804/1200 | Hesap: User-067 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #805/1200 | Hesap: User-068 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #806/1200 | Hesap: User-068 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #807/1200 | Hesap: User-068 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #808/1200 | Hesap: User-068 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #809/1200 | Hesap: User-068 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #810/1200 | Hesap: User-068 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #811/1200 | Hesap: User-068 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #812/1200 | Hesap: User-068 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #813/1200 | Hesap: User-068 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #814/1200 | Hesap: User-068 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #815/1200 | Hesap: User-068 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #816/1200 | Hesap: User-068 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #817/1200 | Hesap: User-069 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #818/1200 | Hesap: User-069 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #819/1200 | Hesap: User-069 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #820/1200 | Hesap: User-069 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #821/1200 | Hesap: User-069 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #822/1200 | Hesap: User-069 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #823/1200 | Hesap: User-069 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #824/1200 | Hesap: User-069 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #825/1200 | Hesap: User-069 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #826/1200 | Hesap: User-069 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #827/1200 | Hesap: User-069 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #828/1200 | Hesap: User-069 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #829/1200 | Hesap: User-070 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #830/1200 | Hesap: User-070 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #831/1200 | Hesap: User-070 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #832/1200 | Hesap: User-070 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #833/1200 | Hesap: User-070 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #834/1200 | Hesap: User-070 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #835/1200 | Hesap: User-070 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #836/1200 | Hesap: User-070 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #837/1200 | Hesap: User-070 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #838/1200 | Hesap: User-070 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #839/1200 | Hesap: User-070 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #840/1200 | Hesap: User-070 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #841/1200 | Hesap: User-071 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #842/1200 | Hesap: User-071 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #843/1200 | Hesap: User-071 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #844/1200 | Hesap: User-071 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #845/1200 | Hesap: User-071 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #846/1200 | Hesap: User-071 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #847/1200 | Hesap: User-071 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #848/1200 | Hesap: User-071 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #849/1200 | Hesap: User-071 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #850/1200 | Hesap: User-071 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #851/1200 | Hesap: User-071 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #852/1200 | Hesap: User-071 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #853/1200 | Hesap: User-072 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #854/1200 | Hesap: User-072 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #855/1200 | Hesap: User-072 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #856/1200 | Hesap: User-072 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #857/1200 | Hesap: User-072 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #858/1200 | Hesap: User-072 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #859/1200 | Hesap: User-072 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #860/1200 | Hesap: User-072 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #861/1200 | Hesap: User-072 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #862/1200 | Hesap: User-072 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #863/1200 | Hesap: User-072 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #864/1200 | Hesap: User-072 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #865/1200 | Hesap: User-073 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #866/1200 | Hesap: User-073 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #867/1200 | Hesap: User-073 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #868/1200 | Hesap: User-073 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #869/1200 | Hesap: User-073 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #870/1200 | Hesap: User-073 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #871/1200 | Hesap: User-073 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #872/1200 | Hesap: User-073 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #873/1200 | Hesap: User-073 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #874/1200 | Hesap: User-073 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #875/1200 | Hesap: User-073 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #876/1200 | Hesap: User-073 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #877/1200 | Hesap: User-074 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #878/1200 | Hesap: User-074 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #879/1200 | Hesap: User-074 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #880/1200 | Hesap: User-074 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #881/1200 | Hesap: User-074 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #882/1200 | Hesap: User-074 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #883/1200 | Hesap: User-074 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #884/1200 | Hesap: User-074 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #885/1200 | Hesap: User-074 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #886/1200 | Hesap: User-074 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #887/1200 | Hesap: User-074 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #888/1200 | Hesap: User-074 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #889/1200 | Hesap: User-075 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #890/1200 | Hesap: User-075 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #891/1200 | Hesap: User-075 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #892/1200 | Hesap: User-075 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #893/1200 | Hesap: User-075 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #894/1200 | Hesap: User-075 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #895/1200 | Hesap: User-075 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #896/1200 | Hesap: User-075 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #897/1200 | Hesap: User-075 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #898/1200 | Hesap: User-075 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #899/1200 | Hesap: User-075 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #900/1200 | Hesap: User-075 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #901/1200 | Hesap: User-076 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #902/1200 | Hesap: User-076 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #903/1200 | Hesap: User-076 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #904/1200 | Hesap: User-076 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #905/1200 | Hesap: User-076 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #906/1200 | Hesap: User-076 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #907/1200 | Hesap: User-076 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #908/1200 | Hesap: User-076 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #909/1200 | Hesap: User-076 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #910/1200 | Hesap: User-076 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #911/1200 | Hesap: User-076 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #912/1200 | Hesap: User-076 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #913/1200 | Hesap: User-077 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #914/1200 | Hesap: User-077 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #915/1200 | Hesap: User-077 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #916/1200 | Hesap: User-077 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #917/1200 | Hesap: User-077 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #918/1200 | Hesap: User-077 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #919/1200 | Hesap: User-077 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #920/1200 | Hesap: User-077 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #921/1200 | Hesap: User-077 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #922/1200 | Hesap: User-077 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #923/1200 | Hesap: User-077 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #924/1200 | Hesap: User-077 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #925/1200 | Hesap: User-078 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #926/1200 | Hesap: User-078 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #927/1200 | Hesap: User-078 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #928/1200 | Hesap: User-078 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #929/1200 | Hesap: User-078 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #930/1200 | Hesap: User-078 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #931/1200 | Hesap: User-078 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #932/1200 | Hesap: User-078 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #933/1200 | Hesap: User-078 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #934/1200 | Hesap: User-078 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #935/1200 | Hesap: User-078 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #936/1200 | Hesap: User-078 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #937/1200 | Hesap: User-079 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #938/1200 | Hesap: User-079 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #939/1200 | Hesap: User-079 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #940/1200 | Hesap: User-079 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #941/1200 | Hesap: User-079 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #942/1200 | Hesap: User-079 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #943/1200 | Hesap: User-079 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #944/1200 | Hesap: User-079 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #945/1200 | Hesap: User-079 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #946/1200 | Hesap: User-079 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #947/1200 | Hesap: User-079 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #948/1200 | Hesap: User-079 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #949/1200 | Hesap: User-080 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #950/1200 | Hesap: User-080 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #951/1200 | Hesap: User-080 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #952/1200 | Hesap: User-080 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #953/1200 | Hesap: User-080 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #954/1200 | Hesap: User-080 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #955/1200 | Hesap: User-080 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #956/1200 | Hesap: User-080 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #957/1200 | Hesap: User-080 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #958/1200 | Hesap: User-080 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #959/1200 | Hesap: User-080 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #960/1200 | Hesap: User-080 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #961/1200 | Hesap: User-081 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #962/1200 | Hesap: User-081 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #963/1200 | Hesap: User-081 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #964/1200 | Hesap: User-081 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #965/1200 | Hesap: User-081 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #966/1200 | Hesap: User-081 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #967/1200 | Hesap: User-081 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #968/1200 | Hesap: User-081 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #969/1200 | Hesap: User-081 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #970/1200 | Hesap: User-081 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #971/1200 | Hesap: User-081 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #972/1200 | Hesap: User-081 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #973/1200 | Hesap: User-082 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #974/1200 | Hesap: User-082 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #975/1200 | Hesap: User-082 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #976/1200 | Hesap: User-082 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #977/1200 | Hesap: User-082 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #978/1200 | Hesap: User-082 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #979/1200 | Hesap: User-082 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #980/1200 | Hesap: User-082 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #981/1200 | Hesap: User-082 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #982/1200 | Hesap: User-082 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #983/1200 | Hesap: User-082 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #984/1200 | Hesap: User-082 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #985/1200 | Hesap: User-083 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #986/1200 | Hesap: User-083 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #987/1200 | Hesap: User-083 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #988/1200 | Hesap: User-083 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #989/1200 | Hesap: User-083 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #990/1200 | Hesap: User-083 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #991/1200 | Hesap: User-083 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #992/1200 | Hesap: User-083 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #993/1200 | Hesap: User-083 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #994/1200 | Hesap: User-083 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #995/1200 | Hesap: User-083 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #996/1200 | Hesap: User-083 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #997/1200 | Hesap: User-084 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #998/1200 | Hesap: User-084 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #999/1200 | Hesap: User-084 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1000/1200 | Hesap: User-084 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1001/1200 | Hesap: User-084 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1002/1200 | Hesap: User-084 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1003/1200 | Hesap: User-084 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1004/1200 | Hesap: User-084 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1005/1200 | Hesap: User-084 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1006/1200 | Hesap: User-084 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1007/1200 | Hesap: User-084 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1008/1200 | Hesap: User-084 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1009/1200 | Hesap: User-085 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1010/1200 | Hesap: User-085 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1011/1200 | Hesap: User-085 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1012/1200 | Hesap: User-085 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1013/1200 | Hesap: User-085 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1014/1200 | Hesap: User-085 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1015/1200 | Hesap: User-085 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1016/1200 | Hesap: User-085 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1017/1200 | Hesap: User-085 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1018/1200 | Hesap: User-085 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1019/1200 | Hesap: User-085 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1020/1200 | Hesap: User-085 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1021/1200 | Hesap: User-086 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1022/1200 | Hesap: User-086 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1023/1200 | Hesap: User-086 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1024/1200 | Hesap: User-086 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1025/1200 | Hesap: User-086 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1026/1200 | Hesap: User-086 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1027/1200 | Hesap: User-086 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1028/1200 | Hesap: User-086 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1029/1200 | Hesap: User-086 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1030/1200 | Hesap: User-086 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1031/1200 | Hesap: User-086 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1032/1200 | Hesap: User-086 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1033/1200 | Hesap: User-087 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1034/1200 | Hesap: User-087 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1035/1200 | Hesap: User-087 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1036/1200 | Hesap: User-087 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1037/1200 | Hesap: User-087 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1038/1200 | Hesap: User-087 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1039/1200 | Hesap: User-087 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1040/1200 | Hesap: User-087 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1041/1200 | Hesap: User-087 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1042/1200 | Hesap: User-087 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1043/1200 | Hesap: User-087 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1044/1200 | Hesap: User-087 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1045/1200 | Hesap: User-088 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1046/1200 | Hesap: User-088 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1047/1200 | Hesap: User-088 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1048/1200 | Hesap: User-088 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1049/1200 | Hesap: User-088 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1050/1200 | Hesap: User-088 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1051/1200 | Hesap: User-088 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1052/1200 | Hesap: User-088 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1053/1200 | Hesap: User-088 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1054/1200 | Hesap: User-088 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1055/1200 | Hesap: User-088 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1056/1200 | Hesap: User-088 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1057/1200 | Hesap: User-089 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1058/1200 | Hesap: User-089 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1059/1200 | Hesap: User-089 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1060/1200 | Hesap: User-089 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1061/1200 | Hesap: User-089 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1062/1200 | Hesap: User-089 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1063/1200 | Hesap: User-089 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1064/1200 | Hesap: User-089 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1065/1200 | Hesap: User-089 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1066/1200 | Hesap: User-089 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1067/1200 | Hesap: User-089 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1068/1200 | Hesap: User-089 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1069/1200 | Hesap: User-090 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1070/1200 | Hesap: User-090 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1071/1200 | Hesap: User-090 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1072/1200 | Hesap: User-090 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1073/1200 | Hesap: User-090 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1074/1200 | Hesap: User-090 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1075/1200 | Hesap: User-090 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1076/1200 | Hesap: User-090 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1077/1200 | Hesap: User-090 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1078/1200 | Hesap: User-090 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1079/1200 | Hesap: User-090 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1080/1200 | Hesap: User-090 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1081/1200 | Hesap: User-091 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1082/1200 | Hesap: User-091 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1083/1200 | Hesap: User-091 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1084/1200 | Hesap: User-091 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1085/1200 | Hesap: User-091 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1086/1200 | Hesap: User-091 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1087/1200 | Hesap: User-091 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1088/1200 | Hesap: User-091 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1089/1200 | Hesap: User-091 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1090/1200 | Hesap: User-091 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1091/1200 | Hesap: User-091 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1092/1200 | Hesap: User-091 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1093/1200 | Hesap: User-092 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1094/1200 | Hesap: User-092 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1095/1200 | Hesap: User-092 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1096/1200 | Hesap: User-092 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1097/1200 | Hesap: User-092 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1098/1200 | Hesap: User-092 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1099/1200 | Hesap: User-092 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1100/1200 | Hesap: User-092 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1101/1200 | Hesap: User-092 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1102/1200 | Hesap: User-092 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1103/1200 | Hesap: User-092 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1104/1200 | Hesap: User-092 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1105/1200 | Hesap: User-093 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1106/1200 | Hesap: User-093 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1107/1200 | Hesap: User-093 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1108/1200 | Hesap: User-093 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1109/1200 | Hesap: User-093 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1110/1200 | Hesap: User-093 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1111/1200 | Hesap: User-093 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1112/1200 | Hesap: User-093 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1113/1200 | Hesap: User-093 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1114/1200 | Hesap: User-093 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1115/1200 | Hesap: User-093 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1116/1200 | Hesap: User-093 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1117/1200 | Hesap: User-094 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1118/1200 | Hesap: User-094 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1119/1200 | Hesap: User-094 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1120/1200 | Hesap: User-094 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1121/1200 | Hesap: User-094 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1122/1200 | Hesap: User-094 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1123/1200 | Hesap: User-094 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1124/1200 | Hesap: User-094 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1125/1200 | Hesap: User-094 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1126/1200 | Hesap: User-094 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1127/1200 | Hesap: User-094 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1128/1200 | Hesap: User-094 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1129/1200 | Hesap: User-095 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1130/1200 | Hesap: User-095 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1131/1200 | Hesap: User-095 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1132/1200 | Hesap: User-095 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1133/1200 | Hesap: User-095 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1134/1200 | Hesap: User-095 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1135/1200 | Hesap: User-095 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1136/1200 | Hesap: User-095 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1137/1200 | Hesap: User-095 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1138/1200 | Hesap: User-095 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1139/1200 | Hesap: User-095 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1140/1200 | Hesap: User-095 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1141/1200 | Hesap: User-096 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1142/1200 | Hesap: User-096 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1143/1200 | Hesap: User-096 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1144/1200 | Hesap: User-096 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1145/1200 | Hesap: User-096 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1146/1200 | Hesap: User-096 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1147/1200 | Hesap: User-096 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1148/1200 | Hesap: User-096 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1149/1200 | Hesap: User-096 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1150/1200 | Hesap: User-096 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1151/1200 | Hesap: User-096 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1152/1200 | Hesap: User-096 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1153/1200 | Hesap: User-097 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1154/1200 | Hesap: User-097 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1155/1200 | Hesap: User-097 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1156/1200 | Hesap: User-097 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1157/1200 | Hesap: User-097 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1158/1200 | Hesap: User-097 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1159/1200 | Hesap: User-097 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1160/1200 | Hesap: User-097 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1161/1200 | Hesap: User-097 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1162/1200 | Hesap: User-097 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1163/1200 | Hesap: User-097 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1164/1200 | Hesap: User-097 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1165/1200 | Hesap: User-098 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1166/1200 | Hesap: User-098 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1167/1200 | Hesap: User-098 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1168/1200 | Hesap: User-098 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1169/1200 | Hesap: User-098 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1170/1200 | Hesap: User-098 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1171/1200 | Hesap: User-098 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1172/1200 | Hesap: User-098 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1173/1200 | Hesap: User-098 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1174/1200 | Hesap: User-098 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1175/1200 | Hesap: User-098 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1176/1200 | Hesap: User-098 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1177/1200 | Hesap: User-099 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1178/1200 | Hesap: User-099 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1179/1200 | Hesap: User-099 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1180/1200 | Hesap: User-099 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1181/1200 | Hesap: User-099 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1182/1200 | Hesap: User-099 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1183/1200 | Hesap: User-099 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1184/1200 | Hesap: User-099 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1185/1200 | Hesap: User-099 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1186/1200 | Hesap: User-099 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1187/1200 | Hesap: User-099 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1188/1200 | Hesap: User-099 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1189/1200 | Hesap: User-100 | Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1190/1200 | Hesap: User-100 | Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1191/1200 | Hesap: User-100 | Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1192/1200 | Hesap: User-100 | Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1193/1200 | Hesap: User-100 | Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1194/1200 | Hesap: User-100 | Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1195/1200 | Hesap: User-100 | Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1196/1200 | Hesap: User-100 | Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI
+[FLEET-EXEC] Gorev #1197/1200 | Hesap: User-100 | Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI
+[FLEET-EXEC] Gorev #1198/1200 | Hesap: User-100 | Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI
+[FLEET-EXEC] Gorev #1199/1200 | Hesap: User-100 | Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI
+[FLEET-EXEC] Gorev #1200/1200 | Hesap: User-100 | Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI

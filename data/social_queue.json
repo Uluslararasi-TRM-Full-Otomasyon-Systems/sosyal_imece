@@ -1,0 +1,98 @@
+[
+    {
+        "product_id": "TRM-101",
+        "title": "Akilli Dus Basligi",
+        "price": 499.9,
+        "target_platform": "YouTube Shorts",
+        "status": "queued",
+        "simulation_note": "100 hesapli ag uzerinden paylasim icin hazir"
+    },
+    {
+        "product_id": "TRM-101",
+        "title": "Akilli Dus Basligi",
+        "price": 499.9,
+        "target_platform": "TikTok",
+        "status": "queued",
+        "simulation_note": "100 hesapli ag uzerinden paylasim icin hazir"
+    },
+    {
+        "product_id": "TRM-101",
+        "title": "Akilli Dus Basligi",
+        "price": 499.9,
+        "target_platform": "Instagram Reels",
+        "status": "queued",
+        "simulation_note": "100 hesapli ag uzerinden paylasim icin hazir"
+    },
+    {
+        "product_id": "TRM-101",
+        "title": "Akilli Dus Basligi",
+        "price": 499.9,
+        "target_platform": "Facebook",
+        "status": "queued",
+        "simulation_note": "100 hesapli ag uzerinden paylasim icin hazir"
+    },
+    {
+        "product_id": "TRM-102",
+        "title": "Koseden Donen Led Isik",
+        "price": 299.5,
+        "target_platform": "YouTube Shorts",
+        "status": "queued",
+        "simulation_note": "100 hesapli ag uzerinden paylasim icin hazir"
+    },
+    {
+        "product_id": "TRM-102",
+        "title": "Koseden Donen Led Isik",
+        "price": 299.5,
+        "target_platform": "TikTok",
+        "status": "queued",
+        "simulation_note": "100 hesapli ag uzerinden paylasim icin hazir"
+    },
+    {
+        "product_id": "TRM-102",
+        "title": "Koseden Donen Led Isik",
+        "price": 299.5,
+        "target_platform": "Instagram Reels",
+        "status": "queued",
+        "simulation_note": "100 hesapli ag uzerinden paylasim icin hazir"
+    },
+    {
+        "product_id": "TRM-102",
+        "title": "Koseden Donen Led Isik",
+        "price": 299.5,
+        "target_platform": "Facebook",
+        "status": "queued",
+        "simulation_note": "100 hesapli ag uzerinden paylasim icin hazir"
+    },
+    {
+        "product_id": "TRM-103",
+        "title": "Mini Tasinabilir Blender",
+        "price": 749.0,
+        "target_platform": "YouTube Shorts",
+        "status": "queued",
+        "simulation_note": "100 hesapli ag uzerinden paylasim icin hazir"
+    },
+    {
+        "product_id": "TRM-103",
+        "title": "Mini Tasinabilir Blender",
+        "price": 749.0,
+        "target_platform": "TikTok",
+        "status": "queued",
+        "simulation_note": "100 hesapli ag uzerinden paylasim icin hazir"
+    },
+    {
+        "product_id": "TRM-103",
+        "title": "Mini Tasinabilir Blender",
+        "price": 749.0,
+        "target_platform": "Instagram Reels",
+        "status": "queued",
+        "simulation_note": "100 hesapli ag uzerinden paylasim icin hazir"
+    },
+    {
+        "product_id": "TRM-103",
+        "title": "Mini Tasinabilir Blender",
+        "price": 749.0,
+        "target_platform": "Facebook",
+        "status": "queued",
+        "simulation_note": "100 hesapli ag uzerinden paylasim icin hazir"
+    }
+]

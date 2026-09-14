@@ -1,0 +1,20 @@
+[
+    {
+        "id": "TRM-101",
+        "title": "Akilli Dus Basligi",
+        "price": 499.9,
+        "margin": "serbest"
+    },
+    {
+        "id": "TRM-102",
+        "title": "Koseden Donen Led Isik",
+        "price": 299.5,
+        "margin": "yuksek"
+    },
+    {
+        "id": "TRM-103",
+        "title": "Mini Tasinabilir Blender",
+        "price": 749.0,
+        "margin": "viral"
+    }
+]

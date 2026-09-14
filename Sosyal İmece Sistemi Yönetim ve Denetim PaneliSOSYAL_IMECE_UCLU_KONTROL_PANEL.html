@@ -321,14 +321,14 @@
 #content-ultimate .volkan-meta .engine{ font-size:11.5px; color:#1a1a1a; opacity:0.08; user-select:none; pointer-events:none; }
 #content-ultimate .engine-dot{ width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:5px; background:#151515; box-shadow:none; opacity:.1; }
 #content-ultimate .engine-dot.ready{ background:#151515; }
-#content-ultimate .btn-unlock{
-  background:linear-gradient(90deg, var(--neon), #1fb894); color:#022019; font-weight:800; border:none;
+.btn-unlock{
+  background:linear-gradient(90deg, var(--neon, #39ffe0), #1fb894); color:#022019; font-weight:800; border:none;
   padding:11px 20px; border-radius:10px; cursor:pointer; font-size:13px; letter-spacing:.03em;
   box-shadow:0 0 0 rgba(57,255,224,0); transition:box-shadow .2s, transform .12s;
 }
-#content-ultimate .btn-unlock:hover{ box-shadow:0 0 16px var(--neon-glow); }
-#content-ultimate .btn-unlock:active{ transform:scale(.97); }
-#content-ultimate .btn-unlock[disabled]{ opacity:.5; cursor:default; box-shadow:none; }
+.btn-unlock:hover{ box-shadow:0 0 16px var(--neon-glow, rgba(57,255,224,.55)); }
+.btn-unlock:active{ transform:scale(.97); }
+.btn-unlock[disabled]{ opacity:.5; cursor:default; box-shadow:none; }
 #content-ultimate .sim-badge{ font-size:1px; padding:0; border:none; color:#0a0a0a; background:transparent; opacity:0.03; pointer-events:none; user-select:none; }
 #content-ultimate .welcome-wrap{ display:none; }
 #content-ultimate .section{ max-width:1400px; margin:0 auto; padding:18px 28px; }
@@ -342,198 +342,121 @@
   box-shadow:0 10px 30px rgba(0,0,0,.35);
   position:relative;
 }
-#content-ultimate .radar-stats{ display:flex; gap:22px; margin-bottom:12px; flex-wrap:wrap; }
-#content-ultimate .radar-stat{ font-size:12px; color:var(--text-dim); }
-#content-ultimate .radar-stat b{ display:block; font-size:20px; color:var(--gold); font-family:Georgia,serif; }
+/* ===================== YENİ: CANLI AKIŞ & RADAR MİMARİSİ (1200 ajan) =====================
+   Performans stratejisi: DOM'da HER ZAMAN sabit sayıda node bulunur (MAX_CONCURRENT kadar
+   akış slotu + sınırlı sayıda kara kutu kartı). 1200 ajan olsa da olmasa da DOM boyutu
+   büyümez — JS tarafında sadece bu sabit node'ların class/textContent'i güncellenir. */
+#content-ultimate .flow-trafik{ display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap; }
+#content-ultimate .flow-trafik-item{
+  flex:1; min-width:140px; background:#00000055; border-radius:14px; padding:10px 16px;
+  border:1px solid #2a3344; text-align:center;
+}
+#content-ultimate .flow-trafik-item b{ display:block; font-size:26px; font-family:Georgia,serif; }
+#content-ultimate .flow-trafik-item span{ font-size:11px; color:var(--text-dim); }
+#content-ultimate .flow-trafik-yesil b{ color:#3ddc71; }
+#content-ultimate .flow-trafik-sari b{ color:#ffd23d; }
+#content-ultimate .flow-trafik-kirmizi b{ color:#ff4d5e; }
+#content-ultimate .flow-trafik-toplam b{ color:var(--gold); }
 
-#content-ultimate .flow-container {
-  background: #00000055; border-radius: 18px; padding: 12px;
-  min-height: 60px; max-height: 150px; overflow-y: auto;
-  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
-  border: 1px solid #2a3344;
+#content-ultimate .flow-container-buyuk{
+  background:#03060a; border-radius:16px; padding:12px;
+  min-height:460px; max-height:460px; overflow-y:auto;
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(190px,1fr)); gap:8px;
+  align-content:flex-start;
+  border:1px solid #1c2636;
+  box-shadow:inset 0 0 30px rgba(0,255,120,.04);
+  font-family:'Consolas','Courier New',monospace;
 }
-#content-ultimate .flow-ajan {
-  background: #1a1f2e; border-radius: 16px; padding: 6px 16px;
-  border: 1px solid #3a3a4a; font-size: 12px;
-  display: flex; align-items: center; gap: 6px;
-  animation: ultPopIn .3s ease;
-  transition: box-shadow .25s, border-color .25s, background .25s;
+/* Slot havuzu: her slot ya BOŞ (kuyruk bekliyor görünümü) ya da bir ajanla DOLU'dur */
+#content-ultimate .flow-slot{
+  background:#0d1420; border-radius:10px; padding:8px 10px; min-height:56px;
+  border-left:3px solid #2a3344; font-size:11.5px;
+  display:flex; flex-direction:column; justify-content:center; gap:2px;
+  transition:background .25s, border-color .25s, box-shadow .25s;
 }
-#content-ultimate .flow-ajan .isim { font-weight: 600; color: #ffdd99; }
-#content-ultimate .flow-ajan .gorev { color: #99bbff; font-size: 11px; }
-#content-ultimate .flow-ajan.tamam { border-color: #44ff88; background: #1a3a2a; }
-#content-ultimate .flow-ajan.durum-yesil {
-  border-color: #3ddc71;
-  box-shadow: 0 0 12px rgba(61,220,113,.7), 0 0 22px rgba(61,220,113,.35);
-  animation: flowNeonYesil 1s steps(1,end) infinite;
+#content-ultimate .flow-slot.bos{
+  border-left-color:#232d3d; color:#3d4a5e; justify-content:center; align-items:center;
+  font-size:10px; letter-spacing:.5px;
 }
-#content-ultimate .flow-ajan.durum-sari {
-  border-color: #ffd23d;
-  background: #3a3000;
-  box-shadow: 0 0 12px rgba(255,210,61,.8), 0 0 22px rgba(255,210,61,.35);
-}
-#content-ultimate .flow-ajan.durum-kirmizi {
-  border-color: #ff4d5e;
-  background: #3a0d12;
-  box-shadow: 0 0 12px rgba(255,77,94,.85), 0 0 22px rgba(255,77,94,.4);
-}
-@keyframes flowNeonYesil {
-  0%,49%{ box-shadow: 0 0 14px rgba(61,220,113,.9), 0 0 26px rgba(61,220,113,.45); border-color:#3ddc71; }
-  50%,100%{ box-shadow: 0 0 4px rgba(61,220,113,.4); border-color:rgba(61,220,113,.5); }
-}
-@keyframes ultPopIn { from { transform: scale(.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+#content-ultimate .flow-slot .fs-kod{ font-weight:700; color:#ffdd99; }
+#content-ultimate .flow-slot .fs-gorev{ color:#99bbff; font-size:10px; line-height:1.25; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+#content-ultimate .flow-slot.giris{ animation:ultSlotGiris .35s ease; }
+@keyframes ultSlotGiris{ from{ transform:translateX(-8px) scale(.92); opacity:.3; } to{ transform:none; opacity:1; } }
 
-#content-ultimate .agent-grid {
-  display: grid;
-  grid-template-columns: repeat(20, 1fr);
-  gap: 3px;
-  padding: 5px;
-  margin-top: 6px;
-  background: #00000066;
-  border-radius: 10px;
-  border: 1px solid #2a3344;
+/* Kategori renk kodlaması */
+#content-ultimate .flow-slot.cat-veri{
+  border-left-color:#3ddc71;
+  box-shadow:0 0 10px rgba(61,220,113,.55);
+  animation:ultSlotGiris .35s ease, flowNeonYesil 1.1s steps(1,end) infinite;
 }
-#content-ultimate .agent-cell {
-  background: #1a1f2e;
-  border-radius: 4px;
-  height: 26px;
-  text-align: center;
-  border: 1px solid #2a3344;
-  font-size: 7.5px;
-  font-weight: 700;
-  color: #99a7bd;
-  cursor: pointer;
-  transition: .15s;
-  user-select: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1px;
-  position: relative;
-  white-space: nowrap;
+#content-ultimate .flow-slot.cat-sosyal{
+  border-left-color:#3b8bff; background:#0d1a30;
+  box-shadow:0 0 10px rgba(59,139,255,.55);
+  animation:ultSlotGiris .35s ease, flowNeonMavi 1.3s steps(1,end) infinite;
 }
-#content-ultimate .agent-cell:hover {
-  transform: scale(1.3);
-  z-index: 5;
-  color: #fff;
-  border-color: #ffaa55;
-  box-shadow: 0 0 10px rgba(255,170,85,.6);
+#content-ultimate .flow-slot.durum-kirmizi{
+  border-left-color:#ff4d5e; background:#3a0d12; color:#ffdada;
+  box-shadow:0 0 14px rgba(255,77,94,.9);
+  animation:flowNeonKirmizi .5s steps(1,end) infinite;
 }
-#content-ultimate .agent-cell.durum-yesil {
-  background: rgba(61,220,113,.16);
-  border-color: #3ddc71;
-  color: #b5ffd0;
-  box-shadow: 0 0 8px rgba(61,220,113,.7);
-  animation: ultCellYesil .9s steps(1,end) infinite;
+#content-ultimate .flow-slot.durum-sari{
+  border-left-color:#ffd23d; background:#3a2f05; color:#fff3c4;
+  box-shadow:0 0 14px rgba(255,210,61,.85);
+  animation:flowNeonSari .6s steps(1,end) infinite;
 }
-#content-ultimate .agent-cell.durum-sari {
-  background: rgba(255,210,61,.22);
-  border-color: #ffd23d;
-  color: #fff3b0;
-  box-shadow: 0 0 10px rgba(255,210,61,.9);
+@keyframes flowNeonYesil{
+  0%,49%{ box-shadow:0 0 12px rgba(61,220,113,.85); }
+  50%,100%{ box-shadow:0 0 3px rgba(61,220,113,.35); }
 }
-#content-ultimate .agent-cell.durum-kirmizi {
-  background: rgba(255,77,94,.25);
-  border-color: #ff4d5e;
-  color: #ffc4ca;
-  box-shadow: 0 0 10px rgba(255,77,94,.9);
+@keyframes flowNeonMavi{
+  0%,49%{ box-shadow:0 0 12px rgba(59,139,255,.85); }
+  50%,100%{ box-shadow:0 0 3px rgba(59,139,255,.35); }
 }
-@keyframes ultCellYesil {
-  0%,49%{ box-shadow: 0 0 10px rgba(61,220,113,.95), 0 0 18px rgba(61,220,113,.5); }
-  50%,100%{ box-shadow: 0 0 3px rgba(61,220,113,.4); }
+@keyframes flowNeonKirmizi{
+  0%,49%{ box-shadow:0 0 16px rgba(255,77,94,1); background:#3a0d12; }
+  50%,100%{ box-shadow:0 0 4px rgba(255,77,94,.5); background:#1f0509; }
+}
+@keyframes flowNeonSari{
+  0%,49%{ box-shadow:0 0 16px rgba(255,210,61,1); background:#3a2f05; }
+  50%,100%{ box-shadow:0 0 4px rgba(255,210,61,.5); background:#241d03; }
 }
 
-#content-ultimate .agent-hover-preview {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 320px;
-  max-width: 92%;
-  background: linear-gradient(155deg, #1a2236, #0d1420);
-  border: 1px solid #ffaa55;
-  border-radius: 14px;
-  padding: 14px 16px;
-  box-shadow: 0 12px 40px rgba(0,0,0,.7), 0 0 22px rgba(255,170,85,.25);
-  font-size: 12px;
-  line-height: 1.5;
-  opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity .18s ease, transform .18s ease;
-  pointer-events: none;
-  z-index: 50;
+/* Kara Kutu — kalıcı kritik hata havuzu */
+#content-ultimate .karakutu-panel{ margin-top:18px; border-top:1px dashed #3a3350; padding-top:14px; }
+#content-ultimate .karakutu-baslik{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+#content-ultimate .karakutu-baslik h3{ font-size:14px; color:#ff8a95; display:flex; align-items:center; gap:8px; }
+#content-ultimate .kk-badge{
+  background:#ff4d5e; color:#2b0509; font-size:11px; font-weight:800;
+  padding:2px 9px; border-radius:20px; min-width:18px; text-align:center;
 }
-#content-ultimate .agent-hover-preview.goster {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+#content-ultimate .kk-temizle-btn{
+  background:#1e2a3a; border:1px solid #3ddc71; color:#b5ffd0; padding:6px 14px;
+  border-radius:30px; font-size:11px; font-weight:600; cursor:pointer;
 }
-#content-ultimate .agent-hover-preview .ahp-baslik {
-  font-family: Georgia, serif;
-  font-size: 15px;
-  font-weight: 800;
-  color: #ffaa44;
-  margin-bottom: 4px;
-  text-shadow: 0 0 10px rgba(255,170,85,.5);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+#content-ultimate .kk-temizle-btn:hover{ background:#173322; }
+#content-ultimate .karakutu-alt-metin{ font-size:11px; color:var(--text-dim); margin:6px 0 10px; }
+#content-ultimate .karakutu-grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(190px,1fr)); gap:8px;
+  max-height:220px; overflow-y:auto;
 }
-#content-ultimate .agent-hover-preview .ahp-rol {
-  color: #ffe9a8;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 6px;
+#content-ultimate .kk-bos{ color:var(--text-dim); font-size:12px; padding:10px; grid-column:1/-1; text-align:center; }
+#content-ultimate .kk-card{
+  background:#1f0509; border:1px solid #ff4d5e; border-radius:10px; padding:8px 10px;
+  cursor:pointer; animation:flowNeonKirmizi .6s steps(1,end) infinite;
+  font-size:11px;
 }
-#content-ultimate .agent-hover-preview .ahp-gorev {
-  color: #ccd;
-  font-size: 11.5px;
-  border-top: 1px dashed rgba(255,170,85,.35);
-  padding-top: 6px;
+#content-ultimate .kk-card.sari{
+  background:#241d03; border:1px solid #ffd23d;
+  animation:flowNeonSari .7s steps(1,end) infinite;
 }
-#content-ultimate .agent-hover-preview .ahp-durum {
-  display: inline-block;
-  font-size: 10px;
-  padding: 2px 8px;
-  border-radius: 20px;
-  font-weight: 700;
+#content-ultimate .kk-card .kk-seviye{ font-size:9px; font-weight:600; opacity:.85; }
+#content-ultimate .kk-card .kk-kod{ font-weight:700; color:#ffb3bb; }
+#content-ultimate .kk-card.sari .kk-kod{ color:#ffe9a8; }
+#content-ultimate .kk-card .kk-mesaj{ color:#ffc9ce; font-size:10px; margin-top:2px; }
+#content-ultimate .kk-card.sari .kk-mesaj{ color:#fff0c2; }
+#content-ultimate .kk-card .kk-incele{
+  margin-top:6px; display:inline-block; font-size:10px; color:#3ddc71; text-decoration:underline;
 }
-#content-ultimate .agent-hover-preview .ahp-durum.yesil{ background:rgba(61,220,113,.2); color:#3ddc71; border:1px solid #3ddc71; }
-#content-ultimate .agent-hover-preview .ahp-durum.sari{ background:rgba(255,210,61,.2); color:#ffd23d; border:1px solid #ffd23d; }
-#content-ultimate .agent-hover-preview .ahp-durum.kirmizi{ background:rgba(255,77,94,.2); color:#ff4d5e; border:1px solid #ff4d5e; }
-#content-ultimate .agent-hover-preview .ahp-durum.bosta{ background:rgba(153,167,189,.15); color:#99a7bd; border:1px solid #99a7bd; }
-#content-ultimate .agent-hover-preview .ahp-actions{
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255,170,85,.3);
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-#content-ultimate .agent-hover-preview .ahp-btn{
-  flex: 1;
-  min-width: 120px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition: transform .12s, box-shadow .12s;
-  font-family: inherit;
-}
-#content-ultimate .agent-hover-preview .ahp-btn:hover{ transform: scale(1.03); }
-#content-ultimate .agent-hover-preview .ahp-btn-danger{
-  background: linear-gradient(90deg,#c81e2e,#ff4d5e);
-  color: #fff;
-  box-shadow: 0 0 0 rgba(255,77,94,0);
-}
-#content-ultimate .agent-hover-preview .ahp-btn-danger:hover{ box-shadow: 0 0 12px rgba(255,77,94,.6); }
-#content-ultimate .agent-hover-preview .ahp-btn-warn{
-  background: linear-gradient(90deg,#e8a500,#ffd23d);
-  color: #3a2a00;
-  box-shadow: 0 0 0 rgba(240,180,41,0);
-}
-#content-ultimate .agent-hover-preview .ahp-btn-warn:hover{ box-shadow: 0 0 12px rgba(240,180,41,.6); }
 
 #content-ultimate .btn-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
 #content-ultimate .btn-group button {
@@ -553,9 +476,6 @@
   font-family: monospace; font-size: 11px; color: #9eff9e;
   max-height: 120px; overflow-y: auto; margin-top: 10px; border: 1px solid #2a3344;
 }
-#content-ultimate .agent-legend{ display:flex; gap:16px; margin-top:14px; font-size:11px; color:var(--text-dim); flex-wrap:wrap; }
-#content-ultimate .agent-legend span{ display:flex; align-items:center; gap:6px; }
-#content-ultimate .agent-legend i{ width:10px; height:10px; border-radius:3px; display:inline-block; }
 #content-ultimate .voice-actions{ display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:14px; }
 #content-ultimate .voice-btn{
   display:flex; flex-direction:column; align-items:flex-start; gap:6px; text-align:left;
@@ -577,9 +497,8 @@
 #content-ultimate .toast.err{border-left-color:var(--err);}
 @keyframes slidein{from{transform:translateX(30px);opacity:0;} to{transform:translateX(0);opacity:1;}}
 @media (max-width:900px){
-  #content-ultimate .agent-grid{ grid-template-columns:repeat(15, 1fr); }
-  #content-ultimate .agent-cell{ font-size:7px; height:24px; }
-  #content-ultimate .agent-hover-preview{ width:250px; top:8px; right:8px; }
+  #content-ultimate .flow-container-buyuk{ grid-template-columns:repeat(auto-fill, minmax(140px,1fr)); min-height:360px; max-height:360px; }
+  #content-ultimate .karakutu-grid{ grid-template-columns:repeat(auto-fill, minmax(140px,1fr)); }
 }
 
 .sys-neon-dot{
@@ -706,9 +625,9 @@ h2[data-announce]:hover, h3[data-announce]:hover{
 
 
 <div class="panel-voice-mini">
-  <button class="btn-unlock sys-voice-on-btn" style="padding:6px 12px; font-size:12px;">🔊 Ses Açma</button>
+  <button class="btn-unlock sys-voice-on-btn" style="padding:10px 18px; font-size:13px;">🔊 Ses Açma</button>
   <span class="sys-neon-dot" title="Sistem durumu: yeşil=aktif, sarı=acil durum, kırmızı=durduruldu"></span>
-  <button class="btn-unlock sys-voice-off-btn" style="padding:6px 12px; font-size:12px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
+  <button class="btn-unlock sys-voice-off-btn" style="padding:10px 18px; font-size:13px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
 </div>
 <div class="topbar">
   <h1>🌐 SOSYAL İMECE — Ana Gösterge Paneli<span>Küresel İmece Dünyası · Otonom Panel</span></h1>
@@ -718,7 +637,7 @@ h2[data-announce]:hover, h3[data-announce]:hover{
 <div class="grid">
 
   <div class="card span-4">
-    <h3 data-announce="Çok Dilli Trafik başlığındasınız. Burada son yirmi dört saatte hangi dilde kaç istek geldiğini göreceksiniz.">🌐 Çok Dilli Trafik (Son 24s)</h3>
+    <h3 data-announce="Çok Dilli Trafik başlığındasınız. Burada son yirmi dört saat içinde sisteme hangi dilde kaç istek geldiğini gösteren bir çizgi grafik göreceksiniz; hangi dilin en çok kullanıldığını buradan takip edebilirsiniz.">🌐 Çok Dilli Trafik (Son 24s)</h3>
     <canvas id="ana_multilangChart" height="140"></canvas>
     <div class="traffic-flags">
       <div class="flag-box"><div class="flag">🇹🇷</div><div class="pct" id="ana_pctTr">–</div></div>
@@ -729,7 +648,7 @@ h2[data-announce]:hover, h3[data-announce]:hover{
   </div>
 
   <div class="card span-8">
-    <h3 data-announce="Canlı Telemetri Osiloskopu başlığındasınız. Kanal butonlarına tıklayarak Volkan'dan görev bilgisi alabilirsiniz.">📈 Canlı Telemetri Osiloskopu</h3>
+    <h3 data-announce="Canlı Telemetri Osiloskopu başlığındasınız. Burada Vatsap mesaj trafiği, CPU, RAM ve yapay zeka başarım yüzdesini canlı çizgiler halinde göreceksiniz. Kanal butonlarından birine tıklarsanız, o an hangi veriye baktığınızı ben açıklarım.">📈 Canlı Telemetri Osiloskopu</h3>
     <div class="osc-wrap">
       <div class="osc-scale-top"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
       <div class="osc-scale-left"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
@@ -742,7 +661,7 @@ h2[data-announce]:hover, h3[data-announce]:hover{
   </div>
 
   <div class="card span-4">
-    <h3 data-announce="SMDA Hızlı Kontrol başlığındasınız.">⚙️ SMDA Hızlı Kontrol</h3>
+    <h3 data-announce="SMDA Hızlı Kontrol başlığındasınız. Burada Sosyal Medya Dağıtım Ajanını deneme modunda test edebilir veya gerçek, geri alınamaz bir canlı dağıtım başlatabilirsiniz; hangisini seçerseniz seçin, işlem başladığında ve bittiğinde sonucunu size bildiririm.">⚙️ SMDA Hızlı Kontrol</h3>
     <div style="margin-bottom:10px;"><span class="led" id="ana_smdaLed"></span><span id="ana_smdaLedText">bekliyor</span></div>
     <div class="btn-row" style="margin-bottom:10px;">
       <button class="btn-warning" data-vtask-start="SMDA Test, Dry Run. Deneme modunda başlatılıyor." data-vtask-done="SMDA deneme modu tamamlandı." onclick="ana_runSocialAgent(true)">SMDA Test (Dry Run)</button>
@@ -753,9 +672,9 @@ h2[data-announce]:hover, h3[data-announce]:hover{
   </div>
 
   <div class="card span-4">
-    <h3 data-announce="Hızlı Eylemler başlığındasınız.">🛠️ Hızlı Eylemler</h3>
+    <h3 data-announce="Hızlı Eylemler başlığındasınız. Burada Vatsap köprüsünü test edebilir, tüm metrikleri yenileyebilir veya son logları görüntüleyebilirsiniz; her birinin sonucunu, başarılı ya da başarısız olsun, size sesli olarak bildiririm.">🛠️ Hızlı Eylemler</h3>
     <div class="btn-row">
-      <button class="btn-primary" data-vtask-start="WhatsApp köprü bağlantısı test ediliyor." data-vtask-done="WhatsApp köprü testi tamamlandı." onclick="ana_testWhatsAppBridge()">WhatsApp Köprüsü Test</button>
+      <button class="btn-primary" data-vtask-start="Vatsap köprü bağlantısı test ediliyor." data-vtask-done="Vatsap köprü testi tamamlandı." onclick="ana_testWhatsAppBridge()">WhatsApp Köprüsü Test</button>
       <button class="btn-outline" data-vtask-start="Tüm canlı metrikler yeniden yükleniyor." data-vtask-done="Metrikler yenilendi." onclick="ana_refreshAllMetrics()">🔄 Yenile</button>
       <button class="btn-secondary" data-vtask-start="Son konuşma logları isteniyor." data-vtask-done="Loglar görüntülendi." onclick="ana_showLogs()">📋 Logları Görüntüle</button>
     </div>
@@ -763,7 +682,7 @@ h2[data-announce]:hover, h3[data-announce]:hover{
   </div>
 
   <div class="card span-4">
-    <h3 data-announce="Bütünleşik Sağlık Endeksi. Derin Sistem Teşhisi butonu ile manuel kalibrasyon başlatılabilir.">💠 Bütünleşik Sağlık Endeksi</h3>
+    <h3 data-announce="Bütünleşik Sağlık Endeksi başlığındasınız. Burada sistemin genel sağlık puanını göreceksiniz; Derin Sistem Teşhisi butonuna basarsanız aktif ajan sayısı, CPU ve bellek gibi değerleri tarayan bir kalibrasyon başlatılır, tarama bitince özet sonucunu size okurum.">💠 Bütünleşik Sağlık Endeksi</h3>
     <div class="gauge-wrap"><svg id="ana_healthGauge" width="180" height="110" viewBox="0 0 180 110"></svg></div>
     <div style="text-align:center; margin-top:12px;">
       <button class="btn-primary" data-vtask-start="Derin sistem teşhisi başlatılıyor." data-vtask-done="Derin sistem teşhisi tamamlandı." onclick="ana_derinTeshis()">🔬 Derin Sistem Teşhisi</button>
@@ -772,7 +691,7 @@ h2[data-announce]:hover, h3[data-announce]:hover{
   </div>
 
   <div class="card span-12">
-    <h3 data-announce="Canlı Mesaj Trafiği ve Son Aktiviteler.">📡 Canlı Mesaj Trafiği &amp; Son Aktiviteler</h3>
+    <h3 data-announce="Canlı Mesaj Trafiği ve Son Aktiviteler başlığındasınız. Burada sisteme gelen son mesajları ve ajanların yaptığı son işlemleri, en yeniden en eskiye doğru sıralanmış şekilde göreceksiniz.">📡 Canlı Mesaj Trafiği &amp; Son Aktiviteler</h3>
     <div style="display:flex; gap:24px; align-items:center;">
       <div style="text-align:center;">
         <div class="counter-big" id="ana_liveMsgCounter">0</div>
@@ -826,9 +745,9 @@ h2[data-announce]:hover, h3[data-announce]:hover{
 
 
 <div class="panel-voice-mini">
-  <button class="btn-unlock sys-voice-on-btn" style="padding:6px 12px; font-size:12px;">🔊 Ses Açma</button>
+  <button class="btn-unlock sys-voice-on-btn" style="padding:10px 18px; font-size:13px;">🔊 Ses Açma</button>
   <span class="sys-neon-dot" title="Sistem durumu: yeşil=aktif, sarı=acil durum, kırmızı=durduruldu"></span>
-  <button class="btn-unlock sys-voice-off-btn" style="padding:6px 12px; font-size:12px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
+  <button class="btn-unlock sys-voice-off-btn" style="padding:10px 18px; font-size:13px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
 </div>
 <div class="topbar">
   <h1 id="gel_pageTitle">🧠 Gelişmiş AI + SMDA Kontrol Paneli<span id="gel_pageSub">Küresel İmece Dünyası · Otonom Panel</span></h1>
@@ -842,24 +761,24 @@ h2[data-announce]:hover, h3[data-announce]:hover{
 <div class="grid">
 
   <div class="card span-4">
-    <h3 id="gel_aiCardTitle" data-announce="Yapay Zeka Modülü başlığındasınız.">🧠 AI Modülü</h3>
+    <h3 id="gel_aiCardTitle" data-announce="Yapay Zeka Modülü başlığındasınız. Burada AI Test butonuna basarak modülün örnek bir soruya doğru yanıt verip vermediğini kontrol edebilirsiniz; test biter bitmez sonucunu, başarılı ya da başarısız, size bildiririm.">🧠 AI Modülü</h3>
     <button class="btn-dark" data-vtask-start="Yapay zeka modülü test ediliyor." data-vtask-done="AI modülü testi tamamlandı." onclick="gel_testAIIntegration()">🧠 AI Test</button>
     <div id="gel_aiTestResult" style="font-size:12px; color:var(--text-dim); margin:10px 0;"></div>
     <canvas id="gel_intentChart" height="180"></canvas>
   </div>
 
   <div class="card span-4">
-    <h3 data-announce="Dil Başına AI Doğruluk başlığındasınız.">🎯 Dil Başına AI Doğruluk</h3>
+    <h3 data-announce="Dil Başına AI Doğruluk başlığındasınız. Burada yapay zekanın Türkçe, İngilizce ve diğer dillerdeki niyet anlama doğruluğunu yüzde olarak karşılaştıran bir grafik göreceksiniz.">🎯 Dil Başına AI Doğruluk</h3>
     <canvas id="gel_langAccuracyChart" height="180"></canvas>
   </div>
 
   <div class="card span-4">
-    <h3 data-announce="Konuşma Süresi Dağılımı başlığındasınız.">⏱️ Konuşma Süresi Dağılımı (dk)</h3>
+    <h3 data-announce="Konuşma Süresi Dağılımı başlığındasınız. Burada müşteri konuşmalarının kaç dakika sürdüğünü gösteren bir dağılım grafiği göreceksiniz; uzun süren konuşmalar genelde daha karmaşık talepleri işaret eder.">⏱️ Konuşma Süresi Dağılımı (dk)</h3>
     <canvas id="gel_durationHistogram" height="180"></canvas>
   </div>
 
   <div class="card span-8">
-    <h3 data-announce="Yapay Zeka ve Sosyal Osiloskop başlığındasınız.">📈 AI + Sosyal Osiloskop (5 Kanal)</h3>
+    <h3 data-announce="AI ve Sosyal Osiloskop başlığındasınız. Burada AI niyet doğruluğu, tarama hızı, paylaşım başarı oranı, platformlar arası gecikme ve hata sayısını canlı olarak göreceksiniz; kanal butonlarına tıklarsanız hangisine baktığınızı ben açıklarım.">📈 AI + Sosyal Osiloskop (5 Kanal)</h3>
     <div class="osc-wrap">
       <div class="osc-scale-top"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
       <div class="osc-scale-left"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
@@ -871,7 +790,7 @@ h2[data-announce]:hover, h3[data-announce]:hover{
   </div>
 
   <div class="card span-4">
-    <h3 data-announce="SMDA Tam Kontrol Paneli başlığındasınız. Özel dakika girişi ile esnek döngü süresi belirleyebilirsiniz.">⚙️ SMDA Tam Kontrol Paneli</h3>
+    <h3 data-announce="SMDA Tam Kontrol Paneli başlığındasınız. Burada Sosyal Medya Dağıtım Ajanını başlatabilir, durdurabilir veya sadece deneme amaçlı çalıştırabilirsiniz; özel dakika girişiyle döngü süresini kendiniz de belirleyebilirsiniz. Hangi işlemi seçerseniz seçin, başladığında ve sonucu belli olduğunda, başarılı ya da başarısız, size haber veririm.">⚙️ SMDA Tam Kontrol Paneli</h3>
     <div class="toggle-row">
       <label class="switch"><input type="checkbox" id="gel_smdaLoopToggle" onchange="gel_toggleSmdaLoop(this.checked)"><span class="slider"></span></label>
       <span>Döngü Aktif</span>
@@ -895,12 +814,12 @@ h2[data-announce]:hover, h3[data-announce]:hover{
   </div>
 
   <div class="card span-8">
-    <h3 data-announce="SMDA Canlı Log başlığındasınız.">🖥️ SMDA Canlı Log</h3>
+    <h3 data-announce="SMDA Canlı Log başlığındasınız. Burada Sosyal Medya Dağıtım Ajanının yaptığı her işlemin zaman damgalı kaydını, en yeniden eskiye doğru göreceksiniz.">🖥️ SMDA Canlı Log</h3>
     <div class="log-box" id="gel_smdaLiveLog"></div>
   </div>
 
   <div class="card span-12">
-    <h3 data-announce="SMDA Döngü Takvimi başlığındasınız.">📅 SMDA Döngü Takvimi (Son 30 Gün)</h3>
+    <h3 data-announce="SMDA Döngü Takvimi başlığındasınız. Burada son otuz gün boyunca kaç dağıtım döngüsü çalıştığını gösteren bir takvim grafiği göreceksiniz.">📅 SMDA Döngü Takvimi (Son 30 Gün)</h3>
     <canvas id="gel_loopCalendarChart" height="90"></canvas>
   </div>
 
@@ -931,9 +850,9 @@ h2[data-announce]:hover, h3[data-announce]:hover{
 
 
 <div class="panel-voice-mini">
-  <button class="btn-unlock sys-voice-on-btn" style="padding:6px 12px; font-size:12px;">🔊 Ses Açma</button>
+  <button class="btn-unlock sys-voice-on-btn" style="padding:10px 18px; font-size:13px;">🔊 Ses Açma</button>
   <span class="sys-neon-dot" title="Sistem durumu: yeşil=aktif, sarı=acil durum, kırmızı=durduruldu"></span>
-  <button class="btn-unlock sys-voice-off-btn" style="padding:6px 12px; font-size:12px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
+  <button class="btn-unlock sys-voice-off-btn" style="padding:10px 18px; font-size:13px; background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#2b0906;">🔇 Ses Kapama</button>
 </div>
 <div class="alarm-bar" id="kom_alarmBar">🚨 ACİL DURUM AKTİF — TÜM OTONOM SÜREÇLER DURDURULDU 🚨</div>
 
@@ -948,7 +867,7 @@ h2[data-announce]:hover, h3[data-announce]:hover{
 <div class="grid">
 
   <div class="card span-12">
-    <h3 data-announce="Üst Düzey Telemetri Osiloskopu başlığındasınız. Sekiz kanal mevcut.">📡 Üst Düzey Telemetri Osiloskopu (8 Kanal)</h3>
+    <h3 data-announce="Üst Düzey Telemetri Osiloskopu başlığındasınız. Burada Vatsap, CPU, RAM, AI başarım, SMDA başarı, platformlar arası gecikme, hata sayısı ve TRM senkron olmak üzere sekiz kanalı canlı görebilirsiniz; kanal butonlarına tıklarsanız hangisine baktığınızı ben açıklarım.">📡 Üst Düzey Telemetri Osiloskopu (8 Kanal)</h3>
     <div class="osc-wrap">
       <div class="osc-scale-top"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
       <div class="osc-scale-left"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
@@ -960,23 +879,23 @@ h2[data-announce]:hover, h3[data-announce]:hover{
   </div>
 
   <div class="card span-5">
-    <h3 data-announce="Merkezi Çok Dilli Trafik başlığındasınız.">🌐 Çok Dilli Trafik (Merkezi Görünüm)</h3>
+    <h3 data-announce="Merkezi Çok Dilli Trafik başlığındasınız. Burada tüm sistemin dil bazlı istek dağılımını, merkezi ve özet bir görünümle göreceksiniz.">🌐 Çok Dilli Trafik (Merkezi Görünüm)</h3>
     <canvas id="kom_bigMultilangChart" height="260"></canvas>
   </div>
 
   <div class="card span-7">
-    <h3 data-announce="Coğrafi Yoğunluk başlığındasınız.">🗺️ Coğrafi Yoğunluk (TR / ABD / Almanya)</h3>
+    <h3 data-announce="Coğrafi Yoğunluk başlığındasınız. Burada Türkiye, Amerika ve Almanya'dan gelen trafiğin yoğunluğunu karşılaştırmalı olarak göreceksiniz.">🗺️ Coğrafi Yoğunluk (TR / ABD / Almanya)</h3>
     <svg id="kom_worldMap" viewBox="0 0 500 220" style="width:100%; height:auto;"></svg>
   </div>
 
   <div class="card span-4">
-    <h3 data-announce="Platform Kontrolü başlığındasınız.">📢 Platform Kontrolü</h3>
+    <h3 data-announce="Platform Kontrolü başlığındasınız. Burada hangi sosyal medya platformlarının aktif olduğunu açıp kapatabilir, seçtiklerinize tek tıkla toplu yayın başlatabilirsiniz; yayın bittiğinde başarı durumunu size bildiririm.">📢 Platform Kontrolü</h3>
     <div class="platform-grid" id="kom_platformGrid"></div>
     <button class="btn-gradient" style="width:100%; margin-top:12px;" data-vtask-start="Seçili platformlara eş zamanlı yayın başlatılıyor." data-vtask-done="Yayın tamamlandı." onclick="kom_shareToAllPlatforms()">📢 Hepsine Yayınla</button>
   </div>
 
   <div class="card span-4">
-    <h3 data-announce="Medya Üret başlığındasınız.">🎬 Medya Üret (Ses + Görsel + Video)</h3>
+    <h3 data-announce="Medya Üret başlığındasınız. Burada yazdığınız metinden sesli, görsel veya video medya ürettirebilirsiniz; üretim tamamlandığında ya da bir hata oluştuğunda sonucu size bildiririm.">🎬 Medya Üret (Ses + Görsel + Video)</h3>
     <textarea id="kom_mediaText" rows="3" placeholder="Paylaşılacak metni buraya yazın…"></textarea>
     <div class="btn-row">
       <button class="btn-dark" data-vtask-start="Medya üretimi başlatılıyor." data-vtask-done="Medya üretimi tamamlandı." onclick="kom_generateMedia()">🎬 Medya Üret</button>
@@ -985,13 +904,13 @@ h2[data-announce]:hover, h3[data-announce]:hover{
   </div>
 
   <div class="card span-4">
-    <h3 data-announce="Platform Başarı Oranı başlığındasınız. Barlara tıklayarak Volkan'dan değerlendirme alabilirsiniz.">📊 Platform Başarı Oranı</h3>
+    <h3 data-announce="Platform Başarı Oranı başlığındasınız. Burada her sosyal medya platformundaki paylaşım başarı yüzdesini bar grafik olarak göreceksiniz; bir bara tıklarsanız o platformun adını doğru telaffuz ederek değerlendirmesini okurum.">📊 Platform Başarı Oranı</h3>
     <canvas id="kom_platformSuccessChart" height="220"></canvas>
     <div style="font-size:11px; color:var(--text-dim); margin-top:8px; text-align:center;">💡 Barlara tıklayın — Volkan değerlendirsin.</div>
   </div>
 
   <div class="card span-12">
-    <h3 data-announce="Son 20 Dağıtım Batch'i başlığındasınız.">🗂️ Son 20 Dağıtım Batch'i</h3>
+    <h3 data-announce="Son 20 Dağıtım Batch'i başlığındasınız. Burada son yirmi toplu dağıtım işleminin tarihini, kaç ürün içerdiğini ve sonucunu bir tablo halinde göreceksiniz.">🗂️ Son 20 Dağıtım Batch'i</h3>
     <div style="max-height:240px; overflow-y:auto;">
       <table>
         <thead><tr><th>Tarih</th><th>Başarı</th><th>Medya</th><th>Hata</th></tr></thead>
@@ -1001,7 +920,7 @@ h2[data-announce]:hover, h3[data-announce]:hover{
   </div>
 
   <div class="card span-12">
-    <h3 data-announce="CEO Yönetim Paneli başlığındasınız. Onaylama, pasif alma, çıkışa zorlama ve toplu işlemler burada yapılır.">👑 CEO Yönetim Paneli — Erişim Onayı</h3>
+    <h3 data-announce="CEO Yönetim Paneli başlığındasınız. Sosyal İmece sistemine girecek kişiyi buradan sisteme girmesini onaylayacak, sistemde pasif kalmasını istediği kişiyi buradan pasif durumuna alacak ve sistemden çıkarmasını istediği kişiyi buradan çıkaracaktır.">👑 CEO Yönetim Paneli — Erişim Onayı</h3>
     <div style="display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap; margin-bottom:16px;">
       <div style="flex:1; min-width:180px;">
         <label style="font-size:11px; color:var(--text-dim); display:block; margin-bottom:4px;">CEO Anahtarı</label>
@@ -1038,7 +957,7 @@ h2[data-announce]:hover, h3[data-announce]:hover{
   </div>
 
   <div class="card span-12">
-    <h3 data-announce="Canlı Konsol başlığındasınız.">🖥️ Canlı Konsol</h3>
+    <h3 data-announce="Canlı Konsol başlığındasınız. Burada sistemin arka planda yaptığı her işlemin ham log kaydını, teknik ayrıntılarıyla birlikte göreceksiniz.">🖥️ Canlı Konsol</h3>
     <div class="console" id="kom_liveConsole"></div>
   </div>
 
@@ -1087,55 +1006,44 @@ h2[data-announce]:hover, h3[data-announce]:hover{
 </div>
 
 <div class="section">
-  <h2 data-announce="Ajanların Akış Alanı. Burada o an görevde olan ajanlar canlı olarak görünür.">🐉 AKIŞ ALANI (Çalışan Ajanlar)</h2>
+  <h2 data-announce="Ajanların Akış ve Radar Alanı. 1200 ajanı kayıt olarak, sadece o an görevde olan yaklaşık 24 tanesi burada canlı akar; kuyrukta bekleyenler ve hataya düşenler ayrı sayaçlarda görünür.">🐉 AKIŞ ALANI (Çalışan Ajanlar) — 1200 Ajan Canlı Akış &amp; Radar</h2>
   <div class="card">
-    <div class="flow-container" id="ult_flowContainer"></div>
+    <div class="flow-trafik">
+      <div class="flow-trafik-item flow-trafik-yesil"><b id="ult_sayacAktif">0</b><span>🟢 Aktif Çalışan</span></div>
+      <div class="flow-trafik-item flow-trafik-sari"><b id="ult_sayacKuyruk">1200</b><span>🟡 Kuyrukta Bekleyen</span></div>
+      <div class="flow-trafik-item flow-trafik-kirmizi"><b id="ult_sayacHata">0</b><span>🔴 Hata / Kritik Durum</span></div>
+      <div class="flow-trafik-item flow-trafik-toplam"><b id="ult_sayacToplam">1200</b><span>Toplam Ajan</span></div>
+    </div>
+
+    <div class="flow-container-buyuk" id="ult_flowContainer"></div>
+
     <div class="btn-group">
       <button id="ult_btnAksSifirla" onclick="ult_akisSifirla()">🔄 Ajanların Akışlarını Sıfırla</button>
       <button id="ult_btnRastgele" onclick="ult_rastgeleGorevVer()">🎲 Ajanlara Rasgele Görev Ver</button>
-      <button id="ult_btnListeYenile" onclick="ult_guncelleAjanListesi()">🔄 Ajanların Listelerini Yenile</button>
+      <button id="ult_btnKaristir" onclick="ult_kuyruguKaristir()">🔀 Bekleme Kuyruğunu Karıştır</button>
     </div>
     <div class="input-group">
-      <input type="text" id="ult_komutInput" placeholder="Örn: Agent-042 5 dakikalık analiz">
-      <button onclick="ult_gonderKomut()">📨 Gönder</button>
+      <input type="text" id="ult_komutInput" placeholder="Örn: Agent-0042 5 dakikalık analiz">
+      <button id="ult_btnGonder" onclick="ult_gonderKomut()">📨 Gönder</button>
     </div>
-    <div class="ult-log-box" id="ult_logBox">✅ Sistem hazır · BAŞLAT'a basınca 200 ajan göreve başlar.</div>
-  </div>
-</div>
+    <div class="ult-log-box" id="ult_logBox">✅ Sistem hazır · BAŞLAT'a basınca 1200 ajan sırayla göreve başlar (aynı anda en fazla 24'ü aktif).</div>
 
-<div class="section">
-  <h2 data-announce="Ajan Listesi. 200 ajanı tek ekranda göreceksiniz.">🤖 AJAN LİSTESİ</h2>
-  <div class="card">
-    <div class="radar-stats">
-      <div class="radar-stat"><b id="ult_statTotal">200</b>Toplam Ajan</div>
-      <div class="radar-stat"><b id="ult_statActive">0</b>Şu An Görevde</div>
-      <div class="radar-stat"><b id="ult_statIdle">200</b>Boşta</div>
-    </div>
-    <div class="agent-grid" id="ult_agentGrid"></div>
-    <div class="agent-legend">
-      <span><i style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15);"></i>Boşta</span>
-      <span><i style="background:rgba(61,220,113,.5); border:1px solid #3ddc71;"></i>Görevde</span>
-      <span><i style="background:rgba(255,210,61,.5); border:1px solid #ffd23d;"></i>Tehlikeli</span>
-      <span><i style="background:rgba(255,77,94,.5); border:1px solid #ff4d5e;"></i>Hata</span>
-    </div>
-
-    <div class="agent-hover-preview" id="ult_agentPreview">
-      <div class="ahp-baslik">
-        <span id="ult_prevKod">—</span>
-        <span class="ahp-durum bosta" id="ult_prevDurum">boşta</span>
+    <div class="karakutu-panel">
+      <div class="karakutu-baslik">
+        <h3>🕳️ Kara Kutu — Kritik Müdahale Havuzu <span class="kk-badge" id="ult_kkBadge">0</span></h3>
+        <button class="kk-temizle-btn" id="ult_btnKKIncele" onclick="ult_karaKutuHepsiniIncele()">🔍 Hepsini İncele</button>
+        <button class="kk-temizle-btn" id="ult_btnKKIncelendi" onclick="ult_karaKutuHepsiIncelendi()">✅ Hepsi İncelendi</button>
       </div>
-      <div class="ahp-rol" id="ult_prevRol">Rol: —</div>
-      <div class="ahp-gorev" id="ult_prevGorev">Görev: —</div>
-      <div class="ahp-actions">
-        <button class="ahp-btn ahp-btn-danger" onclick="ult_tekilAjanSonlandir()">⛔ Tekil Ajanı Sonlandır</button>
-        <button class="ahp-btn ahp-btn-warn" onclick="ult_ajanZorlaYenidenBaslat()">🔄 Ajanı Zorla Yeniden Başlat</button>
+      <div class="karakutu-alt-metin">Hata alan ajanlar buradan kaybolmaz; siz "İncelendi" diyene kadar kalıcı olarak yanıp söner.</div>
+      <div class="karakutu-grid" id="ult_karaKutuGrid">
+        <div class="kk-bos" id="ult_kkBosMesaj">Şu an kritik hata yok — her şey yolunda.</div>
       </div>
     </div>
   </div>
 </div>
 
 <div class="section">
-  <h2 data-announce="Sesli CEO Bildirimli Eylemler başlığındasınız.">🎙️ Sesli CEO Bildirimli Eylemler</h2>
+  <h2 data-announce="Sesli CEO Bildirimli Eylemler başlığındasınız. Burada tek tıkla sistem durum raporu, ajan kapasite özeti veya vardiya kapanış bildirimi gibi hazır konuşmaları bana okutabilirsiniz; hangisine basarsanız basın, ilgili bilgiyi hazırlayıp ardından sesli olarak size sunarım.">🎙️ Sesli CEO Bildirimli Eylemler</h2>
   <div class="card">
     <div class="voice-actions" id="ult_voiceActions"></div>
     <div class="voice-log" id="ult_voiceLog"></div>
@@ -1187,7 +1095,11 @@ window.setSysNeon = setSysNeon;
 function vt_lockPanel(locked){
   window.PANEL_LOCKED = locked;
   document.querySelectorAll("button, .chan-btn").forEach(el=>{
-    if(el.classList.contains("sys-voice-on-btn") || el.classList.contains("sys-voice-off-btn")) return;
+    // Sadece asıl "🔓 001 AI Ajanı BAŞLAT" ve "⏻ KAPAT" butonları (data-vmode
+    // ile işaretli) her zaman tıklanabilir kalır — bunlar sistemi ilk açan/
+    // kapatan tek anahtardır. Diğer TÜM butonlar, "Ses Açma"/"Ses Kapama"
+    // mini butonları dahil, BAŞLAT'a basılmadan pasif kalır.
+    if(el.dataset.vmode === "greet" || el.dataset.vmode === "farewell") return;
     if(el.tagName === "BUTTON") el.disabled = locked;
     el.classList.toggle("vt-locked", locked);
   });
@@ -1312,7 +1224,7 @@ async function panelVoiceOn(btn){
       btn.textContent = "✅ Sistem Aktif";
       btn.disabled = true;
       if(typeof ult_tumAjanlariCalistir === "function") ult_tumAjanlariCalistir();
-      await VolkanVoice.speakExact("Sayın CEO Fahri Bey hoş geldiniz, ben Volkan 001 Ee Aay Ajanı, 200 yapay zeka ajanımız ile komutlarınızı bekliyoruz.");
+      await VolkanVoice.speakExact("Sayın CEO Fahri Bey hoş geldiniz, ben Volkan 001 Ee Aay Ajanı, 1200 yapay zeka ajanımız ile komutlarınızı bekliyoruz.");
     } else {
       if(btn){ btn.disabled = false; btn.textContent = btn.dataset.origText; }
       await VolkanVoice.speakExact("Şu an ses açıldı.");
@@ -1361,7 +1273,7 @@ document.addEventListener("click", (e) => {
   if(el.classList.contains("voice-btn")) return;
   if(el.classList.contains("agent-cell")) return;
   if(el.classList.contains("ahp-btn")) return;
-  if(el.id === "ult_btnAksSifirla" || el.id === "ult_btnRastgele" || el.id === "ult_btnListeYenile") return;
+  if(el.id === "ult_btnAksSifirla" || el.id === "ult_btnRastgele" || el.id === "ult_btnKaristir" || el.id === "ult_btnGonder" || el.id === "ult_btnKKIncele" || el.id === "ult_btnKKIncelendi") return;
   if(el.classList.contains("chan-btn")){
     // === YENİ: Osiloskop kanal butonları için toggle + Volkan anons ===
     const isAll = el.classList.contains("all-btn") || el.dataset.ch === "all";
@@ -1482,8 +1394,8 @@ async function ana_derinTeshis(){
   const logs = await safeFetch("/logs/conversation");
   sonuclar.push({ ad: "Log Servisi", ok: logs.ok, detay: logs.ok ? "Log okunabilir" : "Demo modu" });
 
-  const aktifAjan = (typeof ult_activeAgents !== "undefined" && ult_activeAgents) ? ult_activeAgents.size : 0;
-  sonuclar.push({ ad: "Aktif Ajan", ok: aktifAjan > 0, detay: aktifAjan + " / 200 görevde" });
+  const aktifAjan = (typeof ult_activeAgents !== "undefined" && ult_activeAgents) ? ult_activeAgents.size : (window.ult_activeAgents ? window.ult_activeAgents.size : 0);
+  sonuclar.push({ ad: "Aktif Ajan", ok: aktifAjan > 0, detay: aktifAjan + " / 1200 görevde" });
 
   const smdaToggle = document.getElementById("gel_smdaLoopToggle");
   sonuclar.push({ ad: "SMDA Döngü", ok: true, detay: (smdaToggle && smdaToggle.checked) ? "Aktif" : "Beklemede" });
@@ -1581,12 +1493,12 @@ class Oscilloscope{
 
 const OSC_LABELS = ["WhatsApp mesaj/dk","CPU %","RAM %","AI başarım %"];
 const OSC_EXPLANATIONS = [
-  "WhatsApp mesaj sayısı. Dakikada kaç mesaj gönderildiğini gösterir.",
+  "Vatsap mesaj sayısı. Dakikada kaç mesaj gönderildiğini gösterir.",
   "CPU kullanımı. Sunucunuzun işlemci kullanım yüzdesini gösterir.",
   "RAM kullanımı. Sunucunuzun bellek kullanım yüzdesini gösterir.",
   "Eeeayy ajanı başarımı. Yapay zeka modülünün başarı yüzdesini gösterir."
 ];
-const OSC_ALL_EXPLANATION = "Hepsini Karışık Takip Et modunda WhatsApp, CPU, RAM ve AI başarım kanallarının tümü aynı ekranda üst üste gösterilir.";
+const OSC_ALL_EXPLANATION = "Hepsini Karışık Takip Et modunda Vatsap, CPU, RAM ve AI başarım kanallarının tümü aynı ekranda üst üste gösterilir.";
 const osc = new Oscilloscope("ana_osiloskopCanvas", 4, ["#ff3b3b","#35d488","#3b8bff","#f0d13b"], OSC_LABELS, 200, OSC_EXPLANATIONS, OSC_ALL_EXPLANATION);
 osc.renderButtons("ana_oscChanButtons");
 osc.start();
@@ -1659,7 +1571,7 @@ async function testWhatsAppBridge(){
   if(r.ok){
     document.getElementById("ana_quickActionResult").textContent = `✅ Bağlantı OK (${ms}ms)`;
     toast("WhatsApp köprüsü yanıt verdi (" + ms + "ms)", "ok");
-    speakVolkan("WhatsApp köprüsü testi başarılı.");
+    speakVolkan("Vatsap köprüsü testi başarılı.");
   } else {
     document.getElementById("ana_quickActionResult").textContent = `⚠️ Yanıt yok — demo modu`;
     toast("WhatsApp köprüsüne ulaşılamadı", "err");
@@ -2062,7 +1974,7 @@ class Oscilloscope{
 }
 const CH8_LABELS = ["WhatsApp mesaj","CPU %","RAM %","AI başarım","SMDA başarı","Cross gecikme","Hata sayısı","TRM senkron"];
 const CH8_EXPLANATIONS = [
-  "WhatsApp mesaj trafiği. Dakikada gönderilen mesaj sayısını gösterir.",
+  "Vatsap mesaj trafiği. Dakikada gönderilen mesaj sayısını gösterir.",
   "CPU kullanım yüzdesi.",
   "RAM kullanım yüzdesi.",
   "Eeeayy ajanı başarım yüzdesi.",
@@ -2211,6 +2123,9 @@ const komPlatformSuccessChart = new Chart(document.getElementById('kom_platformS
       if(!window._komBarActive) window._komBarActive = {};
       const wasActive = window._komBarActive[idx] === true;
       window._komBarActive[idx] = !wasActive;
+      // Volkan'ın söylerken "WhatsApp"ı "Hat-Apps" diye telaffuz etmesini önlemek için
+      // sadece SESLİ okunan metinde fonetik yazım kullanılır; ekrandaki/log'daki isim değişmez.
+      const soyleneceKisim = (label === "WhatsApp") ? "Vatsap" : label;
 
       if(!wasActive){
         let degerlendirme;
@@ -2220,7 +2135,7 @@ const komPlatformSuccessChart = new Chart(document.getElementById('kom_platformS
         else if(value >= 60) degerlendirme = "orta";
         else degerlendirme = "geliştirilmesi gereken";
 
-        const metin = `Sayın CEO, ${label} butonuna bastınız. ${label} platformunun başarı oranı yüzde ${value}. Bu ${degerlendirme} seviyede bir sonuç. Bu platformun görevi başlamıştır ve başarı durumu canlı olarak takip edilecektir.`;
+        const metin = `Sayın CEO, ${soyleneceKisim} butonuna bastınız. ${soyleneceKisim} platformunun başarı oranı yüzde ${value}. Bu ${degerlendirme} seviyede bir sonuç. Bu platformun görevi başlamıştır ve başarı durumu canlı olarak takip edilecektir.`;
         if(window.VolkanVoice && VolkanVoice.isUnlocked()) VolkanVoice.speakExact(metin);
         if(typeof consoleLine === "function") consoleLine(`📊 Bar tıklandı: ${label} %${value}`);
 
@@ -2228,7 +2143,7 @@ const komPlatformSuccessChart = new Chart(document.getElementById('kom_platformS
         komPlatformSuccessChart.data.datasets[0].borderColor = '#e8b64c';
         komPlatformSuccessChart.update('none');
       } else {
-        const metin = `Sayın CEO, ${label} platformunun görevi sona ermiştir.`;
+        const metin = `Sayın CEO, ${soyleneceKisim} platformunun görevi sona ermiştir.`;
         if(window.VolkanVoice && VolkanVoice.isUnlocked()) VolkanVoice.speakExact(metin);
         if(typeof consoleLine === "function") consoleLine(`📊 Bar tamamlandı: ${label}`);
 
@@ -2310,9 +2225,32 @@ window.kom_togglePlatform = togglePlatform;
 <script>
 (function(){
 
-const TOTAL_AGENTS = 200;
+/* =====================================================================
+   1200 AJANLIK CANLI AKIŞ & RADAR MOTORU  ("Stream & Radar" mimarisi)
+   -----------------------------------------------------------------
+   - 1200 ajanın HİÇBİRİ tek tek DOM'a basılmaz.
+   - Sabit boyutlu bir "Eş Zamanlı Pencere" (MAX_CONCURRENT) kadar DOM
+     node'u (flow-slot) BİR KERE oluşturulur, bir daha hiç yaratılıp
+     yok edilmez — sadece içeriği/rengi güncellenir (object pooling).
+     Böylece DOM boyutu her zaman sabittir, 1200 ajan da olsa tarayıcı
+     donmaz.
+   - Bekleyen ajanlar yalnızca bir JS dizisinde (ult_queue) id olarak
+     tutulur; ekrana hiç basılmaz.
+   - Ana motor (ult_tick) her TICK_MS'de (throttle) bir kez çalışır:
+     bitmiş görevleri kapatır, boşalan slotları kuyruktaki bir sonraki
+     ajanla doldurur, sayaçları GÜNCEL ve TOPLU olarak yazar. DOM
+     güncellemesi ajan başına değil, tek bir "tick" başına olur.
+   - Hataya düşen ajanlar akıştan kaybolmaz: "Kara Kutu"ya taşınır ve
+     siz "İncelendi" diyene kadar orada kalıcı olarak yanıp söner.
+   ===================================================================== */
+const TOTAL_AGENTS   = 1200;
+const MAX_CONCURRENT = 24;      // Eş zamanlı pencere boyutu (istenen: 20-30)
+const TICK_MS         = 550;    // Throttle aralığı: tüm DOM güncellemeleri bu aralıkla toplu yapılır
+const HATA_OLASILIGI  = 0.07;   // Bir görev bittiğinde kara kutuya düşme ihtimali
+const KARAKUTU_MAX_DOM = 60;    // Kara kutuda DOM'da aynı anda gösterilecek azami kart (performans sınırı)
 
-const ULT_AGENTS = [
+// --- Gerçek isimlendirilmiş ilk 200 ajan (rol/görev tanımları korunuyor) ---
+const ULT_AGENTS_NAMED = [
 {id:1,code:"Agent-001",role:"Başkomutan / Ana Koordinatör",task:"Sistem geneli stratejik kararlar, önceliklendirme ve orchestrator.py yönlendirmesi."},
 {id:2,code:"Agent-002",role:"Operasyonel Denetçi",task:"Alt ajanların anlık görev durumlarını ve hata loglarını izleme."},
 {id:3,code:"Agent-003",role:"Bütçe ve Kaynak Yöneticisi",task:"OpenRouter API maliyetleri, cüzdan takibi ve kaynak optimizasyonu."},
@@ -2514,18 +2452,66 @@ const ULT_AGENTS = [
 {id:199,code:"Agent-199",role:"Sistem Destek Uzmanı",task:"Genel operasyon boyunca kullanıcıya ve diğer ajanlara destek sağlama."},
 {id:200,code:"Agent-200",role:"Baş Arşiv ve Kapanış Ajanı",task:"Tüm günlük operasyonların dökümünü alarak sistemi güvenli kapatma moduna alma."}
 ];
-window.ULT_AGENTS = ULT_AGENTS;
 
+// --- Kategori belirleme: rol/görev metninde sosyal/pazarlama temalı
+//     anahtar kelimeler varsa "sosyal" (mavi), yoksa "veri" (yeşil).
+const SOSYAL_ANAHTAR = /sosyal|pazarlama|paylaşım|içerik|icerik|smda|reklam|kampanya|takipç|whatsapp|instagram|tiktok|dağıtım/i;
+function ult_kategoriBelirle(metin){
+  return SOSYAL_ANAHTAR.test(metin) ? "sosyal" : "veri";
+}
+
+// --- 1200 ajanı üret: ilk 200'ü gerçek isimlerle, kalan 1000'i
+//     kategorilere bölünmüş, gerçekçi görev şablonlarıyla otomatik üretilir.
+const VERI_GOREV_SABLONLARI = [
+  "Trendyol/Hepsiburada ürün fiyat ve stok verisi tarama.",
+  "Rakip site fiyat karşılaştırma analizi.",
+  "Google Trends TR üzerinden yükselen aramaları izleme.",
+  "Kullanıcı davranış/tıklama verisini işleme.",
+  "Affiliate link tıklama ve dönüşüm oranı hesaplama.",
+  "Ürün kategorisi bazlı talep tahmini üretme."
+];
+const SOSYAL_GOREV_SABLONLARI = [
+  "Instagram/TikTok içerik takvimini güncelleme.",
+  "WhatsApp kanalına otomatik ürün bildirimi gönderme.",
+  "Sosyal medya etkileşim (beğeni/yorum) metriklerini toplama.",
+  "İşbirliği fırsatlarını tarama.",
+  "Kampanya reklam metni A/B testi hazırlama.",
+  "Takipçi kitlesi demografi analizi."
+];
+
+function ult_ajanUret(){
+  const arr = ULT_AGENTS_NAMED.map(a => ({...a, cat: ult_kategoriBelirle(a.role + " " + a.task)}));
+  for(let i = arr.length + 1; i <= TOTAL_AGENTS; i++){
+    const cat = (i % 3 === 0) ? "sosyal" : "veri";
+    const sablonlar = cat === "sosyal" ? SOSYAL_GOREV_SABLONLARI : VERI_GOREV_SABLONLARI;
+    arr.push({
+      id: i,
+      code: "Agent-" + String(i).padStart(4, "0"),
+      role: cat === "sosyal" ? "Sosyal Medya / Pazarlama Ajanı" : "Veri Toplama / İşleme Ajanı",
+      task: sablonlar[i % sablonlar.length],
+      cat
+    });
+  }
+  return arr;
+}
+const ULT_AGENTS = ult_ajanUret();
+window.ULT_AGENTS = ULT_AGENTS;
 const ULT_BY_ID = {};
 ULT_AGENTS.forEach(a => ULT_BY_ID[a.id] = a);
 
-let ult_activeAgents = new Map();
-let ult_flowContainer, ult_agentGrid, ult_logBox;
-let ult_simInterval = null;
+// --- Motor durumu ---
+let ult_queue = [];                                            // bekleyen ajan id'leri (FIFO)
+let ult_slotAgentId = new Array(MAX_CONCURRENT).fill(null);     // slot index -> agentId
+let ult_slotBitis   = new Array(MAX_CONCURRENT).fill(0);        // slot index -> bitiş zamanı (ms)
+let ult_activeAgents = new Map();                               // agentId -> {slot, task, cat, bitis}
+window.ult_activeAgents = ult_activeAgents;
+let ult_karaKutu = new Map();                                   // agentId -> {agent, mesaj, zaman}
+let ult_flowContainer, ult_logBox, ult_karaKutuGrid;
+let ult_slotEls = [];                                           // sabit DOM node havuzu (MAX_CONCURRENT adet)
 let ult_sistemAktif = false;
-let ult_renkZamanlayici = null;
+let ult_tickTimer = null;
 
-window._ult_aktifHoverAjanId = null;
+window._ult_aktifHoverAjanId = null; // geriye dönük uyumluluk için bırakıldı
 
 function ult_log(msg){
   if(!ult_logBox) ult_logBox = document.getElementById("ult_logBox");
@@ -2536,275 +2522,268 @@ function ult_log(msg){
 }
 window.ult_log = ult_log;
 
-function ult_durumUygula(id, durum){
-  const cell = document.getElementById("ult-agent-" + id);
-  if(cell){
-    cell.classList.remove("durum-yesil","durum-sari","durum-kirmizi");
-    if(durum && durum !== "bosta") cell.classList.add("durum-" + durum);
-  }
-  const flowItems = ult_flowContainer ? ult_flowContainer.querySelectorAll(".flow-ajan") : [];
-  for(const el of flowItems){
-    if(el.dataset.agentId == id){
-      el.classList.remove("durum-yesil","durum-sari","durum-kirmizi");
-      if(durum && durum !== "bosta") el.classList.add("durum-" + durum);
-      break;
-    }
-  }
-}
-
-function ult_buildAgentList(){
-  ult_agentGrid = document.getElementById("ult_agentGrid");
-  if(!ult_agentGrid) return;
-  ult_agentGrid.innerHTML = "";
-  ULT_AGENTS.forEach(a => {
-    const cell = document.createElement("div");
-    cell.className = "agent-cell";
-    cell.id = "ult-agent-" + a.id;
-    cell.dataset.agentId = a.id;
-    cell.title = `${a.code} — ${a.role}`;
-    cell.textContent = "Ajan " + String(a.id).padStart(3, "0");
-    cell.addEventListener("click", () => ult_agentTiklandi(a));
-    ult_agentGrid.appendChild(cell);
-  });
-  ult_updateStats();
-}
-
-function ult_updateStats(){
-  const active = ult_activeAgents.size;
-  const statTotal  = document.getElementById("ult_statTotal");
-  const statActive = document.getElementById("ult_statActive");
-  const statIdle   = document.getElementById("ult_statIdle");
-  if(statTotal)  statTotal.textContent  = ULT_AGENTS.length;
-  if(statActive) statActive.textContent = active;
-  if(statIdle)   statIdle.textContent   = ULT_AGENTS.length - active;
-}
-
-function ult_agentTiklandi(agent){
-  const prev = document.getElementById("ult_agentPreview");
-  const pKod = document.getElementById("ult_prevKod");
-  const pRol = document.getElementById("ult_prevRol");
-  const pGorev = document.getElementById("ult_prevGorev");
-  const pDurum = document.getElementById("ult_prevDurum");
-
-  if(prev && pKod){
-    pKod.textContent = agent.code;
-    pRol.textContent  = "Rol: " + agent.role;
-    pGorev.textContent = "Görev: " + agent.task;
-    const entry = ult_activeAgents.get(agent.id);
-    let durum = "bosta", durumTxt = "boşta";
-    if(entry){ durum = entry.durum; durumTxt = (durum === "yesil" ? "görevde" : durum === "sari" ? "tehlikeli" : "hata"); }
-    if(pDurum){
-      pDurum.className = "ahp-durum " + durum;
-      pDurum.textContent = durumTxt;
-    }
-    window._ult_aktifHoverAjanId = agent.id;
-    prev.classList.add("goster");
-    clearTimeout(ult_agentTiklandi._timeout);
-    ult_agentTiklandi._timeout = setTimeout(() => {
-      prev.classList.remove("goster");
-      window._ult_aktifHoverAjanId = null;
-    }, 8000);
-  }
-  if(VolkanVoice.isUnlocked()){
-    const metin = `${agent.code}. Rolü: ${agent.role}. Görevi: ${agent.task}`;
-    ult_voiceLog(`🗣️ ${metin}`);
-    VolkanVoice.speakExact(metin);
-  } else {
-    ult_voiceLog(`ℹ️ ${agent.code} — ${agent.role}`);
+// --- Sabit slot havuzunu BİR KERE oluştur (object pooling) ---
+function ult_slotlariKur(){
+  ult_flowContainer = document.getElementById("ult_flowContainer");
+  if(!ult_flowContainer) return;
+  ult_flowContainer.innerHTML = "";
+  ult_slotEls = [];
+  for(let i = 0; i < MAX_CONCURRENT; i++){
+    const el = document.createElement("div");
+    el.className = "flow-slot bos";
+    el.textContent = "· boş ·";
+    ult_flowContainer.appendChild(el);
+    ult_slotEls.push(el);
   }
 }
 
-function ult_tekilAjanSonlandir(){
-  const id = window._ult_aktifHoverAjanId;
-  if(!id){ ult_log("⚠️ Hiçbir ajan seçili değil."); return; }
-  const agent = ULT_AGENTS.find(a => a.id === id);
+function ult_slotDoldur(slotIdx, agentId, gorevMetni){
+  const agent = ULT_BY_ID[agentId];
   if(!agent) return;
-  if(!ult_activeAgents.has(id)){
-    ult_log(`ℹ️ ${agent.code} zaten boşta.`);
-    if(VolkanVoice.isUnlocked()){
-      VolkanVoice.speakExact(`Sayın CEO, ${agent.code} ajanı zaten boşta.`);
-    }
+  const el = ult_slotEls[slotIdx];
+  el.className = "flow-slot giris cat-" + agent.cat;
+  el.innerHTML = `<span class="fs-kod">${agent.code}</span><span class="fs-gorev">${(gorevMetni || agent.task).substring(0,42)}</span>`;
+  ult_slotAgentId[slotIdx] = agentId;
+}
+
+function ult_slotBosalt(slotIdx){
+  const el = ult_slotEls[slotIdx];
+  if(el){ el.className = "flow-slot bos"; el.textContent = "· boş ·"; }
+  ult_slotAgentId[slotIdx] = null;
+}
+
+function ult_slotHataGoster(slotIdx, seviye){
+  const el = ult_slotEls[slotIdx];
+  if(el) el.className = "flow-slot " + (seviye === "sari" ? "durum-sari" : "durum-kirmizi");
+}
+
+// --- Kara Kutu (kalıcı kritik müdahale havuzu) ---
+// ÖNEMLİ: Buraya SADECE, kendisine daha önce görev VERİLMİŞ ve o görevi
+// yürütürken zorlanan/başaramayan ajanlar düşer. Henüz hiç görev
+// verilmemiş, sadece kuyrukta bekleyen ajanlar buraya KESİNLİKLE girmez.
+// seviye: "sari" (görevi zorlukla, gecikmeli yürütüyor) | "kirmizi" (görevi yapamıyor/yapmıyor)
+function ult_karaKutuyaTasi(agentId, mesaj, seviye){
+  const agent = ULT_BY_ID[agentId];
+  if(!agent) return;
+  ult_karaKutu.set(agentId, { agent, mesaj, seviye: seviye || "kirmizi", zaman: new Date().toLocaleTimeString('tr-TR') });
+  ult_karaKutuCiz();
+}
+function ult_karaKutuIncele(agentId){
+  if(!ult_karaKutu.has(agentId)) return;
+  const entry = ult_karaKutu.get(agentId);
+  ult_karaKutu.delete(agentId);
+  ult_karaKutuCiz();
+  ult_queue.push(agentId); // incelenen ajan tekrar kuyruğa döner, sonsuza dek kaybolmaz
+  ult_log(`✅ ${entry.agent.code} incelendi, kuyruğa geri döndü.`);
+  if(VolkanVoice.isUnlocked()) VolkanVoice.announce(`${entry.agent.code} ajanının hatası incelendi ve kuyruğa geri alındı.`);
+}
+window.ult_karaKutuIncele = ult_karaKutuIncele;
+
+function ult_karaKutuHepsiniIncele(){
+  // "Hepsini İncele": kayıtları SİLMEDEN Volkan'a hepsini teker teker okutur.
+  if(ult_karaKutu.size === 0){
+    ult_log("🔍 Kara kutuda incelenecek kayıt yok.");
+    if(VolkanVoice.isUnlocked()) VolkanVoice.speakExact("Sayın CEO, kara kutuda incelenecek bir kayıt yok.");
     return;
   }
-  ult_ajanDeaktif(id);
-  ult_log(`⛔ ${agent.code} sonlandırıldı.`);
+  const girdiler = Array.from(ult_karaKutu.values());
+  const ozet = girdiler.map(e => `${e.agent.code}, ${e.seviye === "sari" ? "sarı seviye" : "kırmızı seviye"}: ${e.mesaj}`).join(" ... ");
+  ult_log(`🔍 Kara kutu incelemesi başlatıldı (${girdiler.length} kayıt).`);
   if(VolkanVoice.isUnlocked()){
-    VolkanVoice.speakExact(`Sayın CEO, ${agent.code} ajanı sonlandırıldı.`);
+    VolkanVoice.speakExact(`Sayın CEO, kara kutuda ${girdiler.length} kritik kayıt var. ${ozet}`);
   }
 }
-window.ult_tekilAjanSonlandir = ult_tekilAjanSonlandir;
+window.ult_karaKutuHepsiniIncele = ult_karaKutuHepsiniIncele;
 
-function ult_ajanZorlaYenidenBaslat(){
-  const id = window._ult_aktifHoverAjanId;
-  if(!id){ ult_log("⚠️ Hiçbir ajan seçili değil."); return; }
-  const agent = ULT_AGENTS.find(a => a.id === id);
-  if(!agent) return;
-  if(ult_activeAgents.has(id)){ ult_ajanDeaktif(id); }
-  setTimeout(() => {
-    if(!ult_sistemAktif){ ult_sistemAktif = true; }
-    ult_ajanaGorevVer(id, agent.task, "yesil");
-    ult_log(`🔄 ${agent.code} zorla yeniden başlatıldı.`);
-    if(VolkanVoice.isUnlocked()){
-      VolkanVoice.speakExact(`Sayın CEO, ${agent.code} ajanı zorla yeniden başlatıldı.`);
-    }
-  }, 400);
+function ult_karaKutuHepsiIncelendi(){
+  // "Hepsi İncelendi": tüm kayıtları kapatır, ilgili ajanları kuyruğa geri döndürür.
+  const adet = ult_karaKutu.size;
+  if(adet === 0) return;
+  Array.from(ult_karaKutu.keys()).forEach(id => ult_queue.push(id));
+  ult_karaKutu.clear();
+  ult_karaKutuCiz();
+  ult_log(`✅ Kara kutudaki ${adet} ajan incelendi, hepsi kuyruğa geri döndü.`);
+  if(VolkanVoice.isUnlocked()) VolkanVoice.announce(`Kara kutudaki ${adet} kritik ajan incelendi ve kuyruğa geri alındı.`);
 }
-window.ult_ajanZorlaYenidenBaslat = ult_ajanZorlaYenidenBaslat;
+window.ult_karaKutuHepsiIncelendi = ult_karaKutuHepsiIncelendi;
 
-function ult_akisaEkle(agent, taskName, durum){
-  if(!ult_flowContainer) ult_flowContainer = document.getElementById("ult_flowContainer");
-  if(!ult_flowContainer) return null;
-  const el = document.createElement("div");
-  el.className = "flow-ajan durum-" + (durum || "yesil");
-  el.dataset.agentId = agent.id;
-  el.innerHTML = `<span class="isim">${agent.code}</span><span class="gorev">${taskName.substring(0, 34)}</span>`;
-  ult_flowContainer.appendChild(el);
-  ult_flowContainer.scrollTop = ult_flowContainer.scrollHeight;
-  return el;
+function ult_karaKutuCiz(){
+  if(!ult_karaKutuGrid) ult_karaKutuGrid = document.getElementById("ult_karaKutuGrid");
+  const badge = document.getElementById("ult_kkBadge");
+  if(badge) badge.textContent = ult_karaKutu.size;
+  if(!ult_karaKutuGrid) return;
+  if(ult_karaKutu.size === 0){
+    ult_karaKutuGrid.innerHTML = `<div class="kk-bos" id="ult_kkBosMesaj">Şu an kritik hata yok — her şey yolunda.</div>`;
+    return;
+  }
+  const girdiler = Array.from(ult_karaKutu.entries());
+  const gosterilecek = girdiler.slice(-KARAKUTU_MAX_DOM);
+  let html = gosterilecek.map(([id, e]) => `
+    <div class="kk-card ${e.seviye === "sari" ? "sari" : "kirmizi"}" onclick="ult_karaKutuIncele(${id})">
+      <div class="kk-kod">${e.agent.code} <span class="kk-seviye">${e.seviye === "sari" ? "🟡 zorlanıyor" : "🔴 yapamıyor"}</span></div>
+      <div class="kk-mesaj">${e.mesaj}</div>
+      <span class="kk-incele">✔ İncelendi</span>
+    </div>`).join("");
+  if(girdiler.length > gosterilecek.length){
+    html += `<div class="kk-bos">+ ${girdiler.length - gosterilecek.length} kritik ajan daha (kaydırın veya "Hepsi İncelendi" kullanın)</div>`;
+  }
+  ult_karaKutuGrid.innerHTML = html;
 }
-function ult_akistanKaldir(agentId){
-  if(!ult_flowContainer) ult_flowContainer = document.getElementById("ult_flowContainer");
-  if(!ult_flowContainer) return;
-  const items = ult_flowContainer.querySelectorAll('.flow-ajan');
-  for(const el of items){
-    if(el.dataset.agentId == agentId){
-      el.classList.add('tamam');
-      setTimeout(() => el.remove(), 500);
-      break;
+
+// --- Sayaçlar: tek bir toplu güncelleme (throttle mekanizmasının bir parçası) ---
+function ult_sayaclariGuncelle(){
+  const elA = document.getElementById("ult_sayacAktif");
+  const elK = document.getElementById("ult_sayacKuyruk");
+  const elH = document.getElementById("ult_sayacHata");
+  const elT = document.getElementById("ult_sayacToplam");
+  if(elA) elA.textContent = ult_activeAgents.size;
+  if(elK) elK.textContent = ult_queue.length;
+  if(elH) elH.textContent = ult_karaKutu.size;
+  if(elT) elT.textContent = TOTAL_AGENTS;
+}
+
+// --- Ana motor: throttled tick. Tüm slot/kuyruk/kara kutu işlemleri
+//     burada, tek bir zamanlayıcıda, TOPLU olarak yapılır. ---
+function ult_tick(){
+  if(!ult_sistemAktif) return;
+  const now = Date.now();
+
+  // 1) Süresi dolan aktif ajanları kapat
+  for(let slot = 0; slot < MAX_CONCURRENT; slot++){
+    const agentId = ult_slotAgentId[slot];
+    if(agentId === null) continue;
+    if(now >= ult_slotBitis[slot]){
+      ult_activeAgents.delete(agentId);
+      if(Math.random() < HATA_OLASILIGI){
+        // Görevi verilmiş bu ajan görevini yürütürken sorun yaşadı:
+        // %60 ihtimalle "zorlanıyor" (sarı), %40 ihtimalle "yapamıyor/yapmıyor" (kırmızı).
+        const seviye = Math.random() < 0.6 ? "sari" : "kirmizi";
+        const mesaj = seviye === "sari"
+          ? "Görevi zorlukla yürütüyor: gecikme/yeniden deneme yaşanıyor."
+          : "Görevi tamamlayamıyor: işlem durdu / yanıt alınamıyor.";
+        ult_slotHataGoster(slot, seviye);
+        ult_karaKutuyaTasi(agentId, mesaj, seviye);
+        setTimeout(() => { ult_slotBosalt(slot); }, 350);
+      } else {
+        ult_slotBosalt(slot);
+        ult_queue.push(agentId); // başarıyla bitti; sürekli operasyon için kuyruğun sonuna dön
+      }
     }
   }
-}
 
-function ult_ajanaGorevVer(agentId, gorevMetni, durum){
-  const agent = ULT_AGENTS.find(a => a.id === agentId);
-  if(!agent) return false;
-  if(ult_activeAgents.has(agentId)) return false;
+  // 2) Boşalan slotları kuyruktaki bir sonraki ajanla doldur
+  for(let slot = 0; slot < MAX_CONCURRENT; slot++){
+    if(ult_slotAgentId[slot] !== null) continue;
+    const nextId = ult_queue.shift();
+    if(nextId === undefined) break; // kuyruk boş
+    const agent = ULT_BY_ID[nextId];
+    if(!agent) continue;
+    const sure = 3000 + Math.random() * 6000; // 3-9 sn arası görev süresi
+    ult_slotDoldur(slot, nextId, agent.task);
+    ult_slotBitis[slot] = now + sure;
+    ult_activeAgents.set(nextId, { slot, task: agent.task, cat: agent.cat, bitis: now + sure });
+  }
 
-  durum = durum || "yesil";
-  const flowEl = ult_akisaEkle(agent, gorevMetni || agent.task, durum);
-  ult_durumUygula(agentId, durum);
-
-  const sure = 6000 + Math.floor(Math.random() * 6000);
-  const timer = setTimeout(() => {
-    if(ult_sistemAktif){
-      ult_ajanDeaktif(agentId);
-      setTimeout(() => {
-        if(ult_sistemAktif && !ult_activeAgents.has(agentId)) {
-          const d = ult_rastgeleDurumUret();
-          ult_ajanaGorevVer(agentId, agent.task, d);
-        }
-      }, 300 + Math.random()*800);
-    } else {
-      ult_ajanDeaktif(agentId);
-    }
-  }, sure);
-
-  ult_activeAgents.set(agentId, { task: gorevMetni || agent.task, durum, timer, flowEl });
-  ult_updateStats();
-  return true;
-}
-function ult_ajanDeaktif(agentId){
-  const entry = ult_activeAgents.get(agentId);
-  if(!entry) return;
-  clearTimeout(entry.timer);
-  ult_activeAgents.delete(agentId);
-  ult_durumUygula(agentId, null);
-  ult_akistanKaldir(agentId);
-  ult_updateStats();
+  // 3) Sayaçları TEK SEFERDE güncelle
+  ult_sayaclariGuncelle();
 }
 
 function ult_rastgeleDurumUret(){
   const r = Math.random();
-  if(r < 0.80) return "yesil";
-  if(r < 0.92) return "sari";
+  if(r < 0.85) return "yesil";
+  if(r < 0.95) return "sari";
   return "kirmizi";
+}
+
+// --- Belirli bir ajana ANINDA/ÖNCELİKLİ görev ver: boş slot varsa hemen
+//     başlat, yoksa kuyruğun EN BAŞINA ekleyerek bir sonraki tick'te
+//     öncelikli çalışmasını sağla. ---
+function ult_ajanaGorevVer(agentId, gorevMetni){
+  const agent = ULT_BY_ID[agentId];
+  if(!agent) return false;
+  if(ult_activeAgents.has(agentId)) return false; // zaten çalışıyor
+  if(ult_karaKutu.has(agentId)) return false;      // kara kutuda, önce incelenmeli
+
+  const qIdx = ult_queue.indexOf(agentId);
+  if(qIdx !== -1) ult_queue.splice(qIdx, 1);
+
+  const bosSlot = ult_slotAgentId.indexOf(null);
+  if(bosSlot !== -1){
+    const sure = 3000 + Math.random() * 6000;
+    ult_slotDoldur(bosSlot, agentId, gorevMetni || agent.task);
+    ult_slotBitis[bosSlot] = Date.now() + sure;
+    ult_activeAgents.set(agentId, { slot: bosSlot, task: gorevMetni || agent.task, cat: agent.cat, bitis: Date.now() + sure });
+  } else {
+    ult_queue.unshift(agentId); // tüm slotlar dolu: kuyruğun EN BAŞINA öncelikli ekle
+  }
+  ult_sayaclariGuncelle();
+  return true;
 }
 
 function ult_tumAjanlariCalistir(){
   if(ult_sistemAktif) return;
   ult_sistemAktif = true;
-  ult_log("🚀 Tüm 200 ajan göreve başladı.");
-  ULT_AGENTS.forEach((a, idx) => {
-    const durum = ult_rastgeleDurumUret();
-    setTimeout(() => {
-      if(!ult_sistemAktif) return;
-      ult_ajanaGorevVer(a.id, a.task, durum);
-    }, idx * 30 + Math.random()*200);
-  });
-  if(ult_simInterval) clearInterval(ult_simInterval);
-  ult_simInterval = setInterval(() => {
-    if(!ult_sistemAktif) return;
-    const idle = ULT_AGENTS.filter(a => !ult_activeAgents.has(a.id));
-    const sayi = Math.min(idle.length, 15 + Math.floor(Math.random() * 11));
-    for(let k = 0; k < sayi; k++){
-      const idx = Math.floor(Math.random() * idle.length);
-      const agent = idle.splice(idx, 1)[0];
-      if(agent) ult_ajanaGorevVer(agent.id, agent.task, ult_rastgeleDurumUret());
-    }
-  }, 3000);
-  if(ult_renkZamanlayici) clearInterval(ult_renkZamanlayici);
-  ult_renkZamanlayici = setInterval(() => {
-    if(!ult_sistemAktif) return;
-    const aktifler = Array.from(ult_activeAgents.keys());
-    if(aktifler.length === 0) return;
-    const sayi = Math.min(aktifler.length, 5 + Math.floor(Math.random() * 6));
-    for(let i = 0; i < sayi; i++){
-      const id = aktifler[Math.floor(Math.random() * aktifler.length)];
-      const entry = ult_activeAgents.get(id);
-      if(!entry) continue;
-      const yeniDurum = ult_rastgeleDurumUret();
-      entry.durum = yeniDurum;
-      ult_durumUygula(id, yeniDurum);
-    }
-  }, 2500);
+  if(!ult_flowContainer) ult_slotlariKur();
+  ult_queue = ULT_AGENTS.map(a => a.id);
+  for(let i = ult_queue.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [ult_queue[i], ult_queue[j]] = [ult_queue[j], ult_queue[i]];
+  }
+  ult_log(`🚀 1200 ajan sıraya alındı. Aynı anda en fazla ${MAX_CONCURRENT} ajan aktif olacak.`);
+  if(ult_tickTimer) clearInterval(ult_tickTimer);
+  ult_tickTimer = setInterval(ult_tick, TICK_MS);
+  ult_tick(); // ilk dolumu hemen yap
 }
 window.ult_tumAjanlariCalistir = ult_tumAjanlariCalistir;
 
 function ult_tumAjanlariDurdur(){
   ult_sistemAktif = false;
-  if(ult_simInterval){ clearInterval(ult_simInterval); ult_simInterval = null; }
-  if(ult_renkZamanlayici){ clearInterval(ult_renkZamanlayici); ult_renkZamanlayici = null; }
-  Array.from(ult_activeAgents.keys()).forEach(id => ult_ajanDeaktif(id));
+  if(ult_tickTimer){ clearInterval(ult_tickTimer); ult_tickTimer = null; }
+  for(let slot = 0; slot < MAX_CONCURRENT; slot++) ult_slotBosalt(slot);
+  ult_activeAgents.clear();
+  ult_queue = [];
+  ult_sayaclariGuncelle();
   ult_log("⏹ Tüm ajanlar durduruldu.");
 }
 window.ult_tumAjanlariDurdur = ult_tumAjanlariDurdur;
 
 function ult_akisSifirla(){
   if(VolkanVoice.isUnlocked()){
-    VolkanVoice.speakExact("Sayın CEO, Ajanların Akışlarını Sıfırla butonuna bastınız. Tüm aktif ajanların görevleri iptal edildi.");
+    VolkanVoice.speakExact("Sayın CEO, Ajanların Akışlarını Sıfırla butonuna bastınız. Tüm aktif ve bekleyen ajanlar ile kara kutu sıfırlandı.");
   }
-  if(ult_simInterval){ clearInterval(ult_simInterval); ult_simInterval = null; }
-  if(ult_renkZamanlayici){ clearInterval(ult_renkZamanlayici); ult_renkZamanlayici = null; }
-  Array.from(ult_activeAgents.keys()).forEach(id => ult_ajanDeaktif(id));
-  ult_activeAgents.clear();
-  if(!ult_flowContainer) ult_flowContainer = document.getElementById("ult_flowContainer");
-  if(ult_flowContainer){ ult_flowContainer.innerHTML = ""; }
-  ult_updateStats();
-  ult_log("🔄 Akış alanı sıfırlandı.");
+  ult_tumAjanlariDurdur();
+  ult_karaKutu.clear();
+  ult_karaKutuCiz();
+  ult_log("🔄 Akış alanı ve kara kutu sıfırlandı.");
 }
 
 function ult_rastgeleGorevVer(){
-  const idle = ULT_AGENTS.filter(a => !ult_activeAgents.has(a.id));
-  if(idle.length === 0){
-    ult_log("⚠️ Tüm ajanlar meşgul!");
-    if(VolkanVoice.isUnlocked()) VolkanVoice.speakExact("Sayın CEO, tüm ajanlar meşgul.");
+  const adaylar = ULT_AGENTS.filter(a => !ult_activeAgents.has(a.id) && !ult_karaKutu.has(a.id));
+  if(adaylar.length === 0){
+    ult_log("⚠️ Tüm ajanlar zaten meşgul veya kara kutuda!");
+    if(VolkanVoice.isUnlocked()) VolkanVoice.speakExact("Sayın CEO, tüm ajanlar zaten meşgul.");
     return;
   }
-  const random = idle[Math.floor(Math.random() * idle.length)];
-  const durum = ult_rastgeleDurumUret();
-  ult_ajanaGorevVer(random.id, random.task, durum);
+  const random = adaylar[Math.floor(Math.random() * adaylar.length)];
+  if(!ult_sistemAktif){ ult_tumAjanlariCalistir(); }
+  ult_ajanaGorevVer(random.id, random.task);
+  ult_log(`🎲 ${random.code} ajanına öncelikli görev verildi.`);
   if(VolkanVoice.isUnlocked()){
-    VolkanVoice.speakExact(`Sayın CEO, ${random.code} ajanına rasgele görev verildi.`);
+    VolkanVoice.speakExact(`Sayın CEO, ${random.code} ajanına öncelikli görev verildi.`);
   }
 }
 
-function ult_guncelleAjanListesi(){
-  ult_buildAgentList();
-  ult_log("🔄 Ajan listesi yenilendi.");
-  if(VolkanVoice.isUnlocked()) VolkanVoice.speakExact("Sayın CEO, ajan listesi yenilendi.");
+function ult_kuyruguKaristir(){
+  for(let i = ult_queue.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [ult_queue[i], ult_queue[j]] = [ult_queue[j], ult_queue[i]];
+  }
+  ult_log("🔀 Bekleme kuyruğu karıştırıldı.");
+  if(VolkanVoice.isUnlocked()) VolkanVoice.speakExact("Sayın CEO, bekleme kuyruğu karıştırıldı.");
 }
+window.ult_kuyruguKaristir = ult_kuyruguKaristir;
 
-function ult_gonderKomut(){
+async function ult_gonderKomut(){
   const input = document.getElementById("ult_komutInput");
   if(!input) return;
   const metin = input.value.trim();
@@ -2812,22 +2791,31 @@ function ult_gonderKomut(){
   input.value = "";
   ult_log(`📨 Komut: ${metin}`);
 
-  const match = metin.match(/Agent-(\d{1,3})/i);
+  if(typeof VolkanVoice !== "undefined" && VolkanVoice.isUnlocked()){
+    await VolkanVoice.speakExact(`Sayın CEO, "${metin}" yazısını okuyarak gönderiyorum.`);
+  }
+
+  const match = metin.match(/Agent-0*(\d{1,4})/i);
   if(match){
     const id = parseInt(match[1]);
-    const agent = ULT_AGENTS.find(a => a.id === id);
-    if(!agent){ ult_log(`❌ Agent-${match[1]} bulunamadı.`); return; }
-    let gorev = metin.replace(/Agent-\d{1,3}/i, "").trim() || agent.task;
-    if(ult_ajanaGorevVer(agent.id, gorev, "yesil")){
-      if(VolkanVoice.isUnlocked()){
-        VolkanVoice.announce(`${agent.code} ajanına ${gorev} görevi verildi.`);
+    const agent = ULT_BY_ID[id];
+    if(!agent){
+      ult_log(`❌ Agent-${match[1]} bulunamadı.`);
+      if(typeof VolkanVoice !== "undefined" && VolkanVoice.isUnlocked()){
+        await VolkanVoice.speakExact(`Sayın CEO, Agent ${match[1]} bulunamadığı için gönderilme işlemi tamamlanamadı.`);
       }
-    } else {
-      ult_log(`⚠️ ${agent.code} zaten çalışıyor.`);
+      return;
     }
+    let gorev = metin.replace(/Agent-0*\d{1,4}/i, "").trim() || agent.task;
+    if(!ult_sistemAktif) ult_tumAjanlariCalistir();
+    const basarili = ult_ajanaGorevVer(agent.id, gorev);
+    if(!basarili) ult_log(`⚠️ ${agent.code} zaten çalışıyor veya kara kutuda.`);
   } else {
     ult_log(`❓ Komut anlaşılmadı: "${metin}"`);
-    if(VolkanVoice.isUnlocked()) VolkanVoice.announce("komut anlaşılmadı.");
+  }
+
+  if(typeof VolkanVoice !== "undefined" && VolkanVoice.isUnlocked()){
+    await VolkanVoice.speakExact("Sayın CEO, gönderilme işlemi tamamlandı.");
   }
 }
 
@@ -2840,8 +2828,8 @@ const ULT_VOICE_ACTIONS = [
     action: async () => { await VolkanVoice.announce("Sosyal medya dağıtım ajanı deneme modunda çalıştırılıyor."); ult_rastgeleGorevVer(); } },
   { title:"🚨 Acil Durum Tatbikatı", desc:"acil durum tatbikatının başladığını bildiriyorum.",
     action: () => VolkanVoice.announce("acil durum tatbikatı başlatıldı.") },
-  { title:"👥 Ajan Kapasite Özeti", desc:"kaç ajanın görevde olduğunu özetliyorum.",
-    action: () => VolkanVoice.announce(`şu anda ${ult_activeAgents.size} ajan görevde, ${ULT_AGENTS.length - ult_activeAgents.size} ajan boşta.`) },
+  { title:"👥 Ajan Kapasite Özeti", desc:"kaç ajanın görevde, kuyrukta ve kritik hata havuzunda olduğunu özetliyorum.",
+    action: () => VolkanVoice.announce(`şu anda ${ult_activeAgents.size} ajan görevde, ${ult_queue.length} ajan kuyrukta bekliyor, ${ult_karaKutu.size} ajan kritik hata havuzunda.`) },
   { title:"🌙 Vardiya Kapanış Bildirimi", desc:"günlük operasyon özetini okuyorum.",
     action: () => VolkanVoice.announce("günlük operasyon tamamlandı. İyi çalışmalar, Fahri Bey.") },
 ];
@@ -2861,16 +2849,18 @@ function ult_renderVoiceActions(){
 
 window.ult_akisSifirla          = ult_akisSifirla;
 window.ult_rastgeleGorevVer     = ult_rastgeleGorevVer;
-window.ult_guncelleAjanListesi  = ult_guncelleAjanListesi;
+window.ult_kuyruguKaristir      = ult_kuyruguKaristir;
 window.ult_gonderKomut          = ult_gonderKomut;
 
 function ult_baslat(){
   ult_flowContainer = document.getElementById("ult_flowContainer");
   ult_logBox        = document.getElementById("ult_logBox");
-  if(!ult_agentGrid) ult_buildAgentList();
+  ult_karaKutuGrid  = document.getElementById("ult_karaKutuGrid");
+  if(!ult_slotEls.length) ult_slotlariKur();
+  ult_karaKutuCiz();
+  ult_sayaclariGuncelle();
   ult_renderVoiceActions();
-  if(ult_flowContainer) ult_flowContainer.innerHTML = "";
-  ult_log("🚀 Volkan 001 AI Ajanı hazır. BAŞLAT'a basınca 200 ajan göreve başlar.");
+  ult_log("🚀 Volkan 001 AI Ajanı hazır. BAŞLAT'a basınca 1200 ajan sırayla göreve başlar (aynı anda en fazla 24'ü aktif).");
   if(window.vt_lockPanel) window.vt_lockPanel(window.PANEL_LOCKED);
 }
 if(document.readyState === "loading"){

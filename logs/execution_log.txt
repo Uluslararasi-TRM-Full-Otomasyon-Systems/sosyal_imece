@@ -1,0 +1,13 @@
+--- SOSYAL IMECE SIMULASYON LOGLARI (2026-09-12 22:38:49) ---
+[EXEC] Gorev #1 -> Urun: Akilli Dus Basligi | Platform: YouTube Shorts | Durum: BASARILI (Simulasyon)
+[EXEC] Gorev #2 -> Urun: Akilli Dus Basligi | Platform: TikTok | Durum: BASARILI (Simulasyon)
+[EXEC] Gorev #3 -> Urun: Akilli Dus Basligi | Platform: Instagram Reels | Durum: BASARILI (Simulasyon)
+[EXEC] Gorev #4 -> Urun: Akilli Dus Basligi | Platform: Facebook | Durum: BASARILI (Simulasyon)
+[EXEC] Gorev #5 -> Urun: Koseden Donen Led Isik | Platform: YouTube Shorts | Durum: BASARILI (Simulasyon)
+[EXEC] Gorev #6 -> Urun: Koseden Donen Led Isik | Platform: TikTok | Durum: BASARILI (Simulasyon)
+[EXEC] Gorev #7 -> Urun: Koseden Donen Led Isik | Platform: Instagram Reels | Durum: BASARILI (Simulasyon)
+[EXEC] Gorev #8 -> Urun: Koseden Donen Led Isik | Platform: Facebook | Durum: BASARILI (Simulasyon)
+[EXEC] Gorev #9 -> Urun: Mini Tasinabilir Blender | Platform: YouTube Shorts | Durum: BASARILI (Simulasyon)
+[EXEC] Gorev #10 -> Urun: Mini Tasinabilir Blender | Platform: TikTok | Durum: BASARILI (Simulasyon)
+[EXEC] Gorev #11 -> Urun: Mini Tasinabilir Blender | Platform: Instagram Reels | Durum: BASARILI (Simulasyon)
+[EXEC] Gorev #12 -> Urun: Mini Tasinabilir Blender | Platform: Facebook | Durum: BASARILI (Simulasyon)
