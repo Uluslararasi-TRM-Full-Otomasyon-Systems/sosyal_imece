@@ -1,6 +1,51 @@
--n 
-"TÅm HTML Paneller.zip" 
-"media_out/" 
-"*.mp3" 
-"tanitim_ses.mp3" 
-".streamlit/secrets.toml" 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+.env
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+*.db
+*.sqlite
+
+# Media
+media_out/
+*.mp3
+*.wav
+tanitim_ses.mp3
+
+# Secrets
+.streamlit/secrets.toml
+secrets.env
+*.key
+*.pem
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+.DS_Store
+Thumbs.db
+
+# Project specific
+"T√ºm HTML Paneller.zip"
+scan_report.json
+trm_*.log
+trm_*.db
+orchestrator_*.log
+panel_sync.log
