@@ -274,9 +274,20 @@ window.addEventListener('beforeunload', function() {
         except Exception as e:
             self.send_response(500, 'application/json', json.dumps({'error': str(e)}))
     
-    def send_response(self, status_code, content_type, content):
-        """HTTP yanıtı gönder"""
-        self.send_response(status_code, content_type, content)
+    def send_response(self, status_code, content_type=None, content=None):
+        """HTTP yanıtı gönder (BaseHTTPRequestHandler ile çakışmasın)."""
+        if content_type is None and content is None:
+            BaseHTTPRequestHandler.send_response(self, status_code)
+            return
+        body = content if isinstance(content, bytes) else (content or "").encode("utf-8")
+        ctype = content_type or "text/html; charset=utf-8"
+        if "charset" not in ctype and (ctype.startswith("text/") or ctype == "application/json"):
+            ctype = f"{ctype}; charset=utf-8"
+        BaseHTTPRequestHandler.send_response(self, status_code)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
     
     def log_message(self, format, *args):
         pass  # Log mesajlarını gösterme

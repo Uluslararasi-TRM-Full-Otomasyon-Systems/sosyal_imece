@@ -3109,3 +3109,7 @@
  * Running on http://127.0.0.1:5001
  * Running on http://192.168.0.100:5001
 2026-09-02 15:30:54,114 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-09-25 20:38:40,337 - config - INFO - ✅ Config dosyası başarıyla yüklendi: C:\Users\Habitat\Desktop\sosyal_imece\global_config.json
+2026-09-25 20:38:40,338 - config - INFO - ✅ Klasörler hazır: LOG_DIR=./logs, REPORT_DIR=./reports
+2026-09-25 20:38:41,972 - llm_client - INFO - Groq client initialized (SDK)
+2026-09-25 20:38:42,474 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"

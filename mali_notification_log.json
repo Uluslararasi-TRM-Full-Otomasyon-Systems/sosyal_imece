@@ -1,0 +1,94 @@
+{
+  "success": true,
+  "message": "Bildirim yayını tamamlandı: 4/4 başarılı",
+  "total_notifications": 4,
+  "successful_notifications": 4,
+  "results": {
+    "whatsapp": [
+      {
+        "success": true,
+        "channel": "whatsapp",
+        "recipient": "admin@sosyalimece.com",
+        "message": "============================================================\nSOSYAL İMECE GELİR DAĞITIM RAPORU\n=====...",
+        "error": null,
+        "timestamp": "2026-09-17T17:49:52.938140"
+      },
+      {
+        "success": true,
+        "channel": "whatsapp",
+        "recipient": "yönetim@sosyalimece.com",
+        "message": "============================================================\nSOSYAL İMECE GELİR DAĞITIM RAPORU\n=====...",
+        "error": null,
+        "timestamp": "2026-09-17T17:49:53.438536"
+      }
+    ],
+    "social_media": [
+      {
+        "success": true,
+        "channel": "social_media",
+        "recipient": "@sosyalimece_official",
+        "message": "============================================================\nSOSYAL İMECE GELİR DAĞITIM RAPORU\n=====...",
+        "error": null,
+        "timestamp": "2026-09-17T17:49:53.738999"
+      },
+      {
+        "success": true,
+        "channel": "social_media",
+        "recipient": "@sosyalimece_updates",
+        "message": "============================================================\nSOSYAL İMECE GELİR DAĞITIM RAPORU\n=====...",
+        "error": null,
+        "timestamp": "2026-09-17T17:49:54.039766"
+      }
+    ]
+  },
+  "timestamp": "2026-09-17T17:49:54.039766"
+}
+{
+  "notification_result": {
+    "success": true,
+    "message": "Bildirim yayını tamamlandı: 4/4 başarılı",
+    "total_notifications": 4,
+    "successful_notifications": 4,
+    "results": {
+      "whatsapp": [
+        {
+          "success": true,
+          "channel": "whatsapp",
+          "recipient": "admin@sosyalimece.com",
+          "message": "============================================================\nSOSYAL İMECE GELİR DAĞITIM RAPORU\n=====...",
+          "error": null,
+          "timestamp": "2026-09-17T19:37:14.406635"
+        },
+        {
+          "success": true,
+          "channel": "whatsapp",
+          "recipient": "yönetim@sosyalimece.com",
+          "message": "============================================================\nSOSYAL İMECE GELİR DAĞITIM RAPORU\n=====...",
+          "error": null,
+          "timestamp": "2026-09-17T19:37:14.908072"
+        }
+      ],
+      "social_media": [
+        {
+          "success": true,
+          "channel": "social_media",
+          "recipient": "@sosyalimece_official",
+          "message": "============================================================\nSOSYAL İMECE GELİR DAĞITIM RAPORU\n=====...",
+          "error": null,
+          "timestamp": "2026-09-17T19:37:15.209354"
+        },
+        {
+          "success": true,
+          "channel": "social_media",
+          "recipient": "@sosyalimece_updates",
+          "message": "============================================================\nSOSYAL İMECE GELİR DAĞITIM RAPORU\n=====...",
+          "error": null,
+          "timestamp": "2026-09-17T19:37:15.511142"
+        }
+      ]
+    },
+    "timestamp": "2026-09-17T19:37:15.511142"
+  },
+  "voice_audio_file": "generate_voice_announcement",
+  "timestamp": "2026-09-17T19:37:34.544635"
+}

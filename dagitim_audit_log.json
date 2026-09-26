@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-09-22T22:26:35.409942",
+  "toplam_dagitilan_havuz_tl": 37500.0,
+  "n_toplam_uye": 4,
+  "n_55_plus_uye": 2,
+  "detaylar": [
+    {
+      "uye_id": "APL-55-ALTIN",
+      "ad": "Mehmet Fahri",
+      "yas": 63,
+      "temel_plus_refah_payi": 7500.0,
+      "zenginlik_payi_55_plus": 3750.0,
+      "toplam_hesaba_aktarilan": 11250.0,
+      "kategori": "55+ Kıdemli + Zenginlik Dahil"
+    },
+    {
+      "uye_id": "APL-02",
+      "ad": "Ayşe Teyze",
+      "yas": 60,
+      "temel_plus_refah_payi": 7500.0,
+      "zenginlik_payi_55_plus": 3750.0,
+      "toplam_hesaba_aktarilan": 11250.0,
+      "kategori": "55+ Kıdemli + Zenginlik Dahil"
+    },
+    {
+      "uye_id": "APL-03",
+      "ad": "Can Genç",
+      "yas": 28,
+      "temel_plus_refah_payi": 7500.0,
+      "zenginlik_payi_55_plus": 0.0,
+      "toplam_hesaba_aktarilan": 7500.0,
+      "kategori": "Standart İmece + Refah"
+    },
+    {
+      "uye_id": "APL-04",
+      "ad": "Zeynep",
+      "yas": 42,
+      "temel_plus_refah_payi": 7500.0,
+      "zenginlik_payi_55_plus": 0.0,
+      "toplam_hesaba_aktarilan": 7500.0,
+      "kategori": "Standart İmece + Refah"
+    }
+  ]
+}

@@ -311,25 +311,25 @@ def handle_api_errors(func):
 # ============================================
 
 @app.route('/')
+@app.route('/panel')
 def serve_panel():
-    """Ana panel HTML dosyasını sun (Düzeltilmiş dosya adı ile)"""
+    """Ana panel HTML dosyasını sun (ASCII ve Türkçe İ dosya adları)."""
     try:
-        # Mutlak dosya yolunu al
+    from flask import send_file as _send_file
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        panel_path = os.path.join(current_dir, 'SOSYAL_IMECE_UCLU_KONTROL_PANELİ.html')
-        
-        # Dosya varlığını kontrol et
-        if not os.path.exists(panel_path):
-            logger.error(f"Panel dosyası bulunamadı: {panel_path}")
+        candidates = [
+            os.path.join(current_dir, 'SOSYAL_IMECE_UCLU_KONTROL_PANELI.html'),
+            os.path.join(current_dir, 'SOSYAL_IMECE_UCLU_KONTROL_PANELİ.html'),
+        ]
+        panel_path = next((p for p in candidates if os.path.exists(p)), None)
+        if not panel_path:
+            logger.error(f"Panel dosyası bulunamadı: {candidates}")
             return jsonify({
                 'error': 'Panel dosyası bulunamadı',
-                'expected_path': panel_path,
+                'expected_path': candidates,
                 'current_directory': current_dir
             }), 404
-        
-        # Dosyayı oku ve döndür
-        with open(panel_path, 'r', encoding='utf-8') as f:
-            return f.read()
+        return _send_file(panel_path, mimetype='text/html; charset=utf-8')
     except Exception as e:
         logger.error(f"Panel dosyası sunma hatası: {e}")
         return jsonify({
@@ -480,13 +480,10 @@ def get_realtime_metrics():
             pass
         
         return jsonify({
-            'success': True,
-            'data': {
-                'cpu': round(cpu, 1),
-                'ram': round(ram, 1),
-                'whatsapp_rate': round(whatsapp_rate, 1),
-                'ai_score': ai_score
-            },
+            'cpu': round(cpu, 1),
+            'ram': round(ram, 1),
+            'whatsapp_rate': round(whatsapp_rate, 1),
+            'ai_score': ai_score,
             'timestamp': datetime.now().isoformat()
         })
     except Exception as e:
@@ -511,13 +508,10 @@ def get_multilang_metrics():
             pass
         
         return jsonify({
-            'success': True,
-            'data': {
-                'counts': {
-                    'tr_count': tr_count,
-                    'en_count': en_count,
-                    'de_count': de_count
-                }
+            'counts': {
+                'tr_count': tr_count,
+                'en_count': en_count,
+                'de_count': de_count
             },
             'timestamp': datetime.now().isoformat()
         })
@@ -568,10 +562,15 @@ def run_social_agent():
             'status': 'completed',
             'success_posts': max_products if dry_run else max_products - 1,
             'total_posts': max_products,
-            'errors': []
+            'errors': [],
+            'details': {
+                'success_posts': max_products if dry_run else max_products - 1,
+                'total_posts': max_products,
+                'errors': []
+            }
         }
         
-        return jsonify({'success': True, 'data': result})
+        return jsonify(result)
     except Exception as e:
         logger.error(f"Social agent run API hatası: {e}")
         return jsonify({'success': False, 'error': str(e), 'type': str(type(e).__name__)}), 500
@@ -627,12 +626,10 @@ def volkan_speak():
             pass
         
         return jsonify({
-            'success': True,
-            'data': {
-                'status': 'success',
-                'audio_url': f'/audio/volkan_{int(time.time())}.mp3',
-                'message': 'Volkan sesli bildirim hazır (demo modu)'
-            }
+            'status': 'success',
+            'audio_url': '',
+            'message': 'Volkan sesli bildirim tarayıcı TTS ile okunur',
+            'text': text
         })
     except Exception as e:
         logger.error(f"Volkan speak API hatası: {e}")
@@ -649,13 +646,10 @@ def test_ai_integration():
             pass
         
         return jsonify({
-            'success': True,
-            'data': {
-                'status': 'connected',
-                'model': 'gpt-4',
-                'accuracy': 0.95,
-                'message': 'AI entegrasyonu başarılı (demo modu)'
-            },
+            'status': 'connected',
+            'response': 'AI entegrasyonu başarılı (demo modu)',
+            'model': 'gpt-4',
+            'accuracy': 0.95,
             'timestamp': datetime.now().isoformat()
         })
     except Exception as e:
@@ -1099,8 +1093,14 @@ if __name__ == "__main__":
     initialize_integrations()
     
     def run_flask_server():
-        logger.info("🌐 Flask Backend Sunucusu başlatılıyor (http://localhost:5000)")
-        app.run(host='0.0.0.0', port=5000, debug=False, use_reloader=False)
+        logger.info("🌐 Kontrol Merkezi Flask (http://localhost:5000)")
+        try:
+            from kontrol_merkezi import create_app
+            panel_app = create_app(get_controller=lambda: controller)
+            panel_app.run(host='0.0.0.0', port=5000, debug=False, use_reloader=False)
+        except Exception as flask_err:
+            logger.error(f"kontrol_merkezi yüklenemedi, yedek Flask: {flask_err}")
+            app.run(host='0.0.0.0', port=5000, debug=False, use_reloader=False)
     
     flask_thread = threading.Thread(target=run_flask_server, daemon=True)
     flask_thread.start()

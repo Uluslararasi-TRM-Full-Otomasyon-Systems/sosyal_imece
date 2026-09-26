@@ -7,7 +7,9 @@ TRM Nirvana v3.0 - GeliÅmiÅ YÃ¶netim Paneli
 
 import asyncio
 import json
+import logging
 import os
+import threading
 import time
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
@@ -18,10 +20,22 @@ import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
 
-# Sistem modÃ¼lleri
-from SYSTEM_MANAGER_24_7 import SystemManager24_7
-from DRIVE_SOCIAL_MANAGER import DriveSocialManager
-from SATIS_ALARM_SISTEMI import SalesAlarmSystem
+logger = logging.getLogger(__name__)
+
+try:
+    from SYSTEM_MANAGER_24_7 import SystemManager24_7
+except ImportError:
+    SystemManager24_7 = None  # type: ignore
+
+try:
+    from DRIVE_SOCIAL_MANAGER import DriveSocialManager
+except ImportError:
+    DriveSocialManager = None  # type: ignore
+
+try:
+    from SATIS_ALARM_SISTEMI import SalesAlarmSystem
+except ImportError:
+    SalesAlarmSystem = None  # type: ignore
 
 class AdvancedDashboardHandler(BaseHTTPRequestHandler):
     def __init__(self, *args, dashboard_manager, **kwargs):
@@ -35,33 +49,40 @@ class AdvancedDashboardHandler(BaseHTTPRequestHandler):
         if path == '/':
             self.send_main_page()
         elif path == '/system-status':
-            self.send_system_status()
+            self._send_manager_json('get_system_status')
         elif path == '/daily-stats':
-            self.send_daily_stats()
+            self._send_manager_json('get_daily_stats')
         elif path == '/error-logs':
-            self.send_error_logs()
+            self._send_manager_json('get_error_logs')
         elif path == '/social-posts':
-            self.send_social_posts()
+            self._send_manager_json('get_social_posts')
         elif path == '/ai-performance':
-            self.send_ai_performance()
+            self._send_manager_json('get_ai_performance')
         elif path == '/web-scraping':
-            self.send_web_scraping()
+            self._send_manager_json('get_web_scraping_status')
         elif path == '/sales-graphs':
-            self.send_sales_graphs()
+            self._send_manager_json('get_sales_graphs')
         elif path == '/high-commission':
-            self.send_high_commission()
+            self._send_manager_json('get_high_commission_products')
         elif path == '/sold-products':
-            self.send_sold_products()
+            self._send_manager_json('get_sold_products')
         elif path == '/commission-tracking':
-            self.send_commission_tracking()
+            self._send_manager_json('get_commission_tracking')
         elif path == '/daily-commission':
-            self.send_daily_commission()
+            self._send_manager_json('get_daily_commission')
         elif path == '/24h-reset':
-            self.send_24h_reset()
+            self._send_manager_json('get_24h_reset_status')
         elif path.startswith('/api/'):
             self.send_api_response(path)
         else:
             self.send_404()
+
+    def _send_manager_json(self, method_name):
+        getter = getattr(self.dashboard_manager, method_name)
+        self.send_response(200, 'application/json', json.dumps(getter(), ensure_ascii=False, default=str))
+
+    def send_404(self):
+        self.send_response(404, 'text/plain', 'Not Found')
     
     def send_main_page(self):
         """Ana sayfayÄ± gÃ¶nder"""
@@ -502,9 +523,23 @@ setInterval(() => {
         except Exception as e:
             self.send_response(500, 'application/json', json.dumps({'error': str(e)}))
     
-    def send_response(self, status_code, content_type, content):
-        """HTTP yanÄ±tÄ± gÃ¶nder"""
-        self.send_response(status_code, content_type, content)
+    def send_response(self, status_code, content_type=None, content=None):
+        """HTTP yaniti gonder (BaseHTTPRequestHandler.send_response ile cakismasin)."""
+        if content_type is None and content is None:
+            BaseHTTPRequestHandler.send_response(self, status_code)
+            return
+        if isinstance(content, bytes):
+            body = content
+        else:
+            body = (content or "").encode("utf-8")
+        ctype = content_type or "text/html; charset=utf-8"
+        if "charset" not in ctype and (ctype.startswith("text/") or ctype == "application/json"):
+            ctype = f"{ctype}; charset=utf-8"
+        BaseHTTPRequestHandler.send_response(self, status_code)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
     
     def log_message(self, format, *args):
         pass  # Log mesajlarÄ±nÄ± gÃ¶sterme

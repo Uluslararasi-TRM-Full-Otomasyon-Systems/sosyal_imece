@@ -1,0 +1,20 @@
+[
+  {
+    "timestamp": "2026-09-22T21:32:23.050719",
+    "niche_category": "sağlık_yaşam",
+    "target_age_bracket": "55_plus_odakli",
+    "komisyon_orani": 0.22,
+    "tahmini_aylik_brut_komisyon_tl": 475200.0,
+    "tahmini_imece_havuz_katkisi_tl": 142560.0,
+    "skor_durumu": "OPTIMAL_NIŞ_ONAYLANDI"
+  },
+  {
+    "timestamp": "2026-09-22T21:37:56.973957",
+    "niche_category": "sağlık_yaşam",
+    "target_age_bracket": "55_plus_odakli",
+    "komisyon_orani": 0.22,
+    "tahmini_aylik_brut_komisyon_tl": 660000.0,
+    "tahmini_imece_havuz_katkisi_tl": 198000.0,
+    "skor_durumu": "OPTIMAL_NIŞ_ONAYLANDI"
+  }
+]

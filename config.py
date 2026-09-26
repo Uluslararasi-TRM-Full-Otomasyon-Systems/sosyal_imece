@@ -166,3 +166,98 @@ except Exception as e:
     REPORT_DIR = "./reports"
     os.makedirs(LOG_DIR, exist_ok=True)
     os.makedirs(REPORT_DIR, exist_ok=True)
+
+
+def _load_dotenv_if_present():
+    """Proje kökündeki .env dosyasını os.environ'a yükler (python-dotenv varsa)."""
+    env_path = os.path.join(_BASE_DIR, ".env")
+    try:
+        from dotenv import load_dotenv
+        load_dotenv(env_path, override=False)
+        return
+    except Exception:
+        pass
+    if not os.path.isfile(env_path):
+        return
+    try:
+        with open(env_path, "r", encoding="utf-8") as fh:
+            for raw in fh:
+                line = raw.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, value = line.split("=", 1)
+                key = key.strip()
+                value = value.strip().strip('"').strip("'")
+                os.environ.setdefault(key, value)
+    except OSError as exc:
+        logger.warning(" .env okunamadı: %s", exc)
+
+
+_load_dotenv_if_present()
+
+
+class SecureConfig:
+    """LLM ve entegrasyon anahtarlarını ortam değişkeninden okuyan güvenli köprü."""
+
+    def __init__(self):
+        self.openrouter_api_key = os.getenv("OPENROUTER_API_KEY", "").strip()
+        self.gemini_api_key = os.getenv("GEMINI_API_KEY", "").strip()
+        self.groq_api_key = os.getenv("GROQ_API_KEY", "").strip()
+        self.openai_api_key = os.getenv("OPENAI_API_KEY", "").strip()
+
+    def is_llm_configured(self) -> bool:
+        return bool(self.openrouter_api_key or self.gemini_api_key or self.groq_api_key)
+
+    def configured_llm_providers(self):
+        names = []
+        if self.groq_api_key:
+            names.append("groq")
+        if self.gemini_api_key:
+            names.append("gemini")
+        if self.openrouter_api_key:
+            names.append("openrouter")
+        return names
+
+
+config = SecureConfig()
+
+
+def get_social_media_config():
+    """Sosyal medya yöneticisinin beklediği sözlük (değerler ortamdan)."""
+    placeholder = {
+        "messaging": "your_messaging_api_token_here",
+        "facebook": "your_facebook_access_token_here",
+        "instagram": "your_instagram_access_token_here",
+        "twitter_key": "your_twitter_api_key_here",
+        "twitter_secret": "your_twitter_api_secret_here",
+    }
+    return {
+        "messaging": {
+            "api_token": os.getenv("DISCORD_BOT_TOKEN") or os.getenv("TELEGRAM_BOT_TOKEN") or placeholder["messaging"],
+            "phone_number": os.getenv("DISCORD_CHANNEL_ID") or os.getenv("TELEGRAM_CHAT_ID") or "",
+        },
+        "facebook": {
+            "access_token": os.getenv("FACEBOOK_ACCESS_TOKEN") or placeholder["facebook"],
+        },
+        "instagram": {
+            "access_token": os.getenv("INSTAGRAM_ACCESS_TOKEN") or placeholder["instagram"],
+        },
+        "twitter": {
+            "api_key": os.getenv("TWITTER_API_KEY") or placeholder["twitter_key"],
+            "api_secret": os.getenv("TWITTER_API_SECRET") or placeholder["twitter_secret"],
+        },
+    }
+
+
+# product_scraper/main.py uyumluluğu
+TARGET_URLS = [
+    "https://magazanolsun.com/gida",
+    "https://magazanolsun.com/kozmetik",
+    "https://magazanolsun.com/kisisel-bakim",
+]
+SCRAPE_INTERVAL_HOURS = int(os.getenv("SCRAPE_INTERVAL_HOURS", "6"))
+DROPBOX_TARGET_PATH = os.getenv(
+    "DROPBOX_TARGET_PATH",
+    "/Uluslararasi TRM Full Otomasyon Ürünler Deposu/01_MagazaNolSun",
+)
+DROPBOX_ACCESS_TOKEN = os.getenv("DROPBOX_ACCESS_TOKEN", "")

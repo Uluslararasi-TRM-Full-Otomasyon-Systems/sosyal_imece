@@ -1,0 +1,81 @@
+{
+  "version": "1.0",
+  "created_at": "2026-09-20T15:12:47.153726",
+  "project_root": "C:\\Users\\Habitat\\Desktop\\sosyal_imece",
+  "critical_files": {
+    "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\app.py": "57ff28ccc2ed96ba7bdfc41e48c8d9d7bc82bcaa12a8cfdcee03fa59e2cb8c88",
+    "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\MASTER_CONTROLLER.py": "a2e42f9b548a62c43c16bd5344f871bf9c61f19195d498ab221006818f89b68b",
+    "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\orchestrator_api.py": "019a1ba4f86ac2a1ac1f320d411373c6fc61a37645f7c7c444702ae8ac3fea16",
+    "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\config.py": "56a589b547fcc7300ff6ede634ca626234b9c2e8f17be87f57c338299ab10958",
+    "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\SOSYAL_IMECE_UCLU_KONTROL_PANELI.html": "0e8602fcd562c5551e95c16fc03a1518e8f9d06532a0beca19646a7d11c726d4"
+  },
+  "directory_scans": {
+    ".": {
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\app.py": "57ff28ccc2ed96ba7bdfc41e48c8d9d7bc82bcaa12a8cfdcee03fa59e2cb8c88",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\config.py": "56a589b547fcc7300ff6ede634ca626234b9c2e8f17be87f57c338299ab10958",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\MASTER_CONTROLLER.py": "a2e42f9b548a62c43c16bd5344f871bf9c61f19195d498ab221006818f89b68b",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\orchestrator_api.py": "019a1ba4f86ac2a1ac1f320d411373c6fc61a37645f7c7c444702ae8ac3fea16",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\SOSYAL_IMECE_UCLU_KONTROL_PANELI.html": "0e8602fcd562c5551e95c16fc03a1518e8f9d06532a0beca19646a7d11c726d4",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\.vendor\\invoke\\config.py": "97f2c5ab9bab1bc26466b35ef32b7647faabd96cfa72ea9eb891b3f8ae6af70e",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\.vendor\\paramiko\\config.py": "f6e215032a5e0b91338a656bd518ac9a5533bbcb2d8991382128199e882bf975",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\kurmakistediginfirmaadi\\config.py": "a2e8812305f385de968750c3037f8b3bfaf7ab4bae1624cf831f697900d7c517",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\kurmakistediginfirmaadi\\MASTER_CONTROLLER.py": "f80f2f1671eed430665351ac0268bc621775733e5315704b90dcfcfa089986a8",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\config.py": "f95e608e68f2b55c5c1b0532b732d6f384e112b25c10d642175b1a36ea7ad956",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\MASTER_CONTROLLER.py": "f80f2f1671eed430665351ac0268bc621775733e5315704b90dcfcfa089986a8",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.python-libs\\dulwich\\config.py": "33efb97792f5720d95bc36562d0dfbe8e4888055e0fec5876a33bdb79752804d",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.python-libs\\git\\config.py": "b4f017868428ccbd0cafbc7882da149451949244fc2ed3b739caacab3fbb66b5",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.python-libs\\pandas\\_config\\config.py": "038563ba34f9af6e61494cc20721bcf2d61e837e6d44c18055bc213ce67ed794",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.python-libs\\starlette\\config.py": "195c24a34a464aeb31b901cedf9b4bfcdb7f0292f47e65582f72221c76292d6e",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.python-libs\\streamlit\\config.py": "775e5b8e853dcfb3bcf6b2186559fdebbfd8039535fcef916438e7787c6a047d",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.python-libs\\uvicorn\\config.py": "521624160a9e56a8f7f0565beafc089f7ab2556623afbbbd7897cd3f62cf85f7",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.python-user\\Python314\\site-packages\\git\\config.py": "b4f017868428ccbd0cafbc7882da149451949244fc2ed3b739caacab3fbb66b5",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.python-user\\Python314\\site-packages\\pandas\\_config\\config.py": "038563ba34f9af6e61494cc20721bcf2d61e837e6d44c18055bc213ce67ed794",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.python-user\\Python314\\site-packages\\starlette\\config.py": "195c24a34a464aeb31b901cedf9b4bfcdb7f0292f47e65582f72221c76292d6e",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.python-user\\Python314\\site-packages\\streamlit\\config.py": "775e5b8e853dcfb3bcf6b2186559fdebbfd8039535fcef916438e7787c6a047d",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.python-user\\Python314\\site-packages\\uvicorn\\config.py": "521624160a9e56a8f7f0565beafc089f7ab2556623afbbbd7897cd3f62cf85f7",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.streamlit-lib\\git\\config.py": "b4f017868428ccbd0cafbc7882da149451949244fc2ed3b739caacab3fbb66b5",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.streamlit-lib\\pandas\\_config\\config.py": "038563ba34f9af6e61494cc20721bcf2d61e837e6d44c18055bc213ce67ed794",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.streamlit-lib\\starlette\\config.py": "195c24a34a464aeb31b901cedf9b4bfcdb7f0292f47e65582f72221c76292d6e",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.streamlit-lib\\streamlit\\config.py": "775e5b8e853dcfb3bcf6b2186559fdebbfd8039535fcef916438e7787c6a047d",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\.streamlit-lib\\uvicorn\\config.py": "521624160a9e56a8f7f0565beafc089f7ab2556623afbbbd7897cd3f62cf85f7",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\streamlit_env\\git\\config.py": "5a8c012371eb8063f137a2c58604d3dfba64637f22d3bd1a6cf7b3dbabf357ff",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\streamlit_env\\pandas\\_config\\config.py": "3562c07333feeacf3aa0e9d7b037e0627c78a907331a662373c3e16e0138426f",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\streamlit_env\\starlette\\config.py": "21de3dd511d905d5d95c650829106a5d7dff6851d62dde60bbbc81d43e11968d",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Eko Sistemi\\streamlit_env\\streamlit\\config.py": "517188fba95ea5378c68e79e6611df3ae5642ae3b1d24a27a9d5df18c1116ef2",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\config.py": "f95e608e68f2b55c5c1b0532b732d6f384e112b25c10d642175b1a36ea7ad956",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\MASTER_CONTROLLER.py": "f80f2f1671eed430665351ac0268bc621775733e5315704b90dcfcfa089986a8",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.python-libs\\dulwich\\config.py": "33efb97792f5720d95bc36562d0dfbe8e4888055e0fec5876a33bdb79752804d",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.python-libs\\git\\config.py": "b4f017868428ccbd0cafbc7882da149451949244fc2ed3b739caacab3fbb66b5",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.python-libs\\pandas\\_config\\config.py": "038563ba34f9af6e61494cc20721bcf2d61e837e6d44c18055bc213ce67ed794",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.python-libs\\starlette\\config.py": "195c24a34a464aeb31b901cedf9b4bfcdb7f0292f47e65582f72221c76292d6e",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.python-libs\\streamlit\\config.py": "775e5b8e853dcfb3bcf6b2186559fdebbfd8039535fcef916438e7787c6a047d",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.python-libs\\uvicorn\\config.py": "521624160a9e56a8f7f0565beafc089f7ab2556623afbbbd7897cd3f62cf85f7",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.python-user\\Python314\\site-packages\\git\\config.py": "b4f017868428ccbd0cafbc7882da149451949244fc2ed3b739caacab3fbb66b5",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.python-user\\Python314\\site-packages\\pandas\\_config\\config.py": "038563ba34f9af6e61494cc20721bcf2d61e837e6d44c18055bc213ce67ed794",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.python-user\\Python314\\site-packages\\starlette\\config.py": "195c24a34a464aeb31b901cedf9b4bfcdb7f0292f47e65582f72221c76292d6e",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.python-user\\Python314\\site-packages\\streamlit\\config.py": "775e5b8e853dcfb3bcf6b2186559fdebbfd8039535fcef916438e7787c6a047d",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.python-user\\Python314\\site-packages\\uvicorn\\config.py": "521624160a9e56a8f7f0565beafc089f7ab2556623afbbbd7897cd3f62cf85f7",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.streamlit-lib\\git\\config.py": "b4f017868428ccbd0cafbc7882da149451949244fc2ed3b739caacab3fbb66b5",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.streamlit-lib\\pandas\\_config\\config.py": "038563ba34f9af6e61494cc20721bcf2d61e837e6d44c18055bc213ce67ed794",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.streamlit-lib\\starlette\\config.py": "195c24a34a464aeb31b901cedf9b4bfcdb7f0292f47e65582f72221c76292d6e",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.streamlit-lib\\streamlit\\config.py": "775e5b8e853dcfb3bcf6b2186559fdebbfd8039535fcef916438e7787c6a047d",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\.streamlit-lib\\uvicorn\\config.py": "521624160a9e56a8f7f0565beafc089f7ab2556623afbbbd7897cd3f62cf85f7",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\streamlit_env\\git\\config.py": "5a8c012371eb8063f137a2c58604d3dfba64637f22d3bd1a6cf7b3dbabf357ff",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\streamlit_env\\pandas\\_config\\config.py": "3562c07333feeacf3aa0e9d7b037e0627c78a907331a662373c3e16e0138426f",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\streamlit_env\\starlette\\config.py": "21de3dd511d905d5d95c650829106a5d7dff6851d62dde60bbbc81d43e11968d",
+      "C:\\Users\\Habitat\\Desktop\\sosyal_imece\\Uluslararası TRM Otonom Ekosistemi grupları\\trendurunlermarket.com\\streamlit_env\\streamlit\\config.py": "517188fba95ea5378c68e79e6611df3ae5642ae3b1d24a27a9d5df18c1116ef2"
+    }
+  },
+  "metadata": {
+    "total_files": 58,
+    "monitored_extensions": [
+      ".py",
+      ".html",
+      ".json",
+      ".env"
+    ],
+    "monitored_directories": [
+      "."
+    ]
+  }
+}

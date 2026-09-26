@@ -1,33 +1,45 @@
-import os
-import time
+﻿import os
+import json
+from datetime import datetime
 
-def metni_sese_cevir_ve_oku(metin, hiz=1.0):
+try:
+    from gtts import gTTS
+    GTTS_AVAILABLE = True
+except ImportError:
+    GTTS_AVAILABLE = False
+
+def sesli_rapor_seslendir(metin: str, dosya_adi: str = "trm_asistan_yanit.mp3"):
     """
-    TRM Otonom Ekosistemi icin Sesli Asistan Motoru.
-    Gelismis asamada ElevenLabs ve gTTS API'leri buraya baglanacaktir.
+    TRM otonom raporlarını ve 55+ zenginlik dağılım özetlerini sesli dosyaya çevirir.
     """
-    print(f"\n🎙️ [TRM ASISTAN] Okunuyor (Hiz: {hiz}): '{metin}'")
-    
-    # Isletim sisteminin kendi ses motorunu kullanarak ilk testi yapiyoruz
+    kayit_bilgi = {
+        "timestamp": datetime.now().isoformat(),
+        "metin": metin,
+        "tts_motoru": "gTTS" if GTTS_AVAILABLE else "text_fallback",
+        "dosya": dosya_adi
+    }
+
+    if GTTS_AVAILABLE:
+        tts = gTTS(text=metin, lang='tr', slow=False)
+        tts.save(dosya_adi)
+        print(f"🔊 Sesli asistan yanıtı üretildi: {dosya_adi}")
+    else:
+        print("⚠️ gTTS kütüphanesi yüklü değil, metin tabanlı ses simülasyonu aktif.")
+
+    log_dosyasi = "sesli_asistan_loglari.json"
+    history = []
     try:
-        if os.name == 'nt': # Windows isletim sistemi icin
-            import win32com.client
-            speaker = win32com.client.Dispatch("SAPI.SpVoice")
-            # Ses hizini ayarlama (SAPI hizi -10 ile 10 arasindadir)
-            speaker.Rate = int((hiz - 1.0) * 10)
-            speaker.Speak(metin)
-        else:
-            # Mac veya Linux icin terminal sesini tetikler
-            os.system(f"say '{metin}'")
-            
-    except Exception as e:
-        print(f"⚠️ Ses calinirken bir mikron hata olustu: {e}")
+        with open(log_dosyasi, "r", encoding="utf-8") as f:
+            history = json.load(f)
+    except FileNotFoundError:
+        pass
+    history.append(kayit_bilgi)
+    with open(log_dosyasi, "w", encoding="utf-8") as f:
+        json.dump(history, f, ensure_ascii=False, indent=2)
+
+    return kayit_bilgi
 
 if __name__ == "__main__":
-    print("==================================================")
-    print("🔊 TRM SESLI ASISTAN MOTORU (`sesli_komut.py`) AKTIF")
-    print("==================================================")
-    
-    # Ilk acilis ve hos geldiniz testi
-    test_mesaji = "Merhaba Fahri Bey. TRM Kuresel Imece Dunyasi ses motoru basariyla calistirildi. Sisteminiz sifir hata ile nobette."
-    metni_sese_cevir_ve_oku(test_mesaji, hiz=1.0)
+    test_metin = "Fahri abi, TRM Sosyal İmece 55+ zenginlik payı ve afiliyet sepet eşleşmesi başarıyla tamamlandı. Kuşadası bölge varlık çarpanı 1.226 onaylandı."
+    res = sesli_rapor_seslendir(test_metin)
+    print(json.dumps(res, ensure_ascii=False, indent=2))

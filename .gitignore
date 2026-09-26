@@ -49,3 +49,7 @@ trm_*.log
 trm_*.db
 orchestrator_*.log
 panel_sync.log
+global_config.local.json
+secrets.env
+*.pickle
+token.pickle

@@ -1,0 +1,12 @@
+ok=971
+err=10
+ACIL_SATIS_HAVUZU.py :: PyCompileError
+error_output.py :: PyCompileError
+GUNLUK_KONTROL_LISTESI.py :: PyCompileError
+KURESEL_IMECE_DUNYASI_200_AJAN_NIHAI_DOKUMAN_TAM_TURKCE_V2.py :: PyCompileError
+muhafiz_nobet_defteri.py :: PyCompileError
+PANEL_ACICI_REHBERI.py :: PyCompileError
+requirements.py :: PyCompileError
+SISTEM_ENVANTERI.py :: PyCompileError
+test.py :: PyCompileError
+TRM_SOHBET_GECMISI.py :: PyCompileError

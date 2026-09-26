@@ -1,6 +1,13 @@
+import os
+import sys
 import time
 import schedule
-from config import TARGET_URLS, SCRAPE_INTERVAL_HOURS, DROPBOX_TARGET_PATH, DROPBOX_ACCESS_TOKEN
+
+_HERE = os.path.dirname(os.path.abspath(__file__))
+if _HERE not in sys.path:
+    sys.path.insert(0, _HERE)
+
+from product_scraperconfig import TARGET_URLS, SCRAPE_INTERVAL_HOURS, DROPBOX_TARGET_PATH, DROPBOX_ACCESS_TOKEN
 from magazanolsun_scraper import MagazaNolSunScraper
 from dropbox_uploader import DropboxUploader
 

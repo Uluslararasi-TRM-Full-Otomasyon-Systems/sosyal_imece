@@ -1,0 +1,14 @@
+{
+  "accounts": [
+    {"platform": "facebook", "handle": "uteykder", "status": "active"},
+    {"platform": "instagram", "handle": "cevre_uteykder", "status": "active"},
+    {"platform": "tiktok", "handle": "endeksa_trm", "status": "active"},
+    {"platform": "telegram", "handle": "trm_kanal", "status": "active"},
+    {"platform": "youtube", "handle": "uteykder_tv", "status": "active"},
+    {"platform": "twitter", "handle": "sosyalimece", "status": "active"},
+    {"platform": "blog", "name": "sosyalimece_blog", "url": "https://sosyalimece.org", "status": "active"},
+    {"platform": "blog", "name": "uteykder_blog", "url": "https://uteykder.org.tr", "status": "active"},
+    {"platform": "blog", "name": "trend_blog", "url": "https://trendurunlermarket.com/blog", "status": "active"},
+    {"platform": "blog", "name": "trm_insights", "url": "https://sosyalimece.org/insights", "status": "active"}
+  ]
+}

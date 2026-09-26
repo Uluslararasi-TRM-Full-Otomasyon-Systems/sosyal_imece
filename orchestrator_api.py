@@ -1350,3 +1350,60 @@ if __name__ == '__main__':
     print("=" * 60)
     
     socketio.run(app, host='0.0.0.0', port=5000, debug=False)
+# --- ŞEFKATLİ REHBER MÜLAKAT KÖPRÜSÜ ---
+try:
+    from sefkatli_rehber_agent import analyze_applicant_dialogue, ANAC_SELAMLAMA_SABLONLARI
+    
+    @app.route('/api/sefkatli-rehber/greet', methods=['GET'])
+    def api_rehber_greet():
+        return jsonify({
+            "success": True,
+            "persona": "Şefkatli Rehber (40-50 Yaş Anaç / Bilge İmece Rehberi)",
+            "welcome_message": ANAC_SELAMLAMA_SABLONLARI[0]
+        })
+
+    @app.route('/api/sefkatli-rehber/interview', methods=['POST'])
+    def api_rehber_interview():
+        data = request.json or {}
+        applicant_id = data.get('applicant_id', f'APL-{int(datetime.now().timestamp())}')
+        candidate_text = data.get('text', '')
+        region = data.get('region', 'Türkiye')
+        
+        result = analyze_applicant_dialogue(applicant_id, candidate_text, region)
+        return jsonify({
+            "success": True,
+            "persona": "Şefkatli Rehber",
+            "mülakat_sonucu": result
+        })
+    print("[OK] Şefkatli Rehber (Anaç Mülakat Agent) API köprüsü bağlandı")
+except Exception as e:
+    print(f"[INFO] Şefkatli Rehber modülü yükleme durumu: {e}")
+
+# --- ŞEFKATLİ REHBER MÜLAKAT KÖPRÜSÜ ---
+try:
+    from sefkatli_rehber_agent import analyze_applicant_dialogue, ANAC_SELAMLAMA_SABLONLARI
+    
+    @app.route('/api/sefkatli-rehber/greet', methods=['GET'])
+    def api_rehber_greet():
+        return jsonify({
+            "success": True,
+            "persona": "Şefkatli Rehber (40-50 Yaş Anaç / Bilge İmece Rehberi)",
+            "welcome_message": ANAC_SELAMLAMA_SABLONLARI[0]
+        })
+
+    @app.route('/api/sefkatli-rehber/interview', methods=['POST'])
+    def api_rehber_interview():
+        data = request.json or {}
+        applicant_id = data.get('applicant_id', f'APL-{int(datetime.now().timestamp())}')
+        candidate_text = data.get('text', '')
+        region = data.get('region', 'Türkiye')
+        
+        result = analyze_applicant_dialogue(applicant_id, candidate_text, region)
+        return jsonify({
+            "success": True,
+            "persona": "Şefkatli Rehber",
+            "mülakat_sonucu": result
+        })
+    print("[OK] Şefkatli Rehber (Anaç Mülakat Agent) API köprüsü bağlandı")
+except Exception as e:
+    print(f"[INFO] Şefkatli Rehber modülü yükleme durumu: {e}")

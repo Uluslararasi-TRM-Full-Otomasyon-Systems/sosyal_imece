@@ -1,0 +1,102 @@
+[
+  {
+    "timestamp": "2026-09-22T21:21:57.728308",
+    "sepet_id": "TRM-SEP-99881",
+    "uye_id": "APL-55-ALTIN",
+    "sepet_tutar_tl": 2500.0,
+    "brut_komisyon_tl": 450.0,
+    "imece_havuz_aktarim_tl": 135.0,
+    "net_uye_cuzdan_tl": 315.0,
+    "durum": "ESLESTI_VE_AKTARILDI"
+  },
+  {
+    "timestamp": "2026-09-22T21:23:09.367215",
+    "sepet_id": "TRM-LIVE-2026-0922",
+    "uye_id": "APL-55-ALTIN",
+    "sepet_tutar_tl": 5000.0,
+    "brut_komisyon_tl": 1000.0,
+    "imece_havuz_aktarim_tl": 300.0,
+    "net_uye_cuzdan_tl": 700.0,
+    "durum": "ESLESTI_VE_AKTARILDI"
+  },
+  {
+    "timestamp": "2026-09-22T21:24:35.749814",
+    "sepet_id": "TRM-LIVE-2026-0922",
+    "uye_id": "APL-55-ALTIN",
+    "sepet_tutar_tl": 5000.0,
+    "brut_komisyon_tl": 1000.0,
+    "imece_havuz_aktarim_tl": 300.0,
+    "net_uye_cuzdan_tl": 700.0,
+    "durum": "ESLESTI_VE_AKTARILDI"
+  },
+  {
+    "timestamp": "2026-09-22T21:29:10.909369",
+    "sepet_id": "TRM-WH-LIVE-001",
+    "uye_id": "APL-55-ALTIN",
+    "sepet_tutar_tl": 7500.0,
+    "brut_komisyon_tl": 1500.0,
+    "imece_havuz_aktarim_tl": 450.0,
+    "net_uye_cuzdan_tl": 1050.0,
+    "durum": "ESLESTI_VE_AKTARILDI"
+  },
+  {
+    "timestamp": "2026-09-22T21:37:56.980631",
+    "sepet_id": "TRM-MASTER-9999",
+    "uye_id": "APL-55-ALTIN",
+    "sepet_tutar_tl": 6892.5,
+    "brut_komisyon_tl": 1516.35,
+    "imece_havuz_aktarim_tl": 454.9,
+    "net_uye_cuzdan_tl": 1061.44,
+    "durum": "ESLESTI_VE_AKTARILDI"
+  },
+  {
+    "timestamp": "2026-09-22T21:45:09.029415",
+    "sepet_id": "MO-LIVE-TRM-8891",
+    "uye_id": "APL-55-ALTIN",
+    "sepet_tutar_tl": 9200.0,
+    "brut_komisyon_tl": 2024.0,
+    "imece_havuz_aktarim_tl": 607.2,
+    "net_uye_cuzdan_tl": 1416.8,
+    "durum": "ESLESTI_VE_AKTARILDI"
+  },
+  {
+    "timestamp": "2026-09-22T21:55:01.844219",
+    "sepet_id": "CLICKBANK-CB-99411",
+    "uye_id": "APL-55-ALTIN",
+    "sepet_tutar_tl": 9625.0,
+    "brut_komisyon_tl": 2406.25,
+    "imece_havuz_aktarim_tl": 721.88,
+    "net_uye_cuzdan_tl": 1684.38,
+    "durum": "ESLESTI_VE_AKTARILDI"
+  },
+  {
+    "timestamp": "2026-09-22T21:56:24.583100",
+    "sepet_id": "GLB-AMZ-LIVE-001",
+    "uye_id": "APL-55-ALTIN",
+    "sepet_tutar_tl": 17500.0,
+    "brut_komisyon_tl": 4375.0,
+    "imece_havuz_aktarim_tl": 1312.5,
+    "net_uye_cuzdan_tl": 3062.5,
+    "durum": "ESLESTI_VE_AKTARILDI"
+  },
+  {
+    "timestamp": "2026-09-22T22:15:44.857429",
+    "sepet_id": "GLB-CANLI-TRM-01",
+    "uye_id": "APL-55-ALTIN",
+    "sepet_tutar_tl": 1000.0,
+    "brut_komisyon_tl": 250.0,
+    "imece_havuz_aktarim_tl": 75.0,
+    "net_uye_cuzdan_tl": 175.0,
+    "durum": "ESLESTI_VE_AKTARILDI"
+  },
+  {
+    "timestamp": "2026-09-22T22:26:35.399645",
+    "sepet_id": "GLB-FINAL-LEDGER-01",
+    "uye_id": "APL-55-ALTIN",
+    "sepet_tutar_tl": 1000.0,
+    "brut_komisyon_tl": 250.0,
+    "imece_havuz_aktarim_tl": 75.0,
+    "net_uye_cuzdan_tl": 175.0,
+    "durum": "ESLESTI_VE_AKTARILDI"
+  }
+]

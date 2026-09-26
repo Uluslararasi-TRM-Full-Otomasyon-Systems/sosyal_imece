@@ -7091,3 +7091,54 @@
 [2026-09-02 17:18:01,232] INFO - [PersonaAI] 127.0.0.1 - - [02/Sep/2026 17:18:01] "[33mGET /metrics/multilang HTTP/1.1[0m" 404 -
 [2026-09-02 17:18:01,232] INFO - [PersonaAI] 127.0.0.1 - - [02/Sep/2026 17:18:01] "[33mGET /health HTTP/1.1[0m" 404 -
 [2026-09-02 17:18:01,790] INFO - [PersonaAI] 127.0.0.1 - - [02/Sep/2026 17:18:01] "[33mGET /ceo/active-sessions HTTP/1.1[0m" 404 -
+[2026-09-22 20:15:50,353] INFO - [PersonaAI] ✅ Behavioral & Persona AI Agent başlatıldı
+[2026-09-22 20:15:50,353] INFO - [PersonaAI] 🚀 Behavioral & Persona AI Agent aktif
+[2026-09-22 20:15:50,449] INFO - [PersonaAI] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.105:5000
+[2026-09-22 20:15:50,449] INFO - [PersonaAI] [33mPress CTRL+C to quit[0m
+[2026-09-22 20:17:57,528] INFO - [PersonaAI] ✅ Behavioral & Persona AI Agent başlatıldı
+[2026-09-22 20:17:57,537] INFO - [PersonaAI] 🚀 Behavioral & Persona AI Agent aktif
+[2026-09-22 20:17:57,579] INFO - [PersonaAI] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.105:5000
+[2026-09-22 20:17:57,579] INFO - [PersonaAI] [33mPress CTRL+C to quit[0m
+[2026-09-22 20:23:24,244] INFO - [PersonaAI] ✅ Behavioral & Persona AI Agent başlatıldı
+[2026-09-22 20:23:24,244] INFO - [PersonaAI] 🚀 Behavioral & Persona AI Agent aktif
+[2026-09-22 20:23:24,290] INFO - [PersonaAI] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.105:5000
+[2026-09-22 20:23:24,290] INFO - [PersonaAI] [33mPress CTRL+C to quit[0m
+[2026-09-22 20:25:10,838] INFO - [PersonaAI] ✅ Behavioral & Persona AI Agent başlatıldı
+[2026-09-22 20:25:10,838] INFO - [PersonaAI] 🚀 Behavioral & Persona AI Agent aktif
+[2026-09-22 20:25:10,878] INFO - [PersonaAI] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.105:5000
+[2026-09-22 20:25:10,878] INFO - [PersonaAI] [33mPress CTRL+C to quit[0m
+[2026-09-22 20:26:24,069] INFO - [PersonaAI] 127.0.0.1 - - [22/Sep/2026 20:26:24] "GET /api/nirvana/status HTTP/1.1" 200 -
+[2026-09-22 20:26:24,153] INFO - [PersonaAI] 127.0.0.1 - - [22/Sep/2026 20:26:24] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[2026-09-22 20:31:31,460] INFO - [PersonaAI] ✅ Behavioral & Persona AI Agent başlatıldı
+[2026-09-22 20:31:31,461] INFO - [PersonaAI] 🚀 Behavioral & Persona AI Agent aktif
+[2026-09-22 20:31:31,502] INFO - [PersonaAI] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.105:5000
+[2026-09-22 20:31:31,502] INFO - [PersonaAI] [33mPress CTRL+C to quit[0m
+[2026-09-22 20:42:27,872] INFO - [PersonaAI] ✅ Behavioral & Persona AI Agent başlatıldı
+[2026-09-22 20:42:27,875] INFO - [PersonaAI] 🚀 Behavioral & Persona AI Agent aktif
+[2026-09-22 20:42:27,921] INFO - [PersonaAI] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.105:5000
+[2026-09-22 20:42:27,921] INFO - [PersonaAI] [33mPress CTRL+C to quit[0m
+[2026-09-22 20:55:15,628] INFO - [PersonaAI] ✅ Behavioral & Persona AI Agent başlatıldı
+[2026-09-22 20:55:15,629] INFO - [PersonaAI] 🚀 Behavioral & Persona AI Agent aktif
+[2026-09-22 20:55:15,668] INFO - [PersonaAI] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.105:5000
+[2026-09-22 20:55:15,669] INFO - [PersonaAI] [33mPress CTRL+C to quit[0m

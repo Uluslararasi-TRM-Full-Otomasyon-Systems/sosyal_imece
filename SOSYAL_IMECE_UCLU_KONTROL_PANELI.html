@@ -1224,6 +1224,7 @@ async function panelVoiceOn(btn){
       btn.textContent = "✅ Sistem Aktif";
       btn.disabled = true;
       if(typeof ult_tumAjanlariCalistir === "function") ult_tumAjanlariCalistir();
+      fetch((location.protocol.startsWith("http") ? "" : "http://localhost:5000") + "/api/system/start", {method:"POST"}).catch(()=>{});
       await VolkanVoice.speakExact("Sayın CEO Fahri Bey hoş geldiniz, ben Volkan 001 Ee Aay Ajanı, 1200 yapay zeka ajanımız ile komutlarınızı bekliyoruz.");
     } else {
       if(btn){ btn.disabled = false; btn.textContent = btn.dataset.origText; }
@@ -1253,6 +1254,9 @@ async function panelVoiceOff(btn){
   const startBtn = document.getElementById("ult_btnUnlockVoice");
   if(startBtn){ startBtn.disabled = false; startBtn.textContent = startBtn.dataset.origText || "🔓 Volkan 001 AI Ajanı BAŞLAT"; }
   if(mode === "farewell" && typeof ult_tumAjanlariDurdur === "function") ult_tumAjanlariDurdur();
+  if(mode === "farewell"){
+    fetch((location.protocol.startsWith("http") ? "" : "http://localhost:5000") + "/api/system/stop", {method:"POST"}).catch(()=>{});
+  }
   panelToast("Ses kapatıldı", "ok");
 }
 
@@ -1335,7 +1339,7 @@ window.globalEmergencyLock = function(active){
 
 <script>
 (function(){
-const API_BASE = "http://localhost:5000";
+const API_BASE = (location.protocol === "http:" || location.protocol === "https:") ? "" : "http://localhost:5000";
 function toast(msg, type="ok"){
   const wrap = document.getElementById("ana_toastWrap");
   const el = document.createElement("div");
@@ -1665,7 +1669,7 @@ window.addActivity = addActivity;
 
 <script>
 (function(){
-const API_BASE = "http://localhost:5000";
+const API_BASE = (location.protocol === "http:" || location.protocol === "https:") ? "" : "http://localhost:5000";
 function toast(msg, type="ok"){
   const wrap = document.getElementById("gel_toastWrap");
   const el = document.createElement("div"); el.className = "toast " + type; el.textContent = msg;
@@ -1898,7 +1902,7 @@ window.gel_testAIIntegration = testAIIntegration;
 
 <script>
 (function(){
-const API_BASE = "http://localhost:5000";
+const API_BASE = (location.protocol === "http:" || location.protocol === "https:") ? "" : "http://localhost:5000";
 function toast(msg, type="ok"){
   const wrap = document.getElementById("kom_toastWrap");
   const el = document.createElement("div"); el.className = "toast " + type; el.textContent = msg;
@@ -2879,7 +2883,7 @@ if(document.readyState === "loading"){
 (function(){
   "use strict";
 
-  const API_BASE = "http://localhost:5000";
+  const API_BASE = (location.protocol === "http:" || location.protocol === "https:") ? "" : "http://localhost:5000";
 
   function getCeoKey(){
     const el = document.getElementById("kom_ceoKeyInput");

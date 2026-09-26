@@ -1,0 +1,56 @@
+{
+  "lokasyon_analizi": {
+    "timestamp": "2026-09-22T21:37:56.966306",
+    "query_region": "Kuşadası",
+    "demographic_target": "55_plus_kıdemli",
+    "metrics": {
+      "logistics_score": 88,
+      "community_density": 91,
+      "recommended_hub": "Aydın-Ege Sahil İmece"
+    },
+    "status": "GEO_PROFILED"
+  },
+  "gayrimenkul_varlik_carpan": 1.226,
+  "hoodmaps_demografi_fit": {
+    "imece_demographic_fit_score": 73.5,
+    "distribution_velocity_multiplier": 0.919,
+    "targets_55_plus_wealth_pool": true
+  },
+  "nis_profil": {
+    "timestamp": "2026-09-22T21:37:56.973957",
+    "niche_category": "sağlık_yaşam",
+    "target_age_bracket": "55_plus_odakli",
+    "komisyon_orani": 0.22,
+    "tahmini_aylik_brut_komisyon_tl": 660000.0,
+    "tahmini_imece_havuz_katkisi_tl": 198000.0,
+    "skor_durumu": "OPTIMAL_NIŞ_ONAYLANDI"
+  },
+  "kapali_cevril_islem": {
+    "status": "CLOSED_LOOP_SUCCESS",
+    "sepet_islem": {
+      "timestamp": "2026-09-22T21:37:56.980631",
+      "sepet_id": "TRM-MASTER-9999",
+      "uye_id": "APL-55-ALTIN",
+      "sepet_tutar_tl": 6892.5,
+      "brut_komisyon_tl": 1516.35,
+      "imece_havuz_aktarim_tl": 454.9,
+      "net_uye_cuzdan_tl": 1061.44,
+      "durum": "ESLESTI_VE_AKTARILDI"
+    },
+    "dagitim_ozet": {
+      "toplam_dagitilan_fon_tl": 227450.0,
+      "n_toplam_uye": 4,
+      "n_55_plus_kıdemli": 2
+    }
+  },
+  "sosyal_duyuru": {
+    "timestamp": "2026-09-22T21:37:56.988571",
+    "kanal": [
+      "telegram_channel",
+      "whatsapp_broadcast",
+      "trm_otonom_feed"
+    ],
+    "icerik": "🌟 **TRM Sosyal İmece Anlık Otonom Raporu** (2026-09-22 21:37)\n--------------------------------------------------\n🛒 **Sepet Eşleşme:** TRM-MASTER-9999 | Tutar: 6892.5 TL\n💎 **İmece Havuz Katkısı:** 454.9 TL\n👤 **Üye Cüzdan Net:** 1061.44 TL\n--------------------------------------------------\n🏛️ **Adil Dağıtım Özeti:**\n- Toplam Dağıtılan Fon: 227,450.00 TL\n- Toplam Üye: 4 kişi\n- 55+ Kıdemli Zenginlik Payı Alan: 2 kişi\n--------------------------------------------------\n✨ *Birlikte üretiyor, 55+ kıdemli refah payıyla hakça bölüşüyoruz!*",
+    "durum": "HAZIR_VE_YAYINLANABILIR"
+  }
+}

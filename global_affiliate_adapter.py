@@ -1,17 +1,39 @@
-﻿# global_affiliate_adapter.py - Küresel Afiliyet ve Çoklu Platform Dağıtım Modülü
+﻿from typing import Dict, Any
+from trm_master_pipeline import master_siparis_ve_havuz_dongusu
 
-class GlobalAffiliateAdapter:
-    def __init__(self, target_platform='trendurunlermarket.com'):
-        self.target_platform = target_platform
-        self.global_networks = [
-            {'name': 'Trend Ürünler Market', 'domain': 'trendurunlermarket.com', 'status': 'Active (Pilot)'},
-            {'name': 'Global Network A', 'domain': 'example-global-store-1.com', 'status': 'Parametric Ready'},
-            {'name': 'Global Network B', 'domain': 'example-global-store-2.com', 'status': 'Parametric Ready'}
-        ]
+EXCHANGE_RATES = {
+    "TRY": 1.0,
+    "USD": 35.5,
+    "EUR": 38.5
+}
 
-    def switch_target(self, new_domain):
-        self.target_platform = new_domain
-        print(f'>>> [Global Adapter] Hedef platform değiştirildi: {new_domain}')
+def normalize_and_execute_global_sale(platform: str, raw_sale: Dict[str, Any], member_registry: list) -> Dict[str, Any]:
+    currency = raw_sale.get("currency", "TRY").upper()
+    rate = EXCHANGE_RATES.get(currency, 1.0)
+    
+    local_amount_tl = float(raw_sale.get("amount", 0.0)) * rate
+    commission_rate = float(raw_sale.get("commission_rate", 0.22))
+    
+    normalized_order = {
+        "sepet_id": f"{platform.upper()}-{raw_sale.get('txn_id', 'GEN-01')}",
+        "uye_id": raw_sale.get("beneficiary_member_id", "APL-55-ALTIN"),
+        "tutar": local_amount_tl,
+        "komisyon_orani": commission_rate
+    }
+    
+    return master_siparis_ve_havuz_dongusu(normalized_order, member_registry)
 
-    def generate_trackable_links(self, account_id, product_sku):
-        return f'https://{self.target_platform}/ref/{account_id}/sku/{product_sku}'
+if __name__ == "__main__":
+    from magazanolsun_webhook_bridge import MEMBER_REGISTRY
+    global_test = {
+        "platform": "clickbank_eu",
+        "txn_id": "CB-99411",
+        "beneficiary_member_id": "APL-55-ALTIN",
+        "amount": 250.0,
+        "currency": "EUR",
+        "commission_rate": 0.25
+    }
+    res = normalize_and_execute_global_sale("clickbank", global_test, MEMBER_REGISTRY)
+    import json
+    print("🌍 Küresel Adaptör Test Sonucu:")
+    print(json.dumps(res, ensure_ascii=False, indent=2))

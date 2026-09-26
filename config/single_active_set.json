@@ -1,0 +1,58 @@
+{
+  "set_name": "primary_live_set_10",
+  "target_ecommerce": "trendurunlermarket.com",
+  "social_media": [
+    {
+      "platform": "facebook",
+      "handle": "Trend Ürünler Market",
+      "active": true
+    },
+    {
+      "platform": "instagram",
+      "handle": "trend.urunlermarket",
+      "active": true
+    },
+    {
+      "platform": "tiktok",
+      "handle": "trendurnlermarket1",
+      "active": true
+    },
+    {
+      "platform": "telegram",
+      "handle": "Trend Ürünler Market",
+      "active": true
+    },
+    {
+      "platform": "whatsapp",
+      "handle": "Trend Ürünler Market",
+      "active": true
+    },
+    {
+      "platform": "youtube",
+      "handle": "Trend Ürünler Market",
+      "active": true
+    }
+  ],
+  "blogs": [
+    {
+      "name": "magazanolsun_firsat",
+      "url": "https://magaza.magazanolsun.com/FirsatBlok",
+      "active": true
+    },
+    {
+      "name": "blogger_posts",
+      "url": "https://www.blogger.com/u/1/blog/posts/4362899539756176508?pli=1",
+      "active": true
+    },
+    {
+      "name": "medium_trend",
+      "url": "https://medium.com/@trendurunlermarket",
+      "active": true
+    },
+    {
+      "name": "wordpress_me",
+      "url": "https://wordpress.com/me",
+      "active": true
+    }
+  ]
+}

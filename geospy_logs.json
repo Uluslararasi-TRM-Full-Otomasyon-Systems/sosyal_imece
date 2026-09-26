@@ -1,0 +1,24 @@
+[
+  {
+    "timestamp": "2026-09-22T21:32:03.538649",
+    "query_region": "Kuşadası",
+    "demographic_target": "55_plus_kıdemli",
+    "metrics": {
+      "logistics_score": 88,
+      "community_density": 91,
+      "recommended_hub": "Aydın-Ege Sahil İmece"
+    },
+    "status": "GEO_PROFILED"
+  },
+  {
+    "timestamp": "2026-09-22T21:37:56.966306",
+    "query_region": "Kuşadası",
+    "demographic_target": "55_plus_kıdemli",
+    "metrics": {
+      "logistics_score": 88,
+      "community_density": 91,
+      "recommended_hub": "Aydın-Ege Sahil İmece"
+    },
+    "status": "GEO_PROFILED"
+  }
+]
