@@ -15,7 +15,9 @@ from selenium.common.exceptions import (
     JavascriptException,
     TimeoutException,
 )
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from threading import Thread, Lock
@@ -33,9 +35,10 @@ import string
 import subprocess
 import sys
 import time
-import urllib.parse
+import unicodedata
 
 from derya_cevaplayici import derya_otonom_yanitla
+from esnaf_sablonu import SablonHatasi, esnaf_tanitim_metni
 
 
 def _konsol_hazirla():
@@ -147,6 +150,11 @@ state_lock = Lock()
 
 def _log(mesaj):
     print(f"[{datetime.now().strftime('%H:%M:%S')}] [WHATSAPP] {mesaj}", flush=True)
+
+
+def _konsol_metni(metin, girinti="    │ "):
+    satirlar = str(metin).splitlines() or ["(boş)"]
+    return "\n".join(girinti + satir for satir in satirlar)
 
 
 def _guvenli_sayic_uret(uzunluk=6):
@@ -344,6 +352,13 @@ def _chrome_secenekleri(profil_dizini, cdp_port):
 
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option("useAutomationExtension", False)
+    # WhatsApp Web websocket/uzun-polling yüzünden "load" olayını hiç
+    # tamamlamıyor: normal stratejide driver.get() sayfa bitene kadar
+    # bekliyor ve gönderim thread'i saatlerce kilitlenebiliyor.
+    options.page_load_strategy = "eager"
+    # Beklenmedik yerel diyalog ("Bu sayfadan ayrılansın?") tüm WebDriver
+    # komutlarını susturmasın; otomatik kapatılır.
+    options.set_capability("unhandledPromptBehavior", "dismiss")
     return options
 
 
@@ -486,6 +501,12 @@ def _esnaf_listesinde_mi(numara):
     last-wid = SON AÇILAN SOHBET. Eğer beklenen hat listedeki bir esnafa aitse,
     last-wid'in o numara olması "kendi hattım" kanıtı SAYILMAZ.
     """
+    js = (
+        "var k = document.querySelector(\"div[contenteditable='true'][aria-label*='sohbetine']\")"
+        " || document.querySelector(\"div[contenteditable='true'][data-tab='1']\")"
+        " || document.querySelector(\"div[contenteditable='true']\");"
+        "return k;"
+    )
     try:
         conn = veritabani_baglan()
         rows = conn.execute("SELECT telefon FROM esnaflar").fetchall()
@@ -1126,11 +1147,33 @@ atexit.register(_kapanista_kapat)
 # ============================================================
 def _gonder_dugmesini_tikla(sürücü):
     js = (
-        "const ikon = document.querySelector('span[data-icon=\"send\"], "
-        "span[data-icon=\"send-alt-with-text\"], span[data-icon=\"ptt-footer\"]');"
-        "if (!ikon) return false;"
-        "const dugme = ikon.closest('button,[role=\"button\"]') || ikon;"
-        "dugme.click(); return true;"
+        "var adaylar = [];"
+        "var ikonlar = document.querySelectorAll('span[data-icon]');"
+        "for (var i = 0; i < ikonlar.length; i++) {"
+        "  var ad = String(ikonlar[i].getAttribute('data-icon') || '');"
+        "  if (/^(send|send-alt-with-text|send-alt|send-fill|ptt-footer|ptt-outgoing|arrow-up)$/.test(ad)) {"
+        "    adaylar.push(ikonlar[i].closest('button,[role=\"button\"]') || ikonlar[i]);"
+        "  }"
+        "}"
+        "var ek = document.querySelectorAll("
+        "\"footer button[type='submit'], footer [aria-label*='önder'], \" +"
+        "\"footer [aria-label*='Send'], [data-testid='send-btn']\");"
+        "for (var j = 0; j < ek.length; j++) {"
+        "  adaylar.push(ek[j].closest('button,[role=\"button\"]') || ek[j]);"
+        "}"
+        "var gorunen = [];"
+        "for (var k = 0; k < adaylar.length; k++) {"
+        "  var a = adaylar[k];"
+        "  if (!a || gorunen.indexOf(a) !== -1) continue;"
+        "  var r = a.getBoundingClientRect();"
+        "  if (r.width === 0 || r.height === 0) continue;"
+        "  gorunen.push(a);"
+        "}"
+        "if (!gorunen.length) return 0;"
+        "var sec = gorunen[gorunen.length - 1];"
+        "sec.scrollIntoView({block: 'center'});"
+        "sec.click();"
+        "return gorunen.length;"
     )
     try:
         return bool(sürücü.execute_script(js))
@@ -1138,34 +1181,271 @@ def _gonder_dugmesini_tikla(sürücü):
         return False
 
 
-def _composer_metni(sürücü):
-    """None -> composer yok; '' -> composer var ama boş; aksi -> ön-doldurulmuş metin."""
+def _duz_metin(deger):
+    # "İ".lower() gibi ikili kodlamaları da eritmek için NFKD + birleştirme işareti atma.
+    daginik = unicodedata.normalize("NFKD", str(deger).lower())
+    eritilmis = "".join(c for c in daginik if not unicodedata.combining(c))
+    return re.sub(r"[^a-z0-9]", "", eritilmis)
+
+
+def _aktif_sohbet_kimligi(sürücü):
+    """Açık sohbetin başlık metni ('' -> sohbet yok ya da okunamadı)."""
     js = (
-        "var k = document.querySelector(\"div[contenteditable='true'][data-tab='1']\")"
-        " || document.querySelector(\"div[contenteditable='true']\");"
-        "return k ? String(k.innerText || '').trim() : null;"
+        "var h = document.querySelector('#main header[data-testid=\"conversation-header\"]')"
+        " || document.querySelector('#main header');"
+        "return h ? String(h.innerText || '').trim() : '';"
     )
     try:
-        return sürücü.execute_script(js)
+        return str(sürücü.execute_script(js) or "").strip()
+    except (WebDriverException, JavascriptException):
+        return ""
+
+
+def _kimlik_eslesir_mi(kimlik, telefon, beklenen_ad, beklenen_baslik=""):
+    """
+    Alıcı doğrulama kapısı. WhatsApp Web başlıkta ya numarayı (kayıtsız hat) ya
+    da rehber adını gösterir; bu yüzden üç kanıt kabul edilir:
+    numara rakamları, esnaf kaydı adı, veya numarayı aratınca çıkan ilk sohbet
+    satırının başlığı (`_sohbet_arama_basligi`). Hiçbiri tutmazsa gönderim yok.
+    """
+    if not kimlik:
+        return False
+    baslik_rakam = "".join(c for c in kimlik if c.isdigit())
+    hedef_rakam = "".join(c for c in str(telefon) if c.isdigit())
+    if hedef_rakam.startswith("90"):
+        hedef_rakam = hedef_rakam[2:]
+    hedef_rakam = hedef_rakam.lstrip("0")
+    if len(hedef_rakam) >= 10 and hedef_rakam[-10:] in baslik_rakam:
+        return True
+    baslik = _duz_metin(beklenen_baslik)
+    if baslik and baslik == _duz_metin(kimlik):
+        return True
+    ad = _duz_metin(beklenen_ad)
+    return bool(ad) and ad in _duz_metin(kimlik)
+
+
+_ARAMA_KUTUSU_BUL_JS = (
+    # WhatsApp Web bu sürümde div[role="search"] taşımıyor; sol paneldeki tek
+    # görünür metin kutusu, açık sohbetin (#main) dışındaki input'tur.
+    "function trmAramaKutusu() {"
+    "  var a = document.querySelectorAll("
+    "    \"div[role='search'] input[type='text'], \" +"
+    "    \"input[aria-label*='arat' i], input[placeholder*='arat' i]\");"
+    "  for (var i = 0; i < a.length; i++) {"
+    "    var r = a[i].getBoundingClientRect();"
+    "    if (r.width > 0 && r.height > 0) return a[i];"
+    "  }"
+    "  var g = document.querySelectorAll(\"input[type='text']\");"
+    "  for (var j = 0; j < g.length; j++) {"
+    "    if (g[j].closest('#main')) continue;"
+    "    var k = g[j].getBoundingClientRect();"
+    "    if (k.width > 0 && k.height > 0) return g[j];"
+    "  }"
+    "  return null;"
+    "}"
+)
+
+_ARAMA_KUTUSU_JS = _ARAMA_KUTUSU_BUL_JS + "return trmAramaKutusu();"
+
+_ARAMA_YAZ_JS = (
+    _ARAMA_KUTUSU_BUL_JS
+    + "var kutu = trmAramaKutusu();"
+    "if (!kutu) return false;"
+    "kutu.focus();"
+    # React yalnızca yerli value-setter + input olayını dinliyor.
+    "var t = Object.getOwnPropertyDescriptor("
+    "  window.HTMLInputElement.prototype, 'value');"
+    "t.set.call(kutu, arguments[0]);"
+    "kutu.dispatchEvent(new InputEvent('input', "
+    "  {bubbles: true, inputType: 'insertText', data: arguments[0]}));"
+    "return true;"
+)
+
+
+def _sohbet_arama_basligi(sürücü, telefon):
+    """
+    Numarayı sohbet arama kutusunda aratır, çıkan İLK satırın başlığını döndürür
+    ve o satırı açar. Bu, "WhatsApp bu numarayı hangi sohbetle eşleştiriyor?"
+    sorusunun tek doğrulanabilir cevabıdır; başlık tutmazsa gönderim reddedilir.
+    """
+    rakam = "".join(c for c in str(telefon) if c.isdigit())
+    try:
+        kutu = sürücü.execute_script(_ARAMA_KUTUSU_JS)
+    except (WebDriverException, JavascriptException):
+        return ""
+    if not kutu:
+        return ""
+    try:
+        # Selenium 4.47'de Keys.chord yok; kutuya yazmayı React'ın anladığı
+        # yerli value-setter ile yapıp element bayatlaması riskini de kaldırıyoruz.
+        if not sürücü.execute_script(_ARAMA_YAZ_JS, rakam):
+            return ""
+        time.sleep(3.0)
+        baslik = sürücü.execute_script(
+            "var s = document.querySelectorAll('#pane-side div[role=\"listitem\"],"
+            " #pane-side div[role=\"gridcell\"]');"
+            "for (var i = 0; i < s.length; i++) {"
+            "  var t = String(s[i].innerText || '').replace(/\\s+/g, ' ').trim();"
+            "  if (t) return t.split(/\\s{2,}|\\n/)[0].trim().slice(0, 80); }"
+            "return '';"
+        )
+        sürücü.execute_script(
+            "var s = document.querySelectorAll('#pane-side div[role=\"listitem\"],"
+            " #pane-side div[role=\"gridcell\"]');"
+            "for (var i = 0; i < s.length; i++) {"
+            "  if (String(s[i].innerText || '').trim()) { s[i].click(); return true; } }"
+            "return false;"
+        )
+        time.sleep(2.0)
+        _arama_kutusunu_temizle(sürücü)
+    except (WebDriverException, JavascriptException):
+        return ""
+    return str(baslik or "").strip()
+
+
+def _arama_kutusunu_temizle(sürücü):
+    try:
+        kutu = sürücü.execute_script(_ARAMA_KUTUSU_JS)
+        if not kutu:
+            return
+        sürücü.execute_script(
+            "var t = Object.getOwnPropertyDescriptor("
+            "  window.HTMLInputElement.prototype, 'value');"
+            "t.set.call(arguments[0], '');"
+            "arguments[0].dispatchEvent(new InputEvent('input', {bubbles: true}));",
+            kutu,
+        )
+    except (WebDriverException, JavascriptException):
+        pass
+
+
+def _hedef_sohbeti_ac(sürücü, telefon, beklenen_ad, süre=12):
+    """Döner: (ok, kimlik). ok=False ise hiçbir metin yazılmaz ve gönderilmez."""
+    beklenen_baslik = ""
+    for deneme in (1, 2):
+        bitis = time.time() + süre
+        while time.time() < bitis:
+            if _qr_bekliyor_mu(sürücü):
+                return False, "qr"
+            kimlik = _aktif_sohbet_kimligi(sürücü)
+            if kimlik and _kimlik_eslesir_mi(kimlik, telefon, beklenen_ad, beklenen_baslik):
+                return True, kimlik
+            time.sleep(1.5)
+        if deneme == 1:
+            _log("Başlıkta hedef numara görünmedi; numarayı aratıp eşleşen sohbet açılıyor...")
+            beklenen_baslik = _sohbet_arama_basligi(sürücü, telefon)
+            if beklenen_baslik:
+                _log(f"Arama sonucu açılan sohbet başlığı: '{beklenen_baslik}'")
+    return False, _aktif_sohbet_kimligi(sürücü)
+
+
+def _gonderim_canli_dogrula(sürücü, mesaj, süre=15):
+    """Mesajın tamamının kendi çıkış baloncuğunda göründüğünü onaylar."""
+    js = (
+        "var satirlar = document.querySelectorAll(\"#main [role='row']\");"
+        "var son = '';"
+        "for (var i = 0; i < satirlar.length; i++) {"
+        "  var balonlar = satirlar[i].querySelectorAll("
+        "    \"span.selectable-text, span[data-testid='client-side-text-div-copy']\");"
+        "  var metin = '';"
+        "  for (var j = 0; j < balonlar.length; j++) {"
+        "    metin += String(balonlar[j].innerText || '') + '\\n';"
+        "  }"
+        "  if (metin.trim()) son = metin;"
+        "}"
+        "return son;"
+    )
+    hedef = _duz_metin(mesaj)
+    bitis = time.time() + süre
+    while time.time() < bitis:
+        try:
+            son = str(sürücü.execute_script(js) or "")
+        except (WebDriverException, JavascriptException):
+            return False
+        if hedef and hedef in _duz_metin(son):
+            return True
+        time.sleep(1.0)
+    return False
+
+
+_COMPOSER_BUL_JS = (
+    "var k = document.querySelector(\"div[contenteditable='true'][aria-label*='sohbetine']\")"
+    " || document.querySelector(\"div[contenteditable='true'][data-tab='1']\")"
+    " || document.querySelector(\"div[contenteditable='true']\");"
+)
+
+
+def _composer_metni(sürücü):
+    """None -> composer yok; '' -> composer var ama boş; aksi -> ön-doldurulmuş metin."""
+    try:
+        return sürücü.execute_script(_COMPOSER_BUL_JS + "return k ? String(k.innerText || '').trim() : null;")
     except (WebDriverException, JavascriptException):
         return None
 
 
-def _metni_yaz(sürücü, mesaj):
-    js = (
-        "var k = document.querySelector(\"div[contenteditable='true'][data-tab='1']\")"
-        " || document.querySelector(\"div[contenteditable='true']\");"
-        "if (!k) return false;"
-        "k.focus();"
-        "var ok = document.execCommand('insertText', false, arguments[0]);"
-        "if (!ok) { k.textContent = arguments[0];"
-        "  k.dispatchEvent(new InputEvent('input', {bubbles: true, data: arguments[0], inputType: 'insertText'})); }"
-        "return true;"
-    )
+def _composeri_temizle(sürücü):
     try:
-        return bool(sürücü.execute_script(js, str(mesaj)))
+        if not sürücü.execute_script(_COMPOSER_BUL_JS + "if (!k) return false; k.focus(); return true;"):
+            return False
+        zincir = ActionChains(sürücü)
+        zincir.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL)
+        zincir.send_keys(Keys.DELETE)
+        zincir.perform()
     except (WebDriverException, JavascriptException):
         return False
+    return not _composer_metni(sürücü)
+
+
+def _metni_yaz(sürücü, mesaj):
+    """
+    Composer'a satır satır, gerçek tuş olaylarıyla yazar.
+    execCommand('insertText') çok satırlı metnin satır sonlarını yutuyor
+    (canlıda tek paragraf olarak iletildi); WhatsApp'ta düz Enter mesajı
+    gönderdiği için satır sonları Shift+Enter ile verilir.
+    """
+    try:
+        kutu = sürücü.execute_script(_COMPOSER_BUL_JS + "return k;")
+        if not kutu:
+            return False
+        sürücü.execute_script("arguments[0].focus();", kutu)
+        zincir = ActionChains(sürücü)
+        for sıra, satir in enumerate(str(mesaj).split("\n")):
+            if sıra:
+                zincir.key_down(Keys.SHIFT).send_keys(Keys.ENTER).key_up(Keys.SHIFT)
+            if satir:
+                zincir.send_keys(satir)
+        zincir.perform()
+    except (WebDriverException, JavascriptException):
+        return False
+    return bool(_composer_metni(sürücü))
+
+
+def _satirlar(metin):
+    """
+    WhatsApp composer'ı her satırı ayrı <p> olarak tutuyor ve innerText her
+    blok sonunda iki satır başı veriyor; bu yüzden art arda boş satırlar tek
+    satıra indirgenir. Şablon boş satır içermediğinden "hepsi tek satıra
+    düştü" hatası yine yakalanır.
+    """
+    return [s for s in re.sub(r"\n{2,}", "\n", str(metin).strip()).split("\n") if s]
+
+
+def _metin_kilidi_kontrol(sürücü, mesaj):
+    """Döner: (tamam, sebep). Kutudaki metin gidecek metinle birebir olmalı."""
+    kutu = _composer_metni(sürücü)
+    if kutu is None:
+        return False, "mesaj kutusu bulunamadı"
+    # Emoji'ler composer'da <img> olarak tutulur ve innerText'e girmez;
+    # karşılaştırma yalnızca harf/rakam iskeleti ve satır sayısı üzerinden yapılır.
+    if _duz_metin(kutu) != _duz_metin(mesaj):
+        return False, "kutudaki metin şablonla birebir aynı değil"
+    beklenen_satir = len(_satirlar(mesaj))
+    if len(_satirlar(kutu)) != beklenen_satir:
+        return False, (
+            f"satır sayısı {len(_satirlar(kutu))} != {beklenen_satir} "
+            "(satır sonları kayboldu)"
+        )
+    return True, ""
 
 
 def _devam_dugmesini_tikla(sürücü):
@@ -1207,8 +1487,14 @@ def _sohbet_ekrani_hazirla(sürücü, mesaj, timeout=None):
     while time.time() < bitis:
         metin = _composer_metni(sürücü)
         if metin is not None:
-            if not metin and not _metni_yaz(sürücü, mesaj):
-                return "bekleniyor"
+            # WhatsApp, o sohbetin TASLAĞINI composer'a geri koyuyor. Taslak
+            # temizlenmeden yazılırsa eski metin gönderilir: önce kutu boşaltılır.
+            if metin and not _composeri_temizle(sürücü):
+                time.sleep(1.5)
+                continue
+            if not _metni_yaz(sürücü, mesaj):
+                time.sleep(1.5)
+                continue
             return "hazir"
         if _devam_dugmesini_tikla(sürücü):
             time.sleep(1.5)
@@ -1219,7 +1505,7 @@ def _sohbet_ekrani_hazirla(sürücü, mesaj, timeout=None):
     return "bekleniyor"
 
 
-def gercek_whatsapp_mesaj_gonder(telefon, mesaj):
+def gercek_whatsapp_mesaj_gonder(telefon, mesaj, isletme_adi=None):
     global whatsapp_driver
 
     if not _surucu_saglam_mi():
@@ -1243,11 +1529,31 @@ def gercek_whatsapp_mesaj_gonder(telefon, mesaj):
         temiz_tel = "".join(c for c in str(telefon) if c.isdigit())
         if temiz_tel.startswith("0"):
             temiz_tel = "9" + temiz_tel
-        encoded_msg = urllib.parse.quote(str(mesaj))
-        formatted_url = (
-            f"https://web.whatsapp.com/send?phone={temiz_tel}&text={encoded_msg}"
-        )
-        whatsapp_driver.get(formatted_url)
+        isletme = (isletme_adi or "-").strip() or "-"
+        _log(f"[WHATSAPP GÖNDERİM BAŞLADI] İşletme: {isletme} - Hat: {temiz_tel} "
+             f"- {len(str(mesaj))} karakter")
+        # Metin URL'ye konulmaz: uzun/emoji'li metin /send derin bağlantısını
+        # bozup sohbeti açmadan eski pencerede bırakıyor. Önce sohbet doğrulanır,
+        # sonra metin yazılır.
+        try:
+            whatsapp_driver.get(f"https://web.whatsapp.com/send?phone={temiz_tel}")
+        except TimeoutException:
+            _log("Sayfa yüklemesi zaman aşımına uğradı (WhatsApp Web ağır); "
+                 "sohbet yoklamasına devam ediliyor.")
+
+        acik, kimlik = _hedef_sohbeti_ac(whatsapp_driver, temiz_tel, isletme)
+        if kimlik == "qr":
+            whatsapp_state["durum"] = "hazir_qr"
+            whatsapp_state["eslesme"] = False
+            _log("❌ Oturum düşmüş, ekran QR karşılama sayfasına dönmüş. "
+                 "Gönderim yapılmadı. /api/whatsapp_yeniden_baslat ile yeni QR okutun.")
+            return False
+        if not acik:
+            _hata_ekrani_al("alici_dogrulanamadi")
+            _log(f"🚫 ALICI DOĞRULANMADI, GÖNDERİM YOK. Hedef: {temiz_tel} ({isletme}) | "
+                 f"şu an açık sohbet: {kimlik or '-'}. Metin hiçbir mesaj kutusuna yazılmadı.")
+            return False
+        _log(f"✅ Alıcı doğrulandı: '{kimlik}' == hedef {temiz_tel}")
 
         # Sohbet ekranı (yükleme + olası "devam et" onayı) kurulmadan gönderime geçilmez.
         ekran = _sohbet_ekrani_hazirla(whatsapp_driver, mesaj)
@@ -1263,6 +1569,15 @@ def gercek_whatsapp_mesaj_gonder(telefon, mesaj):
                  f"({SOHBET_BEKLEME_SN} sn içinde mesaj kutusu gelmedi).")
             return False
 
+        # Metin kilidi: kutuda tam olarak gidecek şablon yoksa gönderilmez.
+        kilitli, kilit_sebebi = _metin_kilidi_kontrol(whatsapp_driver, mesaj)
+        if not kilitli:
+            _hata_ekrani_al("metin_kilidi")
+            _log(f"🚫 METİN KİLİDİ SAĞLANAMADI ({kilit_sebebi}) -> gönderim yok. "
+                 f"İşletme: {isletme} - Hat: {temiz_tel}")
+            _log(f"[WHATSAPP GÖNDERİLEMEDİ] İşletme: {isletme} - Metin:\n{_konsol_metni(mesaj)}")
+            return False
+
         gonderildi = False
         for _ in range(3):
             if _gonder_dugmesini_tikla(whatsapp_driver):
@@ -1276,7 +1591,7 @@ def gercek_whatsapp_mesaj_gonder(telefon, mesaj):
                 kutu = WebDriverWait(whatsapp_driver, 6).until(
                     EC.element_to_be_clickable((By.CSS_SELECTOR, "div[contenteditable='true']"))
                 )
-                kutu.send_keys("\n")
+                kutu.send_keys(Keys.ENTER)
                 gonderildi = True
             except (TimeoutException, WebDriverException):
                 pass
@@ -1284,14 +1599,22 @@ def gercek_whatsapp_mesaj_gonder(telefon, mesaj):
         if not gonderildi:
             _hata_ekrani_al("gonder_dugmesi_bulunamadi")
             _log("❌ Gönder düğmesi bulunamadı (WhatsApp arayüzü değişmiş olabilir).")
+            _log(f"[WHATSAPP GÖNDERİLEMEDİ] İşletme: {isletme} - Metin:\n{_konsol_metni(mesaj)}")
             return False
 
-        time.sleep(1.0)
+        if not _gonderim_canli_dogrula(whatsapp_driver, mesaj):
+            _hata_ekrani_al("gonderim_dogrulanamadi")
+            _log(f"⚠️ GÖNDERİM DOĞRULANAMADI -> baloncuğunda görünmedi. İşletme: {isletme} "
+                 f"- Metin:\n{_konsol_metni(mesaj)}")
+            return False
+
         _log(f"📤 Mesaj gönderildi -> {temiz_tel} (hat {whatsapp_state['giris_hat']})")
+        _log(f"[WHATSAPP GÖNDERİLDİ] İşletme: {isletme} - Metin:\n{_konsol_metni(mesaj)}")
         return True
     except Exception as hata:
         _hata_ekrani_al("gonderim_hatasi")
         _log(f"❌ GÖNDERİM HATASI: {hata}")
+        _log(f"[WHATSAPP GÖNDERİLEMEDİ] İşletme: {isletme} - Metin:\n{_konsol_metni(mesaj)}")
         return False
 
 
@@ -1376,20 +1699,24 @@ def get_mesajlar(esnaf_id):
     return jsonify(formatli_mesajlar)
 
 
-@app.route("/api/mesaj_gonder", methods=["POST"])
-def mesaj_gonder():
-    data = request.json or {}
-    esnaf_id = data.get("esnaf_id")
-    esnaf_mesaj = data.get("mesaj")
+def _esnaf_kayiti(conn, esnaf_id):
+    row = conn.execute("SELECT * FROM esnaflar WHERE id = ?", (esnaf_id,)).fetchone()
+    if not row:
+        return None
+    hucere = row.keys()
 
-    if not esnaf_id or not esnaf_mesaj:
-        return jsonify({"status": "hata", "mesaj": "Eksik parametre"}), 400
+    def alan(ad):
+        return str(row[ad]).strip() if ad in hucere and row[ad] is not None else ""
 
-    conn = veritabani_baglan()
-    esnaf = conn.execute("SELECT isletme, telefon FROM esnaflar WHERE id = ?", (esnaf_id,)).fetchone()
-    isletme_adi = esnaf["isletme"] if esnaf else "İşletme"
-    telefon = esnaf["telefon"] if esnaf else ""
+    return {
+        "isletme": alan("isletme"),
+        "telefon": alan("telefon"),
+        "adres": alan("adres"),
+        "yetkili": alan("yetkili"),
+    }
 
+
+def _mesaj_kaydet(conn, esnaf_id, gonderen, metin):
     conn.execute(
         """
         CREATE TABLE IF NOT EXISTS mesajlar (
@@ -1402,24 +1729,112 @@ def mesaj_gonder():
         """
     )
     conn.execute(
-        "INSERT INTO mesajlar (esnaf_id, gonderen, mesaj) VALUES (?, 'ESNAF', ?)",
-        (esnaf_id, esnaf_mesaj),
+        "INSERT INTO mesajlar (esnaf_id, gonderen, mesaj) VALUES (?, ?, ?)",
+        (esnaf_id, gonderen, metin),
     )
     conn.commit()
 
-    derya_cevabi = derya_otonom_yanitla(esnaf_mesaj, isletme_adi)
 
-    conn.execute(
-        "INSERT INTO mesajlar (esnaf_id, gonderen, mesaj) VALUES (?, 'DERYA', ?)",
-        (esnaf_id, derya_cevabi),
+def _esnaf_tanitimi_gonder(esnaf_id, adres=None, yetkili=None, isletme_adi=None):
+    """Kilitli tanıtım metnini üretir, WhatsApp'tan gönderir ve yalnızca teslim
+    edildiğinde panel geçmişine yazar."""
+    conn = veritabani_baglan()
+    try:
+        kayit = _esnaf_kayiti(conn, esnaf_id)
+        if not kayit:
+            return {"status": "hata", "mesaj": f"Esnaf kaydı bulunamadı: {esnaf_id}"}, 404
+        try:
+            metin = esnaf_tanitim_metni(
+                isletme_adi or kayit["isletme"],
+                kayit["adres"] if adres is None else adres,
+                kayit["yetkili"] if yetkili is None else yetkili,
+            )
+        except SablonHatasi as hata:
+            _log(f"🚫 Tanıtım metni üretilmedi (esnaf {esnaf_id}): {hata}")
+            return {"status": "hata", "mesaj": str(hata), "eksikler": hata.eksikler}, 400
+    finally:
+        conn.close()
+
+    _log(f"[WHATSAPP TETİKLENDİ] Esnaf #{esnaf_id} - İşletme: {kayit['isletme'] or '-'} "
+         f"- Hat: {kayit['telefon'] or '-'}")
+    gonderim = (
+        gercek_whatsapp_mesaj_gonder(kayit["telefon"], metin, kayit["isletme"])
+        if kayit["telefon"] else False
     )
-    conn.commit()
+    if gonderim:
+        conn = veritabani_baglan()
+        try:
+            _mesaj_kaydet(conn, esnaf_id, "DERYA", metin)
+        finally:
+            conn.close()
+    return {
+        "status": "basarili" if gonderim else "gonderilemedi",
+        "esnaf_id": esnaf_id,
+        "isletme": kayit["isletme"],
+        "telefon": kayit["telefon"],
+        "metin": metin,
+        "metin_karakter": len(metin),
+        "whatsapp_gonderildi": gonderim,
+        "oturum": whatsapp_state["durum"],
+        "hat": whatsapp_state.get("giris_hat", ""),
+    }, 200
+
+
+@app.route("/api/esnaf_tanitim_gonder", methods=["POST"])
+def esnaf_tanitim_gonder():
+    data = request.json or {}
+    esnaf_id = data.get("esnaf_id")
+    if not esnaf_id:
+        return jsonify({"status": "hata", "mesaj": "esnaf_id zorunlu"}), 400
+    govde, kod = _esnaf_tanitimi_gonder(
+        esnaf_id,
+        adres=data.get("adres"),
+        yetkili=data.get("yetkili"),
+        isletme_adi=data.get("isletme"),
+    )
+    return jsonify(govde), kod
+
+
+@app.route("/api/mesaj_gonder", methods=["POST"])
+def mesaj_gonder():
+    data = request.json or {}
+    esnaf_id = data.get("esnaf_id")
+    esnaf_mesaj = data.get("mesaj")
+
+    if not esnaf_id:
+        return jsonify({"status": "hata", "mesaj": "Eksik parametre"}), 400
+
+    if data.get("sablon") == "esnaf_tanitim":
+        govde, kod = _esnaf_tanitimi_gonder(
+            esnaf_id,
+            adres=data.get("adres"),
+            yetkili=data.get("yetkili"),
+            isletme_adi=data.get("isletme"),
+        )
+        return jsonify(govde), kod
+
+    if not esnaf_mesaj:
+        return jsonify({"status": "hata", "mesaj": "Eksik parametre"}), 400
+
+    conn = veritabani_baglan()
+    kayit = _esnaf_kayiti(conn, esnaf_id) or {"isletme": "İşletme", "telefon": ""}
+    isletme_adi = kayit["isletme"] or "İşletme"
+    telefon = kayit["telefon"]
+
+    _mesaj_kaydet(conn, esnaf_id, "ESNAF", esnaf_mesaj)
     conn.close()
 
+    derya_cevabi = derya_otonom_yanitla(esnaf_mesaj, isletme_adi)
     gonderim = None
     if telefon:
-        gonderim = gercek_whatsapp_mesaj_gonder(telefon, derya_cevabi)
-
+        gonderim = gercek_whatsapp_mesaj_gonder(telefon, derya_cevabi, isletme_adi)
+    if gonderim:
+        # Panel geçmişi yalnızca WhatsApp teslimatı doğrulanan çıktıları taşır.
+        conn = veritabani_baglan()
+        try:
+            _mesaj_kaydet(conn, esnaf_id, "DERYA", derya_cevabi)
+        finally:
+            conn.close()
     return jsonify({
         "status": "basarili",
         "cevap": derya_cevabi,
