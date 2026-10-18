@@ -64,3 +64,7 @@ data_cluster/
 htmlcov/
 .pytest_cache/
 .mypy_cache/
+logs/
+
+# Canlı anahtarlar depoya girmesin
+.env/

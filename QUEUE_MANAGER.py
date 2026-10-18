@@ -1,187 +1,182 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-TRM Queue Manager v5.0 - Madde 10: Gercek zamanli kuyruk, bozuk veri temizleme,
-kilitlenme korumasi, yedek veri sistemi.
+TRM Queue Manager v6.0 — SQLite (trm_veritabani.db) destekli kuyruk yönetimi.
+
+Eski sürüm data/queues/<ad>.json + filelock ile çalışıyordu; dosya kilitleri
+zaman aşımına uğradığında push/pop sessizce başarısız oluyordu. Yeni sürüm
+tüm kuyruk verisini merkezi trm_veritabani.db içindeki is_kuyrugu tablosunda
+tutar:
+
+- Yazmalar trm_db'nin tek yazıcı thread'inden sırayla geçer → çakışma yok.
+- pop() tek transaction içinde SELECT+DELETE yapar → aynı iş iki kez alınamaz.
+- Öncelik (oncelik) küçük olan önce; eşitlikte FIFO.
+- clear_stale() eski kayıtları verimli tek DELETE ile temizler.
+- backup() kuyruğun anlık görüntüsünü data/queue_backups/ içine JSON olarak
+  dışa aktarır (insan tarafından okunabilir yedek; ana depolama DB'dir).
+
+Public API eski sürümle birebir aynıdır (push, push_many, pop, peek, size,
+clear_stale, backup, status) — mevcut çağıran kod değişikliği gerektirmez.
 """
 
 import asyncio
 import json
 import logging
-import os
-import shutil
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-import filelock
+
+from trm_db import trm_db, _json_yaz, _json_coz
 
 logger = logging.getLogger('TRMQueue')
 
-BASE_DIR  = Path(__file__).parent.resolve()
-DATA_DIR  = BASE_DIR / 'data'
-QUEUE_DIR = DATA_DIR / 'queues'
-BACKUP_DIR = DATA_DIR / 'queue_backups'
-DATA_DIR.mkdir(exist_ok=True)
-QUEUE_DIR.mkdir(exist_ok=True)
-BACKUP_DIR.mkdir(exist_ok=True)
-
-LOCK_TIMEOUT = 10  # saniye
-
-def _queue_path(name: str) -> Path:
-    return QUEUE_DIR / f'{name}.json'
-
-def _lock_path(name: str) -> Path:
-    return QUEUE_DIR / f'{name}.lock'
-
-def _load_safe(path: Path) -> List[Dict]:
-    """JSON yukle; bozuksa bos liste dondur."""
-    if not path.exists():
-        return []
-    try:
-        data = json.loads(path.read_text(encoding='utf-8'))
-        if isinstance(data, list):
-            return data
-        return []
-    except (json.JSONDecodeError, UnicodeDecodeError):
-        # Bozuk dosya → yedekle
-        bak = BACKUP_DIR / f'{path.stem}_corrupt_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json'
-        shutil.copy2(path, bak)
-        logger.warning(f'Bozuk kuyruk yedeklendi: {bak.name}')
-        path.write_text('[]', encoding='utf-8')
-        return []
-
-def _save_safe(path: Path, data: List) -> bool:
-    tmp = path.with_suffix('.tmp')
-    try:
-        tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
-        tmp.replace(path)
-        return True
-    except Exception as e:
-        logger.error(f'Kuyruk kaydetme hatasi: {e}')
-        return False
+BASE_DIR = Path(__file__).parent.resolve()
+BACKUP_DIR = BASE_DIR / 'data' / 'queue_backups'
+BACKUP_DIR.mkdir(parents=True, exist_ok=True)
 
 
 class QueueManager:
-    """Thread-safe, kilitleme korumali kuyruk yoneticisi."""
+    """trm_veritabani.db/is_kuyrugu üzerinde çalışan kuyruk yöneticisi.
+
+    Tüm işlemler merkezi yazıcı kuyruğundan geçtiği için thread ve süreç
+    güvenlidir; dosya kilidi (filelock) gereksizdir.
+    """
 
     def __init__(self, name: str):
         self.name = name
-        self._path = _queue_path(name)
-        self._lock = filelock.FileLock(str(_lock_path(name)), timeout=LOCK_TIMEOUT)
+        self.db = trm_db()
 
-    def push(self, item: Dict) -> bool:
+    # ── Yazma ────────────────────────────────────────────────────────────
+
+    def push(self, item: Dict, oncelik: int = 5) -> bool:
+        """Kuyruğa tek iş ekler. queued_at otomatik yazılır."""
         try:
-            with self._lock:
-                q = _load_safe(self._path)
-                item['queued_at'] = datetime.now().isoformat()
-                q.append(item)
-                return _save_safe(self._path, q)
-        except filelock.Timeout:
-            logger.error(f'[{self.name}] Kilit zaman asimi — push basarisiz')
+            item['queued_at'] = datetime.now().isoformat()
+            self.db.kuyruga_ekle(self.name, item, oncelik=int(oncelik))
+            return True
+        except Exception as exc:
+            logger.error(f'[{self.name}] push başarısız: {exc}')
             return False
 
-    def push_many(self, items: List[Dict]) -> int:
+    def push_many(self, items: List[Dict], oncelik: int = 5) -> int:
+        """Kuyruğa çok iş ekler; eklenen sayıyı döndürür."""
         try:
-            with self._lock:
-                q = _load_safe(self._path)
-                now = datetime.now().isoformat()
-                for item in items:
-                    item['queued_at'] = now
-                q.extend(items)
-                _save_safe(self._path, q)
-                return len(items)
-        except filelock.Timeout:
-            logger.error(f'[{self.name}] Kilit zaman asimi — push_many basarisiz')
+            now = datetime.now().isoformat()
+            is_idleri = self.db.yaz_coklu([
+                ("INSERT INTO is_kuyrugu (kuyruk_adi, payload, durum, oncelik, kuyruk_zamani) "
+                 "VALUES (?, ?, 'bekliyor', ?, ?)",
+                 (self.name, _json_yaz({**item, 'queued_at': now}), int(oncelik), now))
+                for item in items
+            ])
+            return len(is_idleri or [])
+        except Exception as exc:
+            logger.error(f'[{self.name}] push_many başarısız: {exc}')
             return 0
 
     def pop(self) -> Optional[Dict]:
+        """Sıradaki işi ATOMİK olarak çeker ve kuyruktan düşürür."""
         try:
-            with self._lock:
-                q = _load_safe(self._path)
-                if not q:
-                    return None
-                item = q.pop(0)
-                _save_safe(self._path, q)
-                return item
-        except filelock.Timeout:
-            logger.error(f'[{self.name}] Kilit zaman asimi — pop basarisiz')
+            kayit = self.db.kuyruktan_cek(self.name)
+            if kayit is None:
+                return None
+            payload = kayit.get('payload') or {}
+            if isinstance(payload, dict):
+                payload.setdefault('queued_at', kayit.get('queued_at'))
+                payload['queue_id'] = kayit.get('id')
+                return payload
+            return {'payload': payload, 'queued_at': kayit.get('queued_at'),
+                    'queue_id': kayit.get('id')}
+        except Exception as exc:
+            logger.error(f'[{self.name}] pop başarısız: {exc}')
             return None
 
+    # ── Okuma / durum ────────────────────────────────────────────────────
+
     def peek(self, n: int = 5) -> List[Dict]:
-        return _load_safe(self._path)[:n]
+        """Kuyruğun başındaki n işi kuyruktan düşmeden görüntüler."""
+        kayitlar = self.db.kuyruk_gozlemle(self.name, int(n))
+        sonuc = []
+        for kayit in kayitlar:
+            payload = kayit.get('payload') or {}
+            if isinstance(payload, dict):
+                payload.setdefault('queued_at', kayit.get('kuyruk_zamani'))
+                payload['queue_id'] = kayit.get('id')
+                sonuc.append(payload)
+            else:
+                sonuc.append({'payload': payload, 'queue_id': kayit.get('id')})
+        return sonuc
 
     def size(self) -> int:
-        return len(_load_safe(self._path))
+        return self.db.kuyruk_boyut(self.name)
+
+    def status(self) -> Dict[str, Any]:
+        kayitlar = self.db.kuyruk_gozlemle(self.name, 1)
+        oldest = kayitlar[0].get('kuyruk_zamani') if kayitlar else None
+        return {'name': self.name, 'size': self.size(), 'oldest_item': oldest}
+
+    # ── Bakım ────────────────────────────────────────────────────────────
 
     def clear_stale(self, max_age_hours: int = 48) -> int:
-        """Eski ve bozuk kayitlari temizle."""
+        """Belirtilen saatten eski kayıtları temizler, silinen sayıyı döndürür."""
         try:
-            with self._lock:
-                q = _load_safe(self._path)
-                cutoff = datetime.now() - timedelta(hours=max_age_hours)
-                clean = []
-                removed = 0
-                for item in q:
-                    if not isinstance(item, dict):
-                        removed += 1
-                        continue
-                    ts = item.get('queued_at','')
-                    try:
-                        if datetime.fromisoformat(ts) < cutoff:
-                            removed += 1
-                            continue
-                    except (ValueError, TypeError):
-                        pass
-                    clean.append(item)
-                if removed:
-                    _save_safe(self._path, clean)
-                    logger.info(f'[{self.name}] {removed} eski kayit temizlendi')
-                return removed
-        except filelock.Timeout:
+            silinen = self.db.kuyruk_eski_temizle(max_age_hours=int(max_age_hours),
+                                                  kuyruk_adi=self.name)
+            if silinen:
+                logger.info(f'[{self.name}] {silinen} eski kayıt temizlendi')
+            return silinen
+        except Exception as exc:
+            logger.error(f'[{self.name}] clear_stale başarısız: {exc}')
             return 0
 
     def backup(self) -> Optional[Path]:
-        """Anlik yedek al."""
-        q = _load_safe(self._path)
-        bak = BACKUP_DIR / f'{self.name}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json'
+        """Kuyruğun anlık görüntüsünü data/queue_backups/ içine dışa aktarır."""
         try:
-            bak.write_text(json.dumps(q, ensure_ascii=False, indent=2), encoding='utf-8')
+            kayitlar = self.db.kuyruk_gozlemle(self.name, 100000)
+            bak = BACKUP_DIR / f'{self.name}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json'
+            bak.write_text(
+                json.dumps([k.get('payload') for k in kayitlar],
+                           ensure_ascii=False, indent=2, default=str),
+                encoding='utf-8',
+            )
             return bak
-        except Exception as e:
-            logger.error(f'Yedek alinamadi: {e}')
+        except Exception as exc:
+            logger.error(f'[{self.name}] yedek alınamadı: {exc}')
             return None
 
-    def status(self) -> Dict:
-        q = _load_safe(self._path)
-        oldest = None
-        if q:
-            try:
-                oldest = q[0].get('queued_at')
-            except Exception:
-                pass
-        return {'name': self.name, 'size': len(q), 'oldest_item': oldest}
 
+# ── Global kuyruk örnekleri ─────────────────────────────────────────────
 
-# ── Global kuyruk ornekleri ─────────────────────────────────────────────
-
-product_queue   = QueueManager('products')
-content_queue   = QueueManager('contents')
-publish_queue   = QueueManager('publish')
-failed_queue    = QueueManager('failed')
+product_queue = QueueManager('products')
+content_queue = QueueManager('contents')
+publish_queue = QueueManager('publish')
+failed_queue = QueueManager('failed')
 
 
 async def queue_maintenance_loop(interval_minutes: int = 30):
-    """Periyodik bakim: stale temizleme + yedekleme."""
+    """Periyodik bakım: stale temizleme + yedekleme."""
     while True:
         await asyncio.sleep(interval_minutes * 60)
         for q in [product_queue, content_queue, publish_queue, failed_queue]:
             q.clear_stale(max_age_hours=48)
             q.backup()
-        logger.info('Kuyruk bakimi tamamlandi')
+        logger.info('Kuyruk bakımı tamamlandı')
 
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    print('=== Kuyruk Durumu ===')
+    print('=== Kuyruk Durumu (trm_veritabani.db) ===')
     for q in [product_queue, content_queue, publish_queue, failed_queue]:
         print(q.status())
+
+    # Hızlı işlev testi
+    test = QueueManager('kuyruk_testi')
+    test.db.yaz("DELETE FROM is_kuyrugu WHERE kuyruk_adi = 'kuyruk_testi'")
+    assert test.push({'title': 'Ürün A'})
+    assert test.push({'title': 'Önce Ben'}, oncelik=1)
+    test.push_many([{'title': f'Ürün {i}'} for i in range(3)])
+    ilk = test.pop()
+    assert ilk['title'] == 'Önce Ben', f'Öncelik bozuldu: {ilk}'
+    kalan = [test.pop() for _ in range(4)]
+    assert all(k for k in kalan), 'FIFO kaybı var'
+    assert test.pop() is None, 'Kuyruk boşalmalıydı'
+    print('[OK] push / push_many / pop / öncelik / FIFO testleri geçti.')
