@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Sosyal İmece Yönetim Paneli Sunucusu
+TRM Ticari Ekosistem Yönetim Paneli Sunucusu
 HTML panelini web sunucusu olarak çalıştırır
 """
 
@@ -39,7 +39,7 @@ def panel_baslat(port=8080, otomatik_ac=True):
         otomatik_ac: Tarayıcıyı otomatik aç (varsayılan: True)
     """
     # Panel dosyasının varlığını kontrol et
-    panel_dosyasi = "Sosyal İmece Sistemi Yönetim ve Denetim paneli.html"
+    panel_dosyasi = "TRM Ticari Ekosistem Sistemi Yönetim ve Denetim paneli.html"
     
     if not os.path.exists(panel_dosyasi):
         print(f"HATA: {panel_dosyasi} dosyasi bulunamadi!")
@@ -47,7 +47,7 @@ def panel_baslat(port=8080, otomatik_ac=True):
         return False
     
     print("=" * 60)
-    print("SOSYAL IMECE YONETIM PANELI SUNUCUSU")
+    print("TRM TICARI EKOSISTEMI YONETIM PANELI SUNUCUSU")
     print("=" * 60)
     print(f"Panel dosyasi: {panel_dosyasi}")
     print(f"Port: {port}")
@@ -90,7 +90,7 @@ def panel_baslat(port=8080, otomatik_ac=True):
 if __name__ == "__main__":
     import argparse
     
-    parser = argparse.ArgumentParser(description="Sosyal İmece Yönetim Paneli Sunucusu")
+    parser = argparse.ArgumentParser(description="TRM Ticari Ekosistem Yönetim Paneli Sunucusu")
     parser.add_argument("--port", type=int, default=8080, help="Port numarası (varsayılan: 8080)")
     parser.add_argument("--no-browser", action="store_true", help="Tarayıcıyı otomatik açma")
     

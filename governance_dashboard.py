@@ -44,7 +44,7 @@ def get_governance_status() -> str:
         return "STATUS: Geçersiz governance raporu formatı"
 
     expected_keys = ["EthicalGuardian", "SyncLead", "Sentinel"]
-    lines = ["\n=== [SOSYAL İMECE] SİSTEM SAĞLIĞI ==="]
+    lines = ["\n=== [TRM TICARI EKOSISTEMI] SİSTEM SAĞLIĞI ==="]
 
     for key in expected_keys:
         value = data.get(key, "PENDING")

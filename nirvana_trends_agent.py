@@ -17,7 +17,7 @@ import threading
 import time
 
 class NirvanaTrendsAgent:
-    def __init__(self, db_path="./data/sosyal_imece.db"):
+    def __init__(self, db_path="./data/trm_ticari_analiz.db"):
         self.db_path = Path(db_path)
         self.running = False
         self.thread = None

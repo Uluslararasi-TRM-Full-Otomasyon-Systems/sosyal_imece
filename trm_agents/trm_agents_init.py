@@ -18,6 +18,5 @@ from .storyteller_agent import StorytellerAgent
 from .public_benefit_analyst_agent import PublicBenefitAnalystAgent
 from .transparency_broadcaster_agent import TransparencyBroadcasterAgent
 from .social_account_automation_agent import SocialAccountAutomationAgent
-from .social_imece_portal_agent import SocialImecePortalAgent
 
-__all__ = ['CoreNexus', 'CamouflageAgent', 'AccountManagerAgent', 'AnalystAgent', 'ContentGeneratorAgent', 'QueueAgent', 'PosterAgent', 'HealthCheckAgent', 'build_expansion_agents', 'get_capacity_snapshot', 'IcerikAgent', 'SeoAgent', 'FinansAgent', 'DNPAgent', 'SentinelGuardAgent', 'FactCheckerAgent', 'LegalShieldAgent', 'StorytellerAgent', 'PublicBenefitAnalystAgent', 'TransparencyBroadcasterAgent', 'SocialAccountAutomationAgent', 'SocialImecePortalAgent']
+__all__ = ['CoreNexus', 'CamouflageAgent', 'AccountManagerAgent', 'AnalystAgent', 'ContentGeneratorAgent', 'QueueAgent', 'PosterAgent', 'HealthCheckAgent', 'build_expansion_agents', 'get_capacity_snapshot', 'IcerikAgent', 'SeoAgent', 'FinansAgent', 'DNPAgent', 'SentinelGuardAgent', 'FactCheckerAgent', 'LegalShieldAgent', 'StorytellerAgent', 'PublicBenefitAnalystAgent', 'TransparencyBroadcasterAgent', 'SocialAccountAutomationAgent']

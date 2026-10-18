@@ -38,7 +38,7 @@ class EnterpriseScaleMaster:
     def process_distributed_payload(self, task_id, payload_data):
         """Milyonlarca isteği eşzamanlı (asenkron/thread-pool) olarak işleyen motor."""
         try:
-            # Simüle edilmiş yüksek ölçekli işlem (Affiliate dağıtımı veya Sosyal İmece fon aktarımı)
+            # Simüle edilmiş yüksek ölçekli işlem (Affiliate dağıtımı veya TRM Ticari Ekosistem fon aktarımı)
             print(f"🚀 İşleniyor [Task ID: {task_id}] -> Veri Boyutu: {len(payload_data)} bayt")
             logging.info(f"Başarıyla işlendi: Task {task_id}")
             return {"status": "SUCCESS", "task_id": task_id}

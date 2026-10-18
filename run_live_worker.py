@@ -14,9 +14,12 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+from core.security import EmergencyKillSwitch, SecurityGateError
+from trm_live_config import load_trm_environment
+
 ROOT = Path(__file__).resolve().parent
 CONFIG_PATH = ROOT / "config" / "single_active_set.json"
-DB_PATH = ROOT / "data" / "sosyal_imece.db"
+DB_PATH = ROOT / "data" / "trm_ticari_analiz.db"
 TARGET_SITE = "trendurunlermarket.com"
 DEFAULT_INTERVAL_SECONDS = 300
 
@@ -214,7 +217,7 @@ def write_warmup_activity(
             "organic_warmup",
             "status_tick",
             f"Warm-up tick #{cycle} for {handle} promoting {target}",
-            f"#{TARGET_SITE.replace('.', '')} #sosyalimece",
+            f"#{TARGET_SITE.replace('.', '')} #trmticari",
             "organic engagement pulse",
             "pending",
             stamp,
@@ -289,6 +292,30 @@ def main() -> int:
     args = parse_args()
     interval = max(1, int(args.interval))
 
+    vault_source = load_trm_environment(ROOT)
+    if vault_source != "windows_dpapi":
+        log_stdout("SECURITY", "Worker locked before startup: Windows DPAPI enrollment is required.")
+        return 78
+    try:
+        kill_switch = EmergencyKillSwitch(ROOT, require_dpapi_enrollment=True)
+        kill_switch.require_master_key()
+        initial_command = kill_switch.poll_remote_command()
+    except SecurityGateError as exc:
+        log_stdout("SECURITY", f"Worker locked before startup: {exc}")
+        return 78
+    if initial_command == "STOP":
+        log_stdout("SECURITY", "Authenticated STOP received before startup; worker remains stopped.")
+        return 0
+    if initial_command == "DESTROY":
+        report = kill_switch.execute_authorized_command("DESTROY", kill_switch.master_key)
+        log_stdout(
+            "SECURITY",
+            f"Authenticated DESTROY completed: {report['status']}; "
+            f"shredded={report['shredded_count']} skipped={report['skipped_count']} "
+            f"failures={len(report['failures'])}.",
+        )
+        return 0 if not report["failures"] else 1
+
     signal.signal(signal.SIGINT, request_shutdown)
     if hasattr(signal, "SIGTERM"):
         signal.signal(signal.SIGTERM, request_shutdown)
@@ -317,6 +344,26 @@ def main() -> int:
     cycle = 0
     try:
         while not _shutdown_requested:
+            try:
+                command = kill_switch.poll_remote_command()
+            except SecurityGateError as exc:
+                log_stdout("SECURITY", f"Kill-switch validation failed; stopping worker: {exc}")
+                break
+            if command == "STOP":
+                log_stdout("SECURITY", "Authenticated STOP received; ending daemon loop.")
+                break
+            if command == "DESTROY":
+                conn.commit()
+                conn.close()
+                conn = None
+                report = kill_switch.execute_authorized_command("DESTROY", kill_switch.master_key)
+                log_stdout(
+                    "SECURITY",
+                    f"Authenticated DESTROY completed: {report['status']}; "
+                    f"shredded={report['shredded_count']} skipped={report['skipped_count']} "
+                    f"failures={len(report['failures'])}.",
+                )
+                return 0 if not report["failures"] else 1
             cycle += 1
             try:
                 run_cycle(conn, set_name, target, socials, blogs, cycle)
@@ -328,13 +375,14 @@ def main() -> int:
     except KeyboardInterrupt:
         request_shutdown()
     finally:
-        insert_system_log(
-            conn,
-            "INFO",
-            f"Live worker daemon stopped after {cycle} cycle(s)",
-        )
-        conn.commit()
-        conn.close()
+        if conn is not None:
+            insert_system_log(
+                conn,
+                "INFO",
+                f"Live worker daemon stopped after {cycle} cycle(s)",
+            )
+            conn.commit()
+            conn.close()
         log_stdout("OK", f"Worker stopped after {cycle} cycle(s).")
     return 0
 

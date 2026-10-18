@@ -10,6 +10,6 @@ if __name__ == "__main__":
     success = orchestrator.run_full_cycle()
     
     if success:
-        print("✨ [Live Test] Başarılı! Tüm sharded cluster dosyaları ve imece kasası data_cluster altında oluşturuldu.")
+        print("✨ [Live Test] Başarılı! Tüm sharded cluster dosyaları ve refah kasası data_cluster altında oluşturuldu.")
     else:
         print("⚠️ [Live Test] Test sırasında uyarı alındı, self-healing core devreye girdi.")

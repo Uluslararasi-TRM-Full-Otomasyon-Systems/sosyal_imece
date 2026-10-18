@@ -3,7 +3,7 @@
 """
 SOCIAL MEDYA DAĞITIM AJANI (social_media_distribution_agent.py)
 ================================================================
-Trend Ürünler Market + Sosyal İmece / UTEYKDER projelerini
+Trend Ürünler Market + TRM Ticari Ekosistem / UTEYKDER projelerini
 arka planda tarayıp, çapraz platformlarda (Telegram / WhatsApp /
 Facebook / Instagram / TikTok) otonom paylaşım yapan servis.
 
@@ -178,7 +178,7 @@ _UTEYKDER_DUYURU_TEMPLATES: List[Dict[str, Any]] = [
         "code": "saglik-icin-elele",
         "title": "🌸 Sağlık İçin Elele Kampanyası",
         "body": (
-            "Sosyal İmece & UTEYKDER olarak “Sağlık İçin Elele” kampanyamızla "
+            "TRM Ticari Ekosistem & UTEYKDER olarak “Sağlık İçin Elele” kampanyamızla "
             "maddi durumu yetersiz ailelerimizin sağlık hizmetlerine erişimini "
             "destekliyoruz. Bugün bağışta bulunan bir arkadaşımızın hikâyesini "
             "okuyun, bir “kalp” atın, paylaşmayı unutmayın. ❤️"
@@ -193,7 +193,7 @@ _UTEYKDER_DUYURU_TEMPLATES: List[Dict[str, Any]] = [
             "“Duy, Algıla ve Farklı Yaşa” eğitim programımız ile farkındalık "
             "oluşturuyoruz. Engelleri ortadan kaldıran, şefkat temelli bir toplum "
             "için bugün gönüllü olmak için DM / yorum bırakabilirsiniz. Tüm "
-            "Sosyal İmece ailesi sizi bekliyor."
+            "TRM Ticari Ekosistem ailesi sizi bekliyor."
         ),
         "hashtags": ["#DuyAlgilaFarkliYasa", "#Farkindalik", "#UTEYKDER",
                      "#EngelsizYasam", "#SosyalSorumluluk", "#GonulluOl"],
@@ -204,7 +204,7 @@ _UTEYKDER_DUYURU_TEMPLATES: List[Dict[str, Any]] = [
         "body": (
             "Bu ay 42 şehirde 1.200+ ihtiyaç sahibi ailemize gıda, giyim ve "
             "eğitim desteği ulaştırdık. Sıradaki durağınız için takipte kalın; "
-            "hikâyeleri sizlerle paylaşacağız. Sosyal İmece ile “hiçbirimiz, "
+            "hikâyeleri sizlerle paylaşacağız. TRM Ticari Ekosistem ile “hiçbirimiz, "
             "hepimiz kadar güçlü değiliz.” ✊"
         ),
         "hashtags": ["#BirlikteGucluyuz", "#IhtiyacHaritasi", "#SosyalImece",
@@ -215,9 +215,9 @@ _UTEYKDER_DUYURU_TEMPLATES: List[Dict[str, Any]] = [
 _IMECE_DUYURU_TEMPLATES: List[Dict[str, Any]] = [
     {
         "code": "uye-ol",
-        "title": "🌐 Sosyal İmece Ailesine Katılın!",
+        "title": "🌐 TRM Ticari Ekosistem Ailesine Katılın!",
         "body": (
-            "Küresel dayanışma hareketimiz Sosyal İmece ailesine bugün katılın! "
+            "Küresel dayanışma hareketimiz TRM Ticari Ekosistem ailesine bugün katılın! "
             "Fahri üyelik, gönüllü çalışma, komisyonlu gelir modeli ve daha "
             "fazlası için hemen t.me/lanalisovets kanalına üye olun. ✨"
         ),
@@ -230,7 +230,7 @@ _IMECE_DUYURU_TEMPLATES: List[Dict[str, Any]] = [
 class ContentScanner:
     """
     1) Trend Ürünler Market JSON / REST → ürün içerikleri
-    2) UTEYKDER / Sosyal İmece statik / JSON duyuruları → CSR içerikleri
+    2) UTEYKDER / TRM Ticari Ekosistem statik / JSON duyuruları → CSR içerikleri
     """
 
     def __init__(self,
@@ -363,7 +363,7 @@ class ContentScanner:
     def _fetch_imece_announcements(self, limit: int) -> List[PostItem]:
         return [
             PostItem(
-                item_id=f"imece_{t['code']}",
+                item_id=f"refah_{t['code']}",
                 content_type="imece_duyuru",
                 title=t["title"],
                 body=f"{t['title']}\n\n{t['body']}",

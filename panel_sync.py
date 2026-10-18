@@ -22,7 +22,7 @@ from typing import Dict, Any, Optional
 # ============================================================
 
 CONFIG = {
-    "panel_file": "Sosyal İmece Sistemi Yönetim ve Denetim paneli.html",
+    "panel_file": "TRM Ticari Ekosistem Sistemi Yönetim ve Denetim paneli.html",
     "backup_dir": "backups",
     "log_file": "panel_sync.log",
     "new_agent_count": 200,

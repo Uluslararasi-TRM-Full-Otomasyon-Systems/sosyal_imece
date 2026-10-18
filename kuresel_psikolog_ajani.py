@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Kuresel Imece Dunyasi - Otonom Muracaat Analizi ve Otomatik Onay Psikolog Ajani
+TRM Ticari Dunyasi - Otonom Muracaat Analizi ve Otomatik Onay Psikolog Ajani
 """
 import os
 import json
@@ -17,7 +17,7 @@ class KureselPsikologAjani:
             "illegal", "hack", "sistemi patlatma", "acik arama", "sahte hesap"
         ]
         
-        # ✨ KURESEL IMECE RUHUNA VE UTEYKDER VIZYONUNA UYUM PARAMETRELERI
+        # ✨ KURESEL REFAH RUHUNA VE UTEYKDER VIZYONUNA UYUM PARAMETRELERI
         self.uyumlu_sinyaller = [
             "yardimlasma", "dernek", "uretim", "kooperatif", "durust kazanc", 
             "sosyal sorumluluk", "engelli", "paylasim", "imece"
@@ -55,7 +55,7 @@ class KureselPsikologAjani:
         if sapitma_skoru < 50 and (uyum_skoru >= 15 or sapitma_skoru == 0):
             net_durum = "OTONOM ONAYLANDI - SISTEME GIRIS YETKISI VERILDI"
             otonom_onay = True
-            notlar.append("✅ Karakter imece modeline uygun ve guvenli bulundu.")
+            notlar.append("✅ Karakter refah modeline uygun ve guvenli bulundu.")
         else:
             notlar.append("❌ Karakter yapisi ekosistemi sabote etme veya sapitma egilimi gosteriyor!")
 
@@ -96,4 +96,4 @@ class KureselPsikologAjani:
 
 if __name__ == "__main__":
     psikolog = KureselPsikologAjani()
-    print("🌍 Kuresel Imece Dunyasi - Otonom Onay Psikolog Ajani Tetikte!")
+    print("🌍 TRM Ticari Dunyasi - Otonom Onay Psikolog Ajani Tetikte!")

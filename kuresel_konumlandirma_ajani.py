@@ -23,7 +23,7 @@ class KureselKonumlandirmaAjani:
         # Magaza yonetimi YOK! Sadece yuksek donusumlu link eslestirme var.
         return {
             "urun_adi": "Otonom Ev-Ofis Bel Destegi (Ergonomik)",
-            "affiliate_linki": "https://amazon.com/affiliate/trm_imece_pilot01",
+            "affiliate_linki": "https://amazon.com/affiliate/trm_ticari_pilot01",
             "komisyon_orani": "%15",
             "tahmini_kazanc_dolar": "12.50 USD (Satis Basina)"
         }
@@ -31,7 +31,7 @@ class KureselKonumlandirmaAjani:
     def otonom_sosyal_medya_icerigi_uret(self, urun_verisi):
         """Katilimcinin parmagini bile oynatmadan paylasabilecegi hazir reklam metni ve gorsel senaryosunu uretir."""
         metin = f"🚀 {urun_verisi['urun_adi']} ile tanisin! Evden calisirken bel agrilarina son. Link profilde! 👉 {urun_verisi['affiliate_linki']}"
-        hashtagler = "#wfh #ergonomics #homeoffice #trmimece"
+        hashtagler = "#wfh #ergonomics #homeoffice #trmticari"
         return {
             "paylasim_metni": metin,
             "etiketler": hashtagler,

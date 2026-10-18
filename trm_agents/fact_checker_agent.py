@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Sosyal İmece Dünya - Kalkan Ajan Ordusu
+TRM Ticari Dünya - Kalkan Ajan Ordusu
 Ajan: FactCheckerAgent
 Amaç: Asılsız iddiaları resmi veri tabanı ve dernek tüzüğü ile çürütür.
 Versiyon: 1.0.0
@@ -18,7 +18,7 @@ class FactCheckerAgent:
     """
     FactCheckerAgent - Asılsız iddiaları resmi veri tabanı ve dernek tüzüğü ile çürütür.
     
-    Bu ajan, Sosyal İmece projesi hakkında yapılan asılsız iddiaları, yalan haberleri ve
+    Bu ajan, TRM Ticari Ekosistem projesi hakkında yapılan asılsız iddiaları, yalan haberleri ve
     dezenformasyon içeriklerini resmi veri tabanı, dernek tüzüğü ve yasal belgeler ile
     karşılaştırarak doğruluğunu kontrol eder ve yanıltıcı bilgileri çürütür.
     """
@@ -38,7 +38,7 @@ class FactCheckerAgent:
             "kayit_no": "34-12345",
             "mudurluk": "İstanbul Valiliği",
             "kurulus_tarihi": "2020-01-15",
-            "amaci": "Sosyal dayanışma ve imece kültürünü yaşatmak",
+            "amaci": "Sosyal dayanışma ve refah kültürünü yaşatmak",
             "faaliyet_alani": "Sosyal yardım, eğitim, kültür",
             "yuksek_kurul": "Yönetim Kurulu",
             "denetim": "Bağımsız denetim",
@@ -48,23 +48,23 @@ class FactCheckerAgent:
         # Yaygın asılsız iddialar ve yanıtları
         self.asilsiz_iddialar = {
             "dolandiricilik": {
-                "id": "Sosyal İmece bir dolandırıcılık şemasıdır",
-                "yanit": "YANLIŞ. Sosyal İmece, UTEYKDER derneği tarafından resmi olarak kayıtlı ve denetlenen bir sosyal sorumluluk projesidir. Kayıt No: 34-12345, İstanbul Valiliği",
+                "id": "TRM Ticari Ekosistem bir dolandırıcılık şemasıdır",
+                "yanit": "YANLIŞ. TRM Ticari Ekosistem, UTEYKDER derneği tarafından resmi olarak kayıtlı ve denetlenen bir sosyal sorumluluk projesidir. Kayıt No: 34-12345, İstanbul Valiliği",
                 "kaynak": "Dernek Kayıt Belgesi"
             },
             "para_cebirme": {
                 "id": "İnsanlardan para zorla alıyorlar",
-                "yanit": "YANLIŞ. Sosyal İmece tamamen gönüllülük esasına dayanır. Hiçbir zorlama veya baskı yapılmaz. Katılım tamamen özgür iradeye dayalıdır.",
+                "yanit": "YANLIŞ. TRM Ticari Ekosistem tamamen gönüllülük esasına dayanır. Hiçbir zorlama veya baskı yapılmaz. Katılım tamamen özgür iradeye dayalıdır.",
                 "kaynak": "Dernek Tüzüğü Madde 5"
             },
             "kara_para": {
                 "id": "Kara para aklama faaliyeti yürütüyorlar",
-                "yanit": "YANLIŞ. Sosyal İmece tamamen şeffaf ve yasal faaliyetler yürütür. Tüm finansal işlemler bağımsız denetime tabidir ve Maliye uyumludur.",
+                "yanit": "YANLIŞ. TRM Ticari Ekosistem tamamen şeffaf ve yasal faaliyetler yürütür. Tüm finansal işlemler bağımsız denetime tabidir ve Maliye uyumludur.",
                 "kaynak": "Bağımsız Denetim Raporu 2024"
             },
             "gercek_degil": {
                 "id": "Bu proje gerçek değil, hayal ürünü",
-                "yanit": "YANLIŞ. Sosyal İmece, UTEYKDER ve İŞADER dernekleri tarafından resmi olarak desteklenen, 200+ yapay zeka ajanı ile çalışan gerçek bir projedir.",
+                "yanit": "YANLIŞ. TRM Ticari Ekosistem, UTEYKDER ve İŞADER dernekleri tarafından resmi olarak desteklenen, 200+ yapay zeka ajanı ile çalışan gerçek bir projedir.",
                 "kaynak": "Dernek Resmi Web Sitesi"
             },
             "hileli_sistem": {
@@ -221,7 +221,7 @@ class FactCheckerAgent:
         tuzuk_maddeleri = {
             1: "Derneğin Adı: UTEYKDER - Ulusal Türk Eğitim ve Yardımlaşma Derneği",
             2: "Merkez: İstanbul",
-            3: "Amaç: Sosyal dayanışma ve imece kültürünü yaşatmak",
+            3: "Amaç: Sosyal dayanışma ve refah kültürünü yaşatmak",
             4: "Çalışma Alanı: Sosyal yardım, eğitim, kültür",
             5: "Üyelik: Gönüllülük esasına dayalıdır"
         }
@@ -246,7 +246,7 @@ class FactCheckerAgent:
         try:
             # Simüle edilmiş iddialar
             test_iddialar = [
-                "Sosyal İmece bir dolandırıcılık şemasıdır",
+                "TRM Ticari Ekosistem bir dolandırıcılık şemasıdır",
                 "UTEYKDER resmi bir dernektir",
                 "İnsanlardan para zorla alıyorlar",
                 "Proje gerçek ve çalışıyor"

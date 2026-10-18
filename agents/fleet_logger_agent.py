@@ -23,7 +23,7 @@ class FleetExecutionLoggerAgent:
         log_file = "logs/master_fleet_execution_log.txt"
 
         with open(log_file, "w", encoding="utf-8") as log:
-            log.write(f"--- SOSYAL IMECE MASTER FILO SIMULASYON LOGLARI ({datetime.now().strftime('%Y-%m-%d %H:%M:%S')}) ---\n")
+            log.write(f"--- TRM TICARI EKOSISTEMI MASTER FILO SIMULASYON LOGLARI ({datetime.now().strftime('%Y-%m-%d %H:%M:%S')}) ---\n")
             
             # Performans için ilk 10 ve son 10 logu ekrana basalım, aradakileri saniyeler içinde işleyelim
             total_tasks = len(fleet_queue)

@@ -19,7 +19,7 @@ class AffiliateInjectorAgent:
             account = item.get("account_id", "User-000")
             product_id = item.get("product_id", "TRM-000")
             # Dinamik affiliate takip linki oluşturuluyor
-            item["affiliate_url"] = f"https://trendurunlermarket.com/urun/{product_id.lower()}?ref={account.lower()}&utm_source=sosyal_imece"
+            item["affiliate_url"] = f"https://trendurunlermarket.com/urun/{product_id.lower()}?ref={account.lower()}&utm_source=trm_ticari"
 
         with open("data/master_fleet_queue.json", "w", encoding="utf-8") as f:
             json.dump(queue, f, ensure_ascii=False, indent=4)

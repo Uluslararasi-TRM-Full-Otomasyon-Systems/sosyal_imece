@@ -61,8 +61,7 @@ class SistemNobetcisiAjani(BaseAgent):
         # Sadece gerçek kod içeren klasör veya modülleri hedefleyelim (veya düz metin .py'leri eleyelim)
         metin_bazli_py_dosyalari = [
             "ACIL_SATIS_HAVUZU.py", "GUNLUK_KONTROL_LISTESI.py", 
-            "KURESEL_IMECE_DUNYASI_200_AJAN_NIHAI_DOKUMAN_TAM_TURKCE_V2.py",
-            "muhafiz_nobet_defteri.py", "PANEL_ACICI_REHBERI.py", "requirements.py",
+                    "muhafiz_nobet_defteri.py", "PANEL_ACICI_REHBERI.py", "requirements.py",
             "SISTEM_ENVANTERI.py", "TAM_KOD_ANALIZI.py", "test.py", "TRM_SOHBET_GECMISI.py"
         ]
 
@@ -192,7 +191,7 @@ if __name__ == "__main__":
     print(f"\nSeffaflik Durumu:")
     if sonuc['seffaflik_durumu'].get('ozet'):
         print(f"  Toplam Gelir: {sonuc['seffaflik_durumu']['ozet']['toplam_gelir']} TL")
-        print(f"  Toplam Imece Kesintisi: {sonuc['seffaflik_durumu']['ozet']['toplam_imece_kesintisi']} TL")
+        print(f"  Toplam Refah Kesintisi: {sonuc['seffaflik_durumu']['ozet']['toplam_imece_kesintisi']} TL")
     else:
         print(f"  Seffaflik Ajan Aktif Degil")
     

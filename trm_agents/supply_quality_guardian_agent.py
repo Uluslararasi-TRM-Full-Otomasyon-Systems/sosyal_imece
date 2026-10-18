@@ -7,7 +7,7 @@ Bu ajan:
 - Ürün stoklarını 7/24 izler
 - Diplomatik uyarı sistemi ile üreticileri bilgilendirir
 - Failover switch ile kritik durumlarda alternatif ürünlere trafik yönlendirir
-- Gelir akışını korur (İR-SA AŞ. komisyon ve imece payı)
+- Gelir akışını korur (İR-SA AŞ. komisyon ve refah payı)
 - Fiyatsızlaştırma ve Master Geo Intelligence entegrasyonu
 """
 

@@ -26,7 +26,7 @@ def main():
     
     st.divider()
     
-    proje_adi = st.text_input("Proje Adı:", "Küresel İmece Dünyası")
+    proje_adi = st.text_input("Proje Adı:", "TRM Ticari Dünyası")
     faaliyet_turu = st.text_input("Faaliyet Türü:", "E-Ticaret ve Dijital Kooperatif")
     hedef_kitle = st.text_input("Hedef Kitle:", "Girişimciler ve Dijital İştirakçiler")
     

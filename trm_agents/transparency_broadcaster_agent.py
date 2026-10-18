@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Sosyal İmece Dünya - Küresel Anlatı Ajan Ordusu
+TRM Ticari Dünya - Küresel Anlatı Ajan Ordusu
 Ajan: TransparencyBroadcaster
 Amaç: Maliye uyumlu bütçe ve burs dağıtım listelerini kamuoyuyla paylaşır.
 Versiyon: 1.0.0
@@ -18,7 +18,7 @@ class TransparencyBroadcasterAgent:
     """
     TransparencyBroadcasterAgent - Maliye uyumlu bütçe ve burs dağıtım listelerini kamuoyuyla paylaşır.
     
-    Bu ajan, Sosyal İmece projesinin mali şeffaflığını sağlamak için bütçe, gelir-gider,
+    Bu ajan, TRM Ticari Ekosistem projesinin mali şeffaflığını sağlamak için bütçe, gelir-gider,
     burs dağıtım listelerini ve diğer finansal verileri düzenli olarak kamuoyuyla paylaşır.
     Maliye uyumlu raporlar hazırlar ve web sitesi, sosyal medya ve diğer platformlarda yayınlar.
     """
@@ -111,22 +111,22 @@ class TransparencyBroadcasterAgent:
         # Yayın platformları
         self.yayin_platformlari = {
             "web_sitesi": {
-                "url": "https://sosyalimece.org/saydamlik",
+                "url": "https://trendurunlermarket.com/saydamlik",
                 "format": "html",
                 "frekans": "haftalik"
             },
             "twitter": {
-                "url": "https://twitter.com/sosyalimece",
+                "url": "https://twitter.com/trendurunlermarket",
                 "format": "tweet",
                 "frekans": "gunluk"
             },
             "facebook": {
-                "url": "https://facebook.com/sosyalimece",
+                "url": "https://facebook.com/trendurunlermarket",
                 "format": "post",
                 "frekans": "haftalik"
             },
             "linkedin": {
-                "url": "https://linkedin.com/company/sosyalimece",
+                "url": "https://linkedin.com/company/trendurunlermarket",
                 "format": "article",
                 "frekans": "aylik"
             }
@@ -182,7 +182,7 @@ class TransparencyBroadcasterAgent:
             "rapor_tarihi": datetime.now().isoformat(),
             "rapor_tipi": "maliye_uyumlu_butce_raporu",
             "donem": self.butce_verileri["donem"],
-            "proje": "Sosyal İmece",
+            "proje": "TRM Ticari Ekosistem",
             "dernek": "UTEYKDER",
             "ozet": {
                 "toplam_gelir": toplam_gelir,
@@ -195,7 +195,7 @@ class TransparencyBroadcasterAgent:
             "sosyal_fon_ayrimi": self.butce_verileri["sosyal_fon_ayrimi"],
             "maliye_uyumluluk": self.butce_verileri["maliye_uyumluluk"],
             "saydamlik_beyani": """
-Bu bütçe raporu, Sosyal İmece projesinin tüm mali faaliyetlerini şeffaf bir şekilde 
+Bu bütçe raporu, TRM Ticari Ekosistem projesinin tüm mali faaliyetlerini şeffaf bir şekilde 
 ortaya koymaktadır. Tüm gelirler ve giderler bağımsız denetime tabidir. Vergi uyumluluğu 
 tam sağlanmıştır. Sosyal fon ayrımları açıkça belirtilmiştir.
             """
@@ -217,7 +217,7 @@ tam sağlanmıştır. Sosyal fon ayrımları açıkça belirtilmiştir.
         rapor = {
             "rapor_tarihi": datetime.now().isoformat(),
             "rapor_tipi": "burs_dagitim_raporu",
-            "proje": "Sosyal İmece",
+            "proje": "TRM Ticari Ekosistem",
             "dernek": "UTEYKDER",
             "ozet": {
                 "toplam_burs_tutari": toplam_burs,
@@ -264,14 +264,14 @@ numaraları gizlilik nedeniyle kısaltılmıştır.
         rapor = {
             "rapor_tarihi": datetime.now().isoformat(),
             "rapor_tipi": "kapsamli_saydamlik_raporu",
-            "proje": "Sosyal İmece",
+            "proje": "TRM Ticari Ekosistem",
             "dernek": "UTEYKDER",
             "butce_raporu": butce_raporu,
             "burs_raporu": burs_raporu,
             "maliye_uyumluluk_puani": self.maliye_uyumluluk_puani_hesapla(),
             "saydamlik_puani": self.saydamlik_puani_hesapla(),
             "genel_degerlendirme": """
-Sosyal İmece projesi, mali şeffaflık ve saydamlık konusunda en yüksek standartları 
+TRM Ticari Ekosistem projesi, mali şeffaflık ve saydamlık konusunda en yüksek standartları 
 takip etmektedir. Tüm finansal işlemler bağımsız denetime tabidir. Burs dağıtımları 
 tamamen şeffaftır ve kamuoyuyla paylaşılmaktadır. Maliye uyumluluğu tam sağlanmıştır.
             """

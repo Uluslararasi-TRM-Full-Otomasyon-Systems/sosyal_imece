@@ -71,7 +71,7 @@ class SelfHealingManager:
     def _send_notification(self, agent_name: str, error_type: str):
         subject = f"[ACİL] TRM Sistem Onarımı - {agent_name}"
         body = f"""
-Sosyalİmece.org - Otonom Sistem Onarımı
+trendurunlermarket.com - Otonom Sistem Onarımı
 
 {agent_name} üzerinde {error_type} tespit edildi ve otonom onarım başarıyla uygulandı.
 
@@ -95,7 +95,7 @@ Sistem kendi kendini iyileştirdi.
         """Karantina durumunda Baş Komutan'a uyarı e-postası gönderir."""
         subject = f"[ACİL] TRM Karantina Uyarısı - {agent_name}"
         body = f"""
-Sosyalİmece.org - Ajan Karantina Uyarısı
+trendurunlermarket.com - Ajan Karantina Uyarısı
 
 {agent_name} ajanı platform tarafından uyarı aldı ve karantinaya alındı.
 
@@ -106,7 +106,7 @@ Karantina Süresi: 24 saat
 Bu süre boyunca ajan hiçbir işlem yapmayacak.
 Sistemi kontrol ediniz.
 
-Sosyalİmece.org Güvenlik Sistemi
+trendurunlermarket.com Güvenlik Sistemi
 """
         settings = self.email_settings
         if settings:

@@ -23,12 +23,12 @@ class TanitimVeSosyalMedyaAjani:
         tweet_metni = (
             f"🌟 Birlikte Güçlüyüz! {proje_adi} ile dayanışma ağımızı büyütüyoruz. "
             f"'{faaliyet_turu}' hareketimize katılarak siz de bu iyilik zincirinin bir parçası olun. "
-            f"Gelin, geleceği birlikte inşa edelim! 🤝✨ #Sosyalİmece #Dayanışma"
+            f"Gelin, geleceği birlikte inşa edelim! 🤝✨ #TRMTicari #Dayanışma"
         )
         
         linkedin_metni = (
             f"Değerli paydaşlarımız ve bağışçılarımız,\n\n"
-            f"Sosyal İmece inisiyatifi olarak hayata geçirdiğimiz {proje_adi} kapsamında "
+            f"TRM Ticari Ekosistem inisiyatifi olarak hayata geçirdiğimiz {proje_adi} kapsamında "
             f"'{faaliyet_turu}' çalışmalarımız tüm hızıyla sürüyor. Şeffaf, güvenli ve yasal kanıt zinciriyle "
             f"desteklenen bu projede {hedef_kitle} odaklı büyümemizi sürdürüyoruz.\n\n"
             f"Siz de toplumsal dönüşümümüze katkı sunmak için sitemizi ziyaret edebilirsiniz."

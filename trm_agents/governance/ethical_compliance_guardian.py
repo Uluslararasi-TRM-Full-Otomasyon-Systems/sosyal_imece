@@ -3,5 +3,5 @@ class EthicalComplianceGuardian:
         self.name = "Ethical Compliance Guardian"
 
     def audit_decision(self, decision_log):
-        # 161 ajanin kararlarini sosyal imece ilkeleriyle kiyasla.
+        # 161 ajanin kararlarini trm ticari ekosistem ilkeleriyle kiyasla.
         print(f"[{self.name}] Denetim tamamlandi: Kararlar uyumlu.")

@@ -222,7 +222,7 @@ if __name__ == "__main__":
     print("--- TRM ANA IBAN AYARLANIYOR ---")
     ana_iban_durum = entegrator.trm_ana_iban_ayarla(
         iban="TR670020500009540781500003",
-        sahibi="Sosyal İmece TRM Ana Hesap"
+        sahibi="TRM Ticari Ekosistem TRM Ana Hesap"
     )
     print(ana_iban_durum)
     

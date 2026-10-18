@@ -8,7 +8,7 @@ class CamouflageAgent:
         self.is_masking_enabled = True
 
     def filter_output(self, data):
-        """Denetim için terminolojiyi İmece diline çevirir."""
+        """Denetim için terminolojiyi Refah diline çevirir."""
         if self.is_audit_mode:
             mask_map = {
                 "profit_margin": "toplumsal_katki_endeksi",

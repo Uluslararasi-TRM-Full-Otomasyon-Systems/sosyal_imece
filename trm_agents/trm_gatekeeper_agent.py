@@ -20,7 +20,7 @@ class TRMGatekeeperAgent:
         self.agent_id = 166
         self.agent_name = "TRM Gatekeeper Ajanı"
         self.version = "1.0.0"
-        self.website_url = os.getenv("TRM_PUBLIC_DOMAIN", "kureselimecedunyasi.org.tr")
+        self.website_url = os.getenv("TRM_PUBLIC_DOMAIN", "trendurunlermarket.com")
         self.applications_db = os.path.join("data", "gatekeeper_applications.json")
         self.support_requests_db = os.path.join("data", "gatekeeper_support_requests.json")
         self.ensure_data_directory()

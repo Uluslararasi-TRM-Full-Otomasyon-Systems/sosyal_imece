@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Sosyal İmece Dünya - Orchestrator
+TRM Ticari Dünya - Orchestrator
 Versiyon: 3.0.0 (200 AJAN)
 """
 
@@ -122,7 +122,7 @@ class Orchestrator:
         @self.app.route('/')
         def index():
             return jsonify({
-                "system": "Sosyal İmece Dünya Orchestrator",
+                "system": "TRM Ticari Dünya Orchestrator",
                 "version": "3.0.0",
                 "status": "running",
                 "max_agents": self.max_agents,
@@ -203,7 +203,7 @@ class Orchestrator:
                     "id": agent_id,
                     "name": agent_name,
                     "role": data.get("role", "Standard Agent"),
-                    "web": data.get("web", "imece.com"),
+                    "web": data.get("web", "trendurunlermarket.com"),
                     "status": data.get("status", "active"),
                     "last_heartbeat": datetime.now().isoformat()
                 }
@@ -242,7 +242,7 @@ class Orchestrator:
             "Otomasyon Geliştirme", "Güvenlik Taraması", "Finans Analizi", "Trend Belirleme",
             "Dil İşleme", "Görüntü Tanıma", "Ses Analizi", "Robotik Kontrol"
         ]
-        webs = ["imece.com", "dunya.ai", "yardim.com", "kooperatif.org", "dayanisma.net"]
+        webs = ["trendurunlermarket.com", "dunya.ai", "yardim.com", "kooperatif.org", "dayanisma.net"]
         
         agents = []
         for i in range(1, count + 1):
@@ -269,7 +269,7 @@ class Orchestrator:
                 web = webs[web_idx]
             elif i == count and count >= 161:
                 role = "🔮 DNP Ajan | Sistem Bütünlük Denetimi"
-                web = "dnp.imece.ai"
+                web = "dnp.trendurunlermarket.com"
             else:
                 role = f"📁 Veri - {roles[role_idx]}"
                 web = webs[web_idx]

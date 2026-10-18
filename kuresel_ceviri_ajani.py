@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-SOSYAL İMECE - Küresel Çeviri ve Yerelleştirme Ajanı (Nirvana Seviyesi)
+TRM TICARI EKOSISTEMI - Küresel Çeviri ve Yerelleştirme Ajanı (Nirvana Seviyesi)
 Odak: 130+ ülke ve dil desteği ile akıllı lokalizasyon matrisi
 """
 import os
@@ -184,8 +184,8 @@ class KureselCeviriAjani:
         
         # Akıllı lokalizasyon matrisi - kültürel ve yerel terminoloji uyarlaması
         self.lokalizasyon_matrisi = {
-            "sosyal_imece": {
-                "tr": "Sosyal İmece",
+            "trm_ticari": {
+                "tr": "TRM Ticari Ekosistem",
                 "en-us": "Social Cooperation",
                 "en-gb": "Social Cooperation",
                 "de": "Soziale Kooperation",
@@ -234,8 +234,8 @@ class KureselCeviriAjani:
                 "sw": "Mwanachama wa Heshima",
                 "am": "ክቡር አባል"
             },
-            "imece_payi": {
-                "tr": "İmece Payı",
+            "refah_payi": {
+                "tr": "Refah Payı",
                 "en-us": "Cooperation Share",
                 "en-gb": "Cooperation Share",
                 "de": "Kooperationsanteil",
@@ -388,8 +388,8 @@ class KureselCeviriAjani:
             lokalize_edilmis = lokalize_edilmis.replace("ürün", "product" if "en" in dil_kodu else "produit" if "fr" in dil_kodu else "produto" if "pt" in dil_kodu else "producto" if "es" in dil_kodu else "منتج" if "ar" in dil_kodu else "محصول" if "fa" in dil_kodu else "محصول")
             lokalize_edilmis = lokalize_edilmis.replace("fiyat", "price" if "en" in dil_kodu else "prix" if "fr" in dil_kodu else "preço" if "pt" in dil_kodu else "precio" if "es" in dil_kodu else "سعر" if "ar" in dil_kodu else "قیمت" if "fa" in dil_kodu else "قیمت")
         
-        elif icerik_turu == "imece_esik":
-            # İmece eşikleri için uyarlamalar
+        elif icerik_turu == "refah_esik":
+            # Refah eşikleri için uyarlamalar
             lokalize_edilmis = lokalize_edilmis.replace("eşik", "threshold" if "en" in dil_kodu else "seuil" if "fr" in dil_kodu else "limiar" if "pt" in dil_kodu else "umbral" if "es" in dil_kodu else "عتبة" if "ar" in dil_kodu else "آستانه" if "fa" in dil_kodu else "آستانه")
             lokalize_edilmis = lokalize_edilmis.replace("destek", "support" if "en" in dil_kodu else "soutien" if "fr" in dil_kodu else "apoio" if "pt" in dil_kodu else "apoyo" if "es" in dil_kodu else "دعم" if "ar" in dil_kodu else "پشتیبانی" if "fa" in dil_kodu else "پشتیبانی")
         

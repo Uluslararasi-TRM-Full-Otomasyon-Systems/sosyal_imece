@@ -1,6 +1,6 @@
 @echo off
 REM ============================================================
-REM SOSYAL İMECE TRM FULL OTOMASYON SİSTEMİ
+REM TRM FULL OTOMASYON SİSTEMİ
 REM Otomatik Başlatma Betiği - Arka Plan Servis Çakışma Önleyici
 REM ============================================================
 
@@ -8,7 +8,7 @@ setlocal enabledelayedexpansion
 
 echo.
 echo ============================================================
-echo    SOSYAL İMECE TRM FULL OTOMASYON SİSTEMİ
+echo    TRM FULL OTOMASYON SİSTEMİ
 echo    Otomatik Başlatma Betiği v1.0
 echo ============================================================
 echo.

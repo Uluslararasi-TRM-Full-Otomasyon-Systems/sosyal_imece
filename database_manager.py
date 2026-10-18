@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 SQLite Database Manager
-Sosyal İmece Sistemi için veritabanı yönetimi
+TRM ticari ekosistemi için veritabanı yönetimi
 """
 
 import sqlite3

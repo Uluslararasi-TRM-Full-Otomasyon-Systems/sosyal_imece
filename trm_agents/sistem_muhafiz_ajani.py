@@ -23,6 +23,7 @@ import time
 import logging
 import requests
 import subprocess
+import sys
 from datetime import datetime
 from threading import Thread
 
@@ -34,9 +35,10 @@ class SistemMuhafizAjani:
     
     def __init__(self):
         self.nobet_defteri = "muhafiz_nobet_defteri.txt"
-        self.streamlit_url = "http://localhost:8501"
+        self.proje_koku = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.panel_url = "http://localhost:5000/api/saglik"
         self.kontrol_araligi = 30  # saniye
-        self.panel_dosyasi = "ENHANCED_PANEL.py"
+        self.panel_dosyasi = "api_server_2.py"
         self.calisiyor = False
         self.muhafiz_thread = None
     
@@ -64,24 +66,23 @@ class SistemMuhafizAjani:
             logger.error(f"Nöbet kayıtları okuma hatası: {e}")
             return []
     
-    def streamlit_sunucusu_kontrol(self):
-        """Streamlit sunucusunun durumunu kontrol et"""
+    def sunucu_kontrol(self):
+        """API sunucusunun durumunu kontrol et"""
         try:
-            response = requests.get(self.streamlit_url, timeout=5)
+            response = requests.get(self.panel_url, timeout=5)
             return response.status_code == 200
         except Exception as e:
             logger.warning(f"Sunucu kontrol hatası: {e}")
             return False
     
-    def streamlit_sunucusu_baslat(self):
-        """Streamlit sunucusunu başlat"""
+    def sunucu_baslat(self):
+        """API sunucusunu başlat"""
         try:
             self.nobet_girisi_yaz("⚠️ SUNUCU ÇÖKTÜ! Otomatik kurtarma başlatılıyor...")
             
-            # Streamlit sunucusunu başlat
             subprocess.Popen(
-                ["streamlit", "run", self.panel_dosyasi, "--server.headless", "true"],
-                cwd=os.path.dirname(os.path.abspath(__file__)),
+                [sys.executable, self.panel_dosyasi],
+                cwd=self.proje_koku,
                 creationflags=subprocess.CREATE_NEW_CONSOLE if os.name == 'nt' else 0
             )
             
@@ -99,13 +100,13 @@ class SistemMuhafizAjani:
         while self.calisiyor:
             try:
                 # Sunucu kontrolü
-                sunucu_aktif = self.streamlit_sunucusu_kontrol()
+                sunucu_aktif = self.sunucu_kontrol()
                 
                 if sunucu_aktif:
                     self.nobet_girisi_yaz("✅ Sunucu aktif ve sağlıklı.")
                 else:
                     self.nobet_girisi_yaz("❌ Sunucu çöktü! Kurtarma başlatılıyor...")
-                    self.streamlit_sunucusu_baslat()
+                    self.sunucu_baslat()
                     time.sleep(10)  # Sunucunun başlaması için bekle
                 
             except Exception as e:
@@ -137,7 +138,7 @@ class SistemMuhafizAjani:
     
     def sistem_durumu_raporu(self):
         """Sistem durum raporu oluştur"""
-        sunucu_aktif = self.streamlit_sunucusu_kontrol()
+        sunucu_aktif = self.sunucu_kontrol()
         return {
             "sunucu_durumu": "AKTİF" if sunucu_aktif else "ÇÖKÜK",
             "muhafiz_durumu": "AKTİF" if self.calisiyor else "PASİF",

@@ -25,7 +25,7 @@ from typing import Dict, Any, Optional
 # ============================================================
 
 CONFIG = {
-    "master_repo": "SOSYAL İMECE",
+    "master_repo": "TRM",
     "agents_dir": "agents",
     "config_file": "config.json",
     "log_file": "update_protocol.log",
@@ -55,7 +55,7 @@ logger = logging.getLogger("UpdateProtocol")
 # ============================================================
 
 class MasterConfig:
-    """Merkezi konfigürasyon deposu (SOSYAL İMECE)"""
+    """Merkezi konfigürasyon deposu (TRM)"""
     
     def __init__(self, repo_path: str = CONFIG["master_repo"]):
         self.repo_path = Path(repo_path)

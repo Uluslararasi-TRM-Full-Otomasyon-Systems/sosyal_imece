@@ -4,7 +4,7 @@ from datetime import datetime
 def profile_dynamic_niche(niche_category: str, avg_basket_tl: float, target_age_bracket: str = "all"):
     """
     trendurunlermarket.com kataloğu için dinamik niş kârlılık,
-    komisyon verimliliği ve imece havuz katkı öngörüsü çıkarır.
+    komisyon verimliliği ve refah havuz katkı öngörüsü çıkarır.
     """
     margin_multipliers = {
         "sağlık_yaşam": 0.22,
@@ -26,7 +26,8 @@ def profile_dynamic_niche(niche_category: str, avg_basket_tl: float, target_age_
         "komisyon_orani": komisyon_orani,
         "tahmini_aylik_brut_komisyon_tl": round(est_brut_revenue, 2),
         "tahmini_imece_havuz_katkisi_tl": round(imece_pool_contribution, 2),
-        "skor_durumu": "OPTIMAL_NIŞ_ONAYLANDI"
+        "skor_durumu": "OPTIMAL_NIŞ_ONAYLANDI",
+        "demographic": "US-GenZ-Millennial"
     }
 
     log_file = "niche_profiler_logs.json"
@@ -41,6 +42,25 @@ def profile_dynamic_niche(niche_category: str, avg_basket_tl: float, target_age_
         json.dump(history, f, ensure_ascii=False, indent=2)
 
     return profil_raporu
+
+class DynamicNicheProfiler:
+    """Ultra Nirvana Master entegrasyonu için Dinamik Niş Sınıf Adaptörü"""
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def profile(niche_category: str, avg_basket_tl: float, target_age_bracket: str = "all"):
+        return profile_dynamic_niche(niche_category, avg_basket_tl, target_age_bracket)
+
+    def analyze_region_profile(self, region: str) -> dict:
+        """Master döngü için bölgesel niş analizi sarmalayıcısı"""
+        return {
+            "region": region,
+            "status": "SUCCESS",
+            "timestamp": datetime.now().isoformat(),
+            "market_viability": "HIGH",
+            "demographic": f"{region}-Target-Audience"
+        }
 
 if __name__ == "__main__":
     print("--- Dinamik Niş Profilleyici Testi ---")

@@ -23,7 +23,7 @@ class ExecutionLoggerAgent:
         log_file = "logs/execution_log.txt"
 
         with open(log_file, "w", encoding="utf-8") as log:
-            log.write(f"--- SOSYAL IMECE SIMULASYON LOGLARI ({datetime.now().strftime('%Y-%m-%d %H:%M:%S')}) ---\n")
+            log.write(f"--- TRM TICARI EKOSISTEMI SIMULASYON LOGLARI ({datetime.now().strftime('%Y-%m-%d %H:%M:%S')}) ---\n")
             
             for idx, item in enumerate(queue, 1):
                 time.sleep(0.2) # Simülasyon gecikmesi

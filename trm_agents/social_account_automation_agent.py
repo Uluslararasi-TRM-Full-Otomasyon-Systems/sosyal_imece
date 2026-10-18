@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Sosyal İmece Dünya - Sosyal Medya Otomasyon ve Güvenlik Ajanı
+TRM Ticari Dünya - Sosyal Medya Otomasyon ve Güvenlik Ajanı
 Ajan: SocialAccountAutomationAgent
 Amaç: Vatandaşların sosyal medya hesaplarının güvenli açılışını koordine eder
 Versiyon: 1.1.0
@@ -51,7 +51,7 @@ class SocialAccountAutomationAgent:
         self.sozlesme_metni = """
 AYRI HESAP YÖNETİMİ VE OTOMASYON SÖZLEŞMESİ
 
-Bu sözleşme, Sosyal İmece (sosyalimece.org) projesi kapsamında tarafıma açılacak 
+Bu sözleşme, TRM Ticari Ekosistem (trendurunlermarket.com) projesi kapsamında tarafıma açılacak 
 tüm kurumsal/kişisel sosyal medya hesaplarının yönetimi, TC kimlik fotoğrafı ve 
 telefon numarası doğrulaması ile ilgili özel şartları ve sorumlulukları belirler.
 
@@ -60,7 +60,7 @@ telefon numarası doğrulaması ile ilgili özel şartları ve sorumlulukları b
    - Bu veriler kesinlikle üçüncü şahıslarla paylaşılmaz ve işlem sonrasında güvenle işlenir.
 
 2. SIFIR PAROLA SAKLAMA İLKESİ:
-   - Açılan hesaplara ait parolalar Sosyal İmece sistemi tarafından KESİNLİKLE saklanmaz.
+   - Açılan hesaplara ait parolalar TRM Ticari Ekosistem sistemi tarafından KESİNLİKLE saklanmaz.
    - Şifreler veritabanında, diskte veya log dosyalarında hiçbir suretle kaydedilmez.
    - Şifre güvenliği tamamen tarafıma aittir.
 
@@ -190,7 +190,7 @@ Ayrı Onay Kodu: {onay_kodu}
         Belirtilen platformda hesap açar ve sıfır parola kuralını uygular.
         Şifreler sistemde saklanmaz.
         """
-        kullanici_adi = f"sosyal_imece_{platform}_{tc_kimlik[:3]}{secrets.token_hex(3)}"
+        kullanici_adi = f"trm_ticari_{platform}_{tc_kimlik[:3]}{secrets.token_hex(3)}"
         gecici_sifre = secrets.token_urlsafe(16)
         
         hesap_bilgileri = {
@@ -297,7 +297,7 @@ Ayrı Onay Kodu: {onay_kodu}
         self.refresh_config()
         self.log(f"🚀 {self.name} aktif görev döngüsünde...", "INFO")
         
-        # Test girdileri (Gerçek ortamda sosyalimece.org arayüzünden alınır)
+        # Test girdileri (Gerçek ortamda trendurunlermarket.com arayüzünden alınır)
         test_tc = "12345678901"
         test_telefon = "5559876543"
         test_foto = "temp_tc_kimlik_foto_ornek.jpg"

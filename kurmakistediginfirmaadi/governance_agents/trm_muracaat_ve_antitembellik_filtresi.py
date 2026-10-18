@@ -35,7 +35,7 @@ class TRMHarikaGumrukMuhafizi:
                 mesaj = (
                     f"Sayın {form_verisi['aday_adi']},\n"
                     "Başvurunuz form doldurma hızı ve baştan savma veri girişi nedeniyle reddedilmiştir.\n"
-                    "Küresel İmece Dünyası ekosistemine dahil olabilmek için hiçbir ek iş yapmamanız, "
+                    "TRM Ticari Dünyası ekosistemine dahil olabilmek için hiçbir ek iş yapmamanız, "
                     "sisteme tam odaklanmanız ve formu parmaklarınızı oynatarak, emek vererek doldurmanız gerekmektedir.\n"
                     "Kendinizi hazır hissettiğinizde 7 gün sonra tekrar müracaat edebilirsiniz."
                 )

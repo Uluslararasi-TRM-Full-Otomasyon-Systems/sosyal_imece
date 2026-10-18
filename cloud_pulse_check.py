@@ -16,7 +16,7 @@ class CloudPulseChecker:
             "cloud_status": "ONLINE",
             "ping_agent": "ACTIVE",
             "system_load": "OPTIMAL",
-            "message": "Bulut ekosistemi kesintisiz çalışıyor, 100 hesap akışı ve imece fonu döngüsü aktif."
+            "message": "Bulut ekosistemi kesintisiz çalışıyor, 100 hesap akışı ve refah fonu döngüsü aktif."
         }
         
         try:

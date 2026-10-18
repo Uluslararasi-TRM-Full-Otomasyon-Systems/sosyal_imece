@@ -11,10 +11,10 @@ import schedule
 import requests
 import threading
 from datetime import datetime
-from dotenv import load_dotenv
+from trm_live_config import load_trm_environment
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-load_dotenv()
+load_trm_environment()
 
 # ============================================
 # WORDPRESS BOT

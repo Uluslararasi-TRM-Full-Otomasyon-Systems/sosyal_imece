@@ -19,7 +19,7 @@ class BehavioralMarketingAgent:
         - Ruh Hali / Niyet Tespiti
         """
         # Config'den sistem ayarlarını al
-        self.system_name = config._cfg.get("system_name", "SOSYAL İMECE")
+        self.system_name = config._cfg.get("system_name", "TRM TICARI EKOSISTEMI")
         self.version = config._cfg.get("version", "3.0.0")
         self.max_agents = config._cfg.get("max_agents", 165)
         

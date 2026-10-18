@@ -4,7 +4,7 @@ import subprocess
 import sys
 
 class WatchdogGuardian:
-    def __init__(self, target_script='ultra_nirvana_master.py'):
+    def __init__(self, target_script='api_server_2.py'):
         self.target_script = target_script
         self.max_retries = 3
 

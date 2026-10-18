@@ -52,4 +52,5 @@ panel_sync.log
 global_config.local.json
 secrets.env
 *.pickle
+affiliate_scout_output/
 token.pickle

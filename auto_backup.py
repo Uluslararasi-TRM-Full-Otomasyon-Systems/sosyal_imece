@@ -73,7 +73,7 @@ class AutoBackup:
         Proje yedeğini oluştur
         """
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        backup_name = f"sosyal_imece_tam_yedek_{timestamp}.zip"
+        backup_name = f"trm_tam_yedek_{timestamp}.zip"
         backup_path = self.backup_dir / backup_name
         
         logger.info(f"[BACKUP] Yedekleme başlatılıyor: {backup_name}")
@@ -110,7 +110,7 @@ class AutoBackup:
         """
         Eski yedekleri temizle (son keep_count kadar yedek tut)
         """
-        backups = sorted(self.backup_dir.glob("sosyal_imece_tam_yedek_*.zip"), key=lambda x: x.stat().st_mtime, reverse=True)
+        backups = sorted(self.backup_dir.glob("trm_tam_yedek_*.zip"), key=lambda x: x.stat().st_mtime, reverse=True)
         
         if len(backups) > keep_count:
             for old_backup in backups[keep_count:]:
@@ -124,7 +124,7 @@ class AutoBackup:
         """
         Mevcut yedekler hakkında bilgi döndür
         """
-        backups = list(self.backup_dir.glob("sosyal_imece_tam_yedek_*.zip"))
+        backups = list(self.backup_dir.glob("trm_tam_yedek_*.zip"))
         
         return {
             "backup_dir": str(self.backup_dir),

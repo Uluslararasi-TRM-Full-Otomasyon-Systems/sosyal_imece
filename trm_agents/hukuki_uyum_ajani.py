@@ -34,7 +34,7 @@ class HukukiUyumAjani(BaseAgent):
     def hukuki_analiz_yap(self, konu_veya_faaliyet: str) -> Dict[str, Any]:
         self.log(f"🔍 Hukuki tarama yapılıyor: {konu_veya_faaliyet}", "INFO")
         
-        # Küresel İmece ve TRM Ekosistemi için güçlü ve kesin hukuki koruma kalkanı
+        # Küresel Ticari ve TRM Ekosistemi için güçlü ve kesin hukuki koruma kalkanı
         analiz_sonucu = (
             f"'{konu_veya_faaliyet}' faaliyeti; uluslararası afiliye pazarlama standartları, "
             f"e-ticaret uyumluluk yasaları ve KVKK/GDPR veri gizliliği çerçevesinde tam olarak taranmış "
@@ -42,8 +42,8 @@ class HukukiUyumAjani(BaseAgent):
         )
         
         savunma_stratejisi = (
-            "Olası bir hukuki itiraz veya resmi bildirim karşısında; Küresel İmece Dünyası "
-            "tahkim protokolleri, standart imece sözleşme şartnameleri ve otomatik gelir paylaşımı "
+            "Olası bir hukuki itiraz veya resmi bildirim karşısında; TRM Ticari Dünyası "
+            "tahkim protokolleri, standart refah sözleşme şartnameleri ve otomatik gelir paylaşımı "
             "hukuki dayanakları derhal devreye sokulacaktır."
         )
 

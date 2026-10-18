@@ -2,6 +2,6 @@
 credentials-file: C:\Users\Habitat\.cloudflared\<TUNNEL-ID-BURAYA>.json
 
 ingress:
-  - hostname: webhook.sosyalimece.org
+  - hostname: webhook.trendurunlermarket.com
     service: http://127.0.0.1:8000
   - service: http_status:404

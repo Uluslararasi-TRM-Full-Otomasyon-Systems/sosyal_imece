@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Sosyal İmece Dünya - Küresel Anlatı Ajan Ordusu
+TRM Ticari Dünya - Küresel Anlatı Ajan Ordusu
 Ajan: StorytellerAgent
 Amaç: Dezavantajlı vatandaşların ilham verici hikayelerini merhamet diliyle aktarır.
 Versiyon: 1.0.0
@@ -18,7 +18,7 @@ class StorytellerAgent:
     """
     StorytellerAgent - Dezavantajlı vatandaşların ilham verici hikayelerini merhamet diliyle aktarır.
     
-    Bu ajan, Sosyal İmece projesinden faydalanan dezavantajlı vatandaşların gerçek hikayelerini
+    Bu ajan, TRM Ticari Ekosistem projesinden faydalanan dezavantajlı vatandaşların gerçek hikayelerini
     toplar, işler ve merhamet dolu bir dille sosyal medya, web sitesi ve diğer platformlarda
     paylaşır. Bu hikayeler, projenin toplumsal etkisini gösterir ve ilham kaynağı olur.
     """
@@ -38,7 +38,7 @@ class StorytellerAgent:
                 "durum": "Engelli birey",
                 "onceki_durum": "İşsiz, gelir yok",
                 "simdiki_durum": "Aylık 5.000 TL gelir, sosyal güvenlik",
-                "hikaye": "Sosyal İmece sayesinde hayatım değişti. Artık kendimi有用lı hissediyorum.",
+                "hikaye": "TRM Ticari Ekosistem sayesinde hayatım değişti. Artık kendimi有用lı hissediyorum.",
                 "tarih": "2024-01-15",
                 "kategori": "engelli_destek"
             },
@@ -47,7 +47,7 @@ class StorytellerAgent:
                 "durum": "Tek ebeveyn",
                 "onceki_durum": "Çocuklarıyla birlikte zorluk yaşıyordu",
                 "simdiki_durum": "Düzenli gelir, çocukları okula gidiyor",
-                "hikaye": "Sosyal İmece bana umut verdi. Çocuklarımın geleceği için çalışabiliyorum.",
+                "hikaye": "TRM Ticari Ekosistem bana umut verdi. Çocuklarımın geleceği için çalışabiliyorum.",
                 "tarih": "2024-02-20",
                 "kategori": "tek_ebeveyn"
             },
@@ -56,7 +56,7 @@ class StorytellerAgent:
                 "durum": "Yaşlı vatandaş",
                 "onceki_durum": "Yalnız, maddi sıkıntı",
                 "simdiki_durum": "Düzenli gelir, sosyal bağlantılar",
-                "hikaye": "Sosyal İmece sayesinde yalnız değilim. Topluluğun bir parçasıyım.",
+                "hikaye": "TRM Ticari Ekosistem sayesinde yalnız değilim. Topluluğun bir parçasıyım.",
                 "tarih": "2024-03-10",
                 "kategori": "yasli_destek"
             }
@@ -69,7 +69,7 @@ class StorytellerAgent:
 Sevgili dostlarımız,
 
 Bugün sizinle {kisi_adi}'ın ilham verici hikayesini paylaşmak istiyoruz. 
-{durum} olan {kisi_adi}, Sosyal İmece projesi sayesinde hayatında büyük bir 
+{durum} olan {kisi_adi}, TRM Ticari Ekosistem projesi sayesinde hayatında büyük bir 
 değişim yaşadı. Bu hikaye, umudun ve dayanışmanın gücünü gösteriyor.
             """,
             "govde": """
@@ -82,15 +82,15 @@ değişim yaşadı. Bu hikaye, umudun ve dayanışmanın gücünü gösteriyor.
 💬 {kisi_adi}'ın Sözleri:
 "{hikaye}"
 
-🤝 Sosyal İmece olarak, {kisi_adi}'ın bu başarıya ulaşmasında küçük bir 
+🤝 TRM Ticari Ekosistem olarak, {kisi_adi}'ın bu başarıya ulaşmasında küçük bir 
 katkımız oldu. Bu başarı, hepimizin başarısıdır.
             """,
             "kapanis": """
-Bu hikaye, Sosyal İmece'nin toplumsal etkisinin küçük bir örneğidir.
+Bu hikaye, TRM Ticari Ekosistem'nin toplumsal etkisinin küçük bir örneğidir.
 Her gün, yüzlerce insanın hayatında olumlu değişim yaratıyoruz.
 
 🌈 Dayanışma ile güçleniyoruz,
-Sosyal İmece Ekibi
+TRM Ticari Ekosistem Ekibi
             """
         }
         
@@ -98,19 +98,19 @@ Sosyal İmece Ekibi
         self.platform_formatlari = {
             "twitter": {
                 "max_karakter": 280,
-                "hashtag": "#Sosyalİmece #Dayanışma #UmudunIşığı"
+                "hashtag": "#TRMTicari #Dayanışma #UmudunIşığı"
             },
             "facebook": {
                 "max_karakter": 5000,
-                "hashtag": "#Sosyalİmece #Dayanışma #UmudunIşığı #ToplumsalEtki"
+                "hashtag": "#TRMTicari #Dayanışma #UmudunIşığı #ToplumsalEtki"
             },
             "instagram": {
                 "max_karakter": 2200,
-                "hashtag": "#Sosyalİmece #Dayanışma #UmudunIşığı #İlhamVericiHikayeler"
+                "hashtag": "#TRMTicari #Dayanışma #UmudunIşığı #İlhamVericiHikayeler"
             },
             "linkedin": {
                 "max_karakter": 3000,
-                "hashtag": "#Sosyalİmece #Dayanışma #ToplumsalSorumluluk #SosyalEtki"
+                "hashtag": "#TRMTicari #Dayanışma #ToplumsalSorumluluk #SosyalEtki"
             }
         }
         

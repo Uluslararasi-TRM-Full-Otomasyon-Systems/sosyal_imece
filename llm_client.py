@@ -258,7 +258,7 @@ class LLMClient:
                 temperature,
                 extra_headers={
                     "HTTP-Referer": "https://trendurunlermarket.com",
-                    "X-Title": "Sosyal Imece TRM",
+                    "X-Title": "TRM Ticari Ekosistem TRM",
                 },
             )
         else:

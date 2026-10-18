@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-SOSYAL İMECE - Sosyal Tanıtım Ajanı
+TRM TICARI EKOSISTEMI - Sosyal Tanıtım Ajanı
 Odak: Otonom duyuru, raporlama ve tanıtım kuyruğu motoru
 """
 import os

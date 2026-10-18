@@ -55,7 +55,7 @@ class PanelEndpoints:
     @staticmethod
     def trigger_social_agent_endpoint(payload=None):
         """Web panelinden veya API üzerinden sosyal medya ajanını tetikler.
-        NOT: Kampanya sistemi sadeleştirildi; artık yalnızca ürün ve imece
+        NOT: Kampanya sistemi sadeleştirildi; artık yalnızca ürün ve refah
         duyuruları desteklenir (bkz. social_media_distribution_agent.py)."""
         if payload is None:
             payload = {}

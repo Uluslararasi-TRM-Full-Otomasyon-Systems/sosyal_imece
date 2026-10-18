@@ -3,7 +3,7 @@
 
 """
 Veri Kaynakları Yöneticisi
-Sosyal İmece projesi için resmi kaynakları, Telegram gruplarını ve veri toplama kanallarını yöneten modül
+TRM Ticari Ekosistem projesi için resmi kaynakları, Telegram gruplarını ve veri toplama kanallarını yöneten modül
 """
 
 import json

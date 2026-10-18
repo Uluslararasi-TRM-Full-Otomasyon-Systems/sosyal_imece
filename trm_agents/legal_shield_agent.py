@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Sosyal İmece Dünya - Kalkan Ajan Ordusu
+TRM Ticari Dünya - Kalkan Ajan Ordusu
 Ajan: LegalShieldAgent
 Amaç: Hukuki sınırları aşan iftiralar için yasal uyarı/delil dosyaları hazırlar.
 Versiyon: 1.0.0
@@ -18,7 +18,7 @@ class LegalShieldAgent:
     """
     LegalShieldAgent - Hukuki sınırları aşan iftiralar için yasal uyarı/delil dosyaları hazırlar.
     
-    Bu ajan, Sosyal İmece projesi hakkında yapılan hukuki sınırları aşan iftiralar, karalamalar
+    Bu ajan, TRM Ticari Ekosistem projesi hakkında yapılan hukuki sınırları aşan iftiralar, karalamalar
     ve hakaret içeriklerini tespit eder, yasal uyarı mektupları hazırlar ve delil dosyaları
     oluşturur. Hukuki süreçlerde kullanılmak üzere belgeleme yapar.
     """
@@ -55,7 +55,7 @@ class LegalShieldAgent:
                 "icerik": """
 Sayın {kullanici_adi},
 
-Sosyal İmece projesi ve UTEYKDER derneği hakkında {platform} platformunda 
+TRM Ticari Ekosistem projesi ve UTEYKDER derneği hakkında {platform} platformunda 
 yaptığınız "{icerik}" başlıklı paylaşımınız, hukuki sınırları aşan iftira 
 ve karalama içeriklidir.
 
@@ -78,7 +78,7 @@ Tarih: {tarih}
                 "icerik": """
 Sayın {kullanici_adi},
 
-Sosyal İmece projesi ve yöneticileri hakkında {platform} platformunda 
+TRM Ticari Ekosistem projesi ve yöneticileri hakkında {platform} platformunda 
 yaptığınız "{icerik}" başlıklı paylaşımınız, hakaret içeriklidir.
 
 Türk Ceza Kanunu Madde 125 - Hakaret:
@@ -100,7 +100,7 @@ Tarih: {tarih}
                 "icerik": """
 Sayın {kullanici_adi},
 
-Sosyal İmece projesi ve yöneticileri hakkında {platform} platformunda 
+TRM Ticari Ekosistem projesi ve yöneticileri hakkında {platform} platformunda 
 yaptığınız "{icerik}" başlıklı paylaşımınız, tehdit içeriklidir.
 
 Türk Ceza Kanunu Madde 106 - Tehdit:
@@ -321,7 +321,7 @@ Tarih: {tarih}
                 {
                     "platform": "twitter",
                     "kullanici_adi": "anonim_kullanici1",
-                    "icerik": "Sosyal İmece dolandırıcılık yapıyor",
+                    "icerik": "TRM Ticari Ekosistem dolandırıcılık yapıyor",
                     "icerik_url": "https://twitter.com/post/123",
                     "tespit_zamani": datetime.now().isoformat()
                 },

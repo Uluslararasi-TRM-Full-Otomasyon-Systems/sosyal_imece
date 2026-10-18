@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Authentication Manager
-Sosyal İmece Sistemi için API Key tabanlı kimlik doğrulama
+TRM Ticari Ekosistem Sistemi için API Key tabanlı kimlik doğrulama
 """
 
 import secrets
@@ -64,7 +64,7 @@ class AuthManager:
     def get_or_create_default_key(self):
         """Varsayılan API key'i oluştur veya getir"""
         # Varsayılan key hash'i
-        default_hash = hashlib.sha256('sosyal-imece-default-key-2024'.encode()).hexdigest()
+        default_hash = hashlib.sha256('trm-ticari-default-key-2026'.encode()).hexdigest()
         
         if default_hash not in self.api_keys:
             self.api_keys[default_hash] = {
@@ -76,7 +76,7 @@ class AuthManager:
             }
             self.save_api_keys()
         
-        return 'sosyal-imece-default-key-2024'
+        return 'trm-ticari-default-key-2026'
     
     def validate_api_key(self, api_key):
         """API key'i doğrula"""

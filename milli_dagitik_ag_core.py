@@ -14,7 +14,7 @@ class MilliDagitikAgCore:
         os.makedirs("data_cluster", exist_ok=True)
         if not os.path.exists(self.registry_path):
             base_structure = {
-                "system": "Milli Dağıtık Ağ (Sosyal İmece)",
+                "system": "Milli Dağıtık Ağ (TRM Ticari Ekosistem)",
                 "max_capacity": 60_000_000,
                 "active_nodes_count": 0,
                 "optimization_mode": "ZERO_BLOAT_LAZY_LOAD",

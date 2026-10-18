@@ -30,7 +30,7 @@ class GenclikSahaKocuAjani:
 
         if not red_nedeni:
             kabul_durumu = True
-            mesaj = f"Tebrikler {ad_soyad}, ön elemeyi başarıyla geçtiniz! Sosyal İmece Gençlik Ekibi'ne hoş geldiniz."
+            mesaj = f"Tebrikler {ad_soyad}, ön elemeyi başarıyla geçtiniz! TRM Ticari Ekosistem Gençlik Ekibi'ne hoş geldiniz."
         else:
             mesaj = f"Adaylık onaylanmadı. Gerekçe: {', '.join(red_nedeni)}"
 
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     gunluk_rapor = koc.gunluk_saha_takip_raporu(
         ad_soyad="Ahmet Can", 
         bugun_yapilan_temas=22, 
-        ispat_belge_linki="https://sistem.sosyalimece.org/ispatlar/ahmetcan_ gun1.pdf"
+        ispat_belge_linki="https://sistem.trendurunlermarket.com/ispatlar/ahmetcan_ gun1.pdf"
     )
 
     print("--- GENÇLİK SAHA KOÇU AJANI ANALİZİ ---")

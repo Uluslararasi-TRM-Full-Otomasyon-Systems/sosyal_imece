@@ -30,15 +30,15 @@ class SeffaflikVeDenetimAjani(BaseAgent):
             agent_id=agent_id if agent_id else 181
         )
         
-        # Dosya yolları (Sosyal İmece Bağımsız Arşiv)
-        self.seffaflik_raporlari_dir = Path("data/sosyal_imece_seffaflik_raporlari")
+        # Dosya yolları (TRM Ticari Ekosistem Bağımsız Arşiv)
+        self.seffaflik_raporlari_dir = Path("data/trm_seffaflik_raporlari")
         self.seffaflik_raporlari_dir.mkdir(parents=True, exist_ok=True)
-        self.seffaflik_dosyasi = self.seffaflik_raporlari_dir / "sosyal_imece_seffaflik_raporlari.json"
+        self.seffaflik_dosyasi = self.seffaflik_raporlari_dir / "trm_seffaflik_raporlari.json"
         
         # Şeffaflık veritabanı
         self.seffaflik_veritabani = self._seffaflik_veritabani_yukle()
         
-        # İmece havuz kesinti oranı
+        # Refah havuz kesinti oranı
         self.imece_havuz_kesinti_orani = 0.30  # %30
         
         # Vergi oranları
@@ -83,7 +83,7 @@ class SeffaflikVeDenetimAjani(BaseAgent):
     
     def gelir_kaydet(self, islem_id: str, gelir_tutari: float, gelir_kaynagi: str, 
                     kullanici_id: str = None, tarih: str = None) -> Dict[str, Any]:
-        """Gelir kaydeder ve İmece havuz kesintisini hesaplar"""
+        """Gelir kaydeder ve Refah havuz kesintisini hesaplar"""
         if tarih is None:
             tarih = datetime.now().strftime("%Y-%m-%d")
         
@@ -109,7 +109,7 @@ class SeffaflikVeDenetimAjani(BaseAgent):
         
         self._seffaflik_veritabani_kaydet()
         
-        self.log(f"💰 Gelir kaydedildi: {gelir_tutari} TL - İmece Kesintisi: {imece_kesintisi} TL", "INFO")
+        self.log(f"💰 Gelir kaydedildi: {gelir_tutari} TL - Refah Kesintisi: {imece_kesintisi} TL", "INFO")
         
         return islem_bilgisi
     
@@ -195,8 +195,8 @@ class SeffaflikVeDenetimAjani(BaseAgent):
             "baslangic_tarihi": baslangic_tarihi,
             "bitis_tarihi": bitis_tarihi,
             "kurum_bilgisi": {
-                "sistem_adi": "Sosyal İmece Otonom Ekosistem",
-                "faaliyet_alani": "Sosyal İmece ve E-Ticaret",
+                "sistem_adi": "TRM Ticari Ekosistem Otonom Ekosistem",
+                "faaliyet_alani": "TRM Ticari Ekosistem ve E-Ticaret",
                 "mali_bagimsizlik": "UTEYKDER_dernek_butccesinden_bagimsiz",
                 "yonetim_yapisi": "Otonom_Dijital_Mimar"
             },
@@ -324,7 +324,7 @@ if __name__ == "__main__":
     
     print(f"\nGelir Kayıt Sonucu:")
     print(f"Gelir Tutarı: {gelir['gelir_tutari']} TL")
-    print(f"İmece Kesintisi: {gelir['imece_havuz_kesintisi']} TL")
+    print(f"Refah Kesintisi: {gelir['imece_havuz_kesintisi']} TL")
     print(f"Net Gelir: {gelir['net_gelir']} TL")
     
     # Test yoksulluk yardımı
@@ -365,5 +365,5 @@ if __name__ == "__main__":
     rapor = ajan.run(operation="rapor")
     print(f"\nŞeffaflık Raporu:")
     print(f"Toplam Gelir: {rapor['ozet']['toplam_gelir']} TL")
-    print(f"Toplam İmece Kesintisi: {rapor['ozet']['toplam_imece_kesintisi']} TL")
+    print(f"Toplam Refah Kesintisi: {rapor['ozet']['toplam_imece_kesintisi']} TL")
     print(f"Toplam Yoksulluk Ödemesi: {rapor['ozet']['toplam_yoksulluk_odemesi']} TL")

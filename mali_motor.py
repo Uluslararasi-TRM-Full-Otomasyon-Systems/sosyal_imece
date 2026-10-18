@@ -17,7 +17,7 @@ def execute_sosyal_imece_distribution(net_profit: float, users: list[dict]) -> d
         uid = u['id']
         allocations[uid]["phase_1_genel_refah"] = round(total_phase1_per_user, 2)
 
-    # 2. Aşama: 55 yaş ve üzeri kişilere özel imece zenginlik payı (Net kârın kalan %20'si)
+    # 2. Aşama: 55 yaş ve üzeri kişilere özel refah zenginlik payı (Net kârın kalan %20'si)
     wealth_pool = net_profit * 0.20
     older_users = [u for u in users if u.get('age', 0) >= 55]
     num_older = len(older_users)
@@ -50,6 +50,6 @@ if __name__ == "__main__":
         {"id": "uye_genc_2", "age": 34}
     ]
 
-    print("--- SOSYAL İMECE DAĞITIM TESTİ BAŞLATILIYOR ---")
+    print("--- TRM TICARI EKOSISTEMI DAĞITIM TESTİ BAŞLATILIYOR ---")
     sonuclar = execute_sosyal_imece_distribution(test_net_profit, test_users)
     print(json.dumps(sonuclar, indent=4, ensure_ascii=False))

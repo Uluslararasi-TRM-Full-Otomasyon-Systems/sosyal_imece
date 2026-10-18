@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Social Responsibility Agent - Sosyal Sorumluluk & Toplum Ağları Entegrasyonu
-- sosyalimece.org ve uteykder.org.tr projeleri için otomatik içerik üretimi
+- trendurunlermarket.com ve uteykder.org.tr projeleri için otomatik içerik üretimi
 - "Sağlık İçin Elele", "Duy Algıla ve Farklı Yaşa" gibi projeler için trafik köprüsü
 - trendurunlermarket.com e-ticaret akışı ile organik entegrasyon
 """
@@ -17,7 +17,7 @@ import threading
 import time
 
 class SocialResponsibilityAgent:
-    def __init__(self, db_path="./data/sosyal_imece.db"):
+    def __init__(self, db_path="./data/trm_ticari_analiz.db"):
         self.db_path = Path(db_path)
         self.running = False
         self.thread = None
@@ -27,7 +27,7 @@ class SocialResponsibilityAgent:
         self.projects = {
             "saglik_icin_elele": {
                 "name": "Sağlık İçin Elele",
-                "organization": "sosyalimece.org",
+                "organization": "trendurunlermarket.com",
                 "description": "Toplum sağlığı için farkındalık ve destek programı",
                 "target_audience": ["gençler", "aileler", "sağlık çalışanları"],
                 "keywords": ["sağlık", "farkındalık", "destek", "dayanışma"]
@@ -39,9 +39,9 @@ class SocialResponsibilityAgent:
                 "target_audience": ["engelli bireyler", "aileler", "öğretmenler"],
                 "keywords": ["engellilik", "entegrasyon", "farkındalık", "eğitim"]
             },
-            "cevre_dostu_imece": {
-                "name": "Çevre Dostu İmece",
-                "organization": "sosyalimece.org",
+            "cevre_dostu_refah": {
+                "name": "Çevre Dostu Refah",
+                "organization": "trendurunlermarket.com",
                 "description": "Sürdürülebilir çevre için topluluk projesi",
                 "target_audience": ["çevre bilinci", "gençler", "yerel topluluklar"],
                 "keywords": ["çevre", "sürdürülebilirlik", "geri dönüşüm", "yeşil"]

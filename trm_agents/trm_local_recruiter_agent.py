@@ -70,7 +70,7 @@ Sayın {firm_name} Yönetimi,
 
 Uzun zamandır Türkiye'nin dört bir yanında yerli üreticilerle, KOBİ'lerle ve esnafla iletişim halindeyiz, onların hikayelerini dinliyoruz. Hepimizin ortak derdi var: Ürettiklerimizi doğru kitleye ulaştırmak, reklam maliyetlerini azaltmak ve sürdürülebilir bir gelir modeli oluşturmak.
 
-Tam da bu yüzden TRM Nirvana v3.0 Ekosistemi'ni oluşturduk. Bu sistem tamamen ÜCRETSİZ bir imece ve reklam destek modelidir. Amacımız, yerli üreticiye can suyu vermek, esnafın ürünlerini Türkiye'nin her yerine ve hatta dünyaya ulaştırmak.
+Tam da bu yüzden TRM Nirvana v3.0 Ekosistemi'ni oluşturduk. Bu sistem tamamen ÜCRETSİZ bir refah ve reklam destek modelidir. Amacımız, yerli üreticiye can suyu vermek, esnafın ürünlerini Türkiye'nin her yerine ve hatta dünyaya ulaştırmak.
 
 Sistem nasıl çalışır?
 - 164 otonom ajanımız, sizin için en uygun pazarlama stratejilerini otomatik olarak oluşturur ve uygular

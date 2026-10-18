@@ -28,7 +28,7 @@ def async_broadcast_with_voice(distribution_result: dict):
     summary = distribution_result.get("summary", {})
     total_dist = summary.get("total_distributed", 0)
     users_count = summary.get("total_users", 0)
-    announcement = f"Sosyal İmece dağıtımı tamamlandı. {users_count} üyeye toplam {total_dist:,.2f} Türk Lirası tahsis edildi."
+    announcement = f"TRM Ticari Ekosistem dağıtımı tamamlandı. {users_count} üyeye toplam {total_dist:,.2f} Türk Lirası tahsis edildi."
     
     logger.info(f"[BİLDİRİM] {announcement}")
     t = threading.Thread(target=_speak_text, args=(announcement,), daemon=True)

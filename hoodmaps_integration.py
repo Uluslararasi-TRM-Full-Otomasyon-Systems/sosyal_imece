@@ -50,4 +50,4 @@ if __name__ == "__main__":
     p = h_service.analyze_neighborhood_identity("Aydın", "Kuşadası", "İnönü")
     fit = h_service.evaluate_sosyal_imece_fit(p)
     print("Hoodmaps Profile:", p)
-    print("İmece Fit:", fit)
+    print("Refah Fit:", fit)

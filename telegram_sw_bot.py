@@ -38,12 +38,12 @@ def run_audited_alert_cycle():
     status_emoji = "🟢" if audit_res.get("status") == "HEALTHY" else "🔴"
     
     alert_txt = (
-        f"{status_emoji} *TRM Nirvana & Sosyal İmece Nöbetçi Raporu*\n"
+        f"{status_emoji} *TRM Nirvana & TRM Ticari Ekosistem Nöbetçi Raporu*\n"
         f"----------------------------------------\n"
         f"▪️ *Mutabakat Durumu:* `{audit_res.get('status')}`\n"
         f"▪️ *Toplam Kayıt:* `{audit_res.get('txn_count', 0)}` adet\n"
         f"▪️ *Hareket Eden Fon:* `{audit_res.get('total_volume_tl', 0):,.2f} TL`\n"
-        f"▪️ *Hedef Havuz:* 55+ Zenginlik + İmece Refah Payı Aktif\n"
+        f"▪️ *Hedef Havuz:* 55+ Zenginlik + Refah Payı Aktif\n"
         f"----------------------------------------\n"
         f"⚡ Otonom ajan katmanı operasyonel."
     )

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-KÜRESEL SOSYAL İMECE DÜNYASI - GELİŞMİŞ ÇEREZ YÖNETİCİSİ
+KÜRESEL TRM TICARI EKOSISTEMI - GELİŞMİŞ ÇEREZ YÖNETİCİSİ
 Yazar: TRM Otomasyon Ekosistemi
 Açıklama: Selenium çerezlerini güvenli bir şekilde kaydeder, yükler ve 
           sık karşılaşılan alan adı/süre aşımı hatalarını otonom olarak çözer.

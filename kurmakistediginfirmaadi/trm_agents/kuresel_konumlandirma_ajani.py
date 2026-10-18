@@ -23,7 +23,7 @@ class KureselKonumlandirmaAjani:
         # Mağaza yönetimi YOK! Sadece yüksek dönüşümlü link eşleştirme var.
         return {
             "urun_adi": "Otonom Ev-Ofis Bel Desteği (Ergonomik)",
-            "affiliate_linki": "https://amazon.com/affiliate/trm_imece_pilot01",
+            "affiliate_linki": "https://amazon.com/affiliate/trm_ticari_pilot01",
             "komisyon_orani": "%15",
             "tahmini_kazanc_dolar": "12.50 USD (Satış Başına)"
         }
@@ -31,7 +31,7 @@ class KureselKonumlandirmaAjani:
     def otonom_sosyal_medya_icerigi_uret(self, urun_verisi):
         """Katılımcının parmağını bile oynatmadan paylaşabileceği hazır reklam metni ve görsel senaryosunu üretir."""
         metin = f"🚀 {urun_verisi['urun_adi']} ile tanışın! Evden çalışırken bel ağrılarına son. Link profilde! 👉 {urun_verisi['affiliate_linki']}"
-        hashtagler = "#wfh #ergonomics #homeoffice #trmimece"
+        hashtagler = "#wfh #ergonomics #homeoffice #trmticari"
         return {
             "paylasim_metni": metin,
             "etiketler": hashtagler,

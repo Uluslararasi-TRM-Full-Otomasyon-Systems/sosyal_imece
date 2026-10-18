@@ -111,19 +111,19 @@ LOCALIZED_RESPONSES = {
     "en": {
         "welcome": (
             "👋 *Hello!*\n\n"
-            "🤖 I'm the autonomous assistant of **Social İmece & Trend Products Market**.\n\n"
+            "🤖 I'm the autonomous assistant of **TRM Ticari Ekosistem**.\n\n"
             "How can I help you?\n\n"
             "📦 To see *trending products & commission opportunities*:\n"
             "  `Show trending products`\n\n"
-            "🌸 For info on *Social İmece & UTEYKDER*:\n"
-            "  `What is İmece?` or `I want to become a member`\n\n"
+            "🌸 For info on *TRM Ticari Ekosistem*:\n"
+            "  `What is the TRM welfare pool?` or `I want to become a member`\n\n"
             "💰 For our *commission & revenue model*:\n"
             "  `How can I earn money?`\n\n"
             "Just start typing — I'll prepare the best response for you! 🚀"
         ),
         "thanks": (
             "✨ *You're welcome!*\n\n"
-            "We are here for you as the Social İmece community.\n"
+            "We are here for you as the TRM commercial community.\n"
             "Feel free to write if you need help with anything else 🌸\n\n"
             "💡 Tip: You can always type `help` to see all options."
         ),
@@ -134,8 +134,8 @@ LOCALIZED_RESPONSES = {
             "  • `trending products`\n"
             "  • `recommend [CATEGORY]` (e.g. recommend electronics)\n"
             "  • `check price [PRODUCT]`\n\n"
-            "🌸 *Social İmece & UTEYKDER*:\n"
-            "  • `What is İmece?`\n"
+            "🌸 *TRM Ticari Ekosistem*:\n"
+            "  • `What is the TRM welfare pool?`\n"
             "  • `I want to become a member`\n"
             "  • `Honorary membership`\n\n"
             "💰 *Commission & Revenue*:\n"
@@ -147,20 +147,20 @@ LOCALIZED_RESPONSES = {
             "Start typing now, our AI agent will guide you! 🧠"
         ),
         "imece": {
-            "misyon": "Social İmece is a community structure operating on the principles of solidarity, sharing, and collective production that creates income channels for citizens around the world.",
-            "uyelik": "You can join the Social İmece community free of charge. Everyone wins with the association structure, cooperative economy, and commissioned marketing model.",
+            "misyon": "TRM Ticari is a community structure operating on the principles of solidarity, sharing, and collective production that creates income channels for citizens around the world.",
+            "uyelik": "You can join the TRM commercial community free of charge. Everyone wins with the association structure, cooperative economy, and commissioned marketing model.",
             "uteykder_aciklama": "UTEYKDER (International Turkish Education Aid and Culture Association); operates with free honorary membership, supports its members in education, culture and solidarity areas.",
             "fahri_uye": "Full name, phone number and identity verification are sufficient for honorary membership. Documents are securely archived by Archivist Meryem (Nirvana Shield AES-256).",
             "katki_kanalları": [
                 "Commissioned shopping via Trend Products Market",
-                "Product / service donation to the İmece pool",
+                "Product / service donation to the welfare pool",
                 "Growing the community with social media shares",
                 "Invitation chain by recommending new members"
             ],
-            "iletisim": "Social İmece & UTEYKDER Support Line: +90 542 623 51 16"
+            "iletisim": "TRM Ticari Ekosistem Support Line: +90 542 623 51 16"
         },
         "imece_main": (
-            "🌍 *World of Social İmece* 🌍\n\n"
+            "🌍 *TRM Ticari Dünya* 🌍\n\n"
             "🎯 *Our Mission:* {misyon}\n\n"
             "🏛️ *Structure:* {uyelik}\n\n"
             "💡 *Channels to Contribute to the Community:*\n"
@@ -170,7 +170,7 @@ LOCALIZED_RESPONSES = {
             "📞 Support: {iletisim}"
         ),
         "imece_uye": (
-            "🌸 *UTEYKDER Honorary Membership & Social İmece Registration*\n\n"
+            "🌸 *UTEYKDER Honorary Membership & TRM Ticari Registration*\n\n"
             "📌 *UTEYKDER:* {uteykder_aciklama}\n\n"
             "📝 *Honorary Membership Requirements:*\n{fahri_uye}\n\n"
             "✅ *Required documents for registration:*\n"
@@ -195,7 +195,7 @@ LOCALIZED_RESPONSES = {
             "rates": "💸 *Commission Rates:* Between 12% - 30% (varies by product)\n",
             "payout": "⏱️ *Payment:* To your bank account at the end of each 30-day period\n",
             "unlimited": "📈 *Unlimited earnings:* The more you share, the more you earn!\n\n",
-            "note": "🌸 Remember: Every commission you earn also feeds the Social İmece pool, you contribute to the welfare of the community.\n\n",
+            "note": "🌸 Remember: Every commission you earn also feeds the TRM Ticari pool, you contribute to the welfare of the community.\n\n",
             "cta": "🔗 Start sharing now! 🚀"
         },
         "iletisim": (
@@ -207,7 +207,7 @@ LOCALIZED_RESPONSES = {
             "   Saturday: 10:00 - 16:00\n\n"
             "📦 *Orders & Shipping:*\n"
             "   Share your order code and we'll track it instantly.\n\n"
-            "🌸 *Social İmece & Association Applications:*\n"
+            "🌸 *TRM Ticari & Association Applications:*\n"
             "   You can send your documents via this line.\n\n"
             "I'm at my desk, responding immediately! ✨"
         ),
@@ -239,14 +239,14 @@ LOCALIZED_RESPONSES = {
             "tips_title": "💡 *Tips:*\n",
             "tip_1": "  • For a specific category: Write `Recommend electronics` or `Kitchen products`\n",
             "tip_2": "  • For commission details: Write `Commission rates`\n",
-            "tip_3": "  • For Social İmece: Write `What is İmece?`\n\n",
+            "tip_3": "  • For TRM Ticari: Write `What is the TRM welfare pool?`\n\n",
             "closing": "🌸 *Your shopping brings income to both you and our community!* 💜"
         },
         "fallback": (
             "🤔 *I couldn't quite figure out what you wanted, can I help?*\n\n"
             "📦 *Looking for products?*\n"
             "  Write `trending products` to see today's opportunities\n\n"
-            "🌸 *Want to join the Social İmece community?*\n"
+            "🌸 *Want to join the TRM commercial community?*\n"
             "  Write `I want to become a member`\n\n"
             "💰 *Targeting commissioned income?*\n"
             "  Let's see `how can I earn money` response\n\n"
@@ -310,19 +310,19 @@ LOCALIZED_RESPONSES = {
     "de": {
         "welcome": (
             "👋 *Hallo!*\n\n"
-            "🤖 Ich bin der autonome Assistent von **Social İmece & Trend Produkte Markt**.\n\n"
+            "🤖 Ich bin der autonome Assistent von **TRM Ticari Ekosistem**.\n\n"
             "Wie kann ich Ihnen helfen?\n\n"
             "📦 Um *Trendprodukte und Provisionsmöglichkeiten* zu sehen:\n"
             "  `Trendprodukte anzeigen`\n\n"
-            "🌸 Für Infos zu *Social İmece & UTEYKDER*:\n"
-            "  `Was ist İmece?` oder `Ich möchte Mitglied werden`\n\n"
+            "🌸 Für Infos zu *TRM Ticari Ekosistem*:\n"
+            "  `Was ist der TRM-Pool?` oder `Ich möchte Mitglied werden`\n\n"
             "💰 Für unser *Provisions- & Ertragsmodell*:\n"
             "  `Wie kann ich Geld verdienen?`\n\n"
             "Fangen Sie einfach an zu schreiben — ich bereite die beste Antwort vor! 🚀"
         ),
         "thanks": (
             "✨ *Gerne geschehen!*\n\n"
-            "Wir sind als Social İmece Gemeinschaft für Sie da.\n"
+            "Wir sind als TRM Gemeinschaft für Sie da.\n"
             "Schreiben Sie uns gerne, wenn Sie sonstige Hilfe brauchen 🌸\n\n"
             "💡 Tipp: Sie können jederzeit `hilfe` schreiben, um alle Optionen zu sehen."
         ),
@@ -333,8 +333,8 @@ LOCALIZED_RESPONSES = {
             "  • `Trendprodukte`\n"
             "  • `[KATEGORIE] empfehlen` (z. B. Elektronik empfehlen)\n"
             "  • `Preis prüfen [PRODUKT]`\n\n"
-            "🌸 *Social İmece & UTEYKDER*:\n"
-            "  • `Was ist İmece?`\n"
+            "🌸 *TRM Ticari Ekosistem*:\n"
+            "  • `Was ist der TRM-Pool?`\n"
             "  • `Ich möchte Mitglied werden`\n"
             "  • `Ehrenmitgliedschaft`\n\n"
             "💰 *Provision & Einkommen*:\n"
@@ -346,20 +346,20 @@ LOCALIZED_RESPONSES = {
             "Schreiben Sie jetzt los, unser KI-Agent leitet Sie! 🧠"
         ),
         "imece": {
-            "misyon": "Social İmece ist eine Gemeinschaftsstruktur, die nach den Prinzipien der Solidarität, des Teilens und der kollektiven Produktion arbeitet und Einkommenskanäle für Bürger auf der ganzen Welt schafft.",
-            "uyelik": "Sie können der Social İmece-Gemeinschaft kostenlos beitreten. Alle gewinnen mit der Vereinsstruktur, der Genossenschaftswirtschaft und dem provisionsbasierten Marketingmodell.",
+            "misyon": "TRM Ticari ist eine Gemeinschaftsstruktur, die nach den Prinzipien der Solidarität, des Teilens und der kollektiven Produktion arbeitet und Einkommenskanäle für Bürger auf der ganzen Welt schafft.",
+            "uyelik": "Sie können der TRM ticari toplulugu kostenlos beitreten. Alle gewinnen mit der Vereinsstruktur, der Genossenschaftswirtschaft und dem provisionsbasierten Marketingmodell.",
             "uteykder_aciklama": "UTEYKDER (Internationaler Türkischer Bildungs- und Kulturhilfsverein); arbeitet mit kostenloser Ehrenmitgliedschaft, unterstützt seine Mitglieder in den Bereichen Bildung, Kultur und Solidarität.",
             "fahri_uye": "Für die Ehrenmitgliedschaft reichen Vor- und Nachname, Telefonnummer und Identitätsnachweis. Dokumente werden von Archivarin Meryem sicher archiviert (Nirvana Shield AES-256).",
             "katki_kanalları": [
                 "Provisionsbasierter Einkauf über Trend Produkte Markt",
-                "Produkt- / Dienstleistungsspende in den İmece-Pool",
+                "Produkt- / Dienstleistungsspende in den Wohlfahrtspool",
                 "Wachstum der Gemeinschaft durch Social-Media-Beiträge",
                 "Einladungskette durch Empfehlung neuer Mitglieder"
             ],
-            "iletisim": "Social İmece & UTEYKDER Support-Hotline: +90 542 623 51 16"
+            "iletisim": "TRM Ticari Ekosistem Support-Hotline: +90 542 623 51 16"
         },
         "imece_main": (
-            "🌍 *Die Welt von Social İmece* 🌍\n\n"
+            "🌍 *TRM Ticari Welt* 🌍\n\n"
             "🎯 *Unsere Mission:* {misyon}\n\n"
             "🏛️ *Struktur:* {uyelik}\n\n"
             "💡 *Kanäle, um zur Gemeinschaft beizutragen:*\n"
@@ -369,7 +369,7 @@ LOCALIZED_RESPONSES = {
             "📞 Support: {iletisim}"
         ),
         "imece_uye": (
-            "🌸 *UTEYKDER Ehrenmitgliedschaft & Social İmece Registrierung*\n\n"
+            "🌸 *UTEYKDER Ehrenmitgliedschaft & TRM Ticari Registrierung*\n\n"
             "📌 *UTEYKDER:* {uteykder_aciklama}\n\n"
             "📝 *Anforderungen an die Ehrenmitgliedschaft:*\n{fahri_uye}\n\n"
             "✅ *Erforderliche Unterlagen für die Anmeldung:*\n"
@@ -394,7 +394,7 @@ LOCALIZED_RESPONSES = {
             "rates": "💸 *Provisionssätze:* Zwischen 12% - 30% (je nach Produkt)\n",
             "payout": "⏱️ *Auszahlung:* Auf Ihr Bankkonto am Ende eines jeden 30-Tages-Zeitraums\n",
             "unlimited": "📈 *Unbegrenztes Einkommen:* Je mehr Sie teilen, desto mehr verdienen Sie!\n\n",
-            "note": "🌸 Denken Sie daran: Jede Provision, die Sie verdienen, speist auch den Social İmece-Pool, Sie tragen zum Wohl der Gemeinschaft bei.\n\n",
+            "note": "🌸 Denken Sie daran: Jede Provision, die Sie verdienen, speist auch den TRM Ticari-Pool, Sie tragen zum Wohl der Gemeinschaft bei.\n\n",
             "cta": "🔗 Starten Sie jetzt mit dem Teilen! 🚀"
         },
         "iletisim": (
@@ -406,7 +406,7 @@ LOCALIZED_RESPONSES = {
             "   Samstag: 10:00 - 16:00\n\n"
             "📦 *Bestellungen & Versand:*\n"
             "   Teilen Sie Ihren Bestellcode, wir verfolgen ihn sofort.\n\n"
-            "🌸 *Social İmece & Vereinsbewerbungen:*\n"
+            "🌸 *TRM Ticari & Vereinsbewerbungen:*\n"
             "   Sie können Ihre Unterlagen über diesen Weg senden.\n\n"
             "Ich bin an meinem Schreibtisch, antworte sofort! ✨"
         ),
@@ -438,14 +438,14 @@ LOCALIZED_RESPONSES = {
             "tips_title": "💡 *Tipps:*\n",
             "tip_1": "  • Für eine bestimmte Kategorie: Schreiben Sie `Elektronik empfehlen` oder `Küchenprodukte`\n",
             "tip_2": "  • Für Provisionsdetails: Schreiben Sie `Provisionssätze`\n",
-            "tip_3": "  • Für Social İmece: Schreiben Sie `Was ist İmece?`\n\n",
+            "tip_3": "  • Für TRM Ticari: Schreiben Sie `Was ist der TRM-Pool?`\n\n",
             "closing": "🌸 *Ihr Einkauf bringt sowohl Ihnen als auch unserer Gemeinschaft Einkommen!* 💜"
         },
         "fallback": (
             "🤔 *Ich konnte nicht ganz herausfinden, was Sie wollten — darf ich helfen?*\n\n"
             "📦 *Suchen Sie Produkte?*\n"
             "  Schreiben Sie `Trendprodukte`, um die heutigen Gelegenheiten zu sehen\n\n"
-            "🌸 *Möchten Sie der Social İmece-Gemeinschaft beitreten?*\n"
+            "🌸 *Möchten Sie der TRM ticari toplulugu beitreten?*\n"
             "  Schreiben Sie `Ich möchte Mitglied werden`\n\n"
             "💰 *Zielen Sie auf ein Provisions-Einkommen?*\n"
             "  Lassen Sie uns die Antwort auf `Wie kann ich Geld verdienen` sehen\n\n"
@@ -675,7 +675,7 @@ class IntentAnalyzer:
                 r"kardeslik", r"halic",
                 r"social imece", r"imece", r"pool", r"solidarity", r"cooperative",
                 r"contribution", r"sharing", r"community", r"association", r"mutual aid",
-                r"sister sharing", r"join imece", r"imece system",
+                r"sister sharing", r"join the pool", r"imece system",
                 r"gemeinsam", r"gemeinschaft", r"genossenschaft", r"solidaritat",
                 r"verein", r"beitrag", r"teilung", r"imece", r"imece pool"
             ],
@@ -771,17 +771,17 @@ class IntentAnalyzer:
 
     def _load_imece_info(self) -> Dict[str, Any]:
         return {
-            "misyon": "Sosyal İmece; dayanışma, paylaşım ve kollektif üretim ilkesiyle faaliyet gösteren, Türkiye'deki vatandaşlarımız için gelir kapıları oluşturan topluluk yapısıdır.",
-            "uyelik": "Sosyal İmece topluluğuna ücretsiz olarak dahil olabilirsiniz. Dernek yapısı, kooperatif ekonomisi ve komisyonlu pazarlama modeli ile herkes kazanır.",
+            "misyon": "TRM Ticari; dayanışma, paylaşım ve kollektif üretim ilkesiyle faaliyet gösteren, Türkiye'deki vatandaşlarımız için gelir kapıları oluşturan topluluk yapısıdır.",
+            "uyelik": "TRM Ticari topluluğuna ücretsiz olarak dahil olabilirsiniz. Dernek yapısı, kooperatif ekonomisi ve komisyonlu pazarlama modeli ile herkes kazanır.",
             "uteykder_aciklama": "UTEYKDER (Uluslararası Türk Eğitim Yardımlaşma ve Kültür Derneği); ücretsiz fahri üyelik ile faaliyet gösterir, üyelerine eğitim, kültür ve dayanışma alanlarında destek verir.",
             "fahri_uye": "Fahri üyelik için ad soyad, telefon ve kimlik doğrulaması yeterlidir. Belgeler Arşivci Meryem tarafından güvenli şekilde arşivlenir (Nirvana Shield AES-256).",
             "katki_kanalları": [
                 "Trend Ürünler Market üzerinden komisyonlu alışveriş",
-                "İmece havuzuna ürün/hizmet bağışlaması",
+                "refah havuzuna ürün/hizmet bağışlaması",
                 "Sosyal medya paylaşımları ile topluluk büyütme",
                 "Yeni üye tavsiyesi ile davet zinciri"
             ],
-            "iletisim": "Sosyal İmece & UTEYKDER Destek Hattı: +90 542 623 51 16"
+            "iletisim": "TRM Ticari & UTEYKDER Destek Hattı: +90 542 623 51 16"
         }
 
     def _load_trend_products(self) -> List[Dict[str, Any]]:
@@ -1040,12 +1040,12 @@ class ResponseGenerator:
     def _selamlama_yaniti(self) -> str:
         return (
             "👋 *Merhaba!*\n\n"
-            "🤖 Ben **Sosyal İmece & Trend Ürünler Market** otonom asistanıyım.\n\n"
+            "🤖 Ben **TRM Ticari Ekosistem** otonom asistanıyım.\n\n"
             "Ne ile yardımcı olayım?\n\n"
             "📦 *Trend ürünleri ve komisyon fırsatlarını* görmek için:\n"
             "  `Trend ürünleri göster`\n\n"
-            "🌸 *Sosyal İmece & UTEYKDER* hakkında bilgi için:\n"
-            "  `İmece nedir?` veya `Üye olmak istiyorum`\n\n"
+            "🌸 *TRM Ticari & UTEYKDER* hakkında bilgi için:\n"
+            "  `Refah havuzu nedir?` veya `Üye olmak istiyorum`\n\n"
             "💰 *Komisyon ve gelir modeli* için:\n"
             "  `Nasıl para kazanırım?`\n\n"
             "Yazmaya başlayın, sizin için en uygun yanıtı hazırlayalım! 🚀"
@@ -1054,7 +1054,7 @@ class ResponseGenerator:
     def _tessekkur_yaniti(self) -> str:
         return (
             "✨ *Rica ederim!*\n\n"
-            "Sosyal İmece topluluğu olarak yanınızdayız.\n"
+            "TRM Ticari topluluğu olarak yanınızdayız.\n"
             "Başka bir konuda yardımcı olmamı isterseniz çekinmeden yazın 🌸\n\n"
             "💡 İpucu: Her an `yardım` yazarak tüm seçenekleri görebilirsiniz."
         )
@@ -1067,8 +1067,8 @@ class ResponseGenerator:
             "  • `en trend ürünler`\n"
             "  • `[KATEGORI] öner` (örn: elektronik öner)\n"
             "  • `fiyat sorgula [ÜRÜN]`\n\n"
-            "🌸 *Sosyal İmece & UTEYKDER*:\n"
-            "  • `İmece nedir?`\n"
+            "🌸 *TRM Ticari & UTEYKDER*:\n"
+            "  • `Refah havuzu nedir?`\n"
             "  • `Üye olmak istiyorum`\n"
             "  • `Fahri üyelik`\n\n"
             "💰 *Komisyon & Gelir*:\n"
@@ -1084,7 +1084,7 @@ class ResponseGenerator:
         info = self.analyzer._imece_info
         if niyet == IntentCategory.UYE_OLMA.value or niyet == IntentCategory.UTEYKDER.value:
             return (
-                "🌸 *UTEYKDER Fahri Üyelik & Sosyal İmece Kaydı*\n\n"
+                "🌸 *UTEYKDER Fahri Üyelik & TRM Ticari Kaydı*\n\n"
                 f"📌 *UTEYKDER:* {info['uteykder_aciklama']}\n\n"
                 f"📝 *Fahri Üyelik Şartları:*\n{info['fahri_uye']}\n\n"
                 "✅ *Kayıt için gerekli belgeler:*\n"
@@ -1100,7 +1100,7 @@ class ResponseGenerator:
             )
 
         return (
-            "🌍 *Sosyal İmece Dünyası* 🌍\n\n"
+            "🌍 *TRM Ticari Dünyası* 🌍\n\n"
             f"🎯 *Misyonumuz:* {info['misyon']}\n\n"
             f"🏛️ *Yapı:* {info['uyelik']}\n\n"
             "💡 *Topluluğa Katkı Kanalları:*\n"
@@ -1137,7 +1137,7 @@ class ResponseGenerator:
             "💸 *Komisyon Oranları:* %12 - %30 arası (ürün bazında değişir)\n"
             "⏱️ *Ödeme:* 30 günlük dönem sonunda banka hesabınıza\n"
             "📈 *Sınırsız kazanç:* Ne kadar çok paylaşım, o kadar çok kazanç!\n\n"
-            "🌸 Unutmayın: Kazandığınız her komisyon Sosyal İmece havuzunu da besler, "
+            "🌸 Unutmayın: Kazandığınız her komisyon TRM Ticari havuzunu da besler, "
             "topluluğun refahına katkı sağlarsınız.\n\n"
             "🔗 Hemen paylaşmaya başlayın! 🚀"
         )
@@ -1153,7 +1153,7 @@ class ResponseGenerator:
             "   Cumartesi: 10:00 - 16:00\n\n"
             "📦 *Sipariş & Kargo:*\n"
             "   Sipariş kodunuzu paylaşın, anında takip edelim.\n\n"
-            "🌸 *Sosyal İmece & Dernek Başvuruları:*\n"
+            "🌸 *TRM Ticari & Dernek Başvuruları:*\n"
             "   Belgelerinizi bu hat üzerinden gönderebilirsiniz.\n\n"
             "Ekrandayım, hemen yanıtlıyorum! ✨"
         )
@@ -1206,7 +1206,7 @@ class ResponseGenerator:
             "💡 *İpuçları:*\n"
             "  • Belirli bir kategori için: `Elektronik öner` veya `Mutfak ürünleri` yazın\n"
             "  • Komisyon detayları için: `Komisyon oranları` yazın\n"
-            "  • Sosyal İmece için: `İmece nedir?` yazın\n\n"
+            "  • TRM Ticari için: `Refah havuzu nedir?` yazın\n\n"
             "🌸 *Alışverişiniz hem size hem topluluğumuza kazanç sağlar!* 💜"
         )
 
@@ -1216,7 +1216,7 @@ class ResponseGenerator:
             "🤔 *Tam olarak ne istediğinizi seçemedim, yardımcı olayım:*\n\n"
             "📦 *Ürün mü arıyorsunuz?*\n"
             "  `trend ürünler` yazarak günün fırsatlarını görün\n\n"
-            "🌸 *Sosyal İmece topluluğuna mı katılmak istiyorsunuz?*\n"
+            "🌸 *TRM Ticari topluluğuna mı katılmak istiyorsunuz?*\n"
             "  `üye olmak istiyorum` yazın\n\n"
             "💰 *Komisyonlu gelir mi hedefliyorsunuz?*\n"
             "  `nasıl para kazanırım` yanıtını görelim\n\n"
@@ -1506,12 +1506,12 @@ def dashboard():
 def uc_kontrol_paneli():
     """3'lü Kontrol Merkezi Paneli - Claude tarafından hazırlanan panel"""
     try:
-        panel_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "SOSYAL_IMECE_UCLU_KONTROL_PANELI.html")
+        panel_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "TRM WhatsApp Paneli.html")
         if os.path.exists(panel_path):
             from flask import send_from_directory
-            return send_from_directory(os.path.dirname(os.path.abspath(__file__)), "SOSYAL_IMECE_UCLU_KONTROL_PANELI.html")
+            return send_from_directory(os.path.dirname(os.path.abspath(__file__)), "TRM WhatsApp Paneli.html")
         else:
-            logger.error("SOSYAL_IMECE_UCLU_KONTROL_PANELI.html dosyası bulunamadı")
+            logger.error("TRM WhatsApp Paneli.html dosyası bulunamadı")
             return jsonify({"status": "error", "message": "3'lü Kontrol Paneli dosyası bulunamadı"}), 404
     except Exception as e:
         logger.error(f"3'lü Kontrol Paneli yüklenirken hata: {e}")
@@ -2111,7 +2111,7 @@ def agents_live():
             ("CameraPsikoAnalizAjanı", "Kamera görüntülerini analiz eder"),
             ("SiberKalkanAjanı", "Siber güvenlik tehditlerini izler"),
             ("HukukiUyumAjanı", "Hukuki uyumluluğunu kontrol eder"),
-            ("ImeceDenetimAjanı", "İmece sistem denetimi yapar"),
+            ("RefahDenetimAjanı", "Refah Havuzu sistem denetimi yapar"),
             ("KureselIstihbaratAjanı", "Küresel istihbarat toplar"),
             ("MasterGeoIntelligenceAgent", "Coğrafi intelligence"),
             ("SpiritualHungerProfilerAgent", "Manevi profil analizi"),
@@ -2134,9 +2134,9 @@ def agents_live():
             ("SistemMuhafizAjanı", "Sistem koruma"),
             ("SistemNobetcisi", "Sistem nöbetçisi"),
             ("HukukiSozlesmeVeAlacakAjanı", "Hukuki sözleşme ve alacak"),
-            ("ImeceRefahAjanı", "İmece refah takibi"),
+            ("RefahTakipAjanı", "Refah Havuzu refah takibi"),
             ("IcDenetimAjanı", "İç denetim"),
-            ("GenclikImeceAjanı", "Gençlik imece"),
+            ("GenclikRefahAjanı", "Gençlik refah"),
             ("FiyatsizlastirmaAjanı", "Fiyatsızlaştırma"),
             ("KureselFiyatRadariAjanı", "Küresel fiyat radarı"),
             ("KureselKonumlandirmaAjanı", "Küresel konumlama"),
@@ -2184,7 +2184,7 @@ def agents_live():
             ("DNPAgent", "DNP operasyonları"),
             # Sosyal Medya ve Dağıtım Ajanları (121-140)
             ("SocialAccountAutomationAgent", "Sosyal hesap otomasyonu"),
-            ("SocialImecePortalAgent", "Sosyal imece portalı"),
+            ("SocialImecePortalAgent", "Sosyal refah portalı"),
             ("OrganicWarmupAgent", "Organik ısınma"),
             ("MarketSignalAgent", "Pazar sinyali"),
             ("NirvanaTrendsAgent", "Nirvana trendler"),
@@ -2216,7 +2216,7 @@ def agents_live():
             ("DinamikLinkDonusturucuAjanı", "Dinamik link dönüştürücü"),
             ("DinamikRegulasyonAjanı", "Dinamik regülasyon"),
             ("GolgeKriptoKoruyucuAjanı", "Gölge kripto koruyucu"),
-            ("ImeceKoprucusuAjanı", "İmece köprücüsü"),
+            ("RefahKoprucusuAjanı", "Refah Havuzu köprücüsü"),
             ("ItibarMuhafiziAjanı", "İtibar muhafızı"),
             ("KahinKararAjanı", "Kahin karar"),
             ("KaranlikVeriAjanı", "Karanlık veri"),

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-SOSYAL İMECE - Güvenli Emeklilik Koruma Ajanı
+TRM TICARI EKOSISTEMI - Güvenli Emeklilik Koruma Ajanı
 Odak: 55 yaş üstü bireylerin anaparasını enflasyona karşı korumak ve düzenli pasif gelir/temettü projeksiyonu sunmak
 """
 import os

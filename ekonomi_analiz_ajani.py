@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-SOSYAL İMECE - Şehir Bazlı Ekonomi ve İmece Payı Analiz Ajanı (81 İl Entegrasyonu)
-Mantık: Şehirlerin temel yaşam maliyetlerini hesaplar, üzerine %20 İmece Güvenlik/Adalet Payı ekleyerek 
-net imece destek tutarlarını belirler.
+TRM TICARI EKOSISTEMI - Şehir Bazlı Ekonomi ve Refah Payı Analiz Ajanı (81 İl Entegrasyonu)
+Mantık: Şehirlerin temel yaşam maliyetlerini hesaplar, üzerine %20 Refah Güvenlik/Adalet Payı ekleyerek 
+net refah destek tutarlarını belirler.
 """
 import os
 import json
@@ -12,8 +12,8 @@ from cografi_demografik_modul import CografiDemografikModul
 
 class SehirBazliEkonomiAjani:
     def __init__(self):
-        self.output_file = "sehir_imece_esikleri_arsivi.json"
-        self.excel_file = "SEHIR_BAZLI_IMECE_RAPORU.xlsx"
+        self.output_file = "sehir_refah_esikleri_arsivi.json"
+        self.excel_file = "SEHIR_BAZLI_REFAH_RAPORU.xlsx"
         
         # Coğrafi demografik modülünü entegre et
         self.cografi_modul = CografiDemografikModul()
@@ -57,8 +57,8 @@ class SehirBazliEkonomiAjani:
     def sehir_bazli_hesapla(self, yil, ay, baz_aclik_siniri):
         """
         Belirtilen baz açlık sınırını şehir katsayıları ile çarpar, 
-        ardından kullanıcının talimatı olan +%20 İmece Güvenlik/Adalet Payını ekleyerek 
-        şehir bazlı net imece destek tutarlarını hesaplar.
+        ardından kullanıcının talimatı olan +%20 Refah Güvenlik/Adalet Payını ekleyerek 
+        şehir bazlı net refah destek tutarlarını hesaplar.
         """
         temel_baz = float(baz_aclik_siniri)
         hesaplanmis_sehir_verileri = []
@@ -78,7 +78,7 @@ class SehirBazliEkonomiAjani:
                 "Sehir": sehir,
                 "Sehir_Katsayisi": katsayi,
                 "Baz_Maliyet_Tl": round(sehir_maliyeti, 2),
-                "Net_Imece_Destek_Payi_Tl": round(net_imece_payi, 2), # Hesaplara gönderilecek tutar
+                "Net_Refah_Destek_Payi_Tl": round(net_imece_payi, 2), # Hesaplara gönderilecek tutar
                 "Yoksulluk_Esigi_Tl": round(yoksulluk_siniri, 2),
                 "Guncelleme_Zamani": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             })

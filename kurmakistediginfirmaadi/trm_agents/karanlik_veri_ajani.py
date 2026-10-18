@@ -194,7 +194,7 @@ class KaranlikVeriAjani:
     # ------------------------------------------------------------------
     def kesfet(self) -> str:
         """
-        ENHANCED_PANEL.py ile uyumlu — string döndürür.
+        api_server_2.py ile uyumlu — string döndürür.
         Detaylı analiz için kesfet_detayli() kullan.
         """
         try:

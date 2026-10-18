@@ -40,6 +40,6 @@ def sesli_rapor_seslendir(metin: str, dosya_adi: str = "trm_asistan_yanit.mp3"):
     return kayit_bilgi
 
 if __name__ == "__main__":
-    test_metin = "Fahri abi, TRM Sosyal İmece 55+ zenginlik payı ve afiliyet sepet eşleşmesi başarıyla tamamlandı. Kuşadası bölge varlık çarpanı 1.226 onaylandı."
+    test_metin = "Fahri abi, TRM TRM Ticari Ekosistem 55+ zenginlik payı ve afiliyet sepet eşleşmesi başarıyla tamamlandı. Kuşadası bölge varlık çarpanı 1.226 onaylandı."
     res = sesli_rapor_seslendir(test_metin)
     print(json.dumps(res, ensure_ascii=False, indent=2))

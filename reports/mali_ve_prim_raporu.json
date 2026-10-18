@@ -1,0 +1,20 @@
+{
+    "tarih": "2026-10-16T14:15:31.001409",
+    "brut_gelir": 50000.0,
+    "vergi": 10000.0,
+    "net_kar": 40000.0,
+    "gider_pusulalari": [
+        {
+            "isim": "Ahmet Yılmaz",
+            "brut_prim": 5000,
+            "stopaj": 500.0,
+            "net_odenen": 4500.0
+        },
+        {
+            "isim": "Ayşe Demir",
+            "brut_prim": 7500,
+            "stopaj": 750.0,
+            "net_odenen": 6750.0
+        }
+    ]
+}

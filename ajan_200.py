@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Sosyal İmece Dünya - DNP Ajan (Agent-200)
+TRM Ticari Dünya - DNP Ajan (Agent-200)
 Versiyon: 3.0.0
 """
 

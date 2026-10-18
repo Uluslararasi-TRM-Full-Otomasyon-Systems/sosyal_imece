@@ -48,7 +48,7 @@ class ModelGuardian:
             'MASTER_CONTROLLER.py',
             'orchestrator_api.py',
             'config.py',
-            'SOSYAL_IMECE_UCLU_KONTROL_PANELI.html'
+            'TRM WhatsApp Paneli.html'
         ]
         
         logger.info(f"Model Guardian başlatıldı - Proje: {self.project_root}")

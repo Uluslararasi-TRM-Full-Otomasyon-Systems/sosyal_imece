@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-SOSYAL İMECE - Arşivci Meryem AI Ajanı
+TRM TICARI EKOSISTEMI - Arşivci Meryem AI Ajanı
 Persona: 40-50 yaşlarında, anaç, şefkatli, disiplinli, titiz ve düzen aşığı arşivci
 Odak: WhatsApp belge işleme, klasörleme ve UTEYKDER arşiv yönetimi
 """

@@ -298,8 +298,8 @@ def run_scraper_logic(show_ui=True):
 
 
 def main():
-    st.set_page_config(page_title="SOSYAL İMECE", layout="wide")
-    st.title("SOSYAL İMECE | Multi-Tenant E-Ticaret Fabrikası")
+    st.set_page_config(page_title="TRM TICARI EKOSISTEMI", layout="wide")
+    st.title("TRM TICARI EKOSISTEMI | Multi-Tenant E-Ticaret Fabrikası")
     st.caption("Guardian Kalkanı, tenant klonları ve merkezi orchestrator görünümü")
 
     col1, col2 = st.columns([1.2, 1])

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Sosyal İmece Dünya - Base Agent Şablonu (TRM Agents)
+TRM Ticari Dünya - Base Agent Şablonu (TRM Agents)
 Versiyon: 3.0.0
 
 Tüm ajanlar bu sınıftan türetilmelidir.

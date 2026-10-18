@@ -21,8 +21,8 @@ class UyumDenetimPanelEntegrasyonu:
             return f"Tarih Hesaplama Hatası: {e}"
 
     def render_panel(self):
-        st.subheader("⚖️ Uyum Denetim Konseyi - İmece Hak Ediş Modülü (Ajan 102)")
-        st.info("💡 Sisteme sonradan dahil olan üyelerin imece payı hak ediş tarihlerini (her ayın 1'i kuralı) otomatik denetler ve kaydeder.")
+        st.subheader("⚖️ Uyum Denetim Konseyi - Refah Hak Ediş Modülü (Ajan 102)")
+        st.info("💡 Sisteme sonradan dahil olan üyelerin refah payı hak ediş tarihlerini (her ayın 1'i kuralı) otomatik denetler ve kaydeder.")
         
         with st.form("uye_kayit_formu"):
             col1, col2 = st.columns(2)
@@ -58,7 +58,7 @@ class UyumDenetimPanelEntegrasyonu:
                 with open(self.storage_file, "w", encoding="utf-8") as f:
                     json.dump(data, f, ensure_ascii=False, indent=4)
                     
-                st.success(f"✅ Üye başarıyla kaydedildi! İlk İmece Payı Hak Ediş Tarihi: **{hesaplanan_hak_edis}**")
+                st.success(f"✅ Üye başarıyla kaydedildi! İlk Refah Payı Hak Ediş Tarihi: **{hesaplanan_hak_edis}**")
 
         # Kayıtlı Üyeleri Listeleme
         if os.path.exists(self.storage_file):

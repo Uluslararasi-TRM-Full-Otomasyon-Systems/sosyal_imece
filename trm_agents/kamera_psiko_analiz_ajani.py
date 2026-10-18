@@ -968,7 +968,7 @@ if __name__ == "__main__":
     avatar_result = agent.run(
         operation='create_avatar',
         agent_id='genclik_imece_001',
-        agent_name='Gençlik İmece Ajanı',
+        agent_name='Gençlik Refah Ajanı',
         agent_type='genclik_imece',
         personality_traits={
             'expressiveness': 'high',

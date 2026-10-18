@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Sosyal İmece Dünya - Kalkan Ajan Ordusu
+TRM Ticari Dünya - Kalkan Ajan Ordusu
 Ajan: SentinelGuardAgent
 Amaç: Sosyal medya ve ağlardaki dezenformasyonu/karalamaları izler.
 Versiyon: 1.0.0
@@ -18,7 +18,7 @@ class SentinelGuardAgent:
     """
     SentinelGuardAgent - Sosyal medya ve ağlardaki dezenformasyonu/karalamaları izler.
     
-    Bu ajan, sosyal medya platformları, forumlar ve web sitelerinde Sosyal İmece projesi
+    Bu ajan, sosyal medya platformları, forumlar ve web sitelerinde TRM Ticari Ekosistem projesi
     hakkında yapılan olumsuz, yanlış veya kötü niyetli içerikleri otomatik olarak izler,
     analiz eder ve raporlar.
     """
@@ -35,8 +35,8 @@ class SentinelGuardAgent:
             "reddit", "linkedin", "tiktok", "telegram"
         ]
         self.izlenen_anahtar_kelimeler = [
-            "sosyal imece", "uteykder", "işader", "ir-sa", "m. fahri güzel",
-            "trm", "nirvana", "kuresel imece"
+            "trm ticari ekosistem", "uteykder", "işader", "ir-sa", "m. fahri güzel",
+            "trm", "nirvana", "kuresel ticari"
         ]
         self.negatif_ifadeler = [
             "dolandırıcılık", "sahte", "kandırma", "yalan", "ifşa", 

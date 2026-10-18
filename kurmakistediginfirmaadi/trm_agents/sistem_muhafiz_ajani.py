@@ -31,7 +31,7 @@ class SistemMuhafizAjani:
     def sunucuyu_yeniden_atesle(self):
         self.nobet_defterine_yaz("⚠️ PANEL ÇÖKMÜŞ VEYA KAPANMIŞ! Otonom olarak yeniden ateşleniyor...")
         # Arka planda Streamlit'i tekrar ayağa kaldırır
-        subprocess.Popen(["streamlit", "run", "ENHANCED_PANEL.py"], shell=True)
+        subprocess.Popen(["python", "api_server_2.py"], shell=True)
         self.nobet_defterine_yaz("🚀 Streamlit sunucusu CMD üzerinden başarıyla yeniden ayağa kaldırıldı.")
 
     def nobet_tut(self):

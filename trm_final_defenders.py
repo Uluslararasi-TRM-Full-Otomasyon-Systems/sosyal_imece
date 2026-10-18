@@ -12,7 +12,7 @@ class Agent171_PayoutDistribution:
         self.name = "Autonomous Payout & IBAN Distribution Agent"
 
     def execute_social_imece_payout(self, user_id: str, iban: str, amount_tl: float):
-        logging.info(f"[{self.name}]: SOSYAL IMECE Havuzundan {user_id} icin transfer emri alindi.")
+        logging.info(f"[{self.name}]: TRM TICARI EKOSISTEMI Havuzundan {user_id} icin transfer emri alindi.")
         logging.info(f"[{self.name}]: {iban} nolu hesaba {amount_tl} TL komisyon otonom EFT/FAST ile gonderildi.")
         logging.info(f"[{self.name}]: Kullanicinin telefonuna bilgilendirme SMS'i basariyla firlatildi.")
         return True
@@ -36,7 +36,7 @@ if __name__ == "__main__":
     payout_agent = Agent171_PayoutDistribution()
     policy_agent = Agent172_PolicyCopyrightFilter()
     
-    print("\n[Senaryo 1: Ay Sonu Sosyal Imece Kazanc Dagitimi]")
+    print("\n[Senaryo 1: Ay Sonu TRM Ticari Ekosistem Kazanc Dagitimi]")
     payout_agent.execute_social_imece_payout("TRM_PILOT_USER_01", "TR62 0006 2000 ... 44", 8750.00)
     
     print("\n[Senaryo 2: Paylasim Oncesi Otomatik Telif Kontrolu]")

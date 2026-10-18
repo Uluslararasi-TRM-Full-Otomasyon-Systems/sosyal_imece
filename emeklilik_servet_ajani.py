@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-SOSYAL İMECE - 81 İl Bazlı Çift Aşamalı Güvenli Emeklilik ve Adalet Refah Dağılım Ajanı
+TRM TICARI EKOSISTEMI - 81 İl Bazlı Çift Aşamalı Güvenli Emeklilik ve Adalet Refah Dağılım Ajanı
 """
 import os
 import json
@@ -39,22 +39,22 @@ class GuvenliEmeklilikKorumaAjani:
     def iki_asamali_refah_ve_zenginlik_dagitimi(self, imece_havuz_butcesi, il_adi, toplam_uye_sayisi, yas_55_ustu_nufus):
         """
         1. Aşama: Sistemdeki tüm kullanıcılara il bazlı enflasyon hesapları yapılarak 
-                  temel imece payı + %20 imece refah payı dağıtılır.
+                  temel refah payı + %20 refah payı dağıtılır.
         2. Aşama: Havuzda kalan gelir rakamı, sadece 55 yaş ve üzeri kişilere özel 
-                  'imece zenginlik payı' olarak bölünür ve aktarılır.
+                  'refah zenginlik payı' olarak bölünür ve aktarılır.
         Zaman Damgası: Her ayın 01. günü saat 00:10.
         """
         carpan = self.il_katsayi_getir(il_adi)
         degerlenmis_havuz = imece_havuz_butcesi * carpan
         
-        # Aşama 1: Genel Kullanıcılara İmece Payı + %20 Refah Payı (%70 bütçe ayrımı)
+        # Aşama 1: Genel Kullanıcılara Refah Payı + %20 Refah Payı (%70 bütçe ayrımı)
         asama_1_butce = degerlenmis_havuz * 0.70
         if toplam_uye_sayisi <= 0:
             kisi_basi_genel_pay = 0.0
         else:
             kisi_basi_genel_pay = asama_1_butce / toplam_uye_sayisi
             
-        # Aşama 2: Kalan Havuz Geliri (%30 bütçe) -> Sadece 55 Yaş ve Üzeri Kişilere İmece Zenginlik Payı
+        # Aşama 2: Kalan Havuz Geliri (%30 bütçe) -> Sadece 55 Yaş ve Üzeri Kişilere Refah Zenginlik Payı
         asama_2_kalan_butce = degerlenmis_havuz * 0.30
         if yas_55_ustu_nufus <= 0:
             kisi_basi_zenginlik_payi = 0.0

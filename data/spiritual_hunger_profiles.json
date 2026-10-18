@@ -147,7 +147,7 @@
         }
     },
     "unknown": {
-        "analysis_timestamp": "2026-09-08T02:12:22.675172",
+        "analysis_timestamp": "2026-10-16T13:52:43.824133",
         "psychological_segment": "maddi_ihtiyac",
         "persona_map": {
             "user_id": "unknown",
@@ -165,33 +165,33 @@
             "preferred_content_format": "friend_recommendation",
             "impulse_buying_threshold": 50,
             "trust_factors": {
-                "micro_influencer_trust": 76,
-                "friend_recommendation_trust": 84,
-                "brand_trust": 37,
-                "social_proof_trust": 64
+                "micro_influencer_trust": 71,
+                "friend_recommendation_trust": 87,
+                "brand_trust": 48,
+                "social_proof_trust": 66
             }
         },
         "spiritual_hunger_score": 50,
         "timing_analysis": {
             "is_optimal": false,
             "optimal_reason": "",
-            "current_time": "02:12:22",
-            "current_hour": 2,
+            "current_time": "13:52:43",
+            "current_hour": 13,
             "is_weekend": false,
             "readiness_score": 40,
-            "recommended_delay": 79
+            "recommended_delay": 95
         },
         "content_recommendation": {
             "content_format": "friend_recommendation",
             "copywriting_style": "casual_friend",
             "product_recommendation": {
-                "category": "practical",
+                "category": "essential",
                 "price_range": "$20-$100",
                 "urgency": "medium",
                 "social_proof_enabled": true,
                 "micro_influencer_endorsed": true
             },
-            "cta_message": "İlginizi çekebilir",
+            "cta_message": "Daha sonra bak",
             "trust_signals": [
                 "10,000+ mutlu müşteri",
                 "4.9/5 yıldız değerlendirme",
@@ -204,7 +204,7 @@
             "tiktok_style": true
         },
         "impulse_buying_probability": 55,
-        "trust_score": 65,
+        "trust_score": 68,
         "budget_analysis": {
             "needs_alternative": true,
             "original_price": 100,
@@ -256,7 +256,7 @@
                 },
                 {
                     "type": "social_proof",
-                    "message": "Şu anda 49 kişi bu ürünü inceliyor",
+                    "message": "Şu anda 29 kişi bu ürünü inceliyor",
                     "urgency_boost": 20
                 }
             ],

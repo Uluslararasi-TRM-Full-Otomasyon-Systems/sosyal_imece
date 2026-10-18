@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Sosyal İmece Dünya - [AJAN_ADI] Ajanı
+TRM Ticari Dünya - [AJAN_ADI] Ajanı
 Versiyon: 3.0.0
 
 BaseAgent: trm_agents/base_agent_template.py

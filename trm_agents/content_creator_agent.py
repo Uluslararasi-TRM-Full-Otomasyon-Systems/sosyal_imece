@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Sosyal İmece Dünya - İçerik Oluşturucu Ajanı
+TRM Ticari Dünya - İçerik Oluşturucu Ajanı
 Versiyon: 3.0.0
 
 BaseAgent: trm_agents/base_agent_template.py
@@ -106,7 +106,7 @@ class ContentCreatorAgent(BaseAgent):
         
         # ★★★ Gerçek AI entegrasyonu buraya ★★★
         # Simülasyon
-        content = f"Bu {topic} konulu harika bir içerik! #SosyalImece #AI"
+        content = f"Bu {topic} konulu harika bir içerik! #TRMTicari #AI"
         
         time.sleep(2)  # Simülasyon bekleme
         return content

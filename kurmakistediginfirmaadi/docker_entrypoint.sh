@@ -38,12 +38,9 @@ fi
 
 echo "✅ Ortam hazır"
 
-# Paneli arka planda başlat
-echo "🌐 Panel başlatılıyor..."
-python ENHANCED_PANEL.py &
-PANEL_PID=$!
-
-# 3 saniye bekle
+# Ticari API servisi arka planda başlat
+python api_server_2.py &
+API_PID=$!
 sleep 3
 
 echo "🚀 Ana sistem başlatılıyor..."

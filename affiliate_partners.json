@@ -447,8 +447,56 @@
             "language": "en",
             "joined_at": "2026-09-08T02:12:23.607547",
             "status": "ACTIVE"
+        },
+        {
+            "partner_id": "TRM_PARTNER_57",
+            "firm_name": "EuroSavvy Stores",
+            "market_type": "e-commerce",
+            "language": "en",
+            "joined_at": "2026-10-16T13:35:28.331137",
+            "status": "ACTIVE"
+        },
+        {
+            "partner_id": "TRM_PARTNER_58",
+            "firm_name": "Turkish Trend Shop",
+            "market_type": "e-commerce",
+            "language": "tr",
+            "joined_at": "2026-10-16T13:47:23.572094",
+            "status": "ACTIVE"
+        },
+        {
+            "partner_id": "TRM_PARTNER_59",
+            "firm_name": "Global Deals Hub",
+            "market_type": "affiliate",
+            "language": "en",
+            "joined_at": "2026-10-16T13:47:23.588112",
+            "status": "ACTIVE"
+        },
+        {
+            "partner_id": "TRM_PARTNER_60",
+            "firm_name": "Turkish Trend Shop",
+            "market_type": "e-commerce",
+            "language": "tr",
+            "joined_at": "2026-10-16T13:47:23.604012",
+            "status": "ACTIVE"
+        },
+        {
+            "partner_id": "TRM_PARTNER_61",
+            "firm_name": "Global Deals Hub",
+            "market_type": "affiliate",
+            "language": "en",
+            "joined_at": "2026-10-16T13:52:43.781577",
+            "status": "ACTIVE"
+        },
+        {
+            "partner_id": "TRM_PARTNER_62",
+            "firm_name": "Global Deals Hub",
+            "market_type": "affiliate",
+            "language": "en",
+            "joined_at": "2026-10-16T13:52:43.797269",
+            "status": "ACTIVE"
         }
     ],
     "pending_partners": [],
-    "total_partners": 56
+    "total_partners": 62
 }

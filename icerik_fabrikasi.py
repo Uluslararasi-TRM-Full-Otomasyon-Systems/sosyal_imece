@@ -11,7 +11,7 @@ class IcerikFabrikasi:
         metin = f"""
         Ürün: {self.urun_verisi['urun_adi']}
         Pazarlama Stratejisi: İnsanları harekete geçiren (CTA) bir dil kullan.
-        SOSYAL İMECE Notu: Bu ürünün komisyonuyla topluluk havuzuna katkı sağlandığını belirt.
+        TRM TICARI EKOSISTEMI Notu: Bu ürünün komisyonuyla topluluk havuzuna katkı sağlandığını belirt.
         """
         # (İçerik üretim mantığı buraya entegre edilecek)
         return "Üretilen Optimize İçerik: [Sosyal Medya Postu + Blog Başlığı + TTS Senaryosu]"

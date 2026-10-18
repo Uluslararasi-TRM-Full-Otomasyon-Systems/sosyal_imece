@@ -17,7 +17,7 @@ import threading
 import time
 
 class MarketSignalAgent:
-    def __init__(self, db_path="./data/sosyal_imece.db", use_simulation=True):
+    def __init__(self, db_path="./data/trm_ticari_analiz.db", use_simulation=True):
         self.db_path = Path(db_path)
         self.use_simulation = use_simulation
         self.signals_history = []

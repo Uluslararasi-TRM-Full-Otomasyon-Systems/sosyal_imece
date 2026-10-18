@@ -1,15 +1,15 @@
 @echo off
-REM Sosyal İmece Orchestrator API - Windows Service Startup Script
+REM TRM Orchestrator API - Windows Service Startup Script
 REM Bu script, API'yi arka planda çalıştırır
 
-title Sosyal İmece Service
+title TRM Orchestrator Service
 
 REM Proje dizinine git
 cd /d "%~dp0"
 
 REM Log dosyası oluştur
 echo ========================================== >> orchestrator_service.log
-echo Sosyal İmece Service Başlatıldı: %date% %time% >> orchestrator_service.log
+echo TRM Ticari Ekosistem Service Başlatıldı: %date% %time% >> orchestrator_service.log
 echo Çalışma Dizini: %CD% >> orchestrator_service.log
 
 REM Sanal ortam kontrolü
@@ -41,7 +41,7 @@ start /B python orchestrator_api.py >> orchestrator_service.log 2>&1
 REM Başlatma mesajı
 echo.
 echo ==========================================
-echo Sosyal İmece API arka planda başlatıldı!
+echo TRM Ticari Ekosistem API arka planda başlatıldı!
 echo ==========================================
 echo API Adresi: http://localhost:5000
 echo Log dosyası: orchestrator_service.log

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-SOSYAL İMECE - Coğrafi ve Demografik Modül (81 İl Entegrasyonu)
+TRM TICARI EKOSISTEMI - Coğrafi ve Demografik Modül (81 İl Entegrasyonu)
 Odak: Türkiye genelindeki tüm 81 ilin coğrafi, demografik ve sosyo-ekonomik verileri
 """
 import json

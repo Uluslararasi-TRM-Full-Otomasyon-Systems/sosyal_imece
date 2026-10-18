@@ -55,4 +55,4 @@ if __name__ == "__main__":
     res = service.fetch_region_valuation("Aydın", "Kuşadası", "İnönü Blv.")
     mult = service.compute_sosyal_imece_asset_multiplier(res)
     print("Endeksa Test:", res)
-    print("Sosyal İmece Varlık Çarpanı:", mult)
+    print("TRM Ticari Ekosistem Varlık Çarpanı:", mult)

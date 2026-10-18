@@ -2,7 +2,7 @@ import os
 import time
 
 class WindsurfEntegrasyonModulu:
-    def __init__(self, workspace_path="./sosyal-imece-komuta"):
+    def __init__(self, workspace_path="./trm-ticari-komuta"):
         self.workspace_path = workspace_path
         self.target = "magazanolsun"
         self.ajan_sayisi = 200
@@ -21,7 +21,7 @@ class WindsurfEntegrasyonModulu:
         time.sleep(0.5)
         print(f"🤖 {self.ajan_sayisi} Otonom AI Ajan ve Video Ajanı sisteme entegre ediliyor...")
         time.sleep(0.5)
-        print("🚀 Başarılı! Panel, Sosyal İmece otonom ağına ve TRM motoruna bağlandı.")
+        print("🚀 Başarılı! Panel, TRM Ticari Ekosistem otonom ağına ve TRM motoruna bağlandı.")
 
     def calistir(self):
         self.ortam_kontrol()

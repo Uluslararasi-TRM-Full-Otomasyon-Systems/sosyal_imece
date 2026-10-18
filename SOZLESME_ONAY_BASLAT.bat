@@ -1,10 +1,10 @@
 @echo off
 chcp 65001 >nul
-title Sosyal İmece Sözleşme Onay Sistemi
+title TRM Ticari Ekosistem Sözleşme Onay Sistemi
 
 echo.
 echo ========================================
-echo    SOSYAL İMECE SÖZLEŞME ONAY SİSTEMİ
+echo    TRM TICARI EKOSISTEMI SÖZLEŞME ONAY SİSTEMİ
 echo ========================================
 echo.
 echo Streamlit uygulaması başlatılıyor...

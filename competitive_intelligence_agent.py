@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 class CompetitiveIntelligenceAgent:
-    def __init__(self, storage_path="./data/intelligence_records.json", db_path="./data/sosyal_imece.db"):
+    def __init__(self, storage_path="./data/intelligence_records.json", db_path="./data/trm_ticari_analiz.db"):
         self.storage_path = Path(storage_path)
         self.storage_path.parent.mkdir(parents=True, exist_ok=True)
         self.db_path = Path(db_path)

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRM Eko Sistem Asistanı Derya 🌸</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{--wa-bg:#0b141a;--wa-panel:#111b21;--wa-panel-2:#202c33;--wa-border:#2a3942;--wa-green:#00a884;--wa-out:#005c4b;--wa-text:#e9edef;--wa-text-dim:#8696a0;--wa-accent:#00d4a0;--wa-hover:#202c33;}
+  *{box-sizing:border-box;}
+  html,body{height:100%;margin:0;font-family:'Segoe UI',-apple-system,system-ui,sans-serif;}
+  body{background:radial-gradient(circle at 20% 0%,rgba(0,168,132,.08),transparent 45%),radial-gradient(circle at 90% 100%,rgba(0,212,160,.05),transparent 45%),linear-gradient(160deg,#05080c 0%,#0b141a 55%,#05080c 100%);color:var(--wa-text);display:flex;flex-direction:column;overflow:hidden;height:100vh;}
+  ::-webkit-scrollbar{width:8px;height:8px;}::-webkit-scrollbar-thumb{background:#2a3942;border-radius:8px;}
+  .app-shell{display:grid;grid-template-columns:400px 1fr;height:100vh;overflow:hidden;}
+  @media(max-width:900px){.app-shell{grid-template-columns:1fr;position:relative;}.sidebar{position:absolute;inset:0;z-index:20;transform:translateX(0);transition:transform .3s;}.sidebar.hidden-mobile{transform:translateX(-100%);}.mobile-back{display:inline-flex!important;}}
+  .mobile-back{display:none;}
+  .sidebar{background:var(--wa-panel);border-right:1px solid var(--wa-border);display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+  .sidebar-header{padding:16px 18px 12px;border-bottom:1px solid var(--wa-border);background:linear-gradient(180deg,rgba(0,168,132,.06),transparent);flex-shrink:0;}
+  .brand-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+  .brand-logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--wa-green),var(--wa-accent));display:flex;align-items:center;justify-content:center;font-size:19px;box-shadow:0 6px 20px rgba(0,168,132,.35);flex-shrink:0;}
+  .brand-title{font-size:14px;font-weight:800;background:linear-gradient(90deg,#e9edef,var(--wa-accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2;}
+  .brand-sub{font-size:10.5px;color:var(--wa-text-dim);margin-top:2px;display:flex;align-items:center;gap:6px;}
+  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--wa-accent);box-shadow:0 0 8px var(--wa-accent);animation:pulseDot 1.6s ease-in-out infinite;flex-shrink:0;}
+  .live-dot.offline{background:#ff4d5e;box-shadow:0 0 8px #ff4d5e;animation:none;}
+  @keyframes pulseDot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.85);}}
+  .notif-controls{display:flex;align-items:center;gap:8px;margin-top:10px;padding:7px 10px;background:rgba(0,168,132,.05);border:1px solid rgba(0,168,132,.15);border-radius:12px;}
+  .nc-label{font-size:10.5px;color:var(--wa-text-dim);letter-spacing:.06em;text-transform:uppercase;font-weight:600;}
+  .nc-toggle{margin-left:auto;position:relative;width:34px;height:20px;border-radius:12px;background:#2a3942;cursor:pointer;transition:background .25s;border:none;}
+  .nc-toggle::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#8696a0;transition:left .25s,background .25s;}
+  .nc-toggle.on{background:rgba(0,212,160,.3);}.nc-toggle.on::after{left:16px;background:var(--wa-accent);box-shadow:0 0 8px var(--wa-accent);}
+  .nc-btn{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--wa-text-dim);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .2s;}
+  .nc-btn:hover{background:rgba(0,212,160,.15);color:var(--wa-accent);}
+  .search-wrap{position:relative;margin-top:10px;}
+  .search-wrap input{width:100%;padding:10px 14px 10px 38px;background:var(--wa-panel-2);border:1px solid var(--wa-border);border-radius:22px;color:var(--wa-text);font-size:13px;outline:none;}
+  .search-wrap input:focus{border-color:var(--wa-green);box-shadow:0 0 0 3px rgba(0,168,132,.15);}
+  .search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--wa-text-dim);font-size:14px;}
+  .channel-filter{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--wa-border);overflow-x:auto;flex-shrink:0;scrollbar-width:none;}
+  .channel-filter::-webkit-scrollbar{display:none;}
+  .ch-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:16px;font-size:11px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--wa-text-dim);cursor:pointer;white-space:nowrap;transition:all .2s;font-weight:600;}
+  .ch-chip.active{background:linear-gradient(90deg,rgba(0,168,132,.25),rgba(0,212,160,.15));border-color:rgba(0,212,160,.5);color:var(--wa-accent);box-shadow:0 0 12px rgba(0,212,160,.2);}
+  .ch-chip .ch-count{font-size:9.5px;padding:1px 5px;background:rgba(255,255,255,.08);border-radius:8px;font-family:'Consolas',monospace;}
+  .ch-chip.active .ch-count{background:rgba(0,212,160,.25);color:#fff;}
+  .esnaf-list{flex:1;overflow-y:auto;padding:6px 0;}
+  .esnaf-item{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;border-bottom:1px solid rgba(42,57,66,.35);transition:background .15s;position:relative;}
+  .esnaf-item:hover{background:var(--wa-hover);}
+  .esnaf-item.active{background:linear-gradient(90deg,rgba(0,168,132,.14),rgba(0,168,132,.02));border-left:3px solid var(--wa-green);}
+  .esnaf-item.active .esnaf-name{color:var(--wa-accent);}
+  .esnaf-item.unread::after{content:'';position:absolute;left:6px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:var(--wa-accent);box-shadow:0 0 8px var(--wa-accent);animation:pulseDot 1.4s infinite;}
+  .esnaf-item.bumped{animation:itemBump 1.4s;}
+  @keyframes itemBump{0%{background:rgba(0,212,160,.28);}40%{background:rgba(0,212,160,.18);}100%{background:transparent;}}
+  .esnaf-avatar{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;flex-shrink:0;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.3);}
+  .esnaf-avatar::after{content:'';position:absolute;bottom:1px;right:1px;width:12px;height:12px;border-radius:50%;border:2px solid var(--wa-panel);}
+  .esnaf-avatar.online::after{background:var(--wa-accent);box-shadow:0 0 8px var(--wa-accent);}
+  .esnaf-avatar.offline::after{background:#8696a0;}
+  .esnaf-avatar .ch-mini{position:absolute;top:-3px;right:-3px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;background:var(--wa-panel);border:1.5px solid var(--wa-border);}
+  .esnaf-info{flex:1;min-width:0;}
+  .esnaf-name-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:3px;}
+  .esnaf-name{font-size:14px;font-weight:600;color:var(--wa-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .esnaf-preview{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--wa-text-dim);margin-bottom:4px;}
+  .esnaf-preview .pv-text{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .esnaf-preview .pv-time{font-size:10.5px;flex-shrink:0;}
+  .esnaf-badges{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap;}
+  .badge{font-size:9.5px;padding:2px 7px;border-radius:10px;letter-spacing:.05em;font-weight:700;text-transform:uppercase;font-family:'Consolas',monospace;}
+  .badge-code{background:rgba(0,168,132,.15);color:var(--wa-accent);border:1px solid rgba(0,168,132,.35);}
+  .badge-phone{background:rgba(255,255,255,.05);color:var(--wa-text-dim);border:1px solid rgba(255,255,255,.1);}
+  .badge-status-onayli{background:rgba(0,212,160,.15);color:var(--wa-accent);border:1px solid rgba(0,212,160,.35);}
+  .badge-status-beklemede{background:rgba(240,180,41,.15);color:#f0b429;border:1px solid rgba(240,180,41,.35);}
+  .badge-status-pasif{background:rgba(134,150,160,.15);color:#8696a0;border:1px solid rgba(134,150,160,.35);}
+  .list-empty{padding:60px 24px;text-align:center;color:var(--wa-text-dim);font-size:13px;line-height:1.7;}
+  .list-empty .le-icon{font-size:42px;opacity:.35;margin-bottom:14px;display:block;}
+  .list-empty .le-title{color:var(--wa-text);font-weight:700;font-size:14px;margin-bottom:6px;}
+  .list-empty .le-sub{font-size:11.5px;}
+  .list-empty .le-btn{margin-top:16px;padding:8px 16px;background:rgba(0,212,160,.12);border:1px solid rgba(0,212,160,.4);color:var(--wa-accent);border-radius:20px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;}
+  .chat-panel{display:flex;flex-direction:column;background:var(--wa-bg);min-width:0;position:relative;}
+  .chat-header{padding:12px 20px;background:var(--wa-panel-2);border-bottom:1px solid var(--wa-border);display:flex;align-items:center;gap:14px;flex-shrink:0;}
+  .chat-header .esnaf-avatar{width:44px;height:44px;}
+  .chat-header-info{flex:1;min-width:0;}
+  .chat-header-name{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .ch-tag{font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;background:rgba(0,212,160,.15);color:var(--wa-accent);border:1px solid rgba(0,212,160,.35);text-transform:uppercase;font-family:'Consolas',monospace;flex-shrink:0;}
+  .chat-header-status{font-size:11.5px;color:var(--wa-text-dim);display:flex;align-items:center;gap:8px;margin-top:2px;flex-wrap:wrap;}
+  .derya-active{display:inline-flex;align-items:center;gap:5px;color:var(--wa-accent);font-weight:600;}
+  .derya-active::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--wa-accent);box-shadow:0 0 8px var(--wa-accent);animation:pulseDot 1.6s infinite;}
+  .meta-chip{font-size:10.5px;padding:3px 9px;border-radius:12px;font-family:'Consolas',monospace;background:rgba(0,168,132,.12);color:var(--wa-accent);border:1px solid rgba(0,168,132,.3);}
+  .chat-body{flex:1;overflow-y:auto;padding:22px 32px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth;}
+  @media(max-width:700px){.chat-body{padding:16px 14px;}}
+  .msg-row{display:flex;gap:10px;max-width:78%;animation:msgIn .28s;}
+  @keyframes msgIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .msg-row.in{align-self:flex-start;}.msg-row.out{align-self:flex-end;flex-direction:row-reverse;}
+  @media(max-width:700px){.msg-row{max-width:88%;}}
+  .msg-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;background:linear-gradient(135deg,#2a3942,#1f2c34);border:1px solid var(--wa-border);}
+  .msg-avatar.derya{background:radial-gradient(circle,rgba(0,212,160,.3),rgba(0,168,132,.05));border-color:rgba(0,212,160,.5);}
+  .msg-bubble{padding:9px 13px;border-radius:10px;font-size:13.5px;line-height:1.45;word-wrap:break-word;box-shadow:0 1px 3px rgba(0,0,0,.25);min-width:60px;}
+  .msg-row.in .msg-bubble{background:#fff;color:#0b141a;border-top-left-radius:3px;}
+  .msg-row.out .msg-bubble{background:var(--wa-out);color:var(--wa-text);border-top-right-radius:3px;}
+  .msg-bubble .msg-meta{font-size:10px;margin-top:4px;opacity:.6;display:flex;align-items:center;justify-content:flex-end;gap:4px;}
+  .msg-row.in .msg-bubble .msg-meta{color:#667781;}
+  .msg-row.out .msg-bubble .msg-meta{color:#d5ede4;}
+  .msg-check{color:#53bdeb;font-size:12px;}
+  .msg-channel{font-size:9px;padding:1px 5px;border-radius:6px;font-weight:700;font-family:'Consolas',monospace;text-transform:uppercase;display:inline-block;margin-right:5px;}
+  .msg-channel.wa{background:rgba(37,211,102,.15);color:#25d366;}
+  .typing-row{display:flex;gap:10px;align-self:flex-start;max-width:78%;}
+  .typing-bubble{background:#fff;padding:12px 16px;border-radius:10px;border-top-left-radius:3px;display:flex;gap:4px;align-items:center;}
+  .typing-bubble span{width:7px;height:7px;border-radius:50%;background:#667781;animation:typingBounce 1.4s infinite;}
+  .typing-bubble span:nth-child(2){animation-delay:.15s;}.typing-bubble span:nth-child(3){animation-delay:.3s;}
+  @keyframes typingBounce{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-5px);opacity:1;}}
+  .empty-chat{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--wa-text-dim);text-align:center;padding:40px 20px;}
+  .empty-chat-icon{font-size:56px;margin-bottom:18px;opacity:.5;}
+  .empty-chat h2{font-size:19px;color:var(--wa-text);margin:0 0 8px;font-weight:700;}
+  .empty-chat p{font-size:13px;margin:0;max-width:360px;line-height:1.6;}
+  .chat-composer{padding:12px 20px 16px;background:var(--wa-panel-2);border-top:1px solid var(--wa-border);display:flex;align-items:flex-end;gap:10px;flex-shrink:0;}
+  .chat-composer textarea{flex:1;background:var(--wa-panel);border:1px solid var(--wa-border);color:var(--wa-text);border-radius:22px;padding:11px 16px;font-size:13.5px;resize:none;font-family:inherit;outline:none;max-height:120px;min-height:44px;line-height:1.4;}
+  .chat-composer textarea:focus{border-color:var(--wa-green);box-shadow:0 0 0 3px rgba(0,168,132,.15);}
+  .send-btn{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--wa-green),var(--wa-accent));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;box-shadow:0 6px 18px rgba(0,168,132,.4);flex-shrink:0;}
+  .send-btn:active{transform:scale(.93);}.send-btn:disabled{opacity:.4;cursor:not-allowed;}
+  .toast-wrap{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:10px;z-index:999;}
+  .toast{background:#111b21;border-left:4px solid var(--wa-green);padding:12px 18px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.6);font-size:13px;color:var(--wa-text);min-width:240px;animation:slideIn .3s;display:flex;align-items:center;gap:10px;}
+  .toast.err{border-left-color:#ff4d5e;}.toast.warn{border-left-color:#f0b429;}
+  @keyframes slideIn{from{transform:translateX(30px);opacity:0;}to{transform:translateX(0);opacity:1;}}
+  .scroll-to-bottom{position:absolute;bottom:90px;right:24px;width:42px;height:42px;border-radius:50%;background:var(--wa-panel-2);border:1px solid var(--wa-border);color:var(--wa-accent);cursor:pointer;display:none;align-items:center;justify-content:center;z-index:5;}
+  .scroll-to-bottom.show{display:flex;}
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand-row">
+        <div class="brand-logo">🌸</div>
+        <div style="flex:1;min-width:0;">
+          <div class="brand-title">TRM Eko Sistem Asistanı Derya 🌸</div>
+          <div class="brand-sub">
+            <span class="live-dot offline" id="connDot"></span>
+            <span id="connText">Bağlanıyor…</span>
+            <span id="queueCount" style="margin-left:auto;color:var(--wa-accent);font-weight:700;">0</span>
+            <span style="color:var(--wa-text-dim);">kayıt</span>
+          </div>
+        </div>
+      </div>
+      <div class="notif-controls">
+        <span style="font-size:14px;">🔔</span>
+        <span class="nc-label">Sesli Uyarı</span>
+        <button class="nc-btn" id="btnTestSound" title="Sesi Test Et">▶</button>
+        <button class="nc-toggle on" id="btnSoundToggle" title="Aç/Kapat"></button>
+      </div>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Esnaf / işletme ara…" autocomplete="off">
+      </div>
+    </div>
+    <div class="channel-filter" id="channelFilter">
+      <div class="ch-chip active" data-channel="all"><span>🌐</span><span>Tümü</span><span class="ch-count" id="cntAll">0</span></div>
+      <div class="ch-chip" data-channel="whatsapp"><span>💬</span><span>WhatsApp</span><span class="ch-count" id="cntWa">0</span></div>
+      <div class="ch-chip" data-channel="telegram"><span>✈️</span><span>Telegram</span><span class="ch-count" id="cntTg">0</span></div>
+      <div class="ch-chip" data-channel="instagram"><span>📸</span><span>Instagram</span><span class="ch-count" id="cntIg">0</span></div>
+      <div class="ch-chip" data-channel="web"><span>🌐</span><span>Web Formu</span><span class="ch-count" id="cntWeb">0</span></div>
+    </div>
+    <div class="esnaf-list" id="esnafList">
+      <div class="list-empty"><span class="le-icon">⏳</span><div class="le-title">Yükleniyor…</div><div class="le-sub">Esnaf kayıtları getiriliyor.</div></div>
+    </div>
+  </aside>
+
+  <main class="chat-panel" id="chatPanel">
+    <div class="chat-header" id="chatHeader" style="display:none;">
+      <button class="mobile-back" onclick="toggleSidebar()" style="background:transparent;border:none;color:var(--wa-accent);font-size:20px;cursor:pointer;padding:4px 8px;margin-right:4px;">←</button>
+      <div class="esnaf-avatar online" id="headerAvatar">?</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name"><span id="headerNameText">—</span><span class="ch-tag" id="headerChannel">WA</span></div>
+        <div class="chat-header-status">
+          <span class="derya-active">Derya Aktif 🌸</span>
+          <span style="opacity:.4;">·</span>
+          <span id="headerPhone">—</span>
+        </div>
+      </div>
+      <div class="chat-header-meta"><span class="meta-chip" id="headerCode">—</span></div>
+    </div>
+
+    <div class="chat-body" id="chatBody">
+      <div class="empty-chat" id="emptyChat">
+        <div class="empty-chat-icon">🌸</div>
+        <h2>TRM Eko Sistem Asistanı Derya</h2>
+        <p>Soldan bir esnaf seçin. Derya tüm kanallardan gelen mesajları 7/24 otonom yönetir.</p>
+      </div>
+    </div>
+
+    <button class="scroll-to-bottom" id="scrollBtn" onclick="scrollToBottom(true)" title="En alta">↓</button>
+
+    <div class="chat-composer" id="composer" style="display:none;">
+      <textarea id="msgInput" rows="1" placeholder="Derya'ya bir mesaj yazın… (Enter: gönder)"></textarea>
+      <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Gönder">➤</button>
+    </div>
+  </main>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+(function(){
+  "use strict";
+  const API_BASE = "http://localhost:5000";
+
+  const FALLBACK_ESNAF = {
+    id: -1,
+    ad: "Test İşletmesi (Kızımın Hattı)",
+    isletme: "Test İşletmesi (Kızımın Hattı)",
+    telefon: "905300000000",
+    kod: "TRM-TEST01",
+    durum: "onayli",
+    kanal: "whatsapp",
+    online: true,
+    son_mesaj: "Yerel yedek kayıt — API'ye bağlanılamadı",
+    son_mesaj_zamani: null
+  };
+
+  const STATE = {
+    esnaflar: [], aktifEsnaf: null, mesajlar: [],
+    loadingMsgs: false, sending: false, connOk: false,
+    activeChannel: "all", soundEnabled: true,
+    unread: {}, lastActivity: {}, bumpQueue: new Set(), fallbackUsed: false
+  };
+  window.TRM_STATE = STATE;
+
+  function nowMs(){ return Date.now(); }
+  function activityOf(e){
+    if(!e) return 0;
+    if(STATE.lastActivity[e.id] !== undefined) return STATE.lastActivity[e.id];
+    if(e.son_mesaj_zamani){
+      const t = new Date(e.son_mesaj_zamani).getTime();
+      if(!isNaN(t)) return t;
+    }
+    return 0;
+  }
+  function markActivity(id, opts){
+    opts = opts || {};
+    STATE.lastActivity[id] = nowMs();
+    if(opts.bump) STATE.bumpQueue.add(id);
+  }
+  function sortByRecent(list){ return list.slice().sort((a,b)=>activityOf(b)-activityOf(a)); }
+
+  function timeFromIso(iso){
+    if(!iso) return "";
+    try{ const d = new Date(iso); if(isNaN(d.getTime())) return "";
+      return d.toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"});
+    }catch(e){ return ""; }
+  }
+  function smartTime(iso){
+    if(!iso) return "";
+    try{
+      const d = new Date(iso); if(isNaN(d.getTime())) return "";
+      const diff = nowMs() - d.getTime();
+      if(diff < 60*1000) return "şimdi";
+      if(diff < 60*60*1000) return Math.floor(diff/60000)+" dk önce";
+      if(diff < 24*60*60*1000) return Math.floor(diff/3600000)+" sa önce";
+      return d.toLocaleDateString("tr-TR",{day:"2-digit",month:"2-digit"});
+    }catch(e){ return ""; }
+  }
+
+  const DeryaSound = (function(){
+    let ctx = null;
+    function ensure(){
+      if(ctx) return ctx;
+      try{ const AC = window.AudioContext || window.webkitAudioContext; if(!AC) return null; ctx = new AC(); }
+      catch(e){ return null; }
+      return ctx;
+    }
+    function resume(){ const c = ensure(); if(c && c.state === "suspended") c.resume().catch(()=>{}); }
+    function unlock(){ resume(); }
+    function play(kind, channel){
+      if(!STATE.soundEnabled) return;
+      const c = ensure(); if(!c) return; resume();
+      let notes = kind === "derya"
+        ? [{f:880,t:0,d:0.14},{f:1318.5,t:0.13,d:0.18}]
+        : [{f:740,t:0,d:0.12},{f:1108.73,t:0.11,d:0.18}];
+      const master = c.createGain(); master.gain.value = 0.0001; master.connect(c.destination);
+      const now = c.currentTime;
+      try{
+        master.gain.setValueAtTime(0.0001, now);
+        master.gain.exponentialRampToValueAtTime(0.14, now+0.02);
+        master.gain.exponentialRampToValueAtTime(0.0001, now+0.45);
+      }catch(e){}
+      notes.forEach(n=>{
+        const o = c.createOscillator(); const g = c.createGain();
+        o.type = "sine"; o.frequency.value = n.f;
+        const s = now+n.t, e = s+n.d;
+        g.gain.setValueAtTime(0.0001, s);
+        g.gain.exponentialRampToValueAtTime(0.9, s+0.015);
+        g.gain.exponentialRampToValueAtTime(0.0001, e);
+        o.connect(g); g.connect(master);
+        o.start(s); o.stop(e+0.05);
+      });
+    }
+    return { unlock, play };
+  })();
+  window.DeryaSound = DeryaSound;
+
+  function $(id){ return document.getElementById(id); }
+  function escapeHtml(s){
+    return String(s ?? "").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+  }
+  function initialFromName(name){
+    if(!name) return "?";
+    const t = String(name).trim();
+    return t ? t[0].toUpperCase() : "?";
+  }
+  function randomPastel(seed){
+    const p = ["#00a884","#25d366","#128c7e","#34b7f1","#8e44ad","#e67e22","#e74c3c","#16a085","#2c3e50","#d35400","#c0392b","#2980b9","#27ae60","#f39c12"];
+    let h = 0; const s = String(seed ?? "x");
+    for(let i=0;i<s.length;i++) h = (h*31 + s.charCodeAt(i)) % p.length;
+    return p[Math.abs(h) % p.length];
+  }
+  function toast(msg, type="ok"){
+    const wrap = $("toastWrap"); if(!wrap) return;
+    const el = document.createElement("div");
+    el.className = "toast " + (type === "ok" ? "" : type);
+    const icon = type === "err" ? "❌" : type === "warn" ? "⚠️" : "🔔";
+    el.innerHTML = `<span>${icon}</span><span>${escapeHtml(msg)}</span>`;
+    wrap.appendChild(el);
+    setTimeout(()=>{ el.style.transition="opacity .3s,transform .3s"; el.style.opacity="0"; el.style.transform="translateX(30px)"; setTimeout(()=>el.remove(),320); }, 3800);
+  }
+
+  const CHANNELS = {
+    whatsapp:{emoji:"💬",label:"WhatsApp",short:"WA",color:"#25d366",cls:"wa"},
+    telegram:{emoji:"✈️",label:"Telegram",short:"TG",color:"#29b6f6",cls:"tg"},
+    instagram:{emoji:"📸",label:"Instagram",short:"IG",color:"#e1306c",cls:"ig"},
+    web:{emoji:"🌐",label:"Web Formu",short:"WEB",color:"#ffb800",cls:"web"}
+  };
+  function normalizeChannel(ch){
+    const c = String(ch||"").toLowerCase().trim();
+    if(c === "tg" || c === "telegram") return "telegram";
+    if(c === "ig" || c === "instagram" || c === "insta") return "instagram";
+    if(c === "web" || c === "webform" || c === "form") return "web";
+    return "whatsapp";
+  }
+
+  async function apiGet(path, timeoutMs=5000){
+    const ctrl = new AbortController();
+    const tid = setTimeout(()=>ctrl.abort(), timeoutMs);
+    try{
+      const res = await fetch(API_BASE+path,{method:"GET",headers:{"Accept":"application/json"},signal:ctrl.signal,cache:"no-store"});
+      clearTimeout(tid);
+      if(!res.ok) throw new Error("HTTP "+res.status);
+      return {ok:true, data: await res.json()};
+    }catch(e){ clearTimeout(tid); return {ok:false,error:e.message}; }
+  }
+  async function apiPost(path, body, timeoutMs=15000){
+    const ctrl = new AbortController();
+    const tid = setTimeout(()=>ctrl.abort(), timeoutMs);
+    try{
+      const res = await fetch(API_BASE+path,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(body),signal:ctrl.signal});
+      clearTimeout(tid);
+      if(!res.ok) throw new Error("HTTP "+res.status);
+      return {ok:true, data: await res.json()};
+    }catch(e){ clearTimeout(tid); return {ok:false,error:e.message}; }
+  }
+
+  async function checkConn(){
+    const r = await apiGet("/api/esnaflar", 4000);
+    STATE.connOk = r.ok;
+    const dot = $("connDot"); const txt = $("connText"); if(!txt) return;
+    if(r.ok){
+      if(dot) dot.classList.remove("offline");
+      txt.textContent = "Canlı bağlantı aktif";
+      txt.style.color = "var(--wa-accent)";
+    } else {
+      if(dot) dot.classList.add("offline");
+      txt.textContent = "API bağlantısı yok (yerel yedek aktif)";
+      txt.style.color = "#ff4d5e";
+    }
+  }
+
+  async function loadEsnaflar(){
+    const wrap = $("esnafList");
+    wrap.innerHTML = `<div class="list-empty"><span class="le-icon">⏳</span><div class="le-title">Yükleniyor…</div><div class="le-sub">Esnaf kayıtları getiriliyor.</div></div>`;
+    const r = await apiGet("/api/esnaflar", 6000);
+    let list = [];
+    if(r.ok){
+      if(Array.isArray(r.data)) list = r.data;
+      else if(r.data && Array.isArray(r.data.esnaflar)) list = r.data.esnaflar;
+      else if(r.data && Array.isArray(r.data.data)) list = r.data.data;
+    }
+    STATE.esnaflar = list.map(e => {
+      const copy = Object.assign({}, e);
+      copy.kanal = normalizeChannel(copy.kanal);
+      if(!copy.ad && copy.isletme) copy.ad = copy.isletme;
+      return copy;
+    });
+
+    if(!STATE.esnaflar.length){
+      STATE.fallbackUsed = true;
+      STATE.esnaflar = [Object.assign({}, FALLBACK_ESNAF)];
+      console.warn("[TRM] API boş → yerel test esnafı yüklendi:", FALLBACK_ESNAF.kod);
+    } else {
+      const hasTest = STATE.esnaflar.some(e =>
+        String(e.telefon||"").replace(/\D/g,"") === "905300000000" || e.kod === "TRM-TEST01"
+      );
+      if(!hasTest){
+        const fb = Object.assign({}, FALLBACK_ESNAF);
+        fb.son_mesaj = "Yerel yedek test kaydı";
+        STATE.esnaflar.push(fb);
+        console.warn("[TRM] Test esnafı API'de yok → yedek eklendi.");
+      }
+    }
+
+    STATE.esnaflar.forEach(e => {
+      if(e.son_mesaj_zamani){
+        const t = new Date(e.son_mesaj_zamani).getTime();
+        if(!isNaN(t)) STATE.lastActivity[e.id] = t;
+      }
+    });
+
+    updateChannelCounts();
+    renderEsnafList();
+  }
+
+  function updateChannelCounts(){
+    const c = {all:0, whatsapp:0, telegram:0, instagram:0, web:0};
+    STATE.esnaflar.forEach(e => {
+      c.all++; const ch = normalizeChannel(e.kanal);
+      if(c[ch] !== undefined) c[ch]++;
+    });
+    const map = {cntAll:c.all,cntWa:c.whatsapp,cntTg:c.telegram,cntIg:c.instagram,cntWeb:c.web};
+    Object.keys(map).forEach(id=>{ const el = $(id); if(el) el.textContent = map[id]; });
+    const q = $("queueCount"); if(q) q.textContent = c.all;
+  }
+
+  function esnafDurumSinif(d){
+    d = String(d||"").toLowerCase();
+    if(d === "onayli" || d === "aktif") return "onayli";
+    if(d === "beklemede" || d === "pending") return "beklemede";
+    return "pasif";
+  }
+  function esnafDurumEtiket(d){
+    d = String(d||"").toLowerCase();
+    if(d === "onayli" || d === "aktif") return "ONAYLI";
+    if(d === "beklemede" || d === "pending") return "BEKLEMEDE";
+    return "PASİF";
+  }
+
+  function renderEsnafList(){
+    const wrap = $("esnafList"); if(!wrap) return;
+    if(!STATE.esnaflar.length){
+      wrap.innerHTML = `<div class="list-empty"><span class="le-icon">📭</span><div class="le-title">Kayıtlı esnaf yok</div><div class="le-sub">Backend'de kayıtlı esnaf bulunamadı.</div><button class="le-btn" onclick="TRM_refreshEsnaflar()">🔄 Yenile</button></div>`;
+      return;
+    }
+    const q = ($("searchInput").value||"").toLowerCase().trim();
+    const filterCh = STATE.activeChannel;
+    const filtered = STATE.esnaflar.filter(e => {
+      if(filterCh !== "all" && normalizeChannel(e.kanal) !== filterCh) return false;
+      if(!q) return true;
+      return (String(e.ad||e.isletme||"").toLowerCase().includes(q) ||
+              String(e.kod||"").toLowerCase().includes(q) ||
+              String(e.telefon||"").toLowerCase().includes(q));
+    });
+    if(!filtered.length){
+      wrap.innerHTML = `<div class="list-empty"><span class="le-icon">🔍</span><div class="le-title">Sonuç bulunamadı</div><div class="le-sub">Arama kriterine uyan esnaf yok.</div></div>`;
+      return;
+    }
+    const sorted = sortByRecent(filtered);
+    const RECENT_MS = 5*60*1000;
+
+    wrap.innerHTML = sorted.map(e => {
+      const isActive = STATE.aktifEsnaf && STATE.aktifEsnaf.id === e.id;
+      const avatarColor = randomPastel(e.ad || e.isletme || e.id);
+      const online = e.online !== false;
+      const durum = esnafDurumSinif(e.durum);
+      const durumEt = esnafDurumEtiket(e.durum);
+      const ch = normalizeChannel(e.kanal);
+      const chMeta = CHANNELS[ch] || CHANNELS.whatsapp;
+      const unread = STATE.unread[e.id];
+      const lastTimeIso = e.son_mesaj_zamani || null;
+      const isRecent = (nowMs() - activityOf(e)) < RECENT_MS;
+      const previewText = e.son_mesaj ? e.son_mesaj : "Henüz mesaj yok";
+      const previewTime = lastTimeIso ? smartTime(lastTimeIso) : "";
+      const isBumping = STATE.bumpQueue.has(e.id);
+      const isFallback = e.id === -1;
+      return `
+        <div class="esnaf-item ${isActive?"active":""} ${unread?"unread":""} ${isRecent?"recent":""} ${isBumping?"bumped":""}"
+             data-esnaf-id="${e.id}" onclick="TRM_selectEsnaf(${e.id})">
+          <div class="esnaf-avatar ${online?"online":"offline"}" style="background:linear-gradient(135deg,${avatarColor},${avatarColor}cc);">
+            ${escapeHtml(initialFromName(e.ad||e.isletme))}
+            <div class="ch-mini" title="${chMeta.label}" style="color:${chMeta.color};">${chMeta.emoji}</div>
+          </div>
+          <div class="esnaf-info">
+            <div class="esnaf-name-row"><span class="esnaf-name">${escapeHtml(e.ad||e.isletme||"Bilinmeyen")}</span></div>
+            <div class="esnaf-preview"><span class="pv-text">${escapeHtml(previewText)}</span><span class="pv-time">${escapeHtml(previewTime)}</span></div>
+            <div class="esnaf-badges">
+              <span class="badge badge-code">${escapeHtml(e.kod||("TRM-"+e.id))}</span>
+              ${e.telefon?`<span class="badge badge-phone">${escapeHtml(e.telefon)}</span>`:""}
+              <span class="badge badge-status-${durum}">${durumEt}</span>
+              ${isFallback?`<span class="badge" style="background:rgba(240,180,41,.15);color:#f0b429;border:1px solid rgba(240,180,41,.35);">YEDEK</span>`:""}
+            </div>
+          </div>
+        </div>`;
+    }).join("");
+
+    if(STATE.bumpQueue.size){
+      setTimeout(()=>{
+        STATE.bumpQueue.clear();
+        document.querySelectorAll(".esnaf-item.bumped").forEach(el=>el.classList.remove("bumped"));
+      }, 1500);
+    }
+  }
+
+  async function selectEsnaf(id){
+    const esnaf = STATE.esnaflar.find(e => e.id === id);
+    if(!esnaf) return;
+    STATE.aktifEsnaf = esnaf;
+    delete STATE.unread[id];
+    DeryaSound.unlock();
+    renderEsnafList();
+
+    const avatarColor = randomPastel(esnaf.ad||esnaf.isletme||esnaf.id);
+    const chMeta = CHANNELS[normalizeChannel(esnaf.kanal)] || CHANNELS.whatsapp;
+    const hAv = $("headerAvatar");
+    hAv.textContent = initialFromName(esnaf.ad||esnaf.isletme);
+    hAv.style.background = `linear-gradient(135deg,${avatarColor},${avatarColor}cc)`;
+    hAv.className = "esnaf-avatar " + (esnaf.online !== false ? "online" : "offline");
+    $("headerNameText").textContent = esnaf.ad||esnaf.isletme||"Bilinmeyen";
+    $("headerChannel").textContent = chMeta.short;
+    $("headerChannel").style.color = chMeta.color;
+    $("headerChannel").style.borderColor = chMeta.color+"66";
+    $("headerChannel").style.background = chMeta.color+"22";
+    $("headerPhone").textContent = esnaf.telefon || "Telefon yok";
+    $("headerCode").textContent = esnaf.kod || ("TRM-"+esnaf.id);
+    $("chatHeader").style.display = "flex";
+    $("composer").style.display = "flex";
+
+    if(window.innerWidth <= 900) $("sidebar").classList.add("hidden-mobile");
+    await loadMessages(id);
+  }
+
+  function toggleSidebar(){
+    const sb = $("sidebar"); if(sb) sb.classList.toggle("hidden-mobile");
+  }
+
+  async function loadMessages(esnafId){
+    const body = $("chatBody");
+    body.innerHTML = `<div class="empty-chat"><div class="empty-chat-icon">📨</div><h2>Mesajlar yükleniyor</h2><p>Derya sohbet geçmişini hazırlıyor…</p></div>`;
+    STATE.loadingMsgs = true;
+
+    if(esnafId === -1){
+      STATE.mesajlar = []; STATE.loadingMsgs = false; renderMessages(); return;
+    }
+
+    const r = await apiGet("/api/mesajlar/"+esnafId, 7000);
+    let mesajlar = [];
+    if(r.ok){
+      if(Array.isArray(r.data)) mesajlar = r.data;
+      else if(r.data && Array.isArray(r.data.mesajlar)) mesajlar = r.data.mesajlar;
+      else if(r.data && Array.isArray(r.data.data)) mesajlar = r.data.data;
+    }
+    const defaultCh = normalizeChannel(STATE.aktifEsnaf?.kanal);
+    mesajlar.forEach(m => { if(!m.kanal) m.kanal = defaultCh; });
+    STATE.mesajlar = mesajlar;
+    STATE.loadingMsgs = false;
+    renderMessages();
+
+    if(mesajlar.length){
+      const last = mesajlar[mesajlar.length-1];
+      if(last && last.zaman){
+        const t = new Date(last.zaman).getTime();
+        if(!isNaN(t) && t > (STATE.lastActivity[esnafId]||0)) STATE.lastActivity[esnafId] = t;
+      }
+      const aktif = STATE.esnaflar.find(x => x.id === esnafId);
+      const son = mesajlar[mesajlar.length-1];
+      if(aktif && son){
+        aktif.son_mesaj = String(son.icerik||son.mesaj||"").slice(0,80);
+        aktif.son_mesaj_zamani = son.zaman || aktif.son_mesaj_zamani;
+      }
+      renderEsnafList();
+    }
+  }
+
+  function renderMessages(){
+    const body = $("chatBody");
+    if(!STATE.mesajlar.length){
+      body.innerHTML = `<div class="empty-chat"><div class="empty-chat-icon">🌸</div><h2>Henüz mesaj yok</h2><p>İlk mesajı gönderin — Derya saniyeler içinde yanıtlayacak.</p></div>`;
+      return;
+    }
+    body.innerHTML = STATE.mesajlar.map(m => renderMessageBubble(m)).join("");
+    scrollToBottom(false);
+  }
+
+  function renderMessageBubble(m){
+    const yon = (m.yon === "out" || m.yon === "giden" || m.yon === "esnaf") ? "out" : "in";
+    const icerik = escapeHtml(m.icerik || m.mesaj || m.text || "");
+    const zaman = timeFromIso(m.zaman || m.tarih);
+    const checkIcon = yon === "out" ? `<span class="msg-check">✓✓</span>` : "";
+    const ch = normalizeChannel(m.kanal);
+    const chMeta = CHANNELS[ch] || CHANNELS.whatsapp;
+    const chBadge = `<span class="msg-channel ${chMeta.cls}">${chMeta.emoji} ${chMeta.short}</span>`;
+    if(yon === "in"){
+      return `<div class="msg-row in"><div class="msg-avatar derya">🌸</div><div class="msg-bubble"><div>${chBadge}${icerik}</div><div class="msg-meta">${escapeHtml(zaman)}</div></div></div>`;
+    }
+    return `<div class="msg-row out"><div class="msg-avatar">🏪</div><div class="msg-bubble"><div>${chBadge}${icerik}</div><div class="msg-meta">${escapeHtml(zaman)} ${checkIcon}</div></div></div>`;
+  }
+
+  function showTyping(){
+    const body = $("chatBody");
+    const empty = body.querySelector(".empty-chat");
+    if(empty) empty.remove();
+    const el = document.createElement("div");
+    el.className = "typing-row"; el.id = "typingIndicator";
+    el.innerHTML = `<div class="msg-avatar derya">🌸</div><div class="typing-bubble"><span></span><span></span><span></span></div>`;
+    body.appendChild(el); scrollToBottom(false);
+  }
+  function hideTyping(){ const el = $("typingIndicator"); if(el) el.remove(); }
+
+  async function sendMessage(){
+    if(STATE.sending) return;
+    const inp = $("msgInput");
+    const text = (inp.value||"").trim();
+    if(!text) return;
+    if(!STATE.aktifEsnaf){ toast("Önce bir esnaf seçin","warn"); return; }
+    DeryaSound.unlock();
+
+    STATE.sending = true;
+    $("sendBtn").disabled = true;
+    inp.value = ""; inp.style.height = "auto";
+
+    const aktifKanal = normalizeChannel(STATE.aktifEsnaf.kanal);
+    const esnafId = STATE.aktifEsnaf.id;
+    const myMsg = {id:"tmp-"+Date.now(),yon:"out",kanal:aktifKanal,icerik:text,zaman:new Date().toISOString()};
+    const empty = $("chatBody").querySelector(".empty-chat");
+    if(empty) empty.remove();
+    STATE.mesajlar.push(myMsg);
+    $("chatBody").insertAdjacentHTML("beforeend", renderMessageBubble(myMsg));
+    scrollToBottom(false);
+
+    STATE.aktifEsnaf.son_mesaj = text.slice(0,80);
+    STATE.aktifEsnaf.son_mesaj_zamani = myMsg.zaman;
+    markActivity(esnafId, {bump:false});
+    renderEsnafList();
+    showTyping();
+
+    if(esnafId === -1){
+      await new Promise(r => setTimeout(r, 900));
+      hideTyping(); STATE.sending = false; $("sendBtn").disabled = false;
+      const cevapText = `Mesajınız yerel test modunda kaydedildi: "${text}". API bağlandığında WhatsApp üzerinden iletilecek.`;
+      const deryaMsg = {id:"d-"+Date.now(),yon:"in",kanal:aktifKanal,icerik:cevapText,zaman:new Date().toISOString()};
+      STATE.mesajlar.push(deryaMsg);
+      $("chatBody").insertAdjacentHTML("beforeend", renderMessageBubble(deryaMsg));
+      scrollToBottom(false);
+      DeryaSound.play("derya", aktifKanal);
+      toast("Yerel modda yanıt üretildi (API yok)","warn");
+      inp.focus(); return;
+    }
+
+    const r = await apiPost("/api/mesaj_gonder", {esnaf_id:esnafId, mesaj:text, kanal:aktifKanal});
+    hideTyping(); STATE.sending = false; $("sendBtn").disabled = false;
+
+    if(!r.ok || !r.data){
+      toast("Mesaj gönderilemedi · sunucu yanıt vermedi","err");
+      inp.focus(); return;
+    }
+    const cevapText = r.data.cevap || r.data.yanit || r.data.response || r.data.message;
+    const cevapKanal = r.data.kanal ? normalizeChannel(r.data.kanal) : aktifKanal;
+    const cevapZaman = r.data.zaman || new Date().toISOString();
+    if(!cevapText){ toast("Sunucu yanıtı boş geldi","warn"); inp.focus(); return; }
+
+    const deryaMsg = {id:"d-"+Date.now(),yon:"in",kanal:cevapKanal,icerik:cevapText,zaman:cevapZaman};
+    STATE.mesajlar.push(deryaMsg);
+    $("chatBody").insertAdjacentHTML("beforeend", renderMessageBubble(deryaMsg));
+    scrollToBottom(false);
+
+    const aktifRef = STATE.esnaflar.find(e => e.id === esnafId);
+    if(aktifRef){
+      aktifRef.son_mesaj = cevapText.slice(0,80);
+      aktifRef.son_mesaj_zamani = cevapZaman;
+      markActivity(esnafId, {bump:true});
+      renderEsnafList();
+    }
+    DeryaSound.play("derya", cevapKanal);
+    if(r.data.wa_gonderildi === false){
+      toast("Mesaj kaydedildi ama WhatsApp'a iletilemedi: "+(r.data.hata||""),"warn");
+    }
+    inp.focus();
+  }
+
+  function scrollToBottom(manual){
+    const body = $("chatBody"); if(!body) return;
+    body.scrollTo({top:body.scrollHeight,behavior:manual?"smooth":"auto"});
+    setTimeout(()=>{ const sb = $("scrollBtn"); if(sb) sb.classList.remove("show"); },50);
+  }
+  function onScrollCheck(){
+    const body = $("chatBody"); if(!body) return;
+    const btn = $("scrollBtn");
+    const near = (body.scrollHeight - body.scrollTop - body.clientHeight) < 80;
+    if(near) btn.classList.remove("show"); else btn.classList.add("show");
+  }
+  function autoGrow(){
+    const ta = $("msgInput");
+    ta.style.height = "auto";
+    ta.style.height = Math.min(ta.scrollHeight,120) + "px";
+  }
+
+  function bindChannelFilter(){
+    const wrap = $("channelFilter"); if(!wrap) return;
+    wrap.querySelectorAll(".ch-chip").forEach(chip=>{
+      chip.addEventListener("click", ()=>{
+        wrap.querySelectorAll(".ch-chip").forEach(c=>c.classList.remove("active"));
+        chip.classList.add("active");
+        STATE.activeChannel = chip.dataset.channel || "all";
+        renderEsnafList();
+      });
+    });
+  }
+
+  function bindSoundToggle(){
+    const btn = $("btnSoundToggle"); if(!btn) return;
+    btn.classList.toggle("on", STATE.soundEnabled);
+    btn.addEventListener("click", ()=>{
+      STATE.soundEnabled = !STATE.soundEnabled;
+      btn.classList.toggle("on", STATE.soundEnabled);
+      DeryaSound.unlock();
+      if(STATE.soundEnabled){ DeryaSound.play("incoming","whatsapp"); toast("Sesli uyarı açıldı","ok"); }
+      else toast("Sesli uyarı kapatıldı","warn");
+    });
+    const t = $("btnTestSound");
+    if(t) t.addEventListener("click", ()=>{ DeryaSound.unlock(); DeryaSound.play("incoming","whatsapp"); });
+  }
+
+  let liveTickTimer = null;
+  function startLiveTick(){
+    if(liveTickTimer) return;
+    liveTickTimer = setInterval(()=>renderEsnafList(), 30000);
+  }
+
+  async function refreshEsnaflar(){ await checkConn(); await loadEsnaflar(); }
+  window.TRM_refreshEsnaflar = refreshEsnaflar;
+
+  document.addEventListener("DOMContentLoaded", async function(){
+    $("searchInput").addEventListener("input", ()=>renderEsnafList());
+    const ta = $("msgInput");
+    ta.addEventListener("input", autoGrow);
+    ta.addEventListener("keydown", (e)=>{
+      if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); sendMessage(); }
+    });
+    $("chatBody").addEventListener("scroll", onScrollCheck);
+
+    const unlockOnce = ()=>{ DeryaSound.unlock(); document.removeEventListener("click", unlockOnce); document.removeEventListener("keydown", unlockOnce); };
+    document.addEventListener("click", unlockOnce, {once:true});
+    document.addEventListener("keydown", unlockOnce, {once:true});
+
+    bindChannelFilter();
+    bindSoundToggle();
+
+    await checkConn();
+    await loadEsnaflar();
+
+    if(STATE.esnaflar.length && window.innerWidth > 900){
+      selectEsnaf(STATE.esnaflar[0].id);
+    }
+
+    setInterval(checkConn, 15000);
+    window.addEventListener("resize", ()=>{
+      if(window.innerWidth > 900) $("sidebar").classList.remove("hidden-mobile");
+    });
+    startLiveTick();
+  });
+
+  window.TRM_selectEsnaf = selectEsnaf;
+  window.sendMessage = sendMessage;
+  window.toggleSidebar = toggleSidebar;
+  window.scrollToBottom = scrollToBottom;
+})();
+</script>
+
+</body>
+</html>

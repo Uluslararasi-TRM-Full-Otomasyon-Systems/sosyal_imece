@@ -8,6 +8,7 @@ import os
 import json
 from datetime import datetime
 import threading
+from value_preprocessor import preprocess_metric_value
 
 app = Flask(__name__)
 
@@ -60,8 +61,8 @@ def metrics_realtime():
         "whatsapp_rate": 14,
         "ai_score": 99.1,
         "smda_success": 85.0,
-        "cross_delay": 2.5,
-        "errors": 1,
+        "cross_delay": preprocess_metric_value(2.5),
+        "errors": preprocess_metric_value(1),
         "trm_sync": 95.0
     })
 

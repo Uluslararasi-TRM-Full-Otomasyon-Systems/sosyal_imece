@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Sosyal İmece Dünya - Küresel Anlatı Ajan Ordusu
+TRM Ticari Dünya - Küresel Anlatı Ajan Ordusu
 Ajan: PublicBenefitAnalystAgent
 Amaç: Projenin ekonomik ve toplumsal katkılarını şeffaf şekilde raporlar.
 Versiyon: 1.0.0
@@ -18,7 +18,7 @@ class PublicBenefitAnalystAgent:
     """
     PublicBenefitAnalystAgent - Projenin ekonomik ve toplumsal katkılarını şeffaf şekilde raporlar.
     
-    Bu ajan, Sosyal İmece projesinin ekonomik ve toplumsal etkilerini analiz eder, 
+    Bu ajan, TRM Ticari Ekosistem projesinin ekonomik ve toplumsal etkilerini analiz eder, 
     şeffaf raporlar hazırlar ve kamuoyuyla paylaşır. Gelir dağılımı, burs 
     dağıtımı, sosyal güvenlik ve toplumsal fayda gibi metrikleri izler.
     """
@@ -222,7 +222,7 @@ class PublicBenefitAnalystAgent:
         rapor = {
             "rapor_tarihi": datetime.now().isoformat(),
             "rapor_tipi": "kamuoyu_saydamlik_raporu",
-            "proje_adi": "Sosyal İmece",
+            "proje_adi": "TRM Ticari Ekosistem",
             "dernek": "UTEYKDER",
             "ekonomik_ozet": {
                 "toplam_gelir": etki_analizi["ekonomik_etki"]["yaratilan_gelir"],
@@ -238,7 +238,7 @@ class PublicBenefitAnalystAgent:
             "etki_skoru": etki_analizi["etki_skoru"],
             "burs_dagitimi": self.burs_dagitimi,
             "saydamlik_beyani": """
-Bu rapor, Sosyal İmece projesinin tüm ekonomik ve toplumsal faaliyetlerini 
+Bu rapor, TRM Ticari Ekosistem projesinin tüm ekonomik ve toplumsal faaliyetlerini 
 şeffaf bir şekilde ortaya koymaktadır. Tüm gelirler ve giderler bağımsız 
 denetime tabidir. Burs dağıtımları tamamen şeffaftır ve kamuoyuyla paylaşılmaktadır.
             """

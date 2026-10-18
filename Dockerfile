@@ -1,5 +1,5 @@
 # 1. Başlangıç noktası: Hafif bir Python sürümü kullanıyoruz
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 # 2. Çalışma dizini: Bulut sunucusunda kodların duracağı yer
 WORKDIR /app

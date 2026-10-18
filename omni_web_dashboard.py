@@ -21,7 +21,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
         <html lang="tr">
         <head>
             <meta charset="UTF-8">
-            <title>Uluslararası TRM & Sosyal İmece - Canlı Omni Panel</title>
+            <title>Uluslararası TRM & TRM Ticari Ekosistem - Canlı Omni Panel</title>
             <style>
                 body {{ background-color: #0f172a; color: #f8fafc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; }}
                 .container {{ max-width: 900px; margin: 0 auto; background: #1e293b; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }}
@@ -33,7 +33,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
         </head>
         <body>
             <div class="container">
-                <h1>🌐 Uluslararası TRM & Sosyal İmece <span class="status-badge">CANLI & AKTİF</span></h1>
+                <h1>🌐 Uluslararası TRM & TRM Ticari Ekosistem <span class="status-badge">CANLI & AKTİF</span></h1>
                 <p>60 Milyonluk Dağıtık Ağ, 100 Hesap Otonom Swarm ve Bulut Nabız Paneli</p>
                 <div class="card">
                     <h3>📡 Son Bulut Nabız Verisi (Cloud Pulse)</h3>

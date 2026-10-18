@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-SOSYAL İMECE - İtiraz ve Geri Bildirim Denetçi Ajanı
+TRM TICARI EKOSISTEMI - İtiraz ve Geri Bildirim Denetçi Ajanı
 Görev: Üyelerin sistem kararlarına karşı yükledikleri gider fişlerini, faturaları 
 veya haklılık beyanlarını otonom olarak inceler, doğrular ve katsayı güncellemesi önerir.
 """

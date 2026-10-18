@@ -2,7 +2,7 @@
 from datetime import datetime
 
 ANAC_SELAMLAMA_SABLONLARI = [
-    "Hoş geldin evladım, gayet sakin dinliyorum seni. Anlat bakalım, bugün hayatında ne var ne yok, Sosyal İmece yolculuğunda sana nasıl destek olabiliriz?",
+    "Hoş geldin evladım, gayet sakin dinliyorum seni. Anlat bakalım, bugün hayatında ne var ne yok, TRM Ticari Ekosistem yolculuğunda sana nasıl destek olabiliriz?",
     "Merhaba değerli büyüğüm/kardeşim, hoş geldin sefalar getirdin. Burası hepimizin ocağı. İhtiyacını ve niyetini usulca paylaş, birlikte el ele verelim."
 ]
 
@@ -24,7 +24,7 @@ def analyze_applicant_dialogue(applicant_id: str, candidate_text: str, region: s
         "applicant_id": applicant_id,
         "region": region,
         "candidate_input": candidate_text,
-        "persona_response": "Evladım/Kıymetli ortak, analizin yapıldı. İmece havuzumuz senin için de devrede.",
+        "persona_response": "Evladım/Kıymetli ortak, analizin yapıldı. Refah havuzumuz senin için de devrede.",
         "need_score": need_score,
         "status": status,
         "anac_tone": "40-50 yaş bilge/şefkatli anaç rehber"

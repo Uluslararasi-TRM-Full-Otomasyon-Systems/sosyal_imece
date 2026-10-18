@@ -74,7 +74,7 @@ def check_processes():
             try:
                 cmdline = ' '.join(proc.info['cmdline'] or [])
                 if 'python' in cmdline and any(x in cmdline for x in [
-                    'ENHANCED_PANEL.py', 'main_orchestrator.py', 
+                    'api_server_2.py', 'main_orchestrator.py', 
                     'telegram_listener.py', 'web_scraper.py'
                 ]):
                     processes.append(proc.info)

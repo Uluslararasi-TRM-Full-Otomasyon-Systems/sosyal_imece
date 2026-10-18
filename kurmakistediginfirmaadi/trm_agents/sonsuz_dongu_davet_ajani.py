@@ -12,7 +12,7 @@ class SonsuzDonguDavetAjani:
             return {
                 "rapor_tarihi": datetime.now().strftime("%Y-%m-%d"),
                 "hedef_kurum": "UTEYKDER / Sivil Toplum Kuruluşları",
-                "olusturulan_davetiye": "Sosyal İmece v4.0 Yeni Dezavantajlı Katılımcı Alım Raporu",
+                "olusturulan_davetiye": "TRM Ticari Ekosistem v4.0 Yeni Dezavantajlı Katılımcı Alım Raporu",
                 "mesaj": "Sistemimiz otonom gelir modelini kanıtlamıştır. Yeni kontenjanlar açılmıştır.",
                 "durum": "OTOMATİK MAİL GÖNDERİME HAZIR"
             }

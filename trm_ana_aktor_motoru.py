@@ -3,7 +3,7 @@
 
 """
 TRM Ana Aktör Motoru & Volkan Sesli Komuta Sunucusu
-Sosyal İmece projesi için tüm ajanları birleştiren ve otonom operasyon yürüten ana motor
+TRM Ticari Ekosistem projesi için tüm ajanları birleştiren ve otonom operasyon yürüten ana motor
 """
 
 import json

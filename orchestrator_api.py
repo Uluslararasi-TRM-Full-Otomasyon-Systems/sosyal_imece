@@ -35,7 +35,7 @@ app = Flask(__name__)
 # ============================================
 DATA_DIR = Path(__file__).parent / 'data'
 DATA_DIR.mkdir(parents=True, exist_ok=True)
-DB_PATH = DATA_DIR / 'sosyal_imece.db'
+DB_PATH = DATA_DIR / 'trm_ticari_analiz.db'
 
 # Veritabanı otomatik oluşturma
 import sqlite3
@@ -240,7 +240,7 @@ CORS(app, resources={
 }, supports_credentials=True)
 
 LOG_FILE = 'trm_orchestrator.log'
-PANEL_FILE = 'Sosyal İmece Sistemi Yönetim ve Denetim paneli.html'
+PANEL_FILE = 'TRM_EKOSISTEM_TICARI_KURESEL_BESLİ_KONTROL_PANELI.html'
 SYSTEM_START_TIME = datetime.now()
 
 # ============================================
@@ -1052,7 +1052,7 @@ def register_agent():
                 "id": agent_id,
                 "name": agent_name,
                 "role": data.get("role", "Standard Agent"),
-                "web": data.get("web", "imece.com"),
+                "web": data.get("web", "trendurunlermarket.com"),
                 "status": data.get("status", "active"),
                 "last_heartbeat": datetime.now().isoformat()
             }
@@ -1358,7 +1358,7 @@ try:
     def api_rehber_greet():
         return jsonify({
             "success": True,
-            "persona": "Şefkatli Rehber (40-50 Yaş Anaç / Bilge İmece Rehberi)",
+            "persona": "Şefkatli Rehber (40-50 Yaş Anaç / Bilge Refah Rehberi)",
             "welcome_message": ANAC_SELAMLAMA_SABLONLARI[0]
         })
 
@@ -1387,7 +1387,7 @@ try:
     def api_rehber_greet():
         return jsonify({
             "success": True,
-            "persona": "Şefkatli Rehber (40-50 Yaş Anaç / Bilge İmece Rehberi)",
+            "persona": "Şefkatli Rehber (40-50 Yaş Anaç / Bilge Refah Rehberi)",
             "welcome_message": ANAC_SELAMLAMA_SABLONLARI[0]
         })
 

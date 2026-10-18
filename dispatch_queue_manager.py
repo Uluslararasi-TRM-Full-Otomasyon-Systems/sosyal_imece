@@ -2,6 +2,7 @@
 import sqlite3
 import time
 import threading
+from contextlib import contextmanager
 from datetime import datetime
 
 class DispatchQueueManager:
@@ -9,8 +10,17 @@ class DispatchQueueManager:
         self.db_name = db_name
         self._init_db()
 
+    @contextmanager
     def _get_connection(self):
-        return sqlite3.connect(self.db_name, check_same_thread=False)
+        connection = sqlite3.connect(self.db_name, check_same_thread=False)
+        try:
+            yield connection
+            connection.commit()
+        except Exception:
+            connection.rollback()
+            raise
+        finally:
+            connection.close()
 
     def _init_db(self):
         with self._get_connection() as conn:

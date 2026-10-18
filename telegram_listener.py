@@ -242,14 +242,13 @@ class TelegramProductListener:
         return None
     
     async def queue_product_for_processing(self, product_data: Dict):
-        """Urunu isleme kuyruguna ekle (file-lock korumali)"""
-        from trm_utils import safe_append_to_queue
-        queue_file = "product_queue.json"
-
-        if safe_append_to_queue(queue_file, product_data):
+        """Urunu isleme kuyruguna ekle (trm_veritabani.db, cakismasiz)"""
+        try:
+            from trm_db import trm_db
+            trm_db().kuyruga_ekle("product_queue", product_data)
             logger.info(f"Urun isleme kuyruguna eklendi: {product_data['title']}")
-        else:
-            logger.error(f"Urun kuyruga eklenemedi: {product_data['title']}")
+        except Exception as exc:
+            logger.error(f"Urun kuyruga eklenemedi: {product_data['title']} ({exc})")
     
     async def run(self):
         """Ana calisma dongusu"""

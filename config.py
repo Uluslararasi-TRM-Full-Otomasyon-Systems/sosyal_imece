@@ -29,7 +29,7 @@ _CONFIG_PATH = os.path.join(_BASE_DIR, "global_config.json")
 
 # Güvenli varsayılan konfigürasyon
 DEFAULT_CONFIG = {
-    "system_name": "SOSYAL İMECE",
+    "system_name": "TRM TICARI",
     "version": "3.0.0",
     "max_agents": 165,
     "social_media": {
@@ -169,28 +169,15 @@ except Exception as e:
 
 
 def _load_dotenv_if_present():
-    """Proje kökündeki .env dosyasını os.environ'a yükler (python-dotenv varsa)."""
-    env_path = os.path.join(_BASE_DIR, ".env")
+    """Load locally protected Windows settings; never read project .env files."""
     try:
-        from dotenv import load_dotenv
-        load_dotenv(env_path, override=False)
-        return
+        from trm_live_config import load_trm_environment
+
+        source = load_trm_environment(_BASE_DIR)
+        if source:
+            logger.info("Protected local configuration loaded from %s", source)
     except Exception:
-        pass
-    if not os.path.isfile(env_path):
-        return
-    try:
-        with open(env_path, "r", encoding="utf-8") as fh:
-            for raw in fh:
-                line = raw.strip()
-                if not line or line.startswith("#") or "=" not in line:
-                    continue
-                key, value = line.split("=", 1)
-                key = key.strip()
-                value = value.strip().strip('"').strip("'")
-                os.environ.setdefault(key, value)
-    except OSError as exc:
-        logger.warning(" .env okunamadı: %s", exc)
+        logger.warning("Protected local configuration is unavailable; live integrations remain locked.")
 
 
 _load_dotenv_if_present()

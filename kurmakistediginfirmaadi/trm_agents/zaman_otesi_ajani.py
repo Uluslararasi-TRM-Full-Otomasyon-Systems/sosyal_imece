@@ -256,7 +256,7 @@ class ZamanOtesiAjani:
     # ------------------------------------------------------------------
     def gelecegi_goster(self) -> str:
         """
-        ENHANCED_PANEL.py ile uyumlu — string döndürür.
+        api_server_2.py ile uyumlu — string döndürür.
         """
         try:
             rapor = self.gelecegi_goster_detayli()

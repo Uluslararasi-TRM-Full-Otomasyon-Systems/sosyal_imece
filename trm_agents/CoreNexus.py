@@ -1,3 +1,5 @@
+from threading import Event
+
 from security_utils import ZeroTrustSecurityManager
 
 
@@ -7,6 +9,7 @@ class CoreNexus:
         self.agents = {} # Ajanları burada tutacağız
         self.shared_context = {}
         self.agent_tokens = {}
+        self._stop_requested = Event()
         self.security = ZeroTrustSecurityManager(
             zero_trust=zero_trust,
             stealth_mode=stealth_mode,
@@ -22,6 +25,12 @@ class CoreNexus:
         )
         self.agent_tokens[agent_name] = self.security.agent_tokens.get(agent_name)
         print(f"[CoreNexus] {agent_name} başarıyla sisteme bağlandı ve denetim altına alındı.")
+
+    def request_stop(self):
+        self._stop_requested.set()
+
+    def reset_stop_request(self):
+        self._stop_requested.clear()
 
     def update_context(self, **kwargs):
         """Ajanlar arasında paylaşılacak bağlamı günceller."""
@@ -80,6 +89,8 @@ class CoreNexus:
 
         sync_results = {}
         for name, agent in self.agents.items():
+            if self._stop_requested.is_set():
+                break
             token = self.agent_tokens.get(name)
             if not self.security.authorize(name, token):
                 raise PermissionError(f"[CoreNexus] Yetkisiz ajan engellendi: {name}")

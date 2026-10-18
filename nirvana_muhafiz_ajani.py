@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-SOSYAL İMECE - Nirvana Muhafız Ajanı
+TRM - Nirvana Muhafız Ajanı
 Odak: 7/24 sistem güvenliği, hata önleme ve koruma kalkanı
 """
 import os
@@ -53,8 +53,8 @@ class NirvanaMuhafizAjani:
             tehdit_seviyesi = "INFO"
             
             # Rastgele hata simülasyonu (gerçek sistemde gerçek kontroller yapılır)
-            if bilesen == "veritabani" and os.path.exists("sehir_imece_esikleri_arsivi.json"):
-                dosya_boyutu = os.path.getsize("sehir_imece_esikleri_arsivi.json")
+            if bilesen == "veritabani" and os.path.exists("trm_veritabani.db"):
+                dosya_boyutu = os.path.getsize("trm_veritabani.db")
                 if dosya_boyutu > 10 * 1024 * 1024:  # 10MB'den büyükse uyarı
                     kontrol_basarili = False
                     mesaj = f"Veritabanı dosya boyutu çok büyük: {dosya_boyutu / 1024 / 1024:.2f} MB"

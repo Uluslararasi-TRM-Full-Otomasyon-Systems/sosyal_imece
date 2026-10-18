@@ -2,7 +2,7 @@ import os
 import json
 from datetime import datetime
 
-class SosyalImeceIcerikStratejiAjani:
+class TRMTicariIcerikStratejiAjani:
     def __init__(self, veri_dosyasi="hafiza_ve_analiz.json"):
         self.veri_dosyasi = veri_dosyasi
         self.hafizayi_yukle()
@@ -28,8 +28,8 @@ class SosyalImeceIcerikStratejiAjani:
             "hedef_kitle": hedef_kitle,
             "video_kancasi": f"Dikkat! {urun_adi} ile evinizde her şey değişiyor, bunu mutlaka görün!",
             "problem_tanimi": f"{urun_faydasi} konusunda artık yorulmaya son!",
-            "cozum_onerisi": "Sosyal İmece dijital vitrin güvencesiyle doğrudan kapınızda.",
-            "cagirici_mesaj": "Sınırlı imece payı fırsatını kaçırmayın, hemen inceleyin!",
+            "cozum_onerisi": "TRM Ticari Ekosistem dijital vitrin güvencesiyle doğrudan kapınızda.",
+            "cagirici_mesaj": "Sınırlı refah payı fırsatını kaçırmayın, hemen inceleyin!",
             "pazarlama_tonu": "Güven veren, samimi, komşu dili ve net."
         }
         
@@ -40,18 +40,18 @@ class SosyalImeceIcerikStratejiAjani:
     def sosyal_medya_paylasim_metni_olustur(self, senaryo, link):
         """6 ana sosyal medya grubunda (Facebook, Instagram vb.) paylaşıma hazır metin üretir."""
         metin = (
-            f"* SOSYAL İMECE DİJİTAL VİTRİNİ *\n\n"
-            f"Değerli komşularımız, {senaryo['urun']} şimdi yerel imece destekleriyle sizlerle!\n\n"
+            f"* TRM TICARI EKOSISTEMI DİJİTAL VİTRİNİ *\n\n"
+            f"Değerli komşularımız, {senaryo['urun']} şimdi yerel refah destekleriyle sizlerle!\n\n"
             f"* {senaryo['problem_tanimi']}\n"
             f"-> {senaryo['cozum_onerisi']}\n\n"
             f"Teknik hiçbir şeyle uğraşmadan, sistem güvencesiyle incelemek için tıklayın:\n"
             f"Link: {link}\n\n"
-            f"#Sosyalİmece #DijitalTicaret #YerelDayanışma #E-Ticaret"
+            f"#TRMTicari #DijitalTicaret #YerelDayanışma #E-Ticaret"
         )
         return metin
 
 if __name__ == "__main__":
-    ajan = SosyalImeceIcerikStratejiAjani()
+    ajan = TRMTicariIcerikStratejiAjani()
     
     # Test Ürünü
     urun = "Akıllı Pratik Mutfak Seti"

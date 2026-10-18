@@ -9,7 +9,7 @@ from agents.social_agents import dispatch_multichannel_campaign
 from uteykder_veri_arsiv_ajani import archive_sosyo_ekonomik_record, verify_archive_integrity
 
 def ignite_system():
-    print("🚀 [ATEŞLEME BAŞLIYOR] TRM / Sosyal İmece / UTEYKDER Entegre Test...")
+    print("🚀 [ATEŞLEME BAŞLIYOR] TRM / TRM Ticari Ekosistem / UTEYKDER Entegre Test...")
     print("-" * 60)
     
     # 1. Çok Kanallı Sosyal Kampanya Dağıtımı

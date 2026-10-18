@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-UTEYKDER Üye Kayıt AI Ajanı - Küresel İmece Dünyası Entegrasyonu
+UTEYKDER Üye Kayıt AI Ajanı - TRM Ticari Dünyası Entegrasyonu
 - Dinamik sorular ile form oluşturma
 - DERBİS formatında Excel dışa aktarma
 """

@@ -1,3 +1,3 @@
 @echo off
-cd /d "C:\Users\Habitat\Desktop\SOSYAL _İMECE"
+cd /d "%~dp0"
 streamlit run app.py

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Sosyal İmece Dünya - Sosyal Medya Uploader Ajanı
+TRM Ticari Dünya - Sosyal Medya Uploader Ajanı
 Versiyon: 3.0.0 (Otonom TRM Sistemi)
 
 BaseAgent: trm_agents/base_agent_template.py
@@ -318,7 +318,7 @@ def trigger_social_upload(video_path: Optional[str] = None, language: Optional[s
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("SOSYAL İMECE DÜNYA - SOSYAL UPLOADER AJAN")
+    print("TRM TICARI DUNYA - SOSYAL UPLOADER AJAN")
     print("BaseAgent: trm_agents/base_agent_template.py")
     print("=" * 60)
     

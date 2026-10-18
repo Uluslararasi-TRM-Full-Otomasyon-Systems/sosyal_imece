@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Küresel Psikolog AI Ajanı - Küresel İmece Dünyası Entegrasyonu
+Küresel Psikolog AI Ajanı - TRM Ticari Dünyası Entegrasyonu
 - Karakter analizi ve motivasyon değerlendirme
 - Otonom onay/reddetme sistemi
 """

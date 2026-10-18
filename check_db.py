@@ -7,7 +7,6 @@ from pathlib import Path
 # Veritabanı yollarını kontrol et
 db_paths = [
     "database.db",
-    "data/sosyal_imece.db", 
     "trm_dashboard.db"
 ]
 

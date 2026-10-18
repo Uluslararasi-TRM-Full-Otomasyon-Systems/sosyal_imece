@@ -45,7 +45,7 @@ class HukukiSozlesmeVeAlacakAjani(BaseAgent):
         # Hesap sayısı
         self.isletme_hesap_sayisi = 6
         
-        # Tahmini aylık imece geliri (hesaplama için)
+        # Tahmini aylık refah geliri (hesaplama için)
         self.tahmini_aylik_imece_geliri = 5000  # TL
         
         self.log(f"⚖️ Hukuki Sözleşme ve Alacak Ajanı (Ajan 178) devrede. Sayın {CEO_TITLE}", "INFO")
@@ -67,7 +67,7 @@ class HukukiSozlesmeVeAlacakAjani(BaseAgent):
             Madde 3: Hesap Kapatma Yükümlülüğü
             Kullanıcı, sistem kurallarına aykırı davranarak veya kendi inisiyatifiyle hesapları
             tamamen/geçici kapatması suretiyle sistem gelirlerini sekteye uğratması durumunda,
-            İR-SA AŞ. bu hesapların 1 yıllık imece havuz hesabına aktaracağı tahmini para miktarını
+            İR-SA AŞ. bu hesapların 1 yıllık refah havuz hesabına aktaracağı tahmini para miktarını
             hesaplayabilir ve kişi hakkında "sistem gelirlerini sekteye uğratma" gerekçesiyle alacak davası/tazminat
             dosyası açabilir.
             
@@ -105,7 +105,7 @@ class HukukiSozlesmeVeAlacakAjani(BaseAgent):
             işletme hesabını tamamen/geçici kapatmış, bu suretle sistem gelirlerini sekteye uğratmıştır.
             
             Talep Edilen Tazminat Miktarı: {tazminat_miktari} TL
-            (1 yıllık tahmini imece geliri: {tahmini_gelir} TL)
+            (1 yıllık tahmini refah geliri: {tahmini_gelir} TL)
             
             Hesap Kapatma Tarihi: {kapatma_tarihi}
             Tahmini Zarar Süresi: 12 ay
@@ -113,7 +113,7 @@ class HukukiSozlesmeVeAlacakAjani(BaseAgent):
             Deliller:
             - Hesap kapatma logları
             - Sistem gelir kayıpları
-            - İmece havuz hesap kayıtları
+            - Refah havuz hesap kayıtları
             
             Tarih: {tarih}
             Dosya No: {dosya_no}
@@ -283,7 +283,7 @@ class HukukiSozlesmeVeAlacakAjani(BaseAgent):
         if not kullanici:
             return {"hata": "Kullanıcı bulunamadı"}
         
-        # Tazminat hesapla (1 yıllık tahmini imece geliri)
+        # Tazminat hesapla (1 yıllık tahmini refah geliri)
         tahmini_yillik_zarar = self.tahmini_aylik_imece_geliri * 12 * len(kullanici["hesaplar"])
         
         # Dosya numarası oluştur

@@ -1,4 +1,4 @@
-# main_orchestrator.py - Uluslararası TRM & Sosyal İmece Tam Otonom Ana Kumanda Merkezi
+# main_orchestrator.py - Uluslararası TRM Tam Otonom Ana Kumanda Merkezi
 import time
 import json
 import os
@@ -14,7 +14,7 @@ from global_expansion_nexus import GlobalExpansionNexus
 
 class MainOrchestrator:
     def __init__(self):
-        print("🌟 [Orchestrator] Uluslararası TRM & Sosyal İmece Master Başlatılıyor...")
+        print("🌟 [Orchestrator] Uluslararası TRM Master Başlatılıyor...")
         self.heal_core = SelfHealingCore() if "SelfHealingCore" in globals() else None
         self.dashboard = OmniDashboardSync() if "OmniDashboardSync" in globals() else None
         self.milli_core = MilliDagitikAgCore()
@@ -35,10 +35,10 @@ class MainOrchestrator:
             syndication_results = self.syndication.distribute_content({"campaign": "60M_Citizen_Welfare_Push"})
             print(f"📡 Dağıtım Swarm: {len(syndication_results)} hesap aktif.")
 
-            # 3. Adım: Affiliate Gelir ve Sosyal İmece Fon Dağılımı (%70 Büyüme / %30 İmece)
+            # 3. Adım: Affiliate Gelir Fon Dağılımı (%70 Büyüme / %30 Refah Fonu)
             simulated_turnover = 250000.0 
             ledger = self.harmonizer.harmonize_and_distribute(simulated_turnover)
-            print(f"💰 Finansal Harmonizasyon Tamamlandı. İmece Fonu Aktarıldı.")
+            print(f"💰 Finansal Harmonizasyon Tamamlandı. Refah Fonu Aktarıldı.")
 
             # 4. Adım: Uluslararası Affiliate Ağına Genleşme (Global Nexus)
             expansion_result = self.global_nexus.adapt_to_global_partner(
