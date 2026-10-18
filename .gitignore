@@ -54,3 +54,13 @@ secrets.env
 *.pickle
 affiliate_scout_output/
 token.pickle
+
+# Harici / üretilmiş ağaçlar (ticari depo kapsamı dışı)
+gstack/
+streamlit_env/
+whatsapp_hata_kayitlari/
+node_modules/
+data_cluster/
+htmlcov/
+.pytest_cache/
+.mypy_cache/
