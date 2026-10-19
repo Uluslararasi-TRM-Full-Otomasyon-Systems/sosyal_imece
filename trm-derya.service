@@ -1,0 +1,78 @@
+# ============================================================================
+# TRM Derya API - systemd birimi (Ubuntu Server 22.04 LTS / Debian 12)
+#
+# deploy_vps.sh bu dosyayi /etc/systemd/system/trm-derya.service olarak
+# kopyalarken @...@ yer tutucularini gercek yollarla degistirir.
+# Elle kuracaksan:
+#     sudo sed -e 's|@TRM_DIR@|/opt/trm/derya|g' -e 's|@TRM_USER@|trm|g' \
+#              -e 's|@PROFIL@|/var/lib/trm-derya/whatsapp|g' \
+#         trm-derya.service > /etc/systemd/system/trm-derya.service
+#     sudo systemctl daemon-reload
+#
+# Yer tutucular: @TRM_DIR@ kod+venv+DB dizini, @TRM_USER@ servis kullanicisi,
+# @PROFIL@ WhatsApp oturumunun ust dizini, @API_PORT@ yalnizca not/saglik kontrolu.
+# ============================================================================
+
+[Unit]
+Description=TRM Eko Sistem - Derya API ve otonom WhatsApp motoru (7/24)
+Documentation=file:@TRM_DIR@/VPS_TASIMA_REHBERI.md
+# WhatsApp Web'e cikmak icin yalnizca "interface up" yetmez: route + DNS hazir olmali.
+# network-online.target sistemde aktif degilse (systemd-networkd-wait-online /
+# NetworkManager-wait-online) bu satir sessizce etkisiz kalir; bkz. rehber bolum 6.
+After=network-online.target
+Wants=network-online.target
+# Sunucu her yeniden baslatildiginda otomatik ayaaga kalkmasi icin:
+#   sudo systemctl enable trm-derya.service
+StartLimitIntervalSec=600
+StartLimitBurst=10
+
+[Service]
+Type=simple
+User=@TRM_USER@
+Group=@TRM_USER@
+WorkingDirectory=@TRM_DIR@
+
+# api_server_2.py Flask'i, QR/oturum gozetmen thread'ini ve otonom hedef isleyiciyi
+# TEKSUREC icinde baslatir; bu yuzden tek bir birim hem API'yi hem motoru ayaaga kalkar.
+# -u olmadan Python stdout tamponda kalir: Chrome/QR gunluk satirlari journalctl'e
+# ya hic ya da cok gec duser, servis "donmus" gibi gorunur.
+ExecStart=@TRM_DIR@/venv/bin/python -u api_server_2.py
+
+# Anahtarlar + WhatsApp ayarlari burada. Dosya 640 root:@TRM_USER@ olmali,
+# icindeki HEADLESS_MODE=true VPS icin zorunlu. "-" basi: dosya yoksa hata verme.
+EnvironmentFile=-/etc/trm-derya.env
+
+# Chrome ~/.config / ~/.cache'i HOME'a yazar: kod agacini kirletmesin, ama
+# yazilabilir bir yerde olsun (ReadWritePaths'de var).
+Environment=HOME=/var/lib/trm-derya
+Environment=LANG=C.UTF-8
+Environment=LC_ALL=C.UTF-8
+Environment=PYTHONIOENCODING=utf-8
+Environment=PYTHONUTF8=1
+
+# Dinlenen port: api_server_2.py -> app.run(host="0.0.0.0", port=5000).
+# @API_PORT@ yalnizca belgeleme/saglik kontrolu icindir; portu degistirmek icin
+# o satiri koddan guncelle. 5000'i firewall arkasinda tut (bkz. rehber bolum 7).
+
+# Her cikis turunden sonra (cokme, hata, kota, beklenmeyen exit) yeniden baslat:
+Restart=always
+RestartSec=15
+# Chrome + WhatsApp Web acarilisi uzun surer; systemd erken "start timeout" vermesin.
+TimeoutStartSec=180
+# systemctl stop once SIGTERM gonderir: api_server_2.py surucuyu kapatip cikir
+# (boylece Chrome'un profil kilidi SingletonLock yetim kalmaz ve sonraki baslatma
+# "profile is in use" ile dusmez). 60 sn sonra systemd SIGKILL uygular.
+TimeoutStopSec=60
+# SIGTERM cgroup'un butun uyelerine gitsin (Chrome + chromedriver de kapanir).
+KillMode=control-group
+
+# --- Kuclendirme (sunucuyu tek servis icin degil, TRM icin calistiriyorsan) ---
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=read-only
+# trm_veritabani.db kod dizininde, WhatsApp oturumu /var/lib/trm-derya'da:
+ReadWritePaths=@TRM_DIR@ /var/lib/trm-derya
+
+[Install]
+WantedBy=multi-user.target

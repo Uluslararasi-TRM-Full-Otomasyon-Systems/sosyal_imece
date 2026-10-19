@@ -1,0 +1,21 @@
+# TRM Derya API - Linux VPS icin ASGARI bagimliliklar
+#
+# Neden ayri dosya? Depodaki requirements.txt Streamlit paneli + tum ajan ekosistemi
+# icin yazilmis (pandas/plotly/fastapi dahil, ~500 MB). VPS'te 7/24 ayakta kalan tek
+# sey api_server_2.py; onun import ettigi uc paket asagidaki. Eksik/fazla paket
+# sunucuda RAM ve yuzeysel surum cakismasi demek.
+#
+# NOT: api_server_2.py .env DOSYASI OKUMAZ, yalnizca os.environ'a bakar. Anahtar ve
+# WhatsApp ayarlari systemd EnvironmentFile (/etc/trm-derya.env) uzerinden verilir.
+#   bkz. trm-derya.service  ->  EnvironmentFile=-/etc/trm-derya.env
+
+flask==3.0.3
+flask-cors>=4.0.0
+
+# Selenium: WhatsApp Web'i surer. 4.6+ Selenium Manager ile chromedriver'i kendisi
+# bulur; CHROMEDRIVER_PATH verilirse o yol kullanilir.
+selenium>=4.15,<5
+
+# Yedek chromedriver indirici (Selenium Manager ag/kota nedeniyle basarisiz olursa
+# api_server_2.py bunu dener). Linux'ta zorunlu degil ama ucuz sigorta.
+webdriver-manager>=4.0.1

@@ -29,6 +29,7 @@ import os
 import random
 import re
 import shutil
+import signal
 import socket
 import sqlite3
 import string
@@ -90,6 +91,12 @@ CDP_PORT_TABANI = _env_sayic("WHATSAPP_CDP_PORT", 9222)
 # NOT: taze profil zaten boş olduğu için QR zorunlu. Gizli mod WhatsApp Web'in
 # IndexedDB oturum kaydını bozabildiğinden VARSAYILAN KAPALI.
 INCOGNITO = _env_bayrak("WHATSAPP_INCOGNITO", "0")
+# Linux VPS'te fiziksel ekran yoktur: HEADLESS_MODE=true Chrome'u gizli başlatır.
+# Windows'ta varsayılan KAPALI kalmalı; aksi halde QR okutma penceresi görünmez olur.
+HEADLESS_MODE = _env_bayrak("HEADLESS_MODE", "0")
+# Sunucuda paketle kurulmuş ikili/sürücü yolu sabitlenebilir (boş = otomatik bul).
+CHROME_IKILI = _env_adi("CHROME_BINARY", "")
+CHROMEDRIVER_YOLU = _env_adi("CHROMEDRIVER_PATH", "")
 OTOMATIK_BASLAT = _env_bayrak("WHATSAPP_OTOMATIK_BASLAT", "1")
 # 0 = SADECE bizim profilimizi kullanan Chrome'ları öldür (güvenli, varsayılan)
 # 1 = tüm chrome.exe süreçlerini öldür (AÇIK UYARI: diğer açık sekmeler kapanır)
@@ -184,13 +191,35 @@ def _profil_yol_parcalari():
     return [p for p in parcalar if p and len(p) > 6]
 
 
+def _linux_hedef_surecleri_olldur():
+    """POSIX'ta aynı hedefli temizlik: yalnızca bizim profilini kullanan Chrome.
+
+    pgrep profil yolunu komut satırında aradığı için kullanıcının/other
+    servislerin Chrome pencereleri listeye girmez. taskkill Windows'a özgü.
+    """
+    oldlen = 0
+    for alt_dizi in _profil_yol_parcalari():
+        if "TRM_WhatsApp" not in alt_dizi:
+            _log(f"Güvenlik: '{alt_dizi}' beklenen TRM_WhatsApp deseniyle uyuşmuyor, atlandı.")
+            continue
+        sonuc = _komut_calistir(["pgrep", "-f", "--", alt_dizi])
+        if not sonuc or not sonuc.stdout.strip():
+            continue
+        for pid in sonuc.stdout.split():
+            if pid.isdigit() and int(pid) != os.getpid():
+                _komut_calistir(["kill", pid])
+                oldlen += 1
+                _log(f"Kalıntı Chrome süreci sonlandırıldı (PID {pid}) profil={alt_dizi}")
+    return oldlen
+
+
 def _hedef_surezleri_olddur():
     """
     Yalnızca command line'ında BİZİM profil dizini geçen chrome.exe süreçlerini
     öldürür. Kullanıcının kendi açtığı Chrome pencerelerine dokunmaz.
     """
     if os.name != "nt":
-        return 0
+        return _linux_hedef_surecleri_olldur()
 
     oldlen = 0
     for alt_dizi in _profil_yol_parcalari():
@@ -224,7 +253,7 @@ def _eski_profili_kilitla():
     """
     if not os.path.isdir(ESKI_PROFIL_DIZIN):
         return False
-    yedek = ESKI_PROFIL_DIZIN.rstrip("\\") + "_ESKI_ARTIK_KULLANILMIYOR"
+    yedek = ESKI_PROFIL_DIZIN.rstrip("\\/") + "_ESKI_ARTIK_KULLANILMIYOR"
     if os.path.exists(yedek):
         yedek = f"{yedek}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
     try:
@@ -241,12 +270,20 @@ def kalinti_temizle():
     _log("Kalıntı süreç/lock temizliği başlıyor "
          f"(sert mod={'ACIK' if SERT_MODEMLEME else 'KAPALI'})...")
 
-    _komut_calistir(["taskkill", "/F", "/IM", "chromedriver.exe"])
+    if os.name == "nt":
+        _komut_calistir(["taskkill", "/F", "/IM", "chromedriver.exe"])
+    else:
+        # Yalnızca BU kullanıcının sürücüleri: sunucuda başka bir uygulamanın
+        # chromedriver'ına dokunulmaz.
+        _komut_calistir(["pkill", "-u", str(os.getuid()), "-x", "chromedriver"])
 
     if SERT_MODEMLEME:
-        # KULLANICI BİLEREK AÇTI: tüm Chrome'lar kapanır.
-        _komut_calistir(["taskkill", "/F", "/IM", "chrome.exe"])
-        _log("SERT MOD: tüm chrome.exe süreçleri sonlandırıldı.")
+        if os.name == "nt":
+            # KULLANICI BİLEREK AÇTI: tüm Chrome'lar kapanır.
+            _komut_calistir(["taskkill", "/F", "/IM", "chrome.exe"])
+            _log("SERT MOD: tüm chrome.exe süreçleri sonlandırıldı.")
+        else:
+            _log("SERT MOD Linux'ta uygulanmıyor: toplu chrome öldürme yapılmadı.")
     else:
         sayi = _hedef_surezleri_olddur()
         _log(f"Hedefli temizlik: {sayi} kalıntı Chrome süreci sonlandırıldı "
@@ -332,6 +369,14 @@ def _chrome_secenekleri(profil_dizini, cdp_port):
         options.add_argument(f"--remote-debugging-port={cdp_port}")
     if INCOGNITO:
         options.add_argument("--incognito")
+    if HEADLESS_MODE:
+        # "--headless=new" gerçek Chrome render katmanını kullanır; eski gizli mod
+        # WhatsApp Web'in composer'ını ve IndexedDB oturum kaydını kırabiliyordu.
+        # Ekransız sunucuda pencere boyutu --window-size ile zaten sabitleniyor.
+        options.add_argument("--headless=new")
+        options.add_argument("--hide-scrollbars")
+    if CHROME_IKILI:
+        options.binary_location = CHROME_IKILI
 
     # Otomatik sürücü izlerini ve oturum/önbellek artıklarını azaltan parametreler:
     for ek in (
@@ -363,12 +408,17 @@ def _chrome_secenekleri(profil_dizini, cdp_port):
 
 
 def _surucu_olustur(options):
-    """Selenium Manager (4.6+) önce denenir; olmazsa webdriver_manager yedeği."""
+    """Sabit sürücü yolu -> Selenium Manager (4.6+) -> webdriver_manager yedeği."""
+    from selenium.webdriver.chrome.service import Service as ChromeService
+
+    if CHROMEDRIVER_YOLU:
+        return webdriver.Chrome(
+            service=ChromeService(executable_path=CHROMEDRIVER_YOLU), options=options
+        )
     try:
         return webdriver.Chrome(options=options)
     except Exception as ilk_hata:
         _log(f"Selenium Manager sürücüyü çözemedi ({ilk_hata}); webdriver_manager deneniyor...")
-        from selenium.webdriver.chrome.service import Service as ChromeService
         from webdriver_manager.chrome import ChromeDriverManager
 
         return webdriver.Chrome(
@@ -1140,6 +1190,26 @@ def _kapanista_kapat():
 
 
 atexit.register(_kapanista_kapat)
+
+
+def _sinyal_yakala(sinyal_no, _kare):
+    # systemd "stop" sırasında SIGTERM gönderir; atexit YALNIZCA normal çıkışta
+    # çalışır. Sürücü kapatılmadan ölen süreç Chrome'u ve profil kilidini
+    # (SingletonLock) yetim bırakır; sonraki açılış "profile is in use" ile düşer.
+    _log(f"Sinyal {sinyal_no} alındı: sürücü kapatılıp çıkılıyor.")
+    _kapanista_kapat()
+    os._exit(0)
+
+
+for _sinyal_adi in ("SIGTERM", "SIGINT"):
+    _sinyal = getattr(signal, _sinyal_adi, None)
+    if _sinyal is not None:
+        try:
+            signal.signal(_sinyal, _sinyal_yakala)
+        except (ValueError, OSError, RuntimeError):
+            # Ana thread dışındaki import'larda (testler, paket olarak kullanım)
+            # sinyal kaydı reddedilir; atexit kapanışı yine çalışır.
+            pass
 
 
 # ============================================================
@@ -2018,6 +2088,7 @@ if __name__ == "__main__":
     print(f"   Ticari hat filtresi : {TICARI_HAT_ULUSLARARASI}")
     print(f"   Profil modu         : {PROFIL_MODU}  ({PROFIL_ANA_DIZIN})")
     print(f"   Sert temizlik modu  : {'ACIK' if SERT_MODEMLEME else 'KAPALI (hedefli)'}")
+    print(f"   Headless Chrome     : {'ACIK' if HEADLESS_MODE else 'KAPALI (pencere açık)'}")
     print(f"   QR bekleme          : {QR_BEKLEME_SN} sn")
     # debug/use_reloader=TRUE iken çift Chrome açılır -> profil kilidi. KAPALI.
     app.run(host="0.0.0.0", port=5000, debug=False, use_reloader=False)
