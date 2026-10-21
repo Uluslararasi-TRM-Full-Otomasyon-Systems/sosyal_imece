@@ -20,7 +20,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from threading import Thread, Lock
+from threading import RLock, Thread, Lock
 from datetime import datetime, timedelta
 
 import atexit
@@ -38,8 +38,20 @@ import sys
 import time
 import unicodedata
 
+from aday_havuzu import AdayYapisi, aday_tarama_dongusu, havuz_durumu
 from derya_cevaplayici import derya_otonom_yanitla
 from esnaf_sablonu import SablonHatasi, esnaf_tanitim_metni
+from otonom_motor import (
+    Motor,
+    Yapilandirma,
+    gelen_mesaj_kaydet,
+    imza as _mesaj_imzasi,
+    kara_listede_mi,
+    sema_goc_uygula,
+    telefon_kanonik,
+    mobil_numara,
+    izin_ver as _motor_izin_ver,
+)
 
 
 def _konsol_hazirla():
@@ -153,6 +165,10 @@ whatsapp_state = {
 }
 driver_lock = Lock()
 state_lock = Lock()
+# Tek Selenium sürücüsü paylaşılır: HTTP ile tetiklenen gönderim ve arka plan
+# otonom döngüsü AYNI anda WhatsApp Web'i kullanamaz. RLock çünkü gönderim
+# zincemesi iç içe geçebilir (motor -> tanitim -> gercek_gonderim).
+SOHBET_KILIDI = RLock()
 
 
 def _log(mesaj):
@@ -1575,7 +1591,88 @@ def _sohbet_ekrani_hazirla(sürücü, mesaj, timeout=None):
     return "bekleniyor"
 
 
+@app.route("/api/kara_liste", methods=["GET"])
+def kara_liste_gor():
+    conn = veritabani_baglan()
+    try:
+        sema_goc_uygula(conn)
+        satirlar = [dict(r) for r in conn.execute(
+            "SELECT telefon, gerekce, tarih, kaynak FROM kara_liste "
+            "ORDER BY tarih DESC LIMIT 500")]
+    finally:
+        conn.close()
+    return jsonify({"adet": len(satirlar), "kayitlar": satirlar})
+
+
+@app.route("/api/kara_liste_kaldir", methods=["POST"])
+def kara_liste_kaldir():
+    """Yanlış yakalanan bir redi geri alma (örn. 'sipariş iptal oldu' mesajı).
+
+    Numara hem kara listeden hem de o numaraya ait esnaf satırlarının
+    opt_out/`gonderim_durumu` kilitlerinden birlikte temizlenir; aksi halde
+    silme işe yaramazdı.
+    """
+    data = request.json or {}
+    kanonik = telefon_kanonik(data.get("telefon"))
+    if not kanonik:
+        return jsonify({"status": "hata", "mesaj": "telefon zorunlu"}), 400
+    sebep = str(data.get("sebep") or "panel")[:200]
+    conn = veritabani_baglan()
+    try:
+        conn.create_function("kanonik", 1, telefon_kanonik)
+        sema_goc_uygula(conn)
+        silinen = conn.execute("DELETE FROM kara_liste WHERE telefon = ?", (kanonik,)).rowcount
+        cozulen = conn.execute(
+            "UPDATE esnaflar SET opt_out = 0, opt_out_tarihi = NULL, "
+            "gonderim_durumu = 'gonderime_hazir', son_gelen_imza = NULL "
+            "WHERE kanonik(COALESCE(telefon, '')) = ?", (kanonik,),
+        ).rowcount
+        conn.commit()
+    finally:
+        conn.close()
+    _log(f"🗑️ Kara listeden çıkarıldı: {kanonik} (silinen={silinen}, "
+         f"esnaf satırı çözüldü={cozulen}, sebep: {sebep})")
+    return jsonify({"status": "basarili", "telefon": kanonik,
+                    "kara_listeden_silinen": silinen, "esnaf_satiri_cozuldu": cozulen})
+
+
+def kara_liste_kontrolu(telefon):
+    """Numara kalıcı kara listede mi? None=karar verilemedi (gönderime devam).
+
+    'DUR'/'İPTAL' redleri numara ile bağlanır: esnaf satırı silinip aynı numara
+    taramayla yeni id olarak geri gelse bile mesaj gitmez.
+    """
+    if not telefon:
+        return False
+    conn = veritabani_baglan()
+    try:
+        sema_goc_uygula(conn)
+        return kara_listede_mi(conn, telefon)
+    except sqlite3.Error as hata:
+        _log(f"⚠️ Kara liste okunamadı ({hata}); gönderim akışı bu kayıt için "
+             "doğrulanmış bir red görmedi.")
+        return None
+    finally:
+        conn.close()
+
+
 def gercek_whatsapp_mesaj_gonder(telefon, mesaj, isletme_adi=None):
+    """Gönderimin TEK girişi: kara liste + sohbet kilidi, sonra asıl iş.
+
+    Motorun arka plan döngüsü ile panelden/HTTP ile gelen gönderimler aynı
+    sürücüyü kullandığından birbirinin sohbetini bozamaz. Kara liste bu tek
+    kapıda uygulanır ki hiçbir çağran (panel, otomatik yanıt, toplu motor)
+    reddedilmiş numaraya ulaşamasın.
+    """
+    if kara_liste_kontrolu(telefon) is True:
+        _log(f"🚫 KARA LİSTE: {telefon} numarasına mesaj gönderilmedi "
+             "(DUR/İPTAL redi kalıcı).")
+        return False
+    with SOHBET_KILIDI:
+        return _gercek_whatsapp_mesaj_gonder_ic(telefon, mesaj, isletme_adi)
+
+
+def _gercek_whatsapp_mesaj_gonder_ic(telefon, mesaj, isletme_adi=None):
     global whatsapp_driver
 
     if not _surucu_saglam_mi():
@@ -1697,8 +1794,20 @@ def get_esnaflar():
     bu yüzden hiçbir koşulda 500 dönmemeli."""
     try:
         conn = veritabani_baglan()
+        sema_goc_uygula(conn)  # izin/adres kolonları eski bir DB'de eksik kalmasın
+        # Sıra operatörün iş akışına göre: ONAY BEKLEYEN telefonlu adaylar en üstte,
+        # sonra onaylılar (motor bunlara yazar), sonra telefonu olmayanlar.
         rows = conn.execute(
-            "SELECT id, isletme, telefon, kod, durum FROM esnaflar ORDER BY id DESC"
+            """
+            SELECT id, isletme, telefon, kod, durum, COALESCE(izin, 0) AS izin,
+                   CASE WHEN TRIM(COALESCE(adres, ''))   = '' THEN 0 ELSE 1 END AS adres_var,
+                   CASE WHEN TRIM(COALESCE(telefon, '')) = '' THEN 0 ELSE 1 END AS telefon_var
+            FROM esnaflar
+            ORDER BY CASE WHEN COALESCE(izin, 0) = 0 AND TRIM(COALESCE(telefon, '')) <> '' THEN 0
+                          WHEN COALESCE(izin, 0) = 1 THEN 1
+                          ELSE 2 END,
+                     id DESC
+            """
         ).fetchall()
         son = {}
         try:
@@ -1724,6 +1833,10 @@ def get_esnaflar():
             "ad": row["isletme"],
             "kod": row["kod"],
             "telefon": row["telefon"],
+            "mobil": mobil_numara(row["telefon"]),
+            "izin": int(row["izin"] or 0),
+            "telefon_var": bool(row["telefon_var"]),
+            "adres_var": bool(row["adres_var"]),
             "durum": row["durum"] if "durum" in row.keys() else "onayli",
             "kanal": "whatsapp",
             "son_mesaj": (str(kayit["mesaj"])[:80] if kayit else ""),
@@ -1891,8 +2004,32 @@ def mesaj_gonder():
     isletme_adi = kayit["isletme"] or "İşletme"
     telefon = kayit["telefon"]
 
-    _mesaj_kaydet(conn, esnaf_id, "ESNAF", esnaf_mesaj)
+    # Gelen metin, WhatsApp okuyucusu ile AYNI yoldan işlenir: tekilleme +
+    # 'DUR'/'İPTAL' redi burada da kalıcı kara listeye yazar.
+    sema_goc_uygula(conn)
+    durum = gelen_mesaj_kaydet(
+        conn, esnaf_id, esnaf_mesaj, _mesaj_imzasi(f"{isletme_adi}", esnaf_mesaj),
+        _mesaj_kaydet,
+    )
+    if not durum["kaydedildi"] and not durum["yinelenen"]:
+        _mesaj_kaydet(conn, esnaf_id, "ESNAF", esnaf_mesaj)
+    kara_listeye_girdi = bool(durum.get("kara_liste"))
     conn.close()
+
+    if durum["opt_out"]:
+        _log(f"🚫 OPT-OUT: Esnaf #{esnaf_id} ({isletme_adi}) 'DUR/İPTAL' dedi — "
+             f"kalıcı kara liste: {kara_listeye_girdi}. Yanıt GÖNDERİLMEDİ.")
+        return jsonify({
+            "status": "opt_out",
+            "esnaf_id": esnaf_id,
+            "isletme": isletme_adi,
+            "opt_out": True,
+            "kara_liste": kara_listeye_girdi,
+            "cevap": "",
+            "yanit": "",
+            "whatsapp_gonderildi": False,
+            "mesaj": "Kişi ticari iletiyi reddetti; kalıcı kara listeye alındı.",
+        })
 
     derya_cevabi = derya_otonom_yanitla(esnaf_mesaj, isletme_adi)
     gonderim = None
@@ -2007,7 +2144,9 @@ def whatsapp_cikis():
     global whatsapp_driver, _gozetmen_imza
     dizin = whatsapp_state.get("profil_dizini") or ""
     _gozetmen_imza = None
-    with driver_lock:
+    # SOHBET_KILIDI once: motor bir gönderimin ortasındayken sürücünün altından
+    # çekilmesini bekletir (kilit sırası her zaman SOHBET_KILIDI -> driver_lock).
+    with SOHBET_KILIDI, driver_lock:
         if whatsapp_driver:
             try:
                 whatsapp_driver.get("https://web.whatsapp.com/")
@@ -2037,27 +2176,414 @@ def saglik():
 
 
 # ============================================================
-# 7) OTONOM HEDEF DÖNGÜSÜ
+# 7) OTONOM MOTOR (7/24 insansız gönderim + gelen mesaj okuma)
 # ============================================================
-def otonom_hedef_isleyici(hedef_sayi=20):
-    print(f"🚀 [OTONOM MOTOR] Arka plan döngüsü başlatıldı. Hedef: {hedef_sayi} Gerçek Firma.")
+OTONOM_YAPI = Yapilandirma(os.environ)
+otonom_kilit = Lock()
+otonom_son_rapor = {"asama": "henuz-baslamadi"}
+gelen_son_rapor = {"kisiler": None}
+# Eşleşmeyen okunmamış sohbetlerin son bildirilen listesi (log tekrarı önlenir).
+_eslesmeyen_imza = ""
+# Eşleşen (esnaf sanılan) sohbetlerin son bildirilen listesi; yanlış eşleşme
+# sessiz kalmasın ama her yoklamada log da şişmesin.
+_eslesen_imza = ""
+
+
+def _log_motor(mesaj):
+    """Motor/okuyucu logları kendi etiketini taşır ([OTONOM], [GELEN])."""
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] {mesaj}", flush=True)
+
+
+# Aday havuzu: harita/listeden firma toplayıp esnaflar tablosuna YALNIZCA
+# izin=0 / durum='ADAY' olarak yazar. Gönderim motoru izin=1 şartı nedeniyle
+# buradan giren hiçbir kaydı seçmez; rıza kararı panelden operatöre aittir.
+ADAY_YAPI = AdayYapisi(os.environ)
+
+
+def _oturum_gonderime_hazir():
+    """Motorun göndermeye izin veren tek kapısı: sürücü ayakta VE hat doğrulanmış."""
+    return bool(_surucu_saglam_mi() and whatsapp_state.get("eslesme"))
+
+
+def _motorla_tanitimi_gonder(esnaf_id):
+    """Motor -> mevcut tanıtım gönderim hattı köprüsü.
+
+    _esnaf_tanitimi_gonder (govde, kod) döndürür; motor govde.status='basarili'
+    arayacağından sadece govde'yi veririz. HTTP tarafıyla aynı kilitli fonksiyon
+    kullanılır, yani panel'den elle yapılan gönderimle çakışamaz.
+    """
+    govde, _kod = _esnaf_tanitimi_gonder(esnaf_id)
+    return govde
+
+
+class _RaporluMotor(Motor):
+    """Son tur çıktısını /api/otonom_durum için bellekte tutar."""
+
+    def bir_tur(self):
+        sonuc = super().bir_tur()
+        with otonom_kilit:
+            otonom_son_rapor.clear()
+            otonom_son_rapor.update(sonuc)
+            otonom_son_rapor["zaman"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        return sonuc
+
+
+def otonom_hedef_isleyici(hedef_sayi=None):
+    motor = _RaporluMotor(
+        yapi=OTONOM_YAPI,
+        baglan=veritabani_baglan,
+        gonder=_motorla_tanitimi_gonder,
+        oturum_hazir=_oturum_gonderime_hazir,
+        uyustur=time.sleep,
+        log=_log_motor,
+    )
+    motor.dongu()
+
+
+# ---- gelen mesaj okuyucu --------------------------------------------------
+# WhatsApp Web satır DOM'u canlıda ölçülerek yazıldı (2026-10-19):
+#  * Her sohbet hem div[role=listitem] hem onun İÇİNDEKİ div[role=gridcell]
+#    olarak iki kez eşleşiyor -> iç içe tekrar ayıklanmazsa her sohbet iki kez
+#    işlenir.
+#  * row.innerText zaman damgası ve önizlemeyi de içeriyor ("Meral Günendi 13:36
+#    Değerli müşterimiz, 0006491021 nolu...") -> telefondan eşleştirme bunu
+#    rakama çevirip çöp üretirdi. Saf isim span[dir=auto][title] özniteliğinde.
+#  * Okunmamış sayısı 'icon-marker' sınıfında DEĞİL, rozetin aria-label'ında
+#    ("8 okunmamış mesaj"). Yerel dile göre değiştiği için sayı + okunmam/unread
+#    deseni birlikte aranır.
+# Payleşen JS parçaları: her execute_script çağrısı kendi başına çalışmalı,
+# bu yüzden düzgüler Python tarafında birleştirilir.
+_SATIRLAR_JS = (
+    "var adaylar = document.querySelectorAll("
+    "  '#pane-side div[role=\"listitem\"], #pane-side div[role=\"gridcell\"]');"
+    "var satirlar = [];"
+    "for (var i = 0; i < adaylar.length; i++) {"
+    "  var n = adaylar[i], tekrar = false;"
+    "  for (var k = 0; k < satirlar.length; k++) {"
+    "    if (satirlar[k].contains(n) || n.contains(satirlar[k])) { tekrar = true; break; }"
+    "  }"
+    "  if (!tekrar) satirlar.push(n);"
+    "}"
+)
+
+_SATIR_BASLIGI_JS = (
+    "function baslikAl(d) {"
+    "  var e = d.querySelector('span[dir=\"auto\"][title]');"
+    "  var t = e ? String(e.getAttribute('title') || '').trim() : '';"
+    "  if (t) return t.slice(0, 80);"
+    "  var tam = String(d.innerText || '').replace(/\\s+/g, ' ').trim();"
+    "  return tam.split(/\\s{2,}|\\n/)[0].trim().slice(0, 80);"
+    "}"
+)
+
+_SATIR_OKUNMAMIS_JS = (
+    "function okunmamisAl(d) {"
+    "  var en = 0;"
+    "  var e = d.querySelectorAll('span');"
+    "  for (var j = 0; j < e.length; j++) {"
+    "    var etiket = String(e[j].getAttribute('aria-label') || '');"
+    "    var sayi = (etiket.match(/[0-9]+/) || [])[0];"
+    "    if (sayi && /okunmam|unread/i.test(etiket) && Number(sayi) > en) en = Number(sayi);"
+    "    var metin = String(e[j].innerText || '').trim();"
+    "    if (/^[0-9]{1,4}$/.test(metin) && Number(metin) > en) en = Number(metin);"
+    "  }"
+    "  return en;"
+    "}"
+)
+
+_KISILER_JS = (
+    _SATIRLAR_JS + _SATIR_BASLIGI_JS + _SATIR_OKUNMAMIS_JS +
+    "var varliklar = [];"
+    "for (var i = 0; i < satirlar.length; i++) {"
+    "  var baslik = baslikAl(satirlar[i]);"
+    "  if (baslik) varliklar.push("
+    "    {baslik: baslik, okunmamis: okunmamisAl(satirlar[i])});"
+    "}"
+    "return varliklar;"
+)
+
+_GELEN_BALONLAR_JS = (
+    "var balonlar = document.querySelectorAll("
+    "  \"#main div.message-in span.selectable-text, "
+    "#main div.message-in span[data-testid='client-side-text-div-copy']\");"
+    "var cikt = [];"
+    "for (var i = 0; i < balonlar.length; i++) {"
+    "  var t = String(balonlar[i].innerText || '').trim();"
+    "  if (t) cikt.push(t);"
+    "}"
+    "return cikt.slice(-8);"
+)
+
+_SOHBET_ROW_TIKLA_JS = (
+    "var hedef = arguments[0];" + _SATIRLAR_JS + _SATIR_BASLIGI_JS +
+    "for (var i = 0; i < satirlar.length; i++) {"
+    "  if (baslikAl(satirlar[i]) === hedef) { satirlar[i].click(); return true; }"
+    "}"
+    "return false;"
+)
+
+
+def _rakamlar(deger):
+    return "".join(c for c in str(deger or "") if c.isdigit())
+
+
+def _esnaf_eslestir(conn, sohbet_basligi):
+    """Sohbet başlığındaki numara veya işletme adı -> esnaflar.id.
+
+    Temkinli: yalnızca TAM numara eşleşmesi ya da başlıkta geçen işletme adı
+    kabul edilir. Bulunamazsa None döner ve mesaj kayda geçmez (yanlış kişiye
+    yanıt gitmesin).
+
+    ADAY satırları eşleştirme DIŞIDIR (izin=1 verilmedikçe): aday havuzu
+    OSM'den scraped isimlerdir, yani karşı tarafın bize yazmış olma ihtimali
+    yoktur. 200 ticari isim tabloya düştüğünde "Kafe", "Medya", "Market" gibi
+    kısa/unvan-parçaları kişisel ya da grup sohbet başlıklarıyla çakışmaya
+    başladı; eşleşme onlara tıklanması ve otomatik yanıt ACIKKEN bir aile
+    ferdi/grup sohbetine ticari bot yanıtı gitmesi demek. Operatör bir adayı
+    onayladığında (izin=1) o satır yeniden eşleşebilir.
+    """
+    baslik_rakam = _rakamlar(sohbet_basligi)
+    baslik_duz = _duz_metin(sohbet_basligi).lower()
+    for kayit in conn.execute(
+        "SELECT id, isletme, telefon FROM esnaflar "
+        "WHERE COALESCE(durum, '') <> ? OR COALESCE(izin, 0) = 1", ("ADAY",)
+    ):
+        tel = _rakamlar(kayit["telefon"])
+        # En az 8 hane eşleşmeden "numara" sayılmaz: "Kafe 2023" gibi başlıklar
+        # bir telefonun içindeki rastgele 4 haneyle yanlış eşleşmesin.
+        if len(tel) >= 8 and len(baslik_rakam) >= 8 and (
+            tel in baslik_rakam or baslik_rakam in tel
+        ):
+            return int(kayit["id"])
+        ad = _duz_metin(kayit["isletme"] or "").lower().strip()
+        if len(ad) >= 4 and ad in baslik_duz:
+            return int(kayit["id"])
+    return None
+
+
+def _gelen_mesajlari_oku():
+    """Bir yoklama: okunmamış sohbetlere gir, son gelen mesajı kaydet.
+
+    Dönen: işlenen yeni mesaj sayısı. Gönderim kapalı olsa da çalışır (salt
+    okuma + kendi kaydımıza yazma). Otomatik yanıt varsayılan KAPALIDIR.
+    """
+    if not OTONOM_YAPI.gelen_mesaj_acik:
+        return 0
+    if not _oturum_gonderime_hazir():
+        return 0
+    conn = veritabani_baglan()
+    try:
+        sema_goc_uygula(conn)
+        with SOHBET_KILIDI:
+            surucu = whatsapp_driver
+            try:
+                kisiler = surucu.execute_script(_KISILER_JS) or []
+            except (WebDriverException, JavascriptException) as hata:
+                _log_motor(f"[GELEN] Kişi listesi okunamadı: {type(hata).__name__}")
+                return 0
+            # Yalnızca kayıtlı ESNAFA ait okunmamış sohbetlere girilir: aile/özel
+            # sohbetlerin "okundu" işaretlenmesi veya içlerine tıklanması sözkonusu
+            # değil. Eşleşmeyen başlıklar için hiçbir tıklama yapılmaz.
+            hedefler = []
+            eslesmeyenler = []
+            okunmamis_sayisi = 0
+            for kisis in kisiler:
+                if int(kisis.get("okunmamis") or 0) <= 0:
+                    continue
+                okunmamis_sayisi += 1
+                baslik = str(kisis.get("baslik") or "").strip()
+                if not baslik:
+                    continue
+                esnaf_id = _esnaf_eslestir(conn, baslik)
+                if esnaf_id is None:
+                    eslesmeyenler.append(baslik)
+                    continue
+                hedefler.append((baslik, esnaf_id))
+                if len(hedefler) >= OTONOM_YAPI.gelen_azami_sohbet:
+                    break
+            # Aynı liste her yoklamada tekrar loglanmasın: yalnızca değişince yaz.
+            global _eslesmeyen_imza, _eslesen_imza
+            anahtar = "|".join(sorted(eslesmeyenler))
+            if anahtar != _eslesmeyen_imza:
+                _eslesmeyen_imza = anahtar
+                if eslesmeyenler:
+                    _log_motor("[GELEN] Okunmamış ama kayıtlı esnaf olmayan sohbetler "
+                               f"(dokunulmadı): {eslesmeyenler[:8]}")
+            # Eşleşenler de loglanır: yanlış bir eşleşme (aday adıyla çakışan bir
+            # grup/kişisel sohbet) sessizce tıklanıp otomatik yanıt gidemesin.
+            eslesen_imza = "|".join(f"#{esnaf_id}:{baslik}" for baslik, esnaf_id in hedefler)
+            if eslesen_imza != _eslesen_imza:
+                _eslesen_imza = eslesen_imza
+                if hedefler:
+                    _log_motor(f"[GELEN] Esnaf eşleşen okunmamış sohbetler: {hedefler[:5]}")
+            # DOM okumasının gerçekten çalıştığını kanıtlamak için sayaç:
+            # 'kisiler=0' seçicinin bozulduğu anlamına gelir, sessizce
+            # 'yanıt yok' sanılmasın.
+            with otonom_kilit:
+                gelen_son_rapor.update({
+                    "kisiler": len(kisiler), "okunmamis": okunmamis_sayisi,
+                    "esnaf_sohbet": len(hedefler),
+                    "zaman": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                })
+            if not kisiler:
+                _log_motor("[GELEN] UYARI: kişi listesi boş döndü — WhatsApp Web "
+                           "seçicileri değişmiş olabilir, okuyucu çalışmıyor.")
+            islenen = 0
+            for baslik, esnaf_id in hedefler:
+                try:
+                    if not surucu.execute_script(_SOHBET_ROW_TIKLA_JS, baslik):
+                        continue
+                    time.sleep(2.0)
+                    balonlar = surucu.execute_script(_GELEN_BALONLAR_JS) or []
+                except (WebDriverException, JavascriptException):
+                    continue
+                if not balonlar:
+                    continue
+                son_metin = str(balonlar[-1]).strip()
+                imza_degeri = _mesaj_imzasi(baslik, son_metin)
+                durum = gelen_mesaj_kaydet(
+                    conn, esnaf_id, son_metin, imza_degeri, _mesaj_kaydet
+                )
+                if durum.get("yinelenen"):
+                    continue
+                islenen += 1
+                _log_motor(f"[GELEN] Esnaf #{esnaf_id} ({baslik}): {son_metin[:120]}")
+                if durum.get("opt_out"):
+                    _log_motor(f"[GELEN] #{esnaf_id} OPT-OUT ('DUR/İPTAL'): "
+                               f"gönderim listesi kapatıldı, kalıcı numara kara listesi: "
+                               f"{bool(durum.get('kara_liste'))}. Otomatik yanıt GÖNDERİLMEDİ.")
+                    continue
+                if OTONOM_YAPI.otomatik_yanit_acik:
+                    yanit = derya_otonom_yanitla(son_metin, baslik)
+                    _log_motor(f"[GELEN] Otomatik yanıt denemesi #{esnaf_id}: {yanit[:80]}")
+                    _otomatik_yanit_gonder(conn, esnaf_id, yanit)
+        return islenen
+    finally:
+        conn.close()
+
+
+def _otomatik_yanit_gonder(conn, esnaf_id, yanit):
+    """Yanıtı yalnızca teslim doğrulanırsa panele yazar (mevcut sözleşme)."""
+    kayit = _esnaf_kayiti(conn, esnaf_id) or {}
+    if not kayit.get("telefon"):
+        _log_motor(f"[GELEN] #{esnaf_id} telefon kayıtlı değil; yanıt gönderilmedi.")
+        return False
+    if not gercek_whatsapp_mesaj_gonder(kayit["telefon"], yanit, kayit.get("isletme")):
+        return False
+    _mesaj_kaydet(conn, esnaf_id, "DERYA", yanit)
+    return True
+
+
+def gelen_mesaj_dongusu():
+    _log_motor(
+        f"[GELEN] Mesaj okuyucu başlatıldı | yoklama={OTONOM_YAPI.gelen_yoklama_sn}sn "
+        f"azami_sohbet={OTONOM_YAPI.gelen_azami_sohbet} "
+        f"otomatik_yanit={'ACIK' if OTONOM_YAPI.otomatik_yanit_acik else 'KAPALI'}"
+    )
     while True:
-        conn = None
         try:
-            conn = veritabani_baglan()
-            cursor = conn.execute("SELECT COUNT(*) as sayi FROM esnaflar")
-            row = cursor.fetchone()
-            mevcut_sayi = row["sayi"] if row else 0
+            _gelen_mesajlari_oku()
+        except Exception as hata:
+            _log_motor(f"[GELEN HATA] {type(hata).__name__}: {hata}")
+        time.sleep(OTONOM_YAPI.gelen_yoklama_sn)
 
-            if mevcut_sayi < hedef_sayi:
-                pass
-        except Exception as e:
-            print(f"⚠️ [OTONOM HATA]: {e}")
-        finally:
-            if conn is not None:
-                conn.close()
 
-        time.sleep(30)
+def aday_tarama_isleyicisi():
+    """Aday havuzu döngüsü: toplar, yazar, uyur. Bu thread'in gönderimle işi yok."""
+    aday_tarama_dongusu(veritabani_baglan, ADAY_YAPI, _log_motor)
+
+
+@app.route("/api/aday_havuzu", methods=["GET"])
+def aday_havuzu_gor():
+    """Panel: havuzdaki adaylar + son tarama özeti. Salt-okur, 500 dönmez."""
+    govde = {"toplam": 0, "kayitlar": []}
+    try:
+        conn = veritabani_baglan()
+    except sqlite3.Error as hata:
+        _log(f"aday_havuzu baglanti hatasi: {hata}")
+        return jsonify({**govde, "hata": str(hata)[:120]})
+    try:
+        return jsonify(havuz_durumu(conn))
+    except sqlite3.Error as hata:
+        _log(f"aday_havuzu sorgu hatasi: {hata}")
+        return jsonify({**govde, "hata": str(hata)[:120]})
+    finally:
+        conn.close()
+
+
+@app.route("/api/izin_ver", methods=["POST"])
+def izin_ver_ucu():
+    """Panele basılan ONAY/RET düğmesinin tek yazma yolu -> esnaflar.izin.
+
+    Motor yalnızca izin=1 satırları seçer; bu uç olmadan aday havuzu hiçbir
+    zaman gönderim sırasına dönüşmez. API kimlik doğrulamasız ve yalnız SSH
+    tünelinden erişilebilir olduğundan karar log'a yazılır (numara değil, id).
+    """
+    data = request.json or {}
+    try:
+        esnaf_id = int(data.get("id"))
+    except (TypeError, ValueError):
+        return jsonify({"status": "hata", "mesaj": "id zorunlu (sayı olmalı)"}), 400
+    conn = veritabani_baglan()
+    try:
+        sema_goc_uygula(conn)
+        sonuc = _motor_izin_ver(conn, esnaf_id, data.get("izin", 1),
+                                kaynak=str(data.get("kaynak") or "panel"))
+    finally:
+        conn.close()
+    if not sonuc.get("ok"):
+        sebep = sonuc.get("sebep")
+        _log(f"⛔ İzin reddi #{esnaf_id}: {sebep}")
+        kod = 404 if sebep == "kayit-yok" else 409
+        return jsonify({"status": "hata", "mesaj": sebep, "esnaf_id": esnaf_id}), kod
+    uyari = f" · {sonuc['uyari']}" if sonuc.get("uyari") else ""
+    _log(f"✅ İzin #{esnaf_id}: {sonuc.get('onceki')} -> izin={sonuc['izin']}{uyari}")
+    return jsonify({"status": "basarili", **sonuc})
+
+
+@app.route("/api/otonom_tani", methods=["GET"])
+def otonom_tani():
+    """Salt-okunur DOM teşhisi: ilk satırlarda okunmamış rozeti NEYLE bulunuyor?
+
+    WhatsApp Web arayüzü güncellendiğinde seçiciler sessizce ölür; bu uç,
+    'okunmamis=0'ın gerçekten 'yanıt yok' mu yoksa 'seçici bozuldu' mu olduğunu
+    ayırt etmek içindir. Hiçbir sohbete tıklamaz, hiçbir şey yazmaz.
+    """
+    js = (
+        _SATIRLAR_JS + _SATIR_BASLIGI_JS + _SATIR_OKUNMAMIS_JS +
+        "var out = [];"
+        "for (var i = 0; i < satirlar.length && out.length < 12; i++) {"
+        "  var d = satirlar[i];"
+        "  out.push({baslik: baslikAl(d), okunmamis: okunmamisAl(d), "
+        "    title_mi: !!d.querySelector('span[dir=\"auto\"][title]'), "
+        "    ham: String(d.innerText || '').replace(/\\s+/g, ' ').trim().slice(0, 70)});"
+        "}"
+        "return {toplam_satir: satirlar.length, ornekler: out};"
+    )
+    if not _oturum_gonderime_hazir():
+        return jsonify({"basarili": False, "sebep": "oturum hazir degil"}), 503
+    with SOHBET_KILIDI:
+        try:
+            satirlar = whatsapp_driver.execute_script(js)
+        except (WebDriverException, JavascriptException) as hata:
+            return jsonify({"basarili": False, "sebep": f"{type(hata).__name__}: {hata}"}), 500
+    return jsonify({"basarili": True, "satirlar": satirlar,
+                    "son_kullanilan_rapor": dict(gelen_son_rapor)})
+
+
+@app.route("/api/otonom_durum", methods=["GET"])
+def otonom_durum():
+    with otonom_kilit:
+        rapor = dict(otonom_son_rapor)
+        gelen = dict(gelen_son_rapor)
+    return jsonify({
+        "sozlesme": OTONOM_YAPI.sozler(),
+        "gonderim_acik": OTONOM_YAPI.gonderim_acik,
+        "motor_ishalinde": otonom_thread.is_alive(),
+        "gelen_okuyucu_ishalinde": gelen_thread.is_alive(),
+        "son_rapor": rapor,
+        "gelen_son_rapor": gelen,
+    })
 
 
 # ============================================================
@@ -2079,8 +2605,15 @@ def _arka_plan_baslat():
 if OTOMATIK_BASLAT:
     _arka_plan_baslat()
 
-otonom_thread = Thread(target=otonom_hedef_isleyici, args=(20,), daemon=True)
+# Motor KAPALI başlatılabilir (OTONOM_GONDERIM=0): döngü yine döner, raporu
+# loglar ama hiçbir mesaja/veritabanı durumuna dokunmaz.
+otonom_thread = Thread(target=otonom_hedef_isleyici, daemon=True, name="otonom-gonderim")
 otonom_thread.start()
+gelen_thread = Thread(target=gelen_mesaj_dongusu, daemon=True, name="otonom-gelen-mesaj")
+gelen_thread.start()
+# ADAY_TARAMA=0 -> döngü yalnızca "KAPALI" loglayıp çıkar (ağdan hiç okumaz).
+aday_thread = Thread(target=aday_tarama_isleyicisi, daemon=True, name="aday-havuzu")
+aday_thread.start()
 
 
 if __name__ == "__main__":
@@ -2090,5 +2623,7 @@ if __name__ == "__main__":
     print(f"   Sert temizlik modu  : {'ACIK' if SERT_MODEMLEME else 'KAPALI (hedefli)'}")
     print(f"   Headless Chrome     : {'ACIK' if HEADLESS_MODE else 'KAPALI (pencere açık)'}")
     print(f"   QR bekleme          : {QR_BEKLEME_SN} sn")
+    print(f"   Otonom motor        : {OTONOM_YAPI.sozler()}")
+    print(f"   Aday havuzu         : {ADAY_YAPI.sozler()} (izin=0 -> gonderim sirasi degil)")
     # debug/use_reloader=TRUE iken çift Chrome açılır -> profil kilidi. KAPALI.
     app.run(host="0.0.0.0", port=5000, debug=False, use_reloader=False)

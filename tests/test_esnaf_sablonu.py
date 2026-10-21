@@ -21,7 +21,9 @@ BEKLENEN = (
     "%100 güvenlidir.\n"
     "🎁 İlk 5 Müşteri Yönlendirmesi Sıfır Komisyon! Sistemi canlı görmeniz için ilk "
     "5 yönlendirmede 1 TL bile talep etmiyoruz.\n"
-    "Uygun olduğunuzda dükkanınıza bir çayınızı içmeye gelelim mi?"
+    "Uygun olduğunuzda dükkanınıza bir çayınızı içmeye gelelim mi?\n"
+    "Bu mesajları almak istemiyorsanız yanıt olarak 'DUR' yazmanız yeterli: "
+    "numaranız kalıcı olarak listemizden çıkar ve bir daha yazmayız."
 )
 
 
@@ -283,6 +285,59 @@ class GonderimYoluSablonTestleri(unittest.TestCase):
         )
         for js in (self.servis._ARAMA_KUTUSU_JS, self.servis._ARAMA_YAZ_JS):
             self.assertEqual(js.count("{"), js.count("}"), js[:60])
+
+
+class EsnafEslestirmeTestleri(unittest.TestCase):
+    """Aday havuzundaki scraped isimler kişisel sohbetlerle eşleşmemeli."""
+
+    def setUp(self):
+        import sqlite3
+        import tempfile
+
+        import api_server_2 as servis
+        self.servis = servis
+        self.tmp = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
+        self.yol = Path(self.tmp.name) / "eslestirme.db"
+        self.sqlite3 = sqlite3
+        self.addCleanup(self.tmp.cleanup)
+        self._kur("Zeytin Cafe", "905370000000", durum="onayli", izin=0)
+
+    def _kur(self, isletme, telefon, durum, izin, id=7):
+        """Tabloyu istenen satırla (yeniden) kur + eşleştirme bağlantısı döndür."""
+        self.sqlite3.connect(self.yol).close()
+        conn = self.sqlite3.connect(self.yol)
+        conn.execute("DROP TABLE IF EXISTS esnaflar")
+        conn.execute(
+            "CREATE TABLE esnaflar (id INTEGER PRIMARY KEY, isletme TEXT,"
+            " telefon TEXT, durum TEXT, izin INTEGER)"
+        )
+        conn.execute("INSERT INTO esnaflar VALUES (?, ?, ?, ?, ?)",
+                     (id, isletme, telefon, durum, izin))
+        conn.commit()
+        conn.close()
+
+    def _eslestir(self, baslik):
+        conn = self.sqlite3.connect(self.yol)
+        conn.row_factory = self.sqlite3.Row
+        try:
+            return self.servis._esnaf_eslestir(conn, baslik)
+        finally:
+            conn.close()
+
+    def test_aday_isimi_kisisel_sohbet_basligiyla_cakisisirsa_esnaf_sayilmaz(self):
+        self._kur("Zeytin Cafe", "", durum="ADAY", izin=0)
+        self.assertIsNone(self._eslestir("Zeytin Cafe Çocukları WhatsApp Grubu"))
+
+    def test_aday_numarasi_da_kisisel_sohbette_esnaf_sayilmaz(self):
+        self._kur("Zeytin Cafe", "905370000000", durum="ADAY", izin=0)
+        self.assertIsNone(self._eslestir("+90 537 000 00 00"))
+
+    def test_onayli_kayit_eslesir(self):
+        self.assertEqual(self._eslestir("Zeytin Cafe - Sipariş"), 7)
+
+    def test_operator_izin_verince_aday_tekrar_eslesilebilir(self):
+        self._kur("Zeytin Cafe", "905370000000", durum="ADAY", izin=1)
+        self.assertEqual(self._eslestir("Zeytin Cafe"), 7)
 
 
 if __name__ == "__main__":

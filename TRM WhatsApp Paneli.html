@@ -66,6 +66,16 @@
   .badge-status-onayli{background:rgba(0,212,160,.15);color:var(--wa-accent);border:1px solid rgba(0,212,160,.35);}
   .badge-status-beklemede{background:rgba(240,180,41,.15);color:#f0b429;border:1px solid rgba(240,180,41,.35);}
   .badge-status-pasif{background:rgba(134,150,160,.15);color:#8696a0;border:1px solid rgba(134,150,160,.35);}
+  .badge-adresyok{background:rgba(240,90,90,.14);color:#ff8080;border:1px solid rgba(240,90,90,.32);}
+  /* ONAY/RET: tıklama satırı açmasın (stopPropagation) ve motorun tek kapısı
+     olduğu için satırın en sağında, daima görünür dursun. */
+  .esnaf-onay{flex-shrink:0;display:flex;flex-direction:column;gap:4px;align-items:flex-end;}
+  .onay-btn{font:700 9.5px/1.4 'Consolas',monospace;letter-spacing:.05em;padding:5px 8px;border-radius:8px;cursor:pointer;
+    background:rgba(0,212,160,.12);color:var(--wa-accent);border:1px solid rgba(0,212,160,.4);transition:.15s;}
+  .onay-btn:hover{background:rgba(0,212,160,.24);}
+  .onay-btn.geri{background:rgba(134,150,160,.1);color:#8696a0;border-color:rgba(134,150,160,.3);}
+  .onay-btn:disabled{opacity:.45;cursor:progress;}
+  .onay-dogrulgu{font-size:9px;color:var(--wa-text-dim);letter-spacing:.03em;}
   .list-empty{padding:60px 24px;text-align:center;color:var(--wa-text-dim);font-size:13px;line-height:1.7;}
   .list-empty .le-icon{font-size:42px;opacity:.35;margin-bottom:14px;display:block;}
   .list-empty .le-title{color:var(--wa-text);font-weight:700;font-size:14px;margin-bottom:6px;}
@@ -155,6 +165,7 @@
       <div class="ch-chip" data-channel="instagram"><span>📸</span><span>Instagram</span><span class="ch-count" id="cntIg">0</span></div>
       <div class="ch-chip" data-channel="web"><span>🌐</span><span>Web Formu</span><span class="ch-count" id="cntWeb">0</span></div>
     </div>
+    <div id="adayOzeti" style="display:none;margin:0 12px 8px;padding:8px 11px;border-radius:10px;background:rgba(0,212,160,.07);border:1px solid rgba(0,168,132,.28);font-size:11px;color:var(--wa-text-dim);line-height:1.6;"></div>
     <div class="esnaf-list" id="esnafList">
       <div class="list-empty"><span class="le-icon">⏳</span><div class="le-title">Yükleniyor…</div><div class="le-sub">Esnaf kayıtları getiriliyor.</div></div>
     </div>
@@ -199,24 +210,15 @@
   "use strict";
   const API_BASE = "http://localhost:5000";
 
-  const FALLBACK_ESNAF = {
-    id: -1,
-    ad: "Test İşletmesi (Kızımın Hattı)",
-    isletme: "Test İşletmesi (Kızımın Hattı)",
-    telefon: "905300000000",
-    kod: "TRM-TEST01",
-    durum: "onayli",
-    kanal: "whatsapp",
-    online: true,
-    son_mesaj: "Yerel yedek kayıt — API'ye bağlanılamadı",
-    son_mesaj_zamani: null
-  };
-
+  // Yedek/uydurma kayıt YOK: API boşsa panel boş kalır. Bir zamanlar burada
+  // sabit duran test numarası (905300000000), veritabanından silinse bile panele
+  // geri yazılıyordu ve motor için "onaylı esnaf" gibi görünüyordu.
   const STATE = {
     esnaflar: [], aktifEsnaf: null, mesajlar: [],
     loadingMsgs: false, sending: false, connOk: false,
     activeChannel: "all", soundEnabled: true,
-    unread: {}, lastActivity: {}, bumpQueue: new Set(), fallbackUsed: false
+    unread: {}, lastActivity: {}, bumpQueue: new Set(),
+    motorAcik: false, motorAra: "45-90 sn", motorBugun: ""
   };
   window.TRM_STATE = STATE;
 
@@ -235,7 +237,20 @@
     STATE.lastActivity[id] = nowMs();
     if(opts.bump) STATE.bumpQueue.add(id);
   }
-  function sortByRecent(list){ return list.slice().sort((a,b)=>activityOf(b)-activityOf(a)); }
+  // Sunucudaki öncelik sırası korunur: 0 = onay bekleyen telefonlu aday (senin
+  // tıklayacağın grup), 1 = onaylı (motor buraya yazar), 2 = telefonsuz aday.
+  // Grup içinde son aktivite geçer.
+  function onayGrubu(e){
+    if(Number(e.izin) === 1) return 1;
+    const tel = String(e.telefon || "").trim();
+    return (e.telefon_var === false || !tel) ? 2 : 0;
+  }
+  function siralaOncelik(list){
+    return list.slice().sort((a,b)=>{
+      const g = onayGrubu(a) - onayGrubu(b);
+      return g !== 0 ? g : activityOf(b) - activityOf(a);
+    });
+  }
 
   function timeFromIso(iso){
     if(!iso) return "";
@@ -348,8 +363,13 @@
     try{
       const res = await fetch(API_BASE+path,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(body),signal:ctrl.signal});
       clearTimeout(tid);
-      if(!res.ok) throw new Error("HTTP "+res.status);
-      return {ok:true, data: await res.json()};
+      const metin = await res.text();
+      let veri = null;
+      try{ veri = JSON.parse(metin); }catch(_e){ }
+      // Reddin gerekçesi gövdede ("kara-liste", "opt-out", "telefon-yok"):
+      // operatör neden onaylayamadığını ham HTTP kodundan değil, sebepten anlamalı.
+      if(!res.ok) throw new Error((veri && (veri.mesaj || veri.hata)) || ("HTTP "+res.status));
+      return {ok:true, data: veri};
     }catch(e){ clearTimeout(tid); return {ok:false,error:e.message}; }
   }
 
@@ -386,19 +406,7 @@
     });
 
     if(!STATE.esnaflar.length){
-      STATE.fallbackUsed = true;
-      STATE.esnaflar = [Object.assign({}, FALLBACK_ESNAF)];
-      console.warn("[TRM] API boş → yerel test esnafı yüklendi:", FALLBACK_ESNAF.kod);
-    } else {
-      const hasTest = STATE.esnaflar.some(e =>
-        String(e.telefon||"").replace(/\D/g,"") === "905300000000" || e.kod === "TRM-TEST01"
-      );
-      if(!hasTest){
-        const fb = Object.assign({}, FALLBACK_ESNAF);
-        fb.son_mesaj = "Yerel yedek test kaydı";
-        STATE.esnaflar.push(fb);
-        console.warn("[TRM] Test esnafı API'de yok → yedek eklendi.");
-      }
+      console.warn("[TRM] API boş — panel kayıt uydurmaz, liste boş görünür.");
     }
 
     STATE.esnaflar.forEach(e => {
@@ -426,13 +434,14 @@
   function esnafDurumSinif(d){
     d = String(d||"").toLowerCase();
     if(d === "onayli" || d === "aktif") return "onayli";
-    if(d === "beklemede" || d === "pending") return "beklemede";
+    if(d === "beklemede" || d === "pending" || d === "aday") return "beklemede";
     return "pasif";
   }
   function esnafDurumEtiket(d){
     d = String(d||"").toLowerCase();
     if(d === "onayli" || d === "aktif") return "ONAYLI";
     if(d === "beklemede" || d === "pending") return "BEKLEMEDE";
+    if(d === "aday") return "ADAY · IZIN YOK";
     return "PASİF";
   }
 
@@ -455,15 +464,17 @@
       wrap.innerHTML = `<div class="list-empty"><span class="le-icon">🔍</span><div class="le-title">Sonuç bulunamadı</div><div class="le-sub">Arama kriterine uyan esnaf yok.</div></div>`;
       return;
     }
-    const sorted = sortByRecent(filtered);
+    const sorted = siralaOncelik(filtered);
     const RECENT_MS = 5*60*1000;
 
     wrap.innerHTML = sorted.map(e => {
       const isActive = STATE.aktifEsnaf && STATE.aktifEsnaf.id === e.id;
       const avatarColor = randomPastel(e.ad || e.isletme || e.id);
       const online = e.online !== false;
-      const durum = esnafDurumSinif(e.durum);
-      const durumEt = esnafDurumEtiket(e.durum);
+      const izin = Number(e.izin) === 1;
+      const adresYok = e.adres_var === false;
+      const durum = izin ? "onayli" : esnafDurumSinif(e.durum);
+      const durumEt = izin ? "ONAYLI · SIRADA" : esnafDurumEtiket(e.durum);
       const ch = normalizeChannel(e.kanal);
       const chMeta = CHANNELS[ch] || CHANNELS.whatsapp;
       const unread = STATE.unread[e.id];
@@ -472,7 +483,7 @@
       const previewText = e.son_mesaj ? e.son_mesaj : "Henüz mesaj yok";
       const previewTime = lastTimeIso ? smartTime(lastTimeIso) : "";
       const isBumping = STATE.bumpQueue.has(e.id);
-      const isFallback = e.id === -1;
+      const sirada = izin && !adresYok && STATE.motorAcik;
       return `
         <div class="esnaf-item ${isActive?"active":""} ${unread?"unread":""} ${isRecent?"recent":""} ${isBumping?"bumped":""}"
              data-esnaf-id="${e.id}" onclick="TRM_selectEsnaf(${e.id})">
@@ -487,8 +498,15 @@
               <span class="badge badge-code">${escapeHtml(e.kod||("TRM-"+e.id))}</span>
               ${e.telefon?`<span class="badge badge-phone">${escapeHtml(e.telefon)}</span>`:""}
               <span class="badge badge-status-${durum}">${durumEt}</span>
-              ${isFallback?`<span class="badge" style="background:rgba(240,180,41,.15);color:#f0b429;border:1px solid rgba(240,180,41,.35);">YEDEK</span>`:""}
+              ${adresYok?`<span class="badge badge-adresyok" title="Adres boş: tanıtım şablonu kilidi bu kaydı gönderim sırasına almaz">ADRES YOK</span>`:""}
+              ${e.mobil === "" ? `<span class="badge badge-adresyok" title="Yalnızca sabit hat: WhatsApp bu numarayı açmaz, onayların bir günlük slotu boşuna harcar">SABİT HAT</span>`:""}
             </div>
+          </div>
+          <div class="esnaf-onay">
+            ${izin
+              ? `<button class="onay-btn geri" title="Onayı geri al — motor bu numaraya yazmaz" onclick="TRM_izinVer(${e.id},0,event)">↩ RET</button>`
+              : `<button class="onay-btn" title="Bu numaraya tanıtım mesajı gitmesine izin ver" onclick="TRM_izinVer(${e.id},1,event)">✅ ONAY</button>`}
+            ${sirada?`<span class="onay-dogrulgu">sırada · ${STATE.motorAra}</span>`:""}
           </div>
         </div>`;
     }).join("");
@@ -726,7 +744,66 @@
     liveTickTimer = setInterval(()=>renderEsnafList(), 30000);
   }
 
-  async function refreshEsnaflar(){ await checkConn(); await loadEsnaflar(); }
+  async function loadMotorDurumu(){
+    const r = await apiGet("/api/otonom_durum", 6000);
+    const d = r.ok ? r.data : null;
+    STATE.motorAcik = !!(d && d.gonderim_acik);
+    const sozlesme = String((d && d.sozlesme) || "");
+    const ara = sozlesme.match(/ara=(\d+-\d+)sn/);
+    STATE.motorAra = ara ? ara[1] + " sn" : "45-90 sn";
+    STATE.otomatikYanit = /oto_yanit=ACIK/.test(sozlesme);
+    const rapor = (d && d.son_rapor) || {};
+    STATE.motorBugun = (rapor.bugunku !== undefined && rapor.tavan !== undefined)
+      ? `${rapor.bugunku}/${rapor.tavan} bugün` : "";
+    return d;
+  }
+
+  async function izinVer(id, izin, evt){
+    if(evt){ evt.stopPropagation(); evt.preventDefault(); }
+    const kaynak = izin ? "panel-onay" : "panel-ret";
+    const r = await apiPost("/api/izin_ver", {id: id, izin: izin, kaynak: "panel"});
+    if(!r.ok){
+      toast(`#${id} onaylanamadı: ${r.error}`, "warn");
+      await loadEsnaflar();
+      return;
+    }
+    const d = r.data || {};
+    if(izin){
+      toast(d.uyari
+        ? `#${id} onaylandı · ${d.uyari}`
+        : `#${id} onaylandı — motor 45-90 sn aralığıyla sıraya alabilir`, "ok");
+    } else {
+      toast(`#${id} onayı geri alındı — motor bu numaraya yazmaz`, "warn");
+    }
+    await loadEsnaflar();
+    await loadAdayOzeti();
+  }
+  window.TRM_izinVer = izinVer;
+
+  async function loadAdayOzeti(){
+    const bar = $("adayOzeti"); if(!bar) return;
+    await loadMotorDurumu();
+    const r = await apiGet("/api/aday_havuzu", 8000);
+    const d = r.ok ? r.data : null;
+    if(!d){ bar.style.display = "none"; return; }
+    const o = d.ozet || {};
+    const motorSatiri = STATE.motorAcik
+      ? `<div style="font-weight:800;color:#ff8080;">🔴 MOTOR AÇIK — onayladığın numaralara ${escapeHtml(STATE.motorAra)} aralıkla tanıtım gider${STATE.motorBugun?` · ${escapeHtml(STATE.motorBugun)}`:""}</div>`
+      : `<div style="font-weight:800;color:#8696a0;">⚪ Motor kapalı (OTONOM_GONDERIM=0) — onay kuyruğu hazırlanır, mesaj gitmez</div>`
+      + `<div style="opacity:.8;">${STATE.otomatikYanit ? "💬 Gelen mesajlara otomatik yanıt AÇIK" : "💬 Otomatik yanıt KAPALI"}</div>`;
+    const havuzSatiri = d.toplam
+      ? `<div>🗺️ Aday havuzu — ${d.toplam} firma <span style="font-weight:600;color:#f0b429;">(İZİN YOK · GÖNDERİLMEZ)</span></div>`
+      + `<div>📞 telefonlu ${d.telefonlu} · 📍 adresli ${d.adresli} · ✅ izin verilen ${d.izin_verilmis}</div>`
+      + (o.zaman ? `<div>son tarama ${escapeHtml(String(o.zaman))}`
+                 + (o.kaynak ? ` · ${escapeHtml(String(o.kaynak).replace(/^https?:\/\//, "").slice(0, 40))}` : "")
+                 + `</div>` : "")
+      + `<div style="opacity:.7;">${escapeHtml(d.atıf || "")}</div>`
+      : `<div>Havuz boş — tarama bekliyor ya da tüm adaylar onaylandı.</div>`;
+    bar.style.display = "block";
+    bar.innerHTML = motorSatiri + havuzSatiri;
+  }
+
+  async function refreshEsnaflar(){ await checkConn(); await loadEsnaflar(); await loadAdayOzeti(); }
   window.TRM_refreshEsnaflar = refreshEsnaflar;
 
   document.addEventListener("DOMContentLoaded", async function(){
@@ -747,12 +824,14 @@
 
     await checkConn();
     await loadEsnaflar();
+    await loadAdayOzeti();
 
     if(STATE.esnaflar.length && window.innerWidth > 900){
       selectEsnaf(STATE.esnaflar[0].id);
     }
 
     setInterval(checkConn, 15000);
+    setInterval(loadAdayOzeti, 60000);
     window.addEventListener("resize", ()=>{
       if(window.innerWidth > 900) $("sidebar").classList.remove("hidden-mobile");
     });

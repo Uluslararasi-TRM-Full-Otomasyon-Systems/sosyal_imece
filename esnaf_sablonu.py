@@ -20,7 +20,9 @@ SABLON = (
     "%100 güvenlidir.\n"
     "🎁 İlk 5 Müşteri Yönlendirmesi Sıfır Komisyon! Sistemi canlı görmeniz için ilk "
     "5 yönlendirmede 1 TL bile talep etmiyoruz.\n"
-    "Uygun olduğunuzda dükkanınıza bir çayınızı içmeye gelelim mi?"
+    "Uygun olduğunuzda dükkanınıza bir çayınızı içmeye gelelim mi?\n"
+    "Bu mesajları almak istemiyorsanız yanıt olarak 'DUR' yazmanız yeterli: "
+    "numaranız kalıcı olarak listemizden çıkar ve bir daha yazmayız."
 )
 
 ZORUNLU_ALANLAR = ("isletme", "adres")
