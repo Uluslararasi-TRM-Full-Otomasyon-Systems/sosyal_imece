@@ -54,6 +54,7 @@ def utc_stamp() -> str:
 
 
 def connect(db_path: Path = DB_PATH) -> sqlite3.Connection:
+    db_path.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     return conn
@@ -77,9 +78,10 @@ def ensure_schema(conn: sqlite3.Connection) -> None:
         """
     )
     columns = {row[1] for row in conn.execute("PRAGMA table_info(organic_content_queue)")}
-    for column in ("external_post_id", "sent_at"):
-        if column not in columns:
-            conn.execute(f"ALTER TABLE organic_content_queue ADD COLUMN {column} TEXT")
+    if columns:
+        for column in ("external_post_id", "sent_at"):
+            if column not in columns:
+                conn.execute(f"ALTER TABLE organic_content_queue ADD COLUMN {column} TEXT")
     conn.commit()
 
 

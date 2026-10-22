@@ -45,8 +45,15 @@ def env_bool(name, default=False, environ=None):
 
 
 def load_trm_environment(project_root=None):
-    """Load configuration only from the Windows DPAPI vault, never project files."""
-    from core.dpapi_vault import DpapiVaultError, load_protected_environment
+    """Load configuration only from the Windows DPAPI vault, never project files.
+
+    Linux'ta (VPS) kasa yoktur: DPAPI bu işletim sisteminde çalışmaz. Orada
+    ayarlar systemd `EnvironmentFile`inden gelir, bu yüzden sessizce None döner.
+    """
+    try:
+        from core.dpapi_vault import DpapiVaultError, load_protected_environment
+    except ImportError:
+        return None
 
     try:
         return load_protected_environment()
