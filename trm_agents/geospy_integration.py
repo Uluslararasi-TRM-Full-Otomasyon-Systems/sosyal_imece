@@ -1,212 +1,78 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-GeoSpy Integration Module
-Görsel coğrafi istihbarat ve lokasyon doğrulama servislerini otonom akışa dahil eder
+"""GeoSpy entegrasyonu — FAIL-CLOSED.
+
+Eski hâli `api.geospy.ai/v1` adresine tek bir istek atmadan İstanbul/Kadıköy
+koordinatları, `confidence: 0.87`, sahte demografi (`population_density: high`)
+ve altyapı yüzdeleri (`internet_penetration: 0.95`) uyduruyordu;
+`analyze_geographic_relevance` ise okunan veriye bakmadan 0.7/0.5 skor
+atıyordu. Bu sürüm hiçbir değer üretmez: doğrulanmış bir uç nokta ve lisanslı
+anahtar olmadan her yöntem `durum='not_configured'` döner.
+
+Anahtar varlığı yalnızca kontrol edilir; değeri okunmaz ve yazılmaz.
 """
 
-import requests
-import json
 import logging
+import os
 from typing import Dict, List, Optional, Tuple
-from datetime import datetime
-import base64
 
 logger = logging.getLogger(__name__)
+
+NOT_CONFIGURED = "not_configured"
+ANAHTAR_ADAYLARI = ("GEOSPYPY_API_TOKEN", "GEOSPY_API_TOKEN", "GEOSPY_API_KEY")
+
+
+def anahtar_var_mi(environ=None) -> bool:
+    e = os.environ if environ is None else environ
+    return any(str(e.get(ad) or "").strip() for ad in ANAHTAR_ADAYLARI)
+
 
 class GeoSpyIntegration:
     def __init__(self, api_key: Optional[str] = None):
         self.api_key = api_key or ""
         self.base_url = "https://api.geospy.ai/v1"
-        self.cache = {}
-        
-    def analyze_image_location(self, image_data: bytes) -> Dict:
-        """
-        Görselden coğrafi konum bilgisi çıkar
-        """
-        try:
-            cache_key = f"image_{hash(image_data)}"
-            if cache_key in self.cache:
-                return self.cache[cache_key]
-            
-            # Mock veri (gerçek API olmadığında)
-            mock_location = {
-                "detected_location": {
-                    "country": "Turkey",
-                    "city": "Istanbul",
-                    "district": "Kadıköy",
-                    "coordinates": {
-                        "lat": 40.9901,
-                        "lng": 29.0292
-                    }
-                },
-                "confidence": 0.87,
-                "visual_features": [
-                    "urban_architecture",
-                    "bosphorus_view",
-                    "historical_buildings"
-                ],
-                "timestamp": datetime.now().isoformat()
-            }
-            
-            self.cache[cache_key] = mock_location
-            logger.info(f"🗺️ GeoSpy görsel konum analizi tamamlandı")
-            return mock_location
-            
-        except Exception as e:
-            logger.error(f"❌ GeoSpy görsel konum analizi hatası: {e}")
-            return {}
-    
-    def verify_location_claim(self, claimed_location: str, image_data: bytes) -> Dict:
-        """
-        İddia edilen konumu görselle doğrula
-        """
-        try:
-            detected = self.analyze_image_location(image_data)
-            
-            if not detected:
-                return {"error": "Konum tespit edilemedi"}
-            
-            detected_city = detected.get("detected_location", {}).get("city", "")
-            detected_country = detected.get("detected_location", {}).get("country", "")
-            
-            # Basit doğrulama
-            claimed_lower = claimed_location.lower()
-            detected_combined = f"{detected_city}, {detected_country}".lower()
-            
-            is_match = claimed_lower in detected_combined or detected_combined in claimed_lower
-            
-            verification_result = {
-                "claimed_location": claimed_location,
-                "detected_location": detected.get("detected_location", {}),
-                "is_verified": is_match,
-                "confidence": detected.get("confidence", 0.0),
-                "timestamp": datetime.now().isoformat()
-            }
-            
-            if is_match:
-                logger.info(f"✅ Konum doğrulandı: {claimed_location}")
-            else:
-                logger.warning(f"⚠️ Konum uyuşmazlığı: İddia={claimed_location}, Tespit={detected_city}, {detected_country}")
-            
-            return verification_result
-            
-        except Exception as e:
-            logger.error(f"❌ GeoSpy konum doğrulama hatası: {e}")
-            return {"error": str(e)}
-    
-    def get_location_intelligence(self, location: str) -> Dict:
-        """
-        Belirtilen konum için coğrafi istihbarat
-        """
-        try:
-            cache_key = f"intel_{location}"
-            if cache_key in self.cache:
-                return self.cache[cache_key]
-            
-            mock_intel = {
-                "location": location,
-                "demographics": {
-                    "population_density": "high",
-                    "urbanization_level": "very_high",
-                    "economic_activity": "commercial"
-                },
-                "infrastructure": {
-                    "internet_penetration": 0.95,
-                    "mobile_usage": 0.98,
-                    "smartphone_adoption": 0.92
-                },
-                "cultural_context": {
-                    "language": "Turkish",
-                    "business_hours": "09:00-18:00",
-                    "peak_social_hours": ["19:00-23:00", "12:00-14:00"]
-                },
-                "security_level": "medium",
-                "timestamp": datetime.now().isoformat()
-            }
-            
-            self.cache[cache_key] = mock_intel
-            logger.info(f"📡 GeoSpy konum istihbaratı alındı: {location}")
-            return mock_intel
-            
-        except Exception as e:
-            logger.error(f"❌ GeoSpy konum istihbaratı hatası: {e}")
-            return {}
-    
-    def analyze_geographic_relevance(self, content: Dict, target_locations: List[str]) -> Dict:
-        """
-        İçeriğin hedef konumlarla coğrafi uyumluluğunu analiz et
-        """
-        relevance_analysis = {
-            "content": content.get("title", "unknown"),
-            "target_locations": target_locations,
-            "location_scores": [],
-            "overall_relevance": 0.0,
-            "recommendations": []
-        }
-        
-        total_score = 0
-        location_count = len(target_locations)
-        
-        for location in target_locations:
-            intel = self.get_location_intelligence(location)
-            
-            if not intel:
-                continue
-            
-            # Basit uyumluluk skoru
-            score = 0.7 if intel.get("demographics", {}).get("population_density") == "high" else 0.5
-            
-            location_analysis = {
-                "location": location,
-                "relevance_score": score,
-                "demographics": intel.get("demographics", {}),
-                "infrastructure": intel.get("infrastructure", {})
-            }
-            
-            relevance_analysis["location_scores"].append(location_analysis)
-            total_score += score
-        
-        if location_count > 0:
-            relevance_analysis["overall_relevance"] = total_score / location_count
-        
-        # Öneriler
-        if relevance_analysis["overall_relevance"] >= 0.7:
-            relevance_analysis["recommendations"].append("Yüksek coğrafi uyumluluk - bu konumlara odaklanın")
-        elif relevance_analysis["overall_relevance"] >= 0.5:
-            relevance_analysis["recommendations"].append("Orta coğrafi uyumluluk - konum stratejisini optimize edin")
-        else:
-            relevance_analysis["recommendations"].append("Düşük coğrafi uyumluluk - alternatif konumları değerlendirin")
-        
-        logger.info(f"🌍 Coğrafi uyumluluk analizi tamamlandı: {content.get('title')}")
-        return relevance_analysis
-    
-    def batch_verify_images(self, image_location_pairs: List[Tuple[bytes, str]]) -> List[Dict]:
-        """
-        Çoklu görsel-konum çiftini doğrula
-        """
-        results = []
-        
-        for image_data, claimed_location in image_location_pairs:
-            verification = self.verify_location_claim(claimed_location, image_data)
-            results.append(verification)
-        
-        logger.info(f"📸 {len(results)} görsel doğrulaması tamamlandı")
-        return results
+        self.durum = NOT_CONFIGURED
 
-# Test çalıştırması
+    def _sebep(self) -> str:
+        if not (self.api_key or anahtar_var_mi()):
+            return "lisanslı GeoSpy anahtarı yok (GEOSPY_API_TOKEN beklenir)"
+        return "anahtar var ama doğrulanmış GeoSpy uç noktası yapılandırılmadı"
+
+    def _red(self, konu: str) -> Dict[str, object]:
+        logger.warning(f"GeoSpy -> not_configured ({konu})")
+        return {"durum": NOT_CONFIGURED, "konu": konu, "sebep": self._sebep(),
+                "veri": None}
+
+    def analyze_image_location(self, image_data: bytes) -> Dict:
+        # Görselden çıkarılan konum, gerçek bir model cevabı olmadan uydurulamaz.
+        return self._red("gorsel_konum_analizi")
+
+    def verify_location_claim(self, claimed_location: str,
+                              image_data: bytes) -> Dict:
+        # Doğrulama yapamıyorsak "doğrulanamadı" deriz; iddiayı ne kabul ne red.
+        red = self._red(f"konum_iddiası ({claimed_location})")
+        red["is_verified"] = None
+        return red
+
+    def get_location_intelligence(self, location: str) -> Dict:
+        # Yaş/gelir/altyapı gibi tüketici profilleri bilerek üretilmez.
+        return self._red(f"konum_istihbarati ({location})")
+
+    def analyze_geographic_relevance(self, content: Dict,
+                                     target_locations: List[str]) -> Dict:
+        # Skor biçiminde anahtar (`overall_relevance` vb.) bile üretilmez:
+        # kırmızı bir sayı olmaması, yeşil bir sayının yerini almamalı.
+        red = self._red("cografik_uyumluluk")
+        red["content"] = (content or {}).get("title", "unknown")
+        red["target_locations"] = list(target_locations or [])
+        return red
+
+    def batch_verify_images(self,
+                            image_location_pairs: List[Tuple[bytes, str]]) -> List[Dict]:
+        return [self.verify_location_claim(konu, gorsel)
+                for gorsel, konu in (image_location_pairs or [])]
+
+
 if __name__ == "__main__":
-    geospy = GeoSpyIntegration()
-    
-    # Konum istihbaratı test
-    intel = geospy.get_location_intelligence("Istanbul")
-    print(json.dumps(intel, indent=2, ensure_ascii=False))
-    
-    # Coğrafi uyumluluk test
-    test_content = {
-        "title": "Şehir İçi Mobil Uygulama",
-        "content": "Urban mobility solution for city dwellers"
-    }
-    
-    relevance = geospy.analyze_geographic_relevance(test_content, ["Istanbul", "Ankara", "Izmir"])
-    print(json.dumps(relevance, indent=2, ensure_ascii=False))
+    servis = GeoSpyIntegration()
+    print(servis.get_location_intelligence("İstanbul"))
+    print(servis.analyze_image_location(b""))

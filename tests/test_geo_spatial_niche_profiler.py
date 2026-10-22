@@ -3,31 +3,49 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
-from random import Random
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from geo_spatial_niche_profiler import GeoSpatialNicheProfiler
 
+_FIRSAT = [{"bolge": "Kuşadası / Sahil", "tespit_edilen_niche": "Taşınbilir fan",
+            "anlik_faktor": "OSM POI yoğunluğu", "tavsiye_edilen_aksiyon": "içerik taslağı"}]
+
 
 class GeoSpatialNicheProfilerTests(unittest.TestCase):
-    def test_default_result_is_simulated_and_does_not_claim_live_geo_data(self):
-        report = GeoSpatialNicheProfiler(rng=Random(0)).bolgesel_niche_tara()
+    def test_veri_saglanmayinca_hicbir_nis_uydurulmaz(self):
+        report = GeoSpatialNicheProfiler().bolgesel_niche_tara()
 
-        self.assertEqual(report["veri_kaynagi"], "simülasyon")
+        self.assertEqual(report["durum"], "not_configured")
+        self.assertIsNone(report["tespit_edilen_niche"])
         self.assertFalse(report["canli_hava_ve_koordinat_verisi"])
-        self.assertIn("değiştirilmedi", report["aksiyon_durumu"])
-        self.assertIn("tespit_edilen_niche", report)
+        self.assertIn("firsatlar", report["sebep"])
 
-    def test_region_hint_selects_matching_demo_opportunity(self):
+    def test_saglanan_gercek_kayit_eslesir(self):
         report = GeoSpatialNicheProfiler(
-            hedef_bolge="Kuşadası / Akdeniz Havzası", rng=Random(1)
+            hedef_bolge="Kuşadası / Akdeniz Havzası", firsatlar=_FIRSAT
         ).bolgesel_niche_tara()
 
+        self.assertEqual(report["durum"], "ok")
         self.assertIn("Kuşadası", report["bolge"])
+        self.assertEqual(report["veri_kaynagi"], "sağlanan bölgesel veri")
 
-    def test_queues_review_task_as_pending(self):
-        profiler = GeoSpatialNicheProfiler(rng=Random(0))
+    def test_eslesmeyen_bolge_red_verir(self):
+        report = GeoSpatialNicheProfiler(hedef_bolge="Hakkari", firsatlar=_FIRSAT) \
+            .bolgesel_niche_tara()
+        self.assertEqual(report["durum"], "not_configured")
+
+    def test_dogrulanmamis_rapor_kuyruga_yazilamaz(self):
+        profiler = GeoSpatialNicheProfiler()
+        rapor = profiler.bolgesel_niche_tara()
+        with tempfile.TemporaryDirectory() as directory:
+            db_path = Path(directory) / "queue.db"
+            with self.assertRaises(ValueError):
+                profiler.inceleme_kuyruguna_ekle(rapor, db_path=db_path)
+            self.assertFalse(db_path.exists(), "red edilen rapor kuyruk dosyası oluşturamaz")
+
+    def test_aydinlatilmis_rapor_kuyruga_pending_yazar(self):
+        profiler = GeoSpatialNicheProfiler(firsatlar=_FIRSAT)
         report = profiler.bolgesel_niche_tara()
         with tempfile.TemporaryDirectory() as directory:
             db_path = Path(directory) / "queue.db"
@@ -43,11 +61,11 @@ class GeoSpatialNicheProfilerTests(unittest.TestCase):
         self.assertEqual(row, ("geo_spatial_niche_profiler", task["post_id"], "pending"))
         self.assertEqual(task["payload"]["status"], "pending_review")
 
-    def test_invalid_region_and_report_are_rejected(self):
+    def test_gecersiz_bolge_ve_rapor_reddedilir(self):
         with self.assertRaises(ValueError):
             GeoSpatialNicheProfiler(hedef_bolge=" ")
         with self.assertRaises(ValueError):
-            GeoSpatialNicheProfiler().inceleme_kuyruguna_ekle({})
+            GeoSpatialNicheProfiler(firsatlar=_FIRSAT).inceleme_kuyruguna_ekle({})
 
 
 if __name__ == "__main__":

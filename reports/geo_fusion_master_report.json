@@ -1,6 +1,6 @@
 {
-    "fusion_status": "active",
-    "timestamp": "2026-09-07 13:28:28",
+    "fusion_status": "not_configured",
+    "timestamp": "2026-10-22 12:32:29",
     "system_config": {
         "system_name": "SOSYAL İMECE",
         "version": "3.0.0",
@@ -8,28 +8,31 @@
     },
     "modules": {
         "hoodmaps_integration": {
-            "status": "synced",
-            "target_zones": [
-                "Ege",
-                "Marmara",
-                "İç Anadolu"
-            ],
-            "vibe_check": "Optimized"
-        },
-        "endeksa_integration": {
-            "status": "synced",
-            "regional_price_index": "Stable",
-            "market_trend": "Growth"
+            "durum": "not_configured",
+            "sebep": "Hoodmaps API'si yok / kazımak hizmet şartlarına aykırı; uydurma demografi üretilmez",
+            "veri": null
         },
         "geospy_integration": {
-            "status": "synced",
-            "coordinate_verification": "Verified",
-            "accuracy": "%99.4"
+            "durum": "not_configured",
+            "sebep": "lisanslı GeoSpy anahtarı yok (GEOSPY_API_TOKEN beklenir)",
+            "veri": null
+        },
+        "endeksa_integration": {
+            "durum": "not_configured",
+            "sebep": "lisanslı Endeksa anahtarı yok (ENDEKSA_API_TOKEN beklenir)",
+            "veri": null
+        },
+        "withraven_integration": {
+            "durum": "not_configured",
+            "sebep": "lisanslı WithRaven anahtarı yok (WITHRAVEN_API_TOKEN beklenir)",
+            "veri": null
         }
     },
-    "ecommerce_synergy": {
+    "canli_modul_sayisi": 0,
+    "aciklama": "Gerçek coğrafi aday taraması OSM/Overpass üzerinden yapılır ve ODbL atfıyla aday_havuzu.py'da raporlanır. Bu rapordaki ticari istihbarat modülleri lisanslı besleme olmadan veri üretmez.",
+    "ecaret": {
         "storefront": "www.trendurunlermarket.com",
-        "regional_fulfillment_readiness": "High",
-        "automated_recommendation": "Aktif bölge bazlı dinamik fiyatlandırma devrede."
+        "dinamik_fiyatlandirma": "not_configured",
+        "bolgesel_fulfillment": "not_configured"
     }
 }

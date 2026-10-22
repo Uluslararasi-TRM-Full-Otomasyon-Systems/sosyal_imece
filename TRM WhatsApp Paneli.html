@@ -155,7 +155,7 @@
       </div>
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Esnaf / işletme ara…" autocomplete="off">
+        <input type="text" id="searchInput" placeholder="Esnaf / kod / telefon / ilçe / mahalle ara…" autocomplete="off">
       </div>
     </div>
     <div class="channel-filter" id="channelFilter">
@@ -458,7 +458,9 @@
       if(!q) return true;
       return (String(e.ad||e.isletme||"").toLowerCase().includes(q) ||
               String(e.kod||"").toLowerCase().includes(q) ||
-              String(e.telefon||"").toLowerCase().includes(q));
+              String(e.telefon||"").toLowerCase().includes(q) ||
+              String(e.ilce||"").toLowerCase().includes(q) ||
+              String(e.mahalle||"").toLowerCase().includes(q));
     });
     if(!filtered.length){
       wrap.innerHTML = `<div class="list-empty"><span class="le-icon">🔍</span><div class="le-title">Sonuç bulunamadı</div><div class="le-sub">Arama kriterine uyan esnaf yok.</div></div>`;
@@ -497,6 +499,7 @@
             <div class="esnaf-badges">
               <span class="badge badge-code">${escapeHtml(e.kod||("TRM-"+e.id))}</span>
               ${e.telefon?`<span class="badge badge-phone">${escapeHtml(e.telefon)}</span>`:""}
+              ${(e.ilce||e.mahalle)?`<span class="badge badge-code" title="OpenStreetMap etiketi (geldiği gibi; etiket yoksa satır etiketsizdir)">📍 ${escapeHtml([e.ilce, e.mahalle].filter(Boolean).join(" · "))}</span>`:""}
               <span class="badge badge-status-${durum}">${durumEt}</span>
               ${adresYok?`<span class="badge badge-adresyok" title="Adres boş: tanıtım şablonu kilidi bu kaydı gönderim sırasına almaz">ADRES YOK</span>`:""}
               ${e.mobil === "" ? `<span class="badge badge-adresyok" title="Yalnızca sabit hat: WhatsApp bu numarayı açmaz, onayların bir günlük slotu boşuna harcar">SABİT HAT</span>`:""}
@@ -791,12 +794,19 @@
       ? `<div style="font-weight:800;color:#ff8080;">🔴 MOTOR AÇIK — onayladığın numaralara ${escapeHtml(STATE.motorAra)} aralıkla tanıtım gider${STATE.motorBugun?` · ${escapeHtml(STATE.motorBugun)}`:""}</div>`
       : `<div style="font-weight:800;color:#8696a0;">⚪ Motor kapalı (OTONOM_GONDERIM=0) — onay kuyruğu hazırlanır, mesaj gitmez</div>`
       + `<div style="opacity:.8;">${STATE.otomatikYanit ? "💬 Gelen mesajlara otomatik yanıt AÇIK" : "💬 Otomatik yanıt KAPALI"}</div>`;
+    const kapsama = o.kapsama || {};
+    const karoSatiri = kapsama.mod === "KARO"
+      ? `<div>🧩 ${escapeHtml(String(kapsama.bolge || "il"))} geneli karo taraması — bu tur ${Number(kapsama.karo_islenen) || 0}/${Number(kapsama.karo_toplam) || 0} karo · sıradaki karo ${Number(kapsama["imleç"]) || 0}</div>`
+      : (kapsama.mod === "RED"
+        ? `<div style="color:#ff8080;font-weight:800;">⛔ Karo bütçesi aşıldı — tarama YAPILMADI (ADAY_BOLGE/ADAY_TILE_KM ayarına bak)</div>`
+        : `<div style="opacity:.7;">▫ Tek kutu tarandı (ADAY_BBOX); il geneli karo taraması kapalı ya da il sınırı okunamadı</div>`);
     const havuzSatiri = d.toplam
       ? `<div>🗺️ Aday havuzu — ${d.toplam} firma <span style="font-weight:600;color:#f0b429;">(İZİN YOK · GÖNDERİLMEZ)</span></div>`
-      + `<div>📞 telefonlu ${d.telefonlu} · 📍 adresli ${d.adresli} · ✅ izin verilen ${d.izin_verilmis}</div>`
+      + `<div>📞 telefonlu ${d.telefonlu} · 📍 adresli ${d.adresli} · 🧭 mahalle etiketli ${d.mahalleli || 0} · ✅ izin verilen ${d.izin_verilmis}</div>`
       + (o.zaman ? `<div>son tarama ${escapeHtml(String(o.zaman))}`
                  + (o.kaynak ? ` · ${escapeHtml(String(o.kaynak).replace(/^https?:\/\//, "").slice(0, 40))}` : "")
                  + `</div>` : "")
+      + karoSatiri
       + `<div style="opacity:.7;">${escapeHtml(d.atıf || "")}</div>`
       : `<div>Havuz boş — tarama bekliyor ya da tüm adaylar onaylandı.</div>`;
     bar.style.display = "block";

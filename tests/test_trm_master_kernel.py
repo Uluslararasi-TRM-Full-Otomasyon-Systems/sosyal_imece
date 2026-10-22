@@ -20,6 +20,11 @@ class MasterKernelTests(unittest.TestCase):
             report = kernel.tam_sistem_dongusunu_baslat({
                 "health_url": "http://127.0.0.1:1/health",
                 "queue_db": Path(tempfile.gettempdir()) / "missing-master-kernel-db.sqlite",
+                # 16-18. adımlar `.env`'den gelen canlı ayarlara göre açılıyor ve
+                # test makinesine göre 15/18 diye değişiyordu. Burada çevrimdışı
+                # tutulur ki çekirdek adım sayısı her ortamda aynı ölçülsün.
+                "magaza_api_enabled": False,
+                "hizli_kazanc_enabled": False,
             })
 
         self.assertEqual(report["modul_sayisi"], 15)

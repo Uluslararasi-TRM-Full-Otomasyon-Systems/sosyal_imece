@@ -1,53 +1,55 @@
-﻿import logging
-from dataclasses import dataclass
-from typing import Dict, List, Optional
+# -*- coding: utf-8 -*-
+"""Hoodmaps entegrasyonu — FAIL-CLOSED (tüketici hedeflemesi olarak da KAPALI).
+
+Eski hâli iki elle yazılmış sahte kayıt ("ayıdin_kusadasi_inonu: emekli
+eğilimi 89.5, ticari yoğunluk 82.0" gibi) ve eşleşmeyen HER bölge için
+75.0/70.0 uydurma skor döndürüyordu. Üstelik `targets_55_plus_wealth_pool` ile
+mahalledeki tüketicileri yaş/refah göre hedefliyordu — bu, ticari onay akışına
+hiçbir şekilde girmemesi gereken bir tüketici hedeflemesidir.
+
+Şimdi:
+  * tek bir veri bile üretilmez; durum daima `not_configured`;
+  * tüketici demografisi (yaş/refah/eğilim) skorlayan hiçbir alan kalmaz;
+  * Hoodmaps'in kendisi API sunmaz, kazımak hizmet şartlarına aykırıdır; bu
+    yüzden "anahtar gelirse açılır" bir yol da yoktur. Ticari POI/addr
+    verisinin meşru kaynağı OpenStreetMap'tir (aday_havuzu.py, ODbL atfıyla).
+"""
+
+import logging
+from typing import Dict
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("HoodmapsIntegration")
 
-@dataclass
-class HoodmapsNeighborhoodProfile:
-    city: str
-    district: str
-    neighborhood: str
-    primary_vibe: str
-    senior_affinity_score: float
-    commercial_activity_density: float
-    tags: List[str]
+NOT_CONFIGURED = "not_configured"
+SEBEP = ("Hoodmaps API'si yok; kazımak hizmet şartlarına aykırı. "
+         "Coğrafi filtre yalnızca OSM ticari POI verisi ve onaylı esnaf "
+         "kayıtlarıyla yapılır (aday_havuzu).")
+
+
+def mahalle_profili(city: str, district: str, neighborhood: str) -> Dict[str, object]:
+    """Dürüst red: profil uydurulmaz, tüketici hedeflemesi üretilmez."""
+    logger.warning(f"Hoodmaps -> not_configured ({city}/{district}/{neighborhood})")
+    return {"durum": NOT_CONFIGURED, "sebep": SEBEP, "city": city, "district": district,
+            "neighborhood": neighborhood}
+
 
 class HoodmapsIntegration:
-    def __init__(self):
-        self.crowdsourced_vibe_cache: Dict[str, Dict[str, any]] = {
-            "aydin_kusadasi_inonu": {"vibe": "family", "senior_affinity": 89.5, "commercial": 82.0, "tags": ["emekli-dostu", "merkezi"]},
-            "istanbul_kadikoy_moda": {"vibe": "hipster", "senior_affinity": 64.0, "commercial": 95.0, "tags": ["genç-trafik", "butik"]},
-        }
+    """Geriye dönük isim: çağrılayanlar durum okuyamasın diye red döner."""
 
-    def _key(self, city: str, district: str, neighborhood: str) -> str:
-        s = f"{city}_{district}_{neighborhood}".lower()
-        for k, v in [("ı", "i"), ("ü", "u"), ("ş", "s"), ("ö", "o"), ("ç", "c"), ("ğ", "g"), (" ", "_")]:
-            s = s.replace(k, v)
-        return s
+    durum = NOT_CONFIGURED
+    sebep = SEBEP
 
-    def analyze_neighborhood_identity(self, city: str, district: str, neighborhood: str) -> HoodmapsNeighborhoodProfile:
-        lookup_key = self._key(city, district, neighborhood)
-        logger.info(f"Hoodmaps sosyal kimlik taranıyor -> {lookup_key}")
-        for k_db, data in self.crowdsourced_vibe_cache.items():
-            if k_db in lookup_key or lookup_key in k_db:
-                return HoodmapsNeighborhoodProfile(city, district, neighborhood, data["vibe"], data["senior_affinity"], data["commercial"], data["tags"])
-        return HoodmapsNeighborhoodProfile(city, district, neighborhood, "family", 75.0, 70.0, ["karma-demografi"])
+    def analyze_neighborhood_identity(self, city: str, district: str,
+                                      neighborhood: str) -> Dict[str, object]:
+        return mahalle_profili(city, district, neighborhood)
 
-    def evaluate_sosyal_imece_fit(self, profile: HoodmapsNeighborhoodProfile, senior_wealth_weight_target: bool = True) -> Dict[str, float]:
-        score = profile.senior_affinity_score * 0.7 + profile.commercial_activity_density * 0.3
-        recommendation_factor = min(1.25, max(0.9, score / 80.0))
-        return {
-            "imece_demographic_fit_score": round(score, 2),
-            "distribution_velocity_multiplier": round(recommendation_factor, 3),
-            "targets_55_plus_wealth_pool": senior_wealth_weight_target and profile.senior_affinity_score >= 75.0,
-        }
+    def get_neighborhood_demographics(self, location: str) -> Dict[str, object]:
+        return mahalle_profili(location, "", "")
+
+    def get_cultural_insights(self, location: str) -> Dict[str, object]:
+        return mahalle_profili(location, "", "")
+
 
 if __name__ == "__main__":
-    h_service = HoodmapsIntegration()
-    p = h_service.analyze_neighborhood_identity("Aydın", "Kuşadası", "İnönü")
-    fit = h_service.evaluate_sosyal_imece_fit(p)
-    print("Hoodmaps Profile:", p)
-    print("Refah Fit:", fit)
+    print(mahalle_profili("Aydın", "Kuşadası", "İnönü"))

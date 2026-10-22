@@ -5,22 +5,28 @@ from pathlib import Path
 # Modül yollarını güvenceye al
 sys.path.append(str(Path(__file__).parent))
 
-from agents.social_agents import dispatch_multichannel_campaign
+from real_social_publisher import RealSocialPublisher
 from uteykder_veri_arsiv_ajani import archive_sosyo_ekonomik_record, verify_archive_integrity
 
 def ignite_system():
     print("🚀 [ATEŞLEME BAŞLIYOR] TRM / TRM Ticari Ekosistem / UTEYKDER Entegre Test...")
     print("-" * 60)
     
-    # 1. Çok Kanallı Sosyal Kampanya Dağıtımı
-    campaign_payload = {
-        "title": "Trend Akıllı Bileklik & Sağlık Asistanı",
-        "link": "https://trendurunlermarket.com/akilli-bileklik",
-        "campaign": "Yaz-2026-Otomasyon"
-    }
-    print("📢 [1/3] Sosyal medya ajanları tetikleniyor...")
-    social_res = dispatch_multichannel_campaign(campaign_payload)
-    print(f"   Sonuç: Çoklu kanal durumu -> {social_res.get('multi_channel_status')}")
+    # 1. Yayın kanalları: gerçek durum, gönderim yok
+    print("📢 [1/3] Yayın kanalları doğrulanıyor (bu adım hiçbir yere gönderi basmaz)...")
+    publisher = RealSocialPublisher()
+    probe = publisher.probe_telegram()
+    get_me = probe["get_me"] or {}
+    for row in publisher.channel_inventory(probe):
+        print(f"   - {row['platform']:<10} durum={row['status']:<14} eksik={row['missing'] or '-'}")
+    print(
+        f"   Telegram kimlik testi: get_me_ok={get_me.get('ok')} "
+        f"bot=@{get_me.get('bot_username') or '-'} detail={get_me.get('detail', 'kimlik eksik')}"
+    )
+    print(
+        "   Gerçek gönderim için: python real_social_publisher.py --kuyruk-gonder "
+        "(veya run_live_worker döngüsü, TRM_DISTRIBUTION_MODE=live ise)"
+    )
     
     # 2. UTEYKDER Sosyo-Ekonomik Arşiv Kaydı
     archive_payload = {

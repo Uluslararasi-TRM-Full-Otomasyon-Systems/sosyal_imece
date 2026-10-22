@@ -64,9 +64,11 @@ class MasterOrchestrator:
         }, status="simulated")
 
         from geo_spatial_niche_profiler import GeoSpatialNicheProfiler
+        # Fail-closed: dışarıdan gerçek bölgesel kayıt verilmediği sürece niş
+        # üretilmez, sadece red raporlanır.
         call(2, "Geo-Spatial Niche Sentinel", lambda: GeoSpatialNicheProfiler(
             hedef_bolge=inputs.get("hedef_bolge", "Kuşadası / Akdeniz Havzası")
-        ).bolgesel_niche_tara(), status="simulated")
+        ).bolgesel_niche_tara(), status="not_configured")
 
         from gelecek_dalga_kehaneti import GelecekDalgaKehaneti
         call(3, "Gelecek Dalga Senaryosu", lambda: GelecekDalgaKehaneti(

@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from core.security import EmergencyKillSwitch, SecurityGateError
+from real_social_publisher import RealSocialPublisher, ensure_schema
 from trm_live_config import load_trm_environment
 
 ROOT = Path(__file__).resolve().parent
@@ -161,22 +162,33 @@ def table_exists(conn: sqlite3.Connection, name: str) -> bool:
     return row is not None
 
 
+_publisher: RealSocialPublisher | None = None
+
+
+def get_publisher() -> RealSocialPublisher:
+    global _publisher
+    if _publisher is None:
+        _publisher = RealSocialPublisher(load_environment=False)
+    return _publisher
+
+
 def process_pending_queue(conn: sqlite3.Connection, table: str, limit: int = 10) -> int:
+    """Kuyruğu dürüst işler: gönderim kapısı açıksa gerçek API denenir, değilse logged_not_sent."""
     if not table_exists(conn, table):
         return 0
     columns = {row[1] for row in conn.execute(f"PRAGMA table_info({table})")}
     if "status" not in columns or "id" not in columns:
         return 0
-    pending = conn.execute(
-        f"SELECT id FROM {table} WHERE lower(coalesce(status, '')) IN ('pending', 'queued', 'new') LIMIT ?",
-        (limit,),
-    ).fetchall()
-    for row in pending:
-        conn.execute(
-            f"UPDATE {table} SET status = 'warmup_logged' WHERE id = ?",
-            (row["id"],),
-        )
-    return len(pending)
+    publisher = get_publisher()
+    processed = len(publisher.drain_queue(conn, table=table, limit=limit))
+    if table == "task_queue":
+        pending = conn.execute(
+            f"SELECT id FROM {table} WHERE lower(coalesce(status, '')) IN ('pending', 'queued', 'new')",
+        ).fetchall()
+        for row in pending:
+            conn.execute(f"UPDATE {table} SET status = 'logged_not_sent' WHERE id = ?", (row["id"],))
+        conn.commit()
+    return processed
 
 
 def write_warmup_activity(
@@ -219,7 +231,7 @@ def write_warmup_activity(
             f"Warm-up tick #{cycle} for {handle} promoting {target}",
             f"#{TARGET_SITE.replace('.', '')} #trmticari",
             "organic engagement pulse",
-            "pending",
+            "logged_not_sent",
             stamp,
             stamp,
         ),
@@ -327,6 +339,7 @@ def main() -> int:
     try:
         conn = connect_db(DB_PATH)
         ensure_tables(conn)
+        ensure_schema(conn)
         startup_msg = (
             f"Live worker daemon started for {set_name} targeting {target} "
             f"with {len(socials)} social channels and {len(blogs)} blogs "

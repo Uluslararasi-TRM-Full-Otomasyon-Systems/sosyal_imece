@@ -159,6 +159,8 @@ class ProtectedLocalVault:
         "api_keys.json",
         "config.json",
         "config.env",
+        "global_config.json",
+        "secrets.env",
         ".streamlit/secrets.toml",
     }
     PROCESS_ENV_ALLOWLIST = {

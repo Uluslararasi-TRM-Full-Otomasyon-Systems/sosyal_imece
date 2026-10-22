@@ -38,7 +38,14 @@ import sys
 import time
 import unicodedata
 
-from aday_havuzu import AdayYapisi, aday_tarama_dongusu, havuz_durumu
+from aday_havuzu import (
+    AdayYapisi,
+    OSM_LISANS as ADAY_ATIF,
+    aday_tarama_dongusu,
+    bolge_dagilimi,
+    havuz_durumu,
+    ozet_oka,
+)
 from derya_cevaplayici import derya_otonom_yanitla
 from esnaf_sablonu import SablonHatasi, esnaf_tanitim_metni
 from otonom_motor import (
@@ -1800,6 +1807,7 @@ def get_esnaflar():
         rows = conn.execute(
             """
             SELECT id, isletme, telefon, kod, durum, COALESCE(izin, 0) AS izin,
+                   ilce, mahalle,
                    CASE WHEN TRIM(COALESCE(adres, ''))   = '' THEN 0 ELSE 1 END AS adres_var,
                    CASE WHEN TRIM(COALESCE(telefon, '')) = '' THEN 0 ELSE 1 END AS telefon_var
             FROM esnaflar
@@ -1835,6 +1843,9 @@ def get_esnaflar():
             "telefon": row["telefon"],
             "mobil": mobil_numara(row["telefon"]),
             "izin": int(row["izin"] or 0),
+            # OSM etiketi geldiği gibi: etiket yoksa None (panel "bilinmiyor" gösterir).
+            "ilce": row["ilce"] if "ilce" in row.keys() else None,
+            "mahalle": row["mahalle"] if "mahalle" in row.keys() else None,
             "telefon_var": bool(row["telefon_var"]),
             "adres_var": bool(row["adres_var"]),
             "durum": row["durum"] if "durum" in row.keys() else "onayli",
@@ -2495,7 +2506,12 @@ def aday_tarama_isleyicisi():
 
 @app.route("/api/aday_havuzu", methods=["GET"])
 def aday_havuzu_gor():
-    """Panel: havuzdaki adaylar + son tarama özeti. Salt-okur, 500 dönmez."""
+    """Panel: havuzdaki adaylar + son tarama özeti. Salt-okur, 500 dönmez.
+
+    ?ilce=&mahalle= yalnızca esnaflar satırlarındaki OSM etiketlerine göre
+    süzer; ?dagilim=1 ilçe/mahalle kırılımını verir. Dışarıdan tüketici
+    hedeflemesi yapılmaz.
+    """
     govde = {"toplam": 0, "kayitlar": []}
     try:
         conn = veritabani_baglan()
@@ -2503,7 +2519,12 @@ def aday_havuzu_gor():
         _log(f"aday_havuzu baglanti hatasi: {hata}")
         return jsonify({**govde, "hata": str(hata)[:120]})
     try:
-        return jsonify(havuz_durumu(conn))
+        if str(request.args.get("dagilim") or "").strip() in ("1", "true", "evet"):
+            return jsonify({"dagilim": bolge_dagilimi(conn),
+                            "atıf": ADAY_ATIF,
+                            "kapsama": (ozet_oka(conn) or {}).get("kapsama")})
+        return jsonify(havuz_durumu(
+            conn, ilce=request.args.get("ilce"), mahalle=request.args.get("mahalle")))
     except sqlite3.Error as hata:
         _log(f"aday_havuzu sorgu hatasi: {hata}")
         return jsonify({**govde, "hata": str(hata)[:120]})

@@ -1,244 +1,28 @@
 {
-    "analysis_timestamp": "2026-10-16T13:52:43.813141",
-    "target_location": "Istanbul",
-    "product_category": "general",
+    "analysis_timestamp": "2026-10-22T12:32:38.922289",
+    "target_location": "Aydın",
     "analysis_type": "comprehensive",
-    "hoodmaps_analysis": {
-        "location": "Istanbul",
-        "product_category": "general",
-        "target_score": 0.75,
-        "recommended_platforms": [
-            "instagram",
-            "tiktok",
-            "twitter"
-        ],
-        "best_posting_times": [
-            "18:00-22:00",
-            "12:00-14:00"
-        ],
-        "content_tone": "casual",
-        "demographic_match": {
-            "18-25": 0.25,
-            "26-35": 0.35,
-            "36-45": 0.25,
-            "46+": 0.15
+    "durum": "not_configured",
+    "modules": {
+        "hoodmaps_integration": {
+            "durum": "not_configured",
+            "sebep": "Hoodmaps API'si yok / kazımak hizmet şartlarına aykırı; uydurma demografi üretilmez"
         },
-        "timestamp": "2026-10-16T13:52:43.813141"
-    },
-    "geospy_analysis": {
-        "location": "Istanbul",
-        "demographics": {
-            "population_density": "high",
-            "urbanization_level": "very_high",
-            "economic_activity": "commercial"
+        "geospy_integration": {
+            "durum": "not_configured",
+            "sebep": "lisanslı GeoSpy anahtarı yok (GEOSPY_API_TOKEN beklenir)"
         },
-        "infrastructure": {
-            "internet_penetration": 0.95,
-            "mobile_usage": 0.98,
-            "smartphone_adoption": 0.92
+        "endeksa_integration": {
+            "durum": "not_configured",
+            "sebep": "lisanslı Endeksa anahtarı yok (ENDEKSA_API_TOKEN beklenir)"
         },
-        "cultural_context": {
-            "language": "Turkish",
-            "business_hours": "09:00-18:00",
-            "peak_social_hours": [
-                "19:00-23:00",
-                "12:00-14:00"
-            ]
-        },
-        "security_level": "medium",
-        "timestamp": "2026-10-16T13:52:43.813141"
-    },
-    "endeksa_analysis": [
-        {
-            "district": "Bebek",
-            "city": "Istanbul",
-            "avg_property_price": 25000000,
-            "income_level": "very_high",
-            "population_profile": "elite_professionals",
-            "luxury_index": 0.95
-        },
-        {
-            "district": "Etiler",
-            "city": "Istanbul",
-            "avg_property_price": 22000000,
-            "income_level": "very_high",
-            "population_profile": "business_executives",
-            "luxury_index": 0.92
-        },
-        {
-            "district": "Yeniköy",
-            "city": "Istanbul",
-            "avg_property_price": 18000000,
-            "income_level": "high",
-            "population_profile": "affluent_families",
-            "luxury_index": 0.88
-        },
-        {
-            "district": "Tarabya",
-            "city": "Istanbul",
-            "avg_property_price": 15000000,
-            "income_level": "high",
-            "population_profile": "wealthy_retirees",
-            "luxury_index": 0.85
-        },
-        {
-            "district": "Zekeriyaköy",
-            "city": "Istanbul",
-            "avg_property_price": 12000000,
-            "income_level": "high",
-            "population_profile": "upper_middle_class",
-            "luxury_index": 0.8
+        "withraven_integration": {
+            "durum": "not_configured",
+            "sebep": "lisanslı WithRaven anahtarı yok (WITHRAVEN_API_TOKEN beklenir)"
         }
-    ],
-    "web_scraping_data": {},
-    "withraven_processing": {
-        "input_data": {
-            "hoodmaps": {
-                "location": "Istanbul",
-                "product_category": "general",
-                "target_score": 0.75,
-                "recommended_platforms": [
-                    "instagram",
-                    "tiktok",
-                    "twitter"
-                ],
-                "best_posting_times": [
-                    "18:00-22:00",
-                    "12:00-14:00"
-                ],
-                "content_tone": "casual",
-                "demographic_match": {
-                    "18-25": 0.25,
-                    "26-35": 0.35,
-                    "36-45": 0.25,
-                    "46+": 0.15
-                },
-                "timestamp": "2026-10-16T13:52:43.813141"
-            },
-            "geospy": {
-                "location": "Istanbul",
-                "demographics": {
-                    "population_density": "high",
-                    "urbanization_level": "very_high",
-                    "economic_activity": "commercial"
-                },
-                "infrastructure": {
-                    "internet_penetration": 0.95,
-                    "mobile_usage": 0.98,
-                    "smartphone_adoption": 0.92
-                },
-                "cultural_context": {
-                    "language": "Turkish",
-                    "business_hours": "09:00-18:00",
-                    "peak_social_hours": [
-                        "19:00-23:00",
-                        "12:00-14:00"
-                    ]
-                },
-                "security_level": "medium",
-                "timestamp": "2026-10-16T13:52:43.813141"
-            },
-            "endeksa": [
-                {
-                    "district": "Bebek",
-                    "city": "Istanbul",
-                    "avg_property_price": 25000000,
-                    "income_level": "very_high",
-                    "population_profile": "elite_professionals",
-                    "luxury_index": 0.95
-                },
-                {
-                    "district": "Etiler",
-                    "city": "Istanbul",
-                    "avg_property_price": 22000000,
-                    "income_level": "very_high",
-                    "population_profile": "business_executives",
-                    "luxury_index": 0.92
-                },
-                {
-                    "district": "Yeniköy",
-                    "city": "Istanbul",
-                    "avg_property_price": 18000000,
-                    "income_level": "high",
-                    "population_profile": "affluent_families",
-                    "luxury_index": 0.88
-                },
-                {
-                    "district": "Tarabya",
-                    "city": "Istanbul",
-                    "avg_property_price": 15000000,
-                    "income_level": "high",
-                    "population_profile": "wealthy_retirees",
-                    "luxury_index": 0.85
-                },
-                {
-                    "district": "Zekeriyaköy",
-                    "city": "Istanbul",
-                    "avg_property_price": 12000000,
-                    "income_level": "high",
-                    "population_profile": "upper_middle_class",
-                    "luxury_index": 0.8
-                }
-            ],
-            "web_data": {}
-        },
-        "processing_timestamp": "2026-10-16T13:52:43.813141",
-        "model_version": "v2.1",
-        "confidence_score": 0.87,
-        "predictions": {
-            "market_potential": "high",
-            "target_density": "very_high",
-            "conversion_probability": 0.73
-        },
-        "feature_importance": {
-            "demographics": 0.35,
-            "infrastructure": 0.25,
-            "cultural_context": 0.2,
-            "economic_activity": 0.2
-        },
-        "recommendations": [
-            "Bu bölgede yüksek dönüşüm potansiyeli tespit edildi",
-            "Demografik faktörler en önemli etken olarak belirlendi",
-            "Kültürel uyum stratejisi öneriliyor"
-        ]
     },
-    "decision_support": {
-        "input_summary": {
-            "geo_data_available": false,
-            "behavioral_data_available": false,
-            "market_data_available": false
-        },
-        "processing_timestamp": "2026-10-16T13:52:43.813141",
-        "model_version": "v2.1",
-        "strategic_recommendations": {
-            "primary_strategy": "geo_targeted_campaign",
-            "secondary_strategy": "behavioral_segmentation",
-            "timing_strategy": "peak_hours_optimization"
-        },
-        "risk_assessment": {
-            "market_risk": "low",
-            "competition_level": "medium",
-            "investment_priority": "high"
-        },
-        "action_plan": [
-            "1. Coğrafi hedefleme optimize edilsin",
-            "2. Davranışsal segmentasyon uygulansın",
-            "3. Zamanlama stratejisi devreye alınsın",
-            "4. Risk izleme sistemi kuruldu"
-        ],
-        "expected_roi": {
-            "short_term": "moderate",
-            "medium_term": "high",
-            "long_term": "very_high"
-        },
-        "confidence_score": 0.89
-    },
-    "overall_intelligence_score": 79.25,
-    "strategic_recommendations": [
-        "Ana Strateji: geo_targeted_campaign",
-        "İkincil Strateji: behavioral_segmentation",
-        "Hoodmaps analizi yüksek hedefleme potansiyeli gösteriyor",
-        "Yüksek internet penetrasyonu - dijital strateji öneriliyor",
-        "Lüks bölge tespit edildi - premium strateji uygulanabilir"
-    ]
+    "overall_intelligence_score": null,
+    "canli_modul_sayisi": 0,
+    "modul_toplam": 4,
+    "asil_cografi_kaynak": "aday_havuzu.py / OSM Overpass (ODbL atfıyla) — ticari POI + ilce/mahalle etiketleri"
 }

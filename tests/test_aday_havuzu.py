@@ -10,6 +10,7 @@ kapatır; testler de bu yüzden yol üzerinden yeni bağlantı kullanır.
 """
 
 import os
+import re
 import sqlite3
 import sys
 import tempfile
@@ -300,6 +301,176 @@ def test_havuz_ozeti_panel_icin_sayilari_verir():
         conn.execute("UPDATE esnaflar SET izin=1 WHERE isletme='Zeytin Cafe'")
         conn.commit()
         assert a.havuz_durumu(conn)["izin_verilmis"] == 1
+    finally:
+        conn.close(); os.unlink(yol)
+
+
+# ---------------------------------------------------------------------------
+# KARO (TILE) TARAMASI — il geneli ölçekleme, ağ enjeksiyonla taklit edilir
+# ---------------------------------------------------------------------------
+_KARO_ENV = {"ADAY_BOLGE_BBOX": "37.80,27.20,37.84,27.28", "ADAY_TILE_KM": "2.0",
+             "ADAY_KARO_BEKLEME_SN": "0"}
+
+_CEVAP_GEO = {"elements": [
+    {"type": "node", "id": 10, "lat": 37.8566, "lon": 27.2622, "tags": {
+        "name": "Kroki Kitap", "phone": "+90 530 222 33 44", "addr:street": "Inonu Blv.",
+        "addr:district": "Kusadasi", "addr:quarter": "Saricatlak"}},
+    {"type": "way", "id": 11, "center": {"lat": 37.8601, "lon": 27.2701},
+     "tags": {"name": "Etiketsiz Firin"}},
+]}
+
+
+class _Sunucu:
+    """ac(url, veri, timeout) taklidi: idari sorguya bbox, POI sorgusuna bir firma."""
+
+    def __init__(self, bolge_bbox=None):
+        self.bolge_bbox = bolge_bbox
+        self.admin = []
+        self.poi_karolar = []
+        self._sayac = 0
+
+    def __call__(self, url, veri, timeout):
+        if "out bb" in veri:
+            self.admin.append(veri)
+            if not self.bolge_bbox:
+                return {"elements": []}
+            minlat, minlon, maxlat, maxlon = self.bolge_bbox
+            return {"elements": [{"type": "relation", "id": 1, "bounds": {
+                "minlat": minlat, "minlon": minlon, "maxlat": maxlat, "maxlon": maxlon}}]}
+        self.poi_karolar.append(re.search(r"\(([0-9.,\- ]+)\)", veri).group(1))
+        self._sayac += 1   # karolar listesi testte temizlense de numara tekrarı yok
+        return {"elements": [{"type": "node", "id": 900 + self._sayac,
+                              "lat": 37.81, "lon": 27.21,
+                              "tags": {"name": f"Firma {self._sayac}",
+                                       "phone": f"0530 100 {self._sayac:04d}"}}]}
+
+
+def _karo_yapi(**extra):
+    env = dict(_KARO_ENV)
+    env.update(extra)
+    return _yapi(**env)
+
+
+def test_karo_bboxlari_kutuyu_bosluk_birakmadan_doldurur():
+    kutu = (37.80, 27.20, 37.84, 27.28)
+    karolar = [tuple(float(x) for x in k.split(",")) for k in a.karo_bboxlari(kutu, 2.0)]
+    assert len(karolar) > 4, karolar
+    assert karolar[0][:2] == (37.80, 27.20), "ilk karo kutunun sol-alt köşesinden başlar"
+    seritler = {}
+    for minlat, minlon, maxlat, maxlon in karolar:
+        seritler.setdefault((minlat, maxlat), []).append((minlon, maxlon))
+    sicak = sorted(seritler)
+    assert abs(sicak[0][0] - 37.80) < 1e-9 and abs(sicak[-1][1] - 37.84) < 1e-9
+    for (_, alt), (ust, _) in zip(sicak, sicak[1:]):
+        assert abs(ust - alt) < 1e-9, "şeritler arasında taranmamış bant var"
+    for araliklar in seritler.values():
+        araliklar.sort()
+        assert abs(araliklar[0][0] - 27.20) < 1e-9 and abs(araliklar[-1][1] - 27.28) < 1e-9
+        for (_, son), (bas, _) in zip(araliklar, araliklar[1:]):
+            assert abs(bas - son) < 1e-9, "karo zincirinde boşluk var"
+    # ~2 km kenar: enlem şeridi 2/111.32° (son şerit kutuya kırpılır)
+    for alt, ust in sicak:
+        if abs(ust - 37.84) > 1e-9:
+            assert abs((ust - alt) * a._KM_LAT - 2.0) < 0.02
+
+
+def test_karo_butcesi_kadar_istek_atilir_ve_imlecin_karosu_tekrarlanmaz():
+    yapi = _karo_yapi(ADAY_TUR_KARO_AZAMI="2")
+    sunucu = _Sunucu()
+    bir, kaynak = a.osm_cek(yapi, log=lambda mesaj: None, ac=sunucu)
+    assert len(bir) == 2 and yapi.karo_imleci == 2, (bir, yapi.karo_imleci)
+    assert sunucu.admin == [], "bbox elle verildi: idari sınır sorgusu boşa istek"
+    assert kaynak.startswith("https://overpass-api.de"), kaynak
+    assert yapi.son_kapsama["mod"] == "KARO" and yapi.son_kapsama["karo_islenen"] == 2
+    beklenti = a.karo_bboxlari((37.80, 27.20, 37.84, 27.28), 2.0)
+    assert sunucu.poi_karolar == beklenti[:2]
+    sunucu.poi_karolar.clear()
+    a.osm_cek(yapi, log=lambda mesaj: None, ac=sunucu)
+    assert sunucu.poi_karolar == beklenti[2:4], "imleç kaldığı yerden devam etmedi"
+
+
+def test_imlec_veritabani_ozetinden_devam_eder_servis_yeniden_basaalsa():
+    yol = _veritabani()
+    sunucu = _Sunucu()
+    cekici = lambda yapi, log=None: a.osm_cek(yapi, log, ac=sunucu)
+    try:
+        ozet = a.tarama_calistir(lambda: _baglan(yol), _karo_yapi(ADAY_TUR_KARO_AZAMI="2"),
+                                 log=lambda mesaj: None, cekici=cekici)
+        assert ozet["eklenen"] == 2 and ozet["karo_imleci"] == 2, ozet
+        assert ozet["kapsama"]["mod"] == "KARO"
+        beklenti = a.karo_bboxlari((37.80, 27.20, 37.84, 27.28), 2.0)
+        sunucu.poi_karolar.clear()
+        # Yeni nesne = yeniden başlayan servis: bellekteki imleç sıfır, DB'deki 2.
+        ozet2 = a.tarama_calistir(lambda: _baglan(yol), _karo_yapi(ADAY_TUR_KARO_AZAMI="2"),
+                                  log=lambda mesaj: None, cekici=cekici)
+        assert sunucu.poi_karolar == beklenti[2:4], sunucu.poi_karolar
+        assert ozet2["karo_imleci"] == 4 and ozet2["eklenen"] == 2, ozet2
+        assert len(_hepsi(yol)) == 4 and all(s["izin"] == 0 for s in _hepsi(yol))
+    finally:
+        os.unlink(yol)
+
+
+def test_karo_butceti_asilirsa_hic_bir_POI_istegi_atilmaz():
+    yapi = _karo_yapi(ADAY_KARO_AZAMI="3", ADAY_TUR_KARO_AZAMI="1")
+    sunucu = _Sunucu()
+    loglar = []
+    adaylar, kaynak = a.osm_cek(yapi, log=loglar.append, ac=sunucu)
+    assert adaylar == [] and kaynak == "", "bütçe aşımı kısmi taramayla geçilmez"
+    assert sunucu.poi_karolar == [] and yapi.son_kapsama["mod"] == "RED"
+    assert any("ADAY_KARO_AZAMI" in s for s in loglar), loglar
+
+
+def test_il_siniri_okunamazsa_tek_kutuya_duser_ve_bunu_sesser():
+    yapi = _yapi(ADAY_BOLGE="Aydin", ADAY_KARO_BEKLEME_SN="0")
+    sunucu = _Sunucu(bolge_bbox=None)   # her ayna boş/idari sınır yok
+    loglar = []
+    adaylar, _ = a.osm_cek(yapi, log=loglar.append, ac=sunucu)
+    assert len(sunucu.admin) == len(yapi.url), "tüm aynalar denendikten sonra vazgeçilmeli"
+    assert yapi.son_kapsama["mod"] == "TEK_KUTU" and len(adaylar) == 1
+    assert any("tek kutuya" in s for s in loglar), loglar
+
+
+def test_il_adi_gectersizse_idari_sorguya_hic_gidilmez():
+    yapi = _yapi(ADAY_BOLGE='Aydin"; out; ', ADAY_KARO_BEKLEME_SN="0")
+    sunucu = _Sunucu()
+    adaylar, _ = a.osm_cek(yapi, log=lambda mesaj: None, ac=sunucu)
+    assert sunucu.admin == [], "etiket enjeksiyonu denenen sorgu olmamalı"
+    assert yapi.son_kapsama["mod"] == "TEK_KUTU" and len(adaylar) == 1
+
+
+def test_karo_taramasi_kapali_iken_eski_tek_kutu_davranisi_surer():
+    yapi = _yapi(ADAY_KARO_TARAMA="0")
+    sunucu = _Sunucu()
+    adaylar, _ = a.osm_cek(yapi, log=lambda mesaj: None, ac=sunucu)
+    assert sunucu.admin == [] and sunucu.poi_karolar == [yapi.bbox]
+    assert yapi.son_kapsama["mod"] == "TEK_KUTU" and len(adaylar) == 1
+
+
+def test_geo_etiketleri_oldugu_gibi_yazilir_etiketi_yok_uydurulmaz():
+    adaylar = a.osm_adaylari(_CEVAP_GEO)
+    assert adaylar[0]["ilce"] == "Kusadasi" and adaylar[0]["mahalle"] == "Saricatlak"
+    assert adaylar[0]["enlem"] == 37.8566 and adaylar[0]["boylam"] == 27.2622
+    assert adaylar[1]["ilce"] is None and adaylar[1]["mahalle"] is None, "tahmin yok"
+    assert adaylar[1]["enlem"] == 37.8601, "way için out center koordinatı okunmalı"
+    assert adaylar[1]["kaynak"] == "OSM:way/11"
+
+
+def test_ilce_mahalle_filtresi_yalnizca_esnaf_satirlarindan_suzulur():
+    yol = _veritabani()
+    conn = _baglan(yol)
+    try:
+        a.adaylari_ala(conn, a.osm_adaylari(_CEVAP_GEO) + a.osm_adaylari(_CEVAP))
+        dagilim = {(d["ilce"], d["mahalle"]): d for d in a.bolge_dagilimi(conn)}
+        assert dagilim[("Kusadasi", "Saricatlak")]["aday"] == 1, dagilim
+        assert dagilim[(None, None)]["aday"] == 4, "etiketsiz kayıt 'biliniyor' sayılmaz"
+        gorunen = a.havuz_durumu(conn, mahalle="Saricatlak")["kayitlar"]
+        assert [k["isletme"] for k in gorunen] == ["Kroki Kitap"], gorunen
+        assert gorunen[0]["kaynak"].startswith("OSM:node/10") and gorunen[0]["enlem"]
+        assert a.havuz_durumu(conn, ilce="kusadasi")["toplam"] == 1, "harf büyüklüğü tolere"
+        assert a.havuz_durumu(conn, ilce="Izmir")["toplam"] == 0
+        assert a.havuz_durumu(conn)["mahalleli"] == 1
+        # Filtre hiçbir zaman gönderim sırası üretmez: motor hâlâ kimseyi seçmez.
+        assert _uygunlar(yol) == []
     finally:
         conn.close(); os.unlink(yol)
 

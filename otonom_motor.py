@@ -54,6 +54,14 @@ _GOC_KOLONLARI = (
     # Canlı şemada zaten var; eski/boş bir DB üzerinde de motorun gelen mesaj
     # yazısı patlamasın diye göç listesinde tutulur (ALTER idempotenttir).
     ("gelen_yanit", "TEXT"),
+    # Hiper-yerel filtre: YALNIZCA dış kaynaktan (OSM etiketleri) okunduğu gibi
+    # yazılır, asla tahmin edilmez. Panel mahalle/ilçe göre burada süzer.
+    ("ilce", "TEXT"),
+    ("mahalle", "TEXT"),
+    ("enlem", "REAL"),
+    ("boylam", "REAL"),
+    # ODbL atfı için kaynak imzası (OSM:node/123 ya da liste:dosya.csv#4).
+    ("kaynak", "TEXT"),
 )
 
 

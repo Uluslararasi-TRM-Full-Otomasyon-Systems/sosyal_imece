@@ -32,6 +32,7 @@ tanitim_ses.mp3
 # Secrets
 .streamlit/secrets.toml
 secrets.env
+global_config.json
 *.key
 *.pem
 

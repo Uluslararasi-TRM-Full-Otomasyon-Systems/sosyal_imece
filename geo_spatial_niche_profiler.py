@@ -1,52 +1,71 @@
+# -*- coding: utf-8 -*-
+"""Bölgesel niş profilcisi — FAIL-CLOSED.
+
+Eski hâli: içinde iki hazır "fırsat" metni duruyordu ve çağrılandan veri
+gelmeseydi bile bunlardan birini RANDOM seçip "tespit edildi" diye sunuyordu.
+Yani ürün önerisi coğrafyadan değil, dosyanın içinden geliyordu.
+
+Şimdi: dışarıdan SAĞLANMIŞ bölgesel kayıt yoksa hiçbir niş üretilmez; durum
+`not_configured` döner ve böyle bir rapor inceleme kuyruğuna da yazılamaz.
+Veri kaynağı olarak meşru yol, OSM tabanlı aday havuzu (aday_havuzu.py) ve
+operatörün kendi listesidir — tüketici/demografik hedefleme burada yapılmaz.
+"""
+
 from copy import deepcopy
 from datetime import datetime, timezone
 import os
 from pathlib import Path
-from random import Random
 from uuid import uuid4
 
 from dispatch_queue_manager import DispatchQueueManager
 
-
-_DEMO_OPPORTUNITIES = (
-    {
-        "bolge": "Kuşadası / Sahil Turizm Hattı",
-        "anlik_faktor": "Örnek sezon ve sıcak hava senaryosu",
-        "tespit_edilen_niche": "UV korumalı taşınabilir boyun vantilatörü ve plaj organizeri",
-        "tavsiye_edilen_aksiyon": "Bölgeye uygun, doğrulanabilir ürün özellikleriyle içerik taslağı hazırlayın.",
-    },
-    {
-        "bolge": "Ankara / Kent Merkezi",
-        "anlik_faktor": "Örnek iş seyahati ve ofis kullanım senaryosu",
-        "tespit_edilen_niche": "Ergonomik sırt desteği ve kablosuz masa şarj cihazı",
-        "tavsiye_edilen_aksiyon": "Ofis kullanımı için ürün uyumluluğu ve teknik detay taslağı hazırlayın.",
-    },
-)
+NOT_CONFIGURED = "not_configured"
+OK = "ok"
+_ZORUNLU_ALANLAR = ("bolge", "tespit_edilen_niche")
 
 
 class GeoSpatialNicheProfiler:
-    def __init__(self, hedef_bolge="Kuşadası / Akdeniz Havzası", firsatlar=None, rng=None):
+    def __init__(self, hedef_bolge="Kuşadası / Akdeniz Havzası", firsatlar=None):
         if not isinstance(hedef_bolge, str) or not hedef_bolge.strip():
             raise ValueError("hedef_bolge boş olmayan bir metin olmalıdır")
         self.hedef_bolge = hedef_bolge.strip()
-        self._firsatlar = tuple(firsatlar if firsatlar is not None else _DEMO_OPPORTUNITIES)
-        self._rng = rng if rng is not None else Random()
-        self._simulated = firsatlar is None
+        self._firsatlar = tuple(firsatlar or ())
+
+    def _red(self, sebep):
+        return {
+            "durum": NOT_CONFIGURED,
+            "sebep": sebep,
+            "hedef_bolge": self.hedef_bolge,
+            "tespit_edilen_niche": None,
+            "veri_kaynagi": None,
+            "canli_hava_ve_koordinat_verisi": False,
+            "aksiyon_durumu": "Filtrelenmiş gerçek veri yok; hiçbir öneri üretilmedi",
+        }
 
     def bolgesel_niche_tara(self):
-        """Yerel örneklerden bölgesel içerik fikri seçer; canlı geo/weather taramaz."""
+        """Yalnızca sağlanan gerçek bölgesel kayıtları eşleştirir; uydurma seçim yok."""
         if not self._firsatlar:
-            raise ValueError("En az bir bölgesel fırsat kaydı gereklidir")
+            return self._red("bölgesel fırsat verisi sağlanmadı (firsatlar=()) — "
+                            "kaynak: aday_havuzu OSM kayıtları veya operatör listesi")
+        eksik = [ad for ad in _ZORUNLU_ALANLAR
+                 if not str(self._firsatlar[0].get(ad) or "").strip()]
+        if eksik:
+            return self._red(f"sağlanan kayıt alanları eksik: {', '.join(eksik)}")
 
         normalized_region = self.hedef_bolge.casefold()
         matches = [
             item for item in self._firsatlar
-            if any(part.strip().casefold() in normalized_region for part in item["bolge"].split("/"))
+            if item.get("bolge") and any(
+                parca.strip().casefold() in normalized_region
+                for parca in str(item["bolge"]).split("/"))
         ]
-        selected = deepcopy(self._rng.choice(matches or self._firsatlar))
+        if not matches:
+            return self._red(f"'{self.hedef_bolge}' için sağlanan kayıtlarda eşleşme yok")
+        selected = deepcopy(matches[0])
         selected.update({
+            "durum": OK,
             "hedef_bolge": self.hedef_bolge,
-            "veri_kaynagi": "simülasyon" if self._simulated else "sağlanan bölgesel veri",
+            "veri_kaynagi": "sağlanan bölgesel veri",
             "olusturma_zamani": datetime.now(timezone.utc).isoformat(),
             "canli_hava_ve_koordinat_verisi": False,
             "aksiyon_durumu": "Öneri taslağı; reklam bütçesi veya hedefleme değiştirilmedi",
@@ -56,6 +75,9 @@ class GeoSpatialNicheProfiler:
     def inceleme_kuyruguna_ekle(self, rapor, db_path=None):
         if not isinstance(rapor, dict) or not rapor.get("tespit_edilen_niche"):
             raise ValueError("Geçerli bir bölgesel öneri raporu gereklidir")
+        if rapor.get("durum") != OK:
+            raise ValueError(f"durum='{rapor.get('durum', NOT_CONFIGURED)}': "
+                            "doğrulanmamış rapor kuyruğa yazılamaz (fail-closed)")
 
         configured_path = db_path or os.environ.get("TRM_DISPATCH_QUEUE_DB")
         queue_path = (
@@ -77,5 +99,4 @@ class GeoSpatialNicheProfiler:
 
 
 if __name__ == "__main__":
-    profiler = GeoSpatialNicheProfiler()
-    print(profiler.bolgesel_niche_tara())
+    print(GeoSpatialNicheProfiler().bolgesel_niche_tara())

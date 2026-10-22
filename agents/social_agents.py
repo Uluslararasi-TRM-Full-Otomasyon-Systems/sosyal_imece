@@ -1,8 +1,16 @@
 # agents/social_agents.py
-import time
 import logging
-from typing import Dict, Any, List
+import sys
+import time
 from functools import wraps
+from pathlib import Path
+from typing import Dict, Any, List
+
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from real_social_publisher import STATUS_SENT, RealSocialPublisher
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("SocialAgents")
@@ -31,6 +39,15 @@ def rate_limited(func):
         return func(*args, **kwargs)
     return wrapper
 
+_publisher: RealSocialPublisher | None = None
+
+
+def get_publisher() -> RealSocialPublisher:
+    global _publisher
+    if _publisher is None:
+        _publisher = RealSocialPublisher()
+    return _publisher
+
 class SocialPublisherAgent:
     def __init__(self, platform: str):
         self.platform = platform
@@ -40,26 +57,20 @@ class SocialPublisherAgent:
         product_title = payload.get("title", "Trend Ürün")
         affiliate_link = payload.get("link", "https://trendurunlermarket.com")
         campaign = payload.get("campaign", "Genel Promosyon")
-        
-        # Simüle edilmiş API çağrısı ve hata yönetimi
-        try:
-            logger.info(f"[{self.platform.upper()}] Yayınlanıyor: {product_title} | Kampanya: {campaign}")
-            # Gerçek SDK/API entegrasyon noktası (Meta Graph API / Telegram Bot API vb.)
-            time.sleep(0.3)
-            return {
-                "status": "success",
-                "platform": self.platform,
-                "message": f"İçerik başarıyla {self.platform} hattına aktarıldı.",
-                "timestamp": time.time()
-            }
-        except Exception as e:
-            logger.error(f"[{self.platform.upper()}] Yayın hatası: {str(e)}")
-            return {
-                "status": "error",
-                "platform": self.platform,
-                "error": str(e),
-                "timestamp": time.time()
-            }
+        text = str(payload.get("text") or f"{product_title} · {campaign}\n{affiliate_link}").strip()
+
+        outcome = get_publisher().publish(self.platform, text)
+        sent = outcome["status"] == STATUS_SENT
+        detail = outcome["post_id"] if sent else (outcome["error"] or outcome["reason"] or "doğrulanamadı")
+        log = logger.info if sent else logger.warning
+        log(f"[{str(self.platform).upper()}] {outcome['status']} · {detail}")
+        return {
+            "status": outcome["status"],
+            "platform": str(self.platform),
+            "post_id": outcome["post_id"],
+            "detail": detail,
+            "timestamp": time.time(),
+        }
 
 def dispatch_multichannel_campaign(payload: Dict[Any, Any]) -> Dict[str, Any]:
     platforms = ["facebook", "telegram", "tiktok", "instagram"]
@@ -67,7 +78,9 @@ def dispatch_multichannel_campaign(payload: Dict[Any, Any]) -> Dict[str, Any]:
     for p in platforms:
         agent = SocialPublisherAgent(platform=p)
         results[p] = agent.publish(payload)
+    sent = [name for name, item in results.items() if item["status"] == STATUS_SENT]
     return {
-        "multi_channel_status": "completed",
+        "multi_channel_status": "sent" if sent else "not_sent",
+        "sent_channels": sent,
         "results": results
     }
