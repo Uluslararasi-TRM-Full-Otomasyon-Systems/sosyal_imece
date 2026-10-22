@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 """real_social_publisher çevrimdışı testleri.
 
-Gerçek ağa çıkmaz: urllib.request.urlopen taklit edilir. Kendi runner'ı ile çalışır:
-    python test_real_social_publisher.py
+Gerçek ağa çıkmaz: urllib.request.urlopen taklit edilir. İki şekilde de koşar:
+    python test_real_social_publisher.py          # kendi runner'ı (geçen/atlayan özeti basar)
+    python -m unittest test_real_social_publisher.py
 """
 
 from __future__ import annotations
@@ -14,6 +15,7 @@ import os
 import sqlite3
 import sys
 import tempfile
+import unittest
 import urllib.error
 from pathlib import Path
 
@@ -294,6 +296,47 @@ def test_live_window_is_memory_only_and_always_reverts():
     # --live olmadan pencere hiç açılmaz
     with rsp.gecici_canli_pencere(publisher, acik=False):
         assert publisher.live_gate_open() is False
+
+
+def _yuru(fn):
+    """Vakayı koşar; fonksiyon 'skip' dönerse unittest'e de atlandı diye bildirir."""
+    if fn() == "skip":
+        raise unittest.SkipTest("bu kurulumda ilgili modül yok")
+
+
+class YayıncıBirimTestleri(unittest.TestCase):
+    """Aynı vakaların unittest keşfi ile koşulabilen hali.
+
+    Bu köprü olmadan `python -m unittest test_real_social_publisher.py` hiçbir TestCase
+    bulamaz ve 0 testle "OK" yazarak yanlış-yeşil verir.
+    """
+
+    def test_kimlik_yoksa_not_configured(self):
+        _yuru(test_no_credentials_is_not_configured)
+
+    def test_entegrasyonu_olmayan_kanallar_not_configured(self):
+        _yuru(test_unwired_channels_are_not_configured)
+
+    def test_canli_gonderim_dogrulanmis_post_id_yazar(self):
+        _yuru(test_live_send_records_verified_post_id)
+
+    def test_platform_reddi_sent_sayilmaz(self):
+        _yuru(test_rejected_send_stays_logged_not_sent)
+
+    def test_ok_ama_message_id_yoksa_basarisiz(self):
+        _yuru(test_ok_without_message_id_is_not_success)
+
+    def test_warmup_tiklemesi_asla_gonderilmez(self):
+        _yuru(test_warmup_ticks_are_never_published)
+
+    def test_social_agents_sahte_basari_dondurmaz(self):
+        _yuru(test_social_agents_delegates_without_faking_success)
+
+    def test_kesif_yalnizca_yonetici_olunan_kanali_aday_gosterir(self):
+        _yuru(test_discovery_enrolls_only_an_administered_channel)
+
+    def test_canli_pencere_bellek_icidir_ve_geri_doner(self):
+        _yuru(test_live_window_is_memory_only_and_always_reverts)
 
 
 def main() -> int:

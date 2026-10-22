@@ -36,6 +36,9 @@ global_config.json
 *.key
 *.pem
 
+# Geçmiş temizleme aletleri (yerel yedek betikleri, asla depoya girmesin)
+trm-gecmis-temizle/
+
 # Temporary files
 *.tmp
 *.bak
