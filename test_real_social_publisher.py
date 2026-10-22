@@ -98,12 +98,15 @@ def ok_handler(request):
 
 def run_case(name, fn):
     try:
-        fn()
+        sonuc = fn()
     except AssertionError as exc:
         print(f"FAIL {name}: {exc}")
-        return False
+        return "fail"
+    if sonuc == "skip":
+        print(f"SKIP {name}")
+        return "skip"
     print(f"PASS {name}")
-    return True
+    return "pass"
 
 
 def test_no_credentials_is_not_configured():
@@ -207,8 +210,7 @@ def test_social_agents_delegates_without_faking_success():
     try:
         from agents import social_agents
     except ImportError:
-        print("SKIP social_agents köprüsü (agents paketi bu kurulumda yok)")
-        return
+        return "skip"
 
     stub = rsp.RealSocialPublisher(settings=settings("simulate"), load_environment=False)
     state = {}
@@ -311,9 +313,17 @@ def main() -> int:
         ("keşif yalnızca yönetici olunan kanalı aday gösterir", test_discovery_enrolls_only_an_administered_channel),
         ("canlı pencere bellek içi ve her durumda geri döner", test_live_window_is_memory_only_and_always_reverts),
     ]
-    results = [run_case(name, fn) for name, fn in cases]
-    print(f"\n{sum(results)}/{len(results)} test geçti")
-    return 0 if all(results) else 1
+    sonuclar = [run_case(name, fn) for name, fn in cases]
+    gecen = sonuclar.count("pass")
+    atlanan = sonuclar.count("skip")
+    basarisiz = sonuclar.count("fail")
+    ozet = f"\n{gecen}/{len(sonuclar)} test geçti"
+    if atlanan:
+        ozet += f" · {atlanan} atlandı (bu kurulumda ilgili modül yok)"
+    if basarisiz:
+        ozet += f" · {basarisiz} BAŞARISIZ"
+    print(ozet)
+    return 0 if basarisiz == 0 else 1
 
 
 if __name__ == "__main__":
